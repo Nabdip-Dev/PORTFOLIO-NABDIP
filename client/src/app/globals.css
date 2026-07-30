@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+/*
+  Theme tokens: [data-theme] controls light/dark surfaces & text.
+  [data-accent] controls the accent family layered on top.
+  ThemeContext sets both attributes on <html>, so switching either is a
+  single DOM write with no re-render of children needed for color to update.
+*/
+
+:root {
+  --radius-card: 1.25rem;
+}
+
+/* ---------- Mode: dark (default) ---------- */
+[data-theme="dark"] {
+  --background: #0a0a0f;
+  --surface: #13131a;
+  --surface-elevated: #1c1c26;
+  --foreground: #f4f4f6;
+  --foreground-muted: #a1a1aa;
+  --border: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+/* ---------- Mode: light ---------- */
+[data-theme="light"] {
+  --background: #fafafa;
+  --surface: #ffffff;
+  --surface-elevated: #f2f2f6;
+  --foreground: #17171c;
+  --foreground-muted: #52525b;
+  --border: rgba(0, 0, 0, 0.08);
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-border: rgba(0, 0, 0, 0.08);
+}
+
+/* ---------- Accent: purple ---------- */
+[data-accent="purple"] {
+  --accent: #8b5cf6;
+  --accent-hover: #7c3aed;
+  --accent-muted: #a78bfa;
+  --accent-foreground: #ffffff;
+  --gradient-accent: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+}
+
+/* ---------- Accent: blue ---------- */
+[data-accent="blue"] {
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  --accent-muted: #60a5fa;
+  --accent-foreground: #ffffff;
+  --gradient-accent: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+}
+
+/*
+  Accent: black — a monochrome/graphite accent rather than a color family.
+  True black on a dark background is invisible, so it flips to near-white
+  in dark mode and stays near-black in light mode; same accent "identity",
+  contrast-corrected per surface.
+*/
+[data-theme="dark"][data-accent="black"] {
+  --accent: #e4e4e7;
+  --accent-hover: #ffffff;
+  --accent-muted: #a1a1aa;
+  --accent-foreground: #0a0a0f;
+  --gradient-accent: linear-gradient(135deg, #f4f4f6 0%, #a1a1aa 100%);
+}
+[data-theme="light"][data-accent="black"] {
+  --accent: #18181b;
+  --accent-hover: #000000;
+  --accent-muted: #52525b;
+  --accent-foreground: #ffffff;
+  --gradient-accent: linear-gradient(135deg, #27272a 0%, #000000 100%);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display), var(--font-body), system-ui, sans-serif;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.font-mono-tag {
+  font-family: var(--font-mono), monospace;
+  letter-spacing: 0.02em;
+}
+
+/* Body copy gets a slightly looser line-height than headings for readability. */
+p {
+  line-height: 1.65;
+}
+
+/* Premium card: consistent hover lift + border glow, layered on top of .glass.
+   Applied to Service/Project/Testimonial cards for a unified feel. */
+.card-premium {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.card-premium:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px -12px rgba(0, 0, 0, 0.35);
+  border-color: var(--accent);
+}
+
+/* Form fields: consistent focus ring + smooth transition, used via .field */
+.field {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 0.65rem 0.9rem;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.field:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+/* Reusable glass surface utility, used by premium cards / navbar / modals */
+.glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+/* Respect reduced-motion preference site-wide */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
