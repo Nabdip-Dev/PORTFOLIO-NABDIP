@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import type { ComponentType } from "react";
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
@@ -9,6 +9,8 @@ import { useTypewriter } from "@/hooks/useTypewriter";
 import { toAttachmentUrl } from "@/utils/cloudinaryUrl";
 import { ButtonLink } from "@/components/ui/Button";
 import { HeroBackground } from "./HeroBackground";
+// import profile from "@/assets/pp.png";
+
 
 // Maps a social link's `platform` field (stored in the DB) to an icon —
 // keeps the schema free of frontend-only concerns like which icon component to render.
@@ -51,9 +53,9 @@ export function Hero() {
           initial="hidden"
           animate="show"
           variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12 } } }}
-          className="relative z-10 flex max-w-3xl flex-col items-center gap-5"
+          className="relative z-10 flex max-w-3xl flex-col items-center gap-5 ]"
         >
-          {hero.availability && (
+          {/* {hero.availability && (
             <motion.div
               variants={{ hidden: { opacity: 0, y: -8 }, show: { opacity: 1, y: 0 } }}
               className="flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs font-medium"
@@ -64,14 +66,23 @@ export function Hero() {
               </span>
               Available for new projects
             </motion.div>
-          )}
+          )} */}
 
-          <motion.p
+          {/* <motion.p
             variants={{ hidden: { opacity: 0, y: -8 }, show: { opacity: 1, y: 0 } }}
             className="text-sm text-[var(--foreground-muted)]"
           >
             {hero.greeting}
-          </motion.p>
+          </motion.p> */}
+
+          {/* <div>
+            <Image
+              src={profile}
+              alt="Hero"
+              width={300}
+              height={300}
+            />
+          </div> */}
 
           <motion.h1
             variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }}
