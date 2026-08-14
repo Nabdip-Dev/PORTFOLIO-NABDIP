@@ -25,14 +25,14 @@ export function ThemeSwitcher() {
         type="button"
         onClick={toggleMode}
         aria-label={mode === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-        className="flex h-7 w-7 items-center justify-center rounded-full text-[var(--foreground)] transition-colors hover:text-[var(--accent)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+        className="flex h-7 w-5 items-center justify-center rounded-full text-[var(--foreground)] transition-colors hover:text-[var(--accent)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
       >
         {mode === "dark" ? <FiSun size={16} /> : <FiMoon size={16} />}
       </button>
 
-      <div className="h-5 w-px bg-[var(--border)]" aria-hidden />
+      {/* <div className="h-5 w-px bg-[var(--border)]" aria-hidden /> */}
 
-      <div className="flex items-center gap-1.5" role="radiogroup" aria-label="Accent color">
+      {/* <div className="flex items-center gap-1.5" role="radiogroup" aria-label="Accent color">
         {ACCENT_COLORS.map((color) => {
           const isActive = accent === color;
           return (
@@ -51,7 +51,7 @@ export function ThemeSwitcher() {
             />
           );
         })}
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -49,99 +49,84 @@ export function Hero() {
       {isLoading || !hero ? (
         <HeroSkeleton />
       ) : (
-        <motion.div
-          initial="hidden"
-          animate="show"
-          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12 } } }}
-          className="relative z-10 flex max-w-3xl flex-col items-center gap-5 ]"
-        >
-          {/* {hero.availability && (
-            <motion.div
-              variants={{ hidden: { opacity: 0, y: -8 }, show: { opacity: 1, y: 0 } }}
-              className="flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs font-medium"
+
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
+
+
+          {/* left side */}
+          <motion.div
+            initial="hidden"
+            animate="show"
+            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12 } } }}
+            className="relative order-2 lg:order-1 z-10 flex max-w-3xl flex-col items-center gap-5 ]"
+          >
+
+            <motion.h1
+              variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }}
+              className="font-display text-4xl font-semibold leading-tight sm:text-6xl"
             >
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" style={{ background: "var(--accent)" }} />
-                <span className="relative inline-flex h-2 w-2 rounded-full" style={{ background: "var(--accent)" }} />
-              </span>
-              Available for new projects
+              {hero.name}
+            </motion.h1>
+
+            <motion.div
+              variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }}
+              className="font-mono-tag flex h-8 items-center text-lg text-[var(--foreground-muted)] sm:text-xl"
+            >
+              {typedTitle}
+              <span className="ml-0.5 inline-block h-5 w-[2px] animate-pulse" style={{ background: "var(--accent)" }} />
             </motion.div>
-          )} */}
 
-          {/* <motion.p
-            variants={{ hidden: { opacity: 0, y: -8 }, show: { opacity: 1, y: 0 } }}
-            className="text-sm text-[var(--foreground-muted)]"
-          >
-            {hero.greeting}
-          </motion.p> */}
-
-          {/* <div>
-            <Image
-              src={profile}
-              alt="Hero"
-              width={300}
-              height={300}
-            />
-          </div> */}
-
-          <motion.h1
-            variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }}
-            className="font-display text-4xl font-semibold leading-tight sm:text-6xl"
-          >
-            {hero.name}
-          </motion.h1>
-
-          <motion.div
-            variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }}
-            className="font-mono-tag flex h-8 items-center text-lg text-[var(--foreground-muted)] sm:text-xl"
-          >
-            {typedTitle}
-            <span className="ml-0.5 inline-block h-5 w-[2px] animate-pulse" style={{ background: "var(--accent)" }} />
-          </motion.div>
-
-          <motion.div
-            variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }}
-            className="mt-4 flex flex-wrap items-center justify-center gap-3"
-          >
-            <ButtonLink href="#contact" variant="primary">
-              Hire Me <FiArrowRight size={15} />
-            </ButtonLink>
-            <ButtonLink href="#contact" variant="secondary">
-              Contact
-            </ButtonLink>
-            {hero.resumeUrl && (
-              <ButtonLink href={toAttachmentUrl(hero.resumeUrl)} download variant="secondary">
-                <FiDownload size={15} /> Resume
+            <motion.div
+              variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }}
+              className="mt-4 flex flex-wrap items-center justify-center gap-3"
+            >
+              <ButtonLink href="#contact" variant="primary">
+                Hire Me <FiArrowRight size={15} />
               </ButtonLink>
+              <ButtonLink href="#contact" variant="secondary">
+                Contact
+              </ButtonLink>
+              {hero.resumeUrl && (
+                <ButtonLink href={toAttachmentUrl(hero.resumeUrl)} download variant="secondary">
+                  <FiDownload size={15} /> Resume
+                </ButtonLink>
+              )}
+            </motion.div>
+
+            {hero.socialLinks?.length > 0 && (
+              <motion.div
+                variants={{ hidden: { opacity: 0 }, show: { opacity: 1 } }}
+                className="mt-2 flex items-center gap-4"
+              >
+                {hero.socialLinks.map((link) => {
+                  const Icon = SOCIAL_ICONS[link.icon] ?? FiGithub;
+                  return (
+                    <motion.a
+                      key={link.platform}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={link.platform}
+                      whileHover={{ scale: 1.12, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                      transition={{ duration: 0.15 }}
+                      className="flex h-10 w-10 items-center justify-center rounded-full glass text-[var(--foreground-muted)] transition-colors hover:text-[var(--accent)]"
+                    >
+                      <Icon size={16} />
+                    </motion.a>
+                  );
+                })}
+              </motion.div>
             )}
           </motion.div>
 
-          {hero.socialLinks?.length > 0 && (
-            <motion.div
-              variants={{ hidden: { opacity: 0 }, show: { opacity: 1 } }}
-              className="mt-2 flex items-center gap-4"
-            >
-              {hero.socialLinks.map((link) => {
-                const Icon = SOCIAL_ICONS[link.icon] ?? FiGithub;
-                return (
-                  <motion.a
-                    key={link.platform}
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={link.platform}
-                    whileHover={{ scale: 1.12, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ duration: 0.15 }}
-                    className="flex h-10 w-10 items-center justify-center rounded-full glass text-[var(--foreground-muted)] transition-colors hover:text-[var(--accent)]"
-                  >
-                    <Icon size={16} />
-                  </motion.a>
-                );
-              })}
-            </motion.div>
-          )}
-        </motion.div>
+            {/* right side */}
+          <div className="order-1 lg:order-2">
+          <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero dolores, ipsum id quo amet illo facere alias quam sint soluta exercitationem voluptatum sapiente voluptas porro numquam dignissimos fugiat et minus?</h1>
+          </div>
+
+        </div>
+
       )}
     </section>
   );

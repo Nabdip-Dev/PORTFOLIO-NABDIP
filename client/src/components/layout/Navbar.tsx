@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiMenu, FiX, FiMessageCircle } from "react-icons/fi";
 import { ThemeSwitcher } from "@/components/theme/ThemeSwitcher";
-import { LanguageSwitcher } from "@/components/theme/LanguageSwitcher";
+
 import { WhatsAppButton } from "./WhatsAppButton";
 import { NAV_LINKS } from "@/constants/navigation";
 import { useChatUI } from "@/contexts/ChatUIContext";
@@ -74,10 +74,8 @@ export function Navbar() {
         </ul>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <LanguageSwitcher />
           <ThemeSwitcher />
-          <WhatsAppButton />
-          <button
+          {/* <button
             type="button"
             onClick={openChat}
             className="flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-[var(--accent-foreground)] transition-transform hover:scale-105"
@@ -85,7 +83,7 @@ export function Navbar() {
           >
             <FiMessageCircle size={15} />
             {t.buttons.chat}
-          </button>
+          </button> */}
         </div>
 
         <button
@@ -130,12 +128,10 @@ export function Navbar() {
                 </li>
               ))}
               <li className="flex items-center justify-between px-3 pt-2">
-                <div className="flex items-center gap-2">
-                  <LanguageSwitcher />
+                <div className="flex items-center gap-2"> 
                   <ThemeSwitcher />
-                  <WhatsAppButton />
                 </div>
-                <button
+                {/* <button
                   type="button"
                   onClick={() => {
                     setMobileOpen(false);
@@ -146,7 +142,7 @@ export function Navbar() {
                 >
                   <FiMessageCircle size={15} />
                   {t.buttons.chat}
-                </button>
+                </button> */}
               </li>
             </ul>
           </motion.div>

@@ -18,7 +18,7 @@ export function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
-      className="flex h-9 w-9 items-center justify-center rounded-full text-white transition-transform hover:scale-110"
+      className="fixed bottom-5 right-5 z-50 flex h-9 w-9 items-center justify-center rounded-full text-white transition-transform hover:scale-110"
       style={{ background: "#25D366" }}
     >
       <FaWhatsapp size={17} />

@@ -12,6 +12,8 @@ import { Testimonials } from "@/components/testimonials/Testimonials";
 import { FAQ } from "@/components/faq/FAQ";
 import { Contact } from "@/components/contact/Contact";
 import { fetchHero } from "@/services/api/heroService";
+import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
+import { ChatButton } from "@/components/layout/ChatButton";
 
 // Server-rendered so the Person JSON-LD is present in the initial HTML —
 // structured data that only appears after client-side fetch is invisible
@@ -59,6 +61,8 @@ export default async function HomePage() {
         <FAQ />
         <Contact />
       </main>
+      <ChatButton />
+      <WhatsAppButton/>
       <Footer />
     </>
   );
