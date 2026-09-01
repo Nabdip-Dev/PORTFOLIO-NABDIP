@@ -9,7 +9,7 @@ import { useTypewriter } from "@/hooks/useTypewriter";
 import { toAttachmentUrl } from "@/utils/cloudinaryUrl";
 import { ButtonLink } from "@/components/ui/Button";
 import { HeroBackground } from "./HeroBackground";
-// import profile from "@/assets/pp.png";
+import profile from "@/assets/pp.png";
 
 
 // Maps a social link's `platform` field (stored in the DB) to an icon —
@@ -58,7 +58,7 @@ export function Hero() {
             initial="hidden"
             animate="show"
             variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12 } } }}
-            className="relative order-2 lg:order-1 z-10 flex max-w-3xl flex-col items-center gap-5 ]"
+            className="relative order-2 lg:order-1 z-10 flex max-w-3xl flex-col items-start gap-5 ]"
           >
 
             <motion.h1
@@ -120,10 +120,20 @@ export function Hero() {
             )}
           </motion.div>
 
-            {/* right side */}
-          <div className="order-1 lg:order-2">
-          <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero dolores, ipsum id quo amet illo facere alias quam sint soluta exercitationem voluptatum sapiente voluptas porro numquam dignissimos fugiat et minus?</h1>
+          {/* right side */}
+          <div className="order-1 lg:order-2 flex justify-end ">
+            <div className="flex h-[450px] w-[300px] items-start justify-center overflow-hidden rounded-2xl border border-[#fafafa2e] bg-red-700/10">
+              <Image
+                src={profile}
+                alt="Profile"
+                width={280}
+                height={280}
+                className="object-cover mt-28 z-50"
+              />
+            </div>
+
           </div>
+
 
         </div>
 

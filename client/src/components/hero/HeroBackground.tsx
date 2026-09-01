@@ -1,7 +1,4 @@
-/**
- * Deliberately minimal: a soft static radial glow + subtle dot grid
- * behind the hero content.
- */
+
 export function HeroBackground() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
@@ -20,7 +17,7 @@ export function HeroBackground() {
       <div
         className="absolute left-1/2 top-1/2 h-[36rem] w-[36rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"
         style={{
-          background: "#22c55e",
+          background: "#ef4444",
           opacity: 0.2,
         }}
       />

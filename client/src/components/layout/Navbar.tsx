@@ -25,9 +25,7 @@ export function Navbar() {
     Testimonials: "testimonials", FAQ: "faq", Contact: "contact",
   };
 
-  // "#about" only scrolls correctly when already on the home page. From any
-  // other route (e.g. /blog), it needs to be "/#about" so it navigates home
-  // first, then the browser scrolls to the anchor.
+
   function resolveHref(href: string) {
     if (!href.startsWith("#")) return href;
     return pathname === "/" ? href : `/${href}`;
@@ -42,16 +40,18 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        scrolled ? "glass shadow-soft" : "bg-transparent"
-      }`}
+      className="fixed inset-x-0 top-0 z-50 transition-colors duration-300"
     >
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 sm:px-10">
+
+      <nav className="mx-auto flex max-w-6xl items-center justify-center gap-8 px-6 py-4 sm:px-10">
         <a href="#home" className="font-display text-lg font-semibold tracking-tight">
           Portfolio<span style={{ color: "var(--accent)" }}>.</span>
         </a>
 
-        <ul className="hidden items-center gap-7 lg:flex">
+        <ul className={`hidden rounded-l-full rounded-r-full py-3 px-8 items-center gap-7 lg:flex ${scrolled
+          ? "glass shadow-soft"
+          : "bg-transparent"
+          }`}>
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
               {link.href.startsWith("#") ? (
@@ -128,7 +128,7 @@ export function Navbar() {
                 </li>
               ))}
               <li className="flex items-center justify-between px-3 pt-2">
-                <div className="flex items-center gap-2"> 
+                <div className="flex items-center gap-2">
                   <ThemeSwitcher />
                 </div>
                 {/* <button
