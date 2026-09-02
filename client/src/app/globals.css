@@ -1,78 +1,70 @@
 @import "tailwindcss";
 
-/*
-  Theme tokens: [data-theme] controls light/dark surfaces & text.
-  [data-accent] controls the accent family layered on top.
-  ThemeContext sets both attributes on <html>, so switching either is a
-  single DOM write with no re-render of children needed for color to update.
-*/
-
 :root {
   --radius-card: 1.25rem;
 }
 
-/* ---------- Mode: dark (default) ---------- */
+/* =========================================
+   RED / BLACK / WHITE THEME
+   ========================================= */
+
+/* ---------- Dark Mode ---------- */
 [data-theme="dark"] {
-  --background: #0a0a0f;
-  --surface: #13131a;
-  --surface-elevated: #1c1c26;
-  --foreground: #f4f4f6;
-  --foreground-muted: #a1a1aa;
-  --border: rgba(255, 255, 255, 0.08);
+  --background: #050505;
+  --surface: #0b0b0b;
+  --surface-elevated: #141414;
+
+  --foreground: #ffffff;
+  --foreground-muted: #b8b8b8;
+
+  --border: rgba(255, 255, 255, 0.10);
+
   --glass-bg: rgba(255, 255, 255, 0.04);
-  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.10);
 }
 
-/* ---------- Mode: light ---------- */
+/* ---------- Light Mode ---------- */
 [data-theme="light"] {
-  --background: #fafafa;
-  --surface: #ffffff;
-  --surface-elevated: #f2f2f6;
-  --foreground: #17171c;
-  --foreground-muted: #52525b;
-  --border: rgba(0, 0, 0, 0.08);
-  --glass-bg: rgba(255, 255, 255, 0.55);
-  --glass-border: rgba(0, 0, 0, 0.08);
+  --background: #ffffff;
+  --surface: #fafafa;
+  --surface-elevated: #f0f0f0;
+
+  --foreground: #050505;
+  --foreground-muted: #555555;
+
+  --border: rgba(0, 0, 0, 0.10);
+
+  --glass-bg: rgba(0, 0, 0, 0.03);
+  --glass-border: rgba(0, 0, 0, 0.10);
 }
 
-/* ---------- Accent: purple ---------- */
-[data-accent="purple"] {
-  --accent: #8b5cf6;
-  --accent-hover: #7c3aed;
-  --accent-muted: #a78bfa;
+
+/* =========================================
+   ACCENT = RED ONLY
+   ========================================= */
+
+[data-accent="red"],
+[data-accent="purple"],
+[data-accent="blue"],
+[data-accent="black"] {
+  --accent: #e50914;
+  --accent-hover: #ff1a25;
+  --accent-muted: #ff4d57;
+
   --accent-foreground: #ffffff;
-  --gradient-accent: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+
+  --gradient-accent:
+    linear-gradient(
+      135deg,
+      #ff1a25 0%,
+      #b0000b 100%
+    );
 }
 
-/* ---------- Accent: blue ---------- */
-[data-accent="blue"] {
-  --accent: #3b82f6;
-  --accent-hover: #2563eb;
-  --accent-muted: #60a5fa;
-  --accent-foreground: #ffffff;
-  --gradient-accent: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
-}
 
-/*
-  Accent: black — a monochrome/graphite accent rather than a color family.
-  True black on a dark background is invisible, so it flips to near-white
-  in dark mode and stays near-black in light mode; same accent "identity",
-  contrast-corrected per surface.
-*/
-[data-theme="dark"][data-accent="black"] {
-  --accent: #e4e4e7;
-  --accent-hover: #ffffff;
-  --accent-muted: #a1a1aa;
-  --accent-foreground: #0a0a0f;
-  --gradient-accent: linear-gradient(135deg, #f4f4f6 0%, #a1a1aa 100%);
-}
-[data-theme="light"][data-accent="black"] {
-  --accent: #18181b;
-  --accent-hover: #000000;
-  --accent-muted: #52525b;
-  --accent-foreground: #ffffff;
-  --gradient-accent: linear-gradient(135deg, #27272a 0%, #000000 100%);
-}
+/* =========================================
+   GLOBAL
+   ========================================= */
 
 html {
   scroll-behavior: smooth;
@@ -81,70 +73,275 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
+
   font-family: var(--font-body), system-ui, sans-serif;
+
   -webkit-font-smoothing: antialiased;
-  transition: background-color 0.3s ease, color 0.3s ease;
+
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
-h1, h2, h3, h4, .font-display {
-  font-family: var(--font-display), var(--font-body), system-ui, sans-serif;
+
+/* ---------- Headings ---------- */
+
+h1,
+h2,
+h3,
+h4,
+.font-display {
+  font-family:
+    var(--font-display),
+    var(--font-body),
+    system-ui,
+    sans-serif;
+
   letter-spacing: -0.02em;
   line-height: 1.15;
 }
+
+
+/* ---------- Mono ---------- */
 
 .font-mono-tag {
   font-family: var(--font-mono), monospace;
   letter-spacing: 0.02em;
 }
 
-/* Body copy gets a slightly looser line-height than headings for readability. */
+
+/* ---------- Paragraph ---------- */
+
 p {
   line-height: 1.65;
 }
 
-/* Premium card: consistent hover lift + border glow, layered on top of .glass.
-   Applied to Service/Project/Testimonial cards for a unified feel. */
+
+/* =========================================
+   PREMIUM CARD
+   ========================================= */
+
 .card-premium {
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
+
 .card-premium:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 40px -12px rgba(0, 0, 0, 0.35);
+
+  box-shadow:
+    0 12px 40px -12px rgba(0, 0, 0, 0.5);
+
   border-color: var(--accent);
 }
 
-/* Form fields: consistent focus ring + smooth transition, used via .field */
+
+/* =========================================
+   FORM FIELD
+   ========================================= */
+
 .field {
   width: 100%;
+
   border-radius: 0.75rem;
+
   border: 1px solid var(--border);
+
   background: var(--surface);
+
+  color: var(--foreground);
+
   padding: 0.65rem 0.9rem;
+
   font-size: 0.875rem;
+
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-.field:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-/* Reusable glass surface utility, used by premium cards / navbar / modals */
+.field:focus {
+  border-color: var(--accent);
+
+  box-shadow:
+    0 0 0 3px
+    color-mix(
+      in srgb,
+      var(--accent) 20%,
+      transparent
+    );
+}
+
+
+/* =========================================
+   GLASS
+   ========================================= */
+
 .glass {
   background: var(--glass-bg);
+
   border: 1px solid var(--glass-border);
+
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
 
+
+/* =========================================
+   SELECTION = RED
+   ========================================= */
+
 ::selection {
-  background: var(--accent);
-  color: var(--accent-foreground);
+  background: #e50914;
+  color: #ffffff;
 }
 
-/* Respect reduced-motion preference site-wide */
+
+/* =========================================
+   RED UTILITY HELPERS
+   ========================================= */
+
+.text-accent {
+  color: var(--accent);
+}
+
+.bg-accent {
+  background: var(--accent);
+}
+
+.border-accent {
+  border-color: var(--accent);
+}
+
+.hover-accent:hover {
+  color: var(--accent);
+}
+
+
+/* =========================================
+   RED GLOW
+   ========================================= */
+
+.red-glow {
+  box-shadow:
+    0 0 30px rgba(229, 9, 20, 0.25);
+}
+
+.red-glow-strong {
+  box-shadow:
+    0 0 50px rgba(229, 9, 20, 0.40);
+}
+
+
+/* =========================================
+   RED GRADIENT TEXT
+   ========================================= */
+
+.text-gradient {
+  background: linear-gradient(
+    135deg,
+    #ff1a25,
+    #e50914,
+    #ffffff
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* =========================================
+   RED BUTTON
+   ========================================= */
+
+.btn-accent {
+  background: #e50914;
+  color: #ffffff;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.btn-accent:hover {
+  background: #ff1a25;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 30px
+    rgba(229, 9, 20, 0.30);
+}
+
+
+/* =========================================
+   RED DIVIDER
+   ========================================= */
+
+.red-divider {
+  height: 2px;
+
+  background: #e50914;
+
+  border-radius: 999px;
+}
+
+
+/* =========================================
+   RED DOT
+   ========================================= */
+
+.red-dot {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #e50914;
+
+  box-shadow:
+    0 0 12px
+    rgba(229, 9, 20, 0.7);
+}
+
+
+/* =========================================
+   RED SCROLLBAR
+   ========================================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e50914;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff1a25;
+}
+
+
+/* =========================================
+   REDUCED MOTION
+   ========================================= */
+
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
