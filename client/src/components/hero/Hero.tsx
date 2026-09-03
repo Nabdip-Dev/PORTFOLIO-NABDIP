@@ -18,6 +18,8 @@ import {
   FiTwitter,
   FiMail,
 } from "react-icons/fi";
+import CircularText from './CircularText';
+import CurvedLoop from './CurvedLoop';
 
 import { fetchHero } from "@/services/api/heroService";
 import { useTypewriter } from "@/hooks/useTypewriter";
@@ -211,7 +213,7 @@ export function Hero() {
     [-1500, 0, 1500],
     [-12, 0, 12]
   );
-  
+
   const cardScrollRotate = useTransform(
     smoothVelocity,
     [-1500, 0, 1500],
@@ -358,12 +360,9 @@ export function Hero() {
       {isLoading || !hero ? (
         <HeroSkeleton />
       ) : (
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
+        <div className="z-50 grid grid-cols-1 gap-10 lg:grid-cols-2">
 
-          {/* =====================================================
-              LEFT SIDE
-          ===================================================== */}
-
+          {/* left side */}
           <motion.div
             initial="hidden" animate="show" variants={{
               hidden: {},
@@ -386,6 +385,17 @@ export function Hero() {
             "
           >
             {/* NAME */}
+
+            <div>
+
+
+              <CircularText
+                text="REACT*BITS*COMPONENTS*"
+                onHover="speedUp"
+                spinDuration={20}
+                className="custom-class"
+              />
+            </div>
 
             <motion.h1
               variants={{
@@ -559,16 +569,14 @@ export function Hero() {
             )}
           </motion.div>
 
-          {/* =====================================================
-              RIGHT SIDE
-          ===================================================== */}
-
+          {/*right side*/}
           <div
             className="
               order-1
               flex
               justify-end
               lg:order-2
+              max-h-90
             "
           >
             <div
@@ -1165,8 +1173,25 @@ export function Hero() {
               </motion.div>
             </div>
           </div>
+
         </div>
+
+
       )}
+
+      <div className="w-full z-50 justify-center items-end-safe -mt-15">
+        <CurvedLoop marqueeText="Welcome to React Bits ✦" />
+        <CurvedLoop
+          marqueeText="Be ✦ Creative ✦ With ✦ React ✦ Bits ✦ loremjkhsfhkjsdffhkjsfhkjsdhfkjsdfhkjsfh"
+          speed={2}
+          curveAmount={400}
+          direction="right"
+          interactive
+          className="custom-text-style"
+        />
+        <CurvedLoop
+        />
+      </div>
     </section>
   );
 }

@@ -40,7 +40,7 @@ export function Navbar() {
 
   return (
     <header
-      className="fixed inset-x-0 top-0 z-50 transition-colors duration-300"
+      className="fixed inset-x-0 top-0 z-9999 transition-colors duration-300"
     >
 
       <nav className="mx-auto flex max-w-6xl items-center justify-center gap-8 px-6 py-4 sm:px-10">
