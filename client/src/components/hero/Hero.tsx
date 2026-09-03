@@ -2,7 +2,12 @@
 
 import Image from "next/image";
 import type { ComponentType } from "react";
-import { motion, useAnimationControls } from "framer-motion";
+import {
+  motion, useAnimationControls, useScroll,
+  useVelocity,
+  useTransform,
+  useSpring
+} from "framer-motion";
 import { useEffect, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -36,7 +41,6 @@ const SOCIAL_ICONS: Record<
   email: FiMail,
 };
 
-
 // =========================================================
 // HERO SKELETON
 // =========================================================
@@ -58,7 +62,6 @@ function HeroSkeleton() {
   );
 }
 
-
 // =========================================================
 // HERO
 // =========================================================
@@ -76,150 +79,153 @@ export function Hero() {
     words: hero?.titles?.length ? hero.titles : [""],
   });
 
-
   // =========================================================
-  // LANYARD + CARD ANIMATION CONTROLS
+  // ANIMATION CONTROLS
   // =========================================================
 
   const swingControls = useAnimationControls();
   const cardControls = useAnimationControls();
-
   const hasInitialAnimationPlayed = useRef(false);
   const isHovering = useRef(false);
 
 
-  // =========================================================
-  // INITIAL DROP
-  //
-  // IMPORTANT:
-  // This runs ONLY once after mount.
-  //
-  // Hover will NEVER call this again.
-  // =========================================================
-
   useEffect(() => {
+    if (isLoading || !hero) return;
     if (hasInitialAnimationPlayed.current) return;
 
     hasInitialAnimationPlayed.current = true;
+    let cancelled = false;
 
     const playInitialDrop = async () => {
-
-      // -------------------------------------------------------
-      // Start from ABOVE the screen
-      // -------------------------------------------------------
-
       swingControls.set({
-        y: -560,
-        rotate: -3,
+        y: -850,
+        rotate: -2,
       });
 
       cardControls.set({
-        rotate: -4,
+        rotate: -3,
       });
 
-
-      // -------------------------------------------------------
-      // DROP + NATURAL SWING
-      // -------------------------------------------------------
-
-      await Promise.all([
-        swingControls.start({
-          y: 0,
-          rotate: [
-            -3,
-            5.5,
-            -4.5,
-            3.8,
-            -3,
-            2.2,
-            -1.5,
-            0.8,
-            -0.35,
-            0,
-          ],
-          transition: {
-            duration: 5.8,
-            ease: "easeOut",
-            times: [
-              0,
-              0.15,
-              0.29,
-              0.42,
-              0.54,
-              0.65,
-              0.75,
-              0.84,
-              0.92,
-              1,
-            ],
-          },
-        }),
-
-        cardControls.start({
-          rotate: [
-            -4,
-            9,
-            -7,
-            6,
-            -4.5,
-            3,
-            -2,
-            1,
-            -0.5,
-            0,
-          ],
-          transition: {
-            duration: 6.2,
-            ease: "easeOut",
-            times: [
-              0,
-              0.15,
-              0.29,
-              0.42,
-              0.54,
-              0.65,
-              0.75,
-              0.84,
-              0.92,
-              1,
-            ],
-          },
-        }),
-      ]);
-
-
-      // -------------------------------------------------------
-      // GUARANTEE FINAL HANGING POSITION
-      // -------------------------------------------------------
-
-      if (!isHovering.current) {
-        swingControls.set({
-          y: 0,
-          rotate: 0,
+      await new Promise((resolve) => {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(resolve);
         });
+      });
 
-        cardControls.set({
-          rotate: 0,
-        });
+      if (cancelled || isHovering.current) return;
+
+      // =======================================================
+      // PHASE 1: FAST FALL (await ছাড়া শুরু করা হলো)
+      // =======================================================
+      const fallPromise = swingControls.start({
+        y: 0,
+        transition: {
+          type: "spring",
+          stiffness: 55,
+          damping: 11,
+          mass: 1.15,
+        },
+      });
+
+      // =======================================================
+      // OVERLAP DELAY
+      // ড্রপ শেষ হওয়ার আগেই স্যুইং শুরু করার জন্য বিরতি
+      // (প্রয়োজন অনুযায়ী 350-600ms বাড়িয়ে বা কমিয়ে নিতে পারেন)
+      // =======================================================
+      await new Promise((res) => setTimeout(res, 450));
+
+      if (cancelled || isHovering.current) return;
+
+      // =======================================================
+      // PHASE 2: ROPE & CARD SWING
+      // =======================================================
+      const ropeSwing = swingControls.start({
+        rotate: [0, 9, -7, 5, -3.5, 2.2, -1.2, 0.6, -0.25, 0],
+        transition: {
+          duration: 3.8,
+          ease: "easeOut",
+          times: [0, 0.14, 0.3, 0.45, 0.58, 0.7, 0.81, 0.9, 0.96, 1],
+        },
+      });
+
+      const cardSwing = cardControls.start({
+        rotate: [-3, 12, -10, 7, -5, 3.2, -1.8, 0.8, -0.3, 0],
+        transition: {
+          duration: 4.3,
+          ease: "easeOut",
+          times: [0, 0.14, 0.3, 0.45, 0.58, 0.7, 0.81, 0.9, 0.96, 1],
+        },
+      });
+
+      // সব অ্যানিমেশন শেষ হওয়া পর্যন্ত অপেক্ষা
+      await Promise.all([fallPromise, ropeSwing, cardSwing]);
+
+      // =======================================================
+      // FINAL SETTLE
+      // =======================================================
+      if (!cancelled && !isHovering.current) {
+        await Promise.all([
+          swingControls.start({
+            y: 0,
+            rotate: 0,
+            transition: {
+              type: "spring",
+              stiffness: 70,
+              damping: 14,
+              mass: 0.9,
+            },
+          }),
+          cardControls.start({
+            rotate: 0,
+            transition: {
+              type: "spring",
+              stiffness: 65,
+              damping: 13,
+              mass: 0.9,
+            },
+          }),
+        ]);
       }
     };
 
-
     playInitialDrop();
-  }, [swingControls, cardControls]);
 
+    return () => {
+      cancelled = true;
+    };
+  }, [hero, isLoading, swingControls, cardControls]);
+
+
+
+  // scroll trcking
+  const { scrollY } = useScroll();
+  const scrollVelocity = useVelocity(scrollY);
+
+  const smoothVelocity = useSpring(scrollVelocity, {
+    damping: 40,
+    stiffness: 250,
+  });
+
+  const ropeScrollRotate = useTransform(
+    smoothVelocity,
+    [-1500, 0, 1500],
+    [-12, 0, 12]
+  );
+  
+  const cardScrollRotate = useTransform(
+    smoothVelocity,
+    [-1500, 0, 1500],
+    [-18, 0, 18]
+  );
 
   // =========================================================
   // HOVER START
   //
-  // IMPORTANT:
-  // We DO NOT set y to negative.
-  // Therefore it can NEVER drop from top again.
+  // NEVER DROPS FROM TOP AGAIN.
   // =========================================================
 
   const handleHoverStart = () => {
     isHovering.current = true;
-
 
     // ---------------------------------------------------------
     // LANYARD / WHOLE BODY SWING
@@ -265,12 +271,8 @@ export function Hero() {
       },
     });
 
-
     // ---------------------------------------------------------
-    // CARD HAS EXTRA NATURAL SWING
-    //
-    // Slightly delayed from rope.
-    // This makes the card feel physically attached.
+    // CARD EXTRA SWING
     // ---------------------------------------------------------
 
     cardControls.start({
@@ -303,27 +305,15 @@ export function Hero() {
     });
   };
 
-
   // =========================================================
   // HOVER END
-  //
-  // IMPORTANT:
-  // It simply settles where it is.
-  //
-  // NEVER goes back to the TOP.
   // =========================================================
 
   const handleHoverEnd = () => {
     isHovering.current = false;
 
-
-    // ---------------------------------------------------------
-    // SETTLE LANYARD
-    // ---------------------------------------------------------
-
     swingControls.start({
       y: 0,
-
       rotate: 0,
 
       transition: {
@@ -331,11 +321,6 @@ export function Hero() {
         ease: [0.22, 1, 0.36, 1],
       },
     });
-
-
-    // ---------------------------------------------------------
-    // SETTLE CARD
-    // ---------------------------------------------------------
 
     cardControls.start({
       rotate: 0,
@@ -347,6 +332,9 @@ export function Hero() {
     });
   };
 
+  // =========================================================
+  // RENDER
+  // =========================================================
 
   return (
     <section
@@ -365,25 +353,19 @@ export function Hero() {
         sm:px-10
       "
     >
-
       <HeroBackground />
-
 
       {isLoading || !hero ? (
         <HeroSkeleton />
       ) : (
-
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
-
 
           {/* =====================================================
               LEFT SIDE
           ===================================================== */}
 
           <motion.div
-            initial="hidden"
-            animate="show"
-            variants={{
+            initial="hidden" animate="show" variants={{
               hidden: {},
               show: {
                 transition: {
@@ -398,12 +380,11 @@ export function Hero() {
               flex
               max-w-3xl
               flex-col
-              items-start
+              items-start justify-center
               gap-5
               lg:order-1
             "
           >
-
             {/* NAME */}
 
             <motion.h1
@@ -420,6 +401,8 @@ export function Hero() {
               className="
                 font-display
                 text-4xl
+                
+                text-[var(--accent)]
                 font-semibold
                 leading-tight
                 sm:text-6xl
@@ -427,7 +410,6 @@ export function Hero() {
             >
               {hero.name}
             </motion.h1>
-
 
             {/* TYPEWRITER */}
 
@@ -467,7 +449,6 @@ export function Hero() {
                 }}
               />
             </motion.div>
-
 
             {/* BUTTONS */}
 
@@ -516,7 +497,6 @@ export function Hero() {
                 </ButtonLink>
               )}
             </motion.div>
-
 
             {/* SOCIAL LINKS */}
 
@@ -577,10 +557,7 @@ export function Hero() {
                 })}
               </motion.div>
             )}
-
           </motion.div>
-
-
 
           {/* =====================================================
               RIGHT SIDE
@@ -594,7 +571,6 @@ export function Hero() {
               lg:order-2
             "
           >
-
             <div
               className="
                 relative
@@ -608,32 +584,18 @@ export function Hero() {
               onMouseLeave={handleHoverEnd}
             >
 
-
               {/* =================================================
                   ENTIRE HANGING OBJECT
-                  
-                  This is the ONLY initial drop animation.
-                  
-                  Rope + card are inside the same physical group.
               ================================================= */}
 
               <motion.div
                 animate={swingControls}
-                className="
-                  absolute
-                  left-1/2
-                  top-0
-                  z-30
-                  h-[500px]
-                  w-[220px]
-                  -translate-x-1/2
-                  overflow-visible
-                "
+                className="absolute left-1/2 top-0 z-30 h-[500px] w-[220px] -translate-x-1/2 overflow-visible"
                 style={{
                   transformOrigin: "50% 0%",
+                  rotate: ropeScrollRotate, // <-- স্ক্রোলের ওপর ভিত্তি করে দুলবে
                 }}
               >
-
 
                 {/* =================================================
                     LANYARD
@@ -650,7 +612,6 @@ export function Hero() {
                     overflow-visible
                   "
                 >
-
                   <defs>
 
                     {/* BLACK WOVEN FABRIC */}
@@ -687,7 +648,6 @@ export function Hero() {
                         stopColor="#050505"
                       />
                     </linearGradient>
-
 
                     {/* METAL */}
 
@@ -729,7 +689,6 @@ export function Hero() {
                       />
                     </linearGradient>
 
-
                     {/* STRAP SHADOW */}
 
                     <filter id="strapShadow">
@@ -742,7 +701,6 @@ export function Hero() {
                       />
                     </filter>
 
-
                     {/* METAL SHADOW */}
 
                     <filter id="metalShadow">
@@ -754,9 +712,7 @@ export function Hero() {
                         floodOpacity=".8"
                       />
                     </filter>
-
                   </defs>
-
 
                   {/* =================================================
                       LEFT STRAP
@@ -799,7 +755,6 @@ export function Hero() {
                     opacity=".65"
                   />
 
-
                   {/* =================================================
                       RIGHT STRAP
                   ================================================= */}
@@ -841,7 +796,6 @@ export function Hero() {
                     opacity=".65"
                   />
 
-
                   {/* =================================================
                       FABRIC TEXTURE
                   ================================================= */}
@@ -872,7 +826,6 @@ export function Hero() {
                     opacity=".28"
                   />
 
-
                   {/* =================================================
                       CENTER JOIN
                   ================================================= */}
@@ -892,7 +845,6 @@ export function Hero() {
                     strokeWidth="15"
                     strokeLinecap="round"
                   />
-
 
                   {/* =================================================
                       METAL RING
@@ -918,7 +870,6 @@ export function Hero() {
                     stroke="url(#metalGradient)"
                     strokeWidth="3"
                   />
-
 
                   {/* =================================================
                       METAL SWIVEL
@@ -954,7 +905,6 @@ export function Hero() {
                     rx="4"
                     fill="#111"
                   />
-
 
                   {/* =================================================
                       HOOK / CLIP
@@ -995,33 +945,19 @@ export function Hero() {
                     strokeWidth="3"
                     strokeLinecap="round"
                   />
-
                 </svg>
-
-
 
                 {/* =================================================
                     ID CARD
-                    
-                    IMPORTANT:
-                    Card is attached inside the same swinging group.
-                    It has extra rotation only.
                 ================================================= */}
 
                 <motion.div
                   animate={cardControls}
-                  className="
-                    absolute
-                    left-1/2
-                    top-[215px]
-                    z-20
-                    h-[275px]
-                    w-[205px]
-                    -translate-x-1/2
-                  "
+                  className="absolute left-1/2 top-[215px] z-20 h-[275px] w-[205px] -translate-x-1/2"
                   style={{
                     transformOrigin: "50% 0%",
                     perspective: "1000px",
+                    rotate: cardScrollRotate, // <-- কার্ড আলাদাভাবে বেশি দুলবে
                   }}
                 >
 
@@ -1039,7 +975,6 @@ export function Hero() {
                     "
                   />
 
-
                   {/* CARD BACK */}
 
                   <div
@@ -1054,7 +989,6 @@ export function Hero() {
                       bg-[#171717]
                     "
                   />
-
 
                   {/* MAIN CARD */}
 
@@ -1110,7 +1044,6 @@ export function Hero() {
                       "
                     />
 
-
                     {/* PROFILE */}
 
                     <Image
@@ -1125,7 +1058,6 @@ export function Hero() {
                       "
                     />
 
-
                     {/* DARK BOTTOM */}
 
                     <div
@@ -1139,7 +1071,6 @@ export function Hero() {
                       "
                     />
 
-
                     {/* VIGNETTE */}
 
                     <div
@@ -1149,7 +1080,6 @@ export function Hero() {
                         bg-[radial-gradient(circle_at_center,transparent_40%,rgba(0,0,0,.48))]
                       "
                     />
-
 
                     {/* GLASS REFLECTION */}
 
@@ -1169,7 +1099,6 @@ export function Hero() {
                       "
                     />
 
-
                     {/* INNER BORDER */}
 
                     <div
@@ -1183,7 +1112,6 @@ export function Hero() {
                       "
                     />
 
-
                     {/* RED BADGE */}
 
                     <div
@@ -1196,7 +1124,6 @@ export function Hero() {
                         text-center
                       "
                     >
-
                       <div
                         className="
                           inline-block
@@ -1232,22 +1159,14 @@ export function Hero() {
                       >
                         Web Development
                       </p>
-
                     </div>
-
                   </div>
-
                 </motion.div>
-
               </motion.div>
-
             </div>
-
           </div>
-
         </div>
       )}
-
     </section>
   );
 }
