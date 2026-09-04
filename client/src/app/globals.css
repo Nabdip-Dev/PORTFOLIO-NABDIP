@@ -11,10 +11,22 @@
 /* ---------- Dark Mode ---------- */
 [data-theme="dark"] {
   --background: #050505;
+  --about-gradient:
+    radial-gradient(circle at 10% 15%,
+      rgba(229, 9, 20, 0.18),
+      transparent 32%),
+    radial-gradient(circle at 90% 75%,
+      rgba(229, 9, 20, 0.12),
+      transparent 35%),
+    linear-gradient(135deg,
+      #050505 0%,
+      #080808 50%,
+      #170607 100%);
+
   --surface: #0b0b0b;
   --surface-elevated: #141414;
 
-  --foreground: #ffffff;
+  --foreground: #fbf6ab;
   --foreground-muted: #b8b8b8;
 
   --border: rgba(255, 255, 255, 0.10);
@@ -25,7 +37,18 @@
 
 /* ---------- Light Mode ---------- */
 [data-theme="light"] {
-  --background: #ffffff;
+  --background: #fcf8ca;
+  --about-gradient:
+    radial-gradient(circle at 10% 15%,
+      rgba(229, 9, 20, 0.10),
+      transparent 32%),
+    radial-gradient(circle at 90% 75%,
+      rgba(229, 9, 20, 0.07),
+      transparent 35%),
+    linear-gradient(135deg,
+      #ffffff 0%,
+      #fafafa 50%,
+      #fff1f2 100%);
   --surface: #fafafa;
   --surface-elevated: #f0f0f0;
 
@@ -54,11 +77,9 @@
   --accent-foreground: #ffffff;
 
   --gradient-accent:
-    linear-gradient(
-      135deg,
+    linear-gradient(135deg,
       #ff1a25 0%,
-      #b0000b 100%
-    );
+      #b0000b 100%);
 }
 
 
@@ -168,12 +189,9 @@ p {
   border-color: var(--accent);
 
   box-shadow:
-    0 0 0 3px
-    color-mix(
-      in srgb,
+    0 0 0 3px color-mix(in srgb,
       var(--accent) 20%,
-      transparent
-    );
+      transparent);
 }
 
 
@@ -242,12 +260,10 @@ p {
    ========================================= */
 
 .text-gradient {
-  background: linear-gradient(
-    135deg,
-    #ff1a25,
-    #e50914,
-    #ffffff
-  );
+  background: linear-gradient(135deg,
+      #ff1a25,
+      #e50914,
+      #ffffff);
 
   -webkit-background-clip: text;
   background-clip: text;
@@ -276,8 +292,7 @@ p {
   transform: translateY(-2px);
 
   box-shadow:
-    0 10px 30px
-    rgba(229, 9, 20, 0.30);
+    0 10px 30px rgba(229, 9, 20, 0.30);
 }
 
 
@@ -307,8 +322,7 @@ p {
   background: #e50914;
 
   box-shadow:
-    0 0 12px
-    rgba(229, 9, 20, 0.7);
+    0 0 12px rgba(229, 9, 20, 0.7);
 }
 
 
@@ -339,6 +353,7 @@ p {
    ========================================= */
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {

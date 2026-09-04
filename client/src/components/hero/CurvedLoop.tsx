@@ -153,7 +153,7 @@ const CurvedLoop: FC<CurvedLoopProps> = ({
           font-bold
           uppercase
           leading-none
-          opacity-15
+          opacity-10
         "
       >
         <defs>
