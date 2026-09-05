@@ -36,7 +36,7 @@
       #080808 0%,
       #101010 50%,
       #1b0708 100%);
-      
+
   --surface: #0b0b0b;
   --surface-elevated: #141414;
 
@@ -85,6 +85,55 @@
   --glass-bg: rgba(0, 0, 0, 0.03);
   --glass-border: rgba(0, 0, 0, 0.10);
 }
+
+
+/* =========================================
+   SERVICES — DEDICATED BACKGROUND
+   Same SVG / Different Theme Colors
+   ========================================= */
+
+[data-theme="dark"] {
+  --services-bg:
+    radial-gradient(circle at 15% 15%,
+      rgba(229, 9, 20, 0.14),
+      transparent 30%),
+    radial-gradient(circle at 85% 80%,
+      rgba(229, 9, 20, 0.10),
+      transparent 32%),
+    linear-gradient(135deg,
+      #020202 0%,
+      #080808 48%,
+      #130405 100%);
+
+  --services-svg-primary: #ff1a25;
+  --services-svg-secondary: #e50914;
+  --services-svg-opacity: 0.32;
+  --services-svg-glow: rgba(229, 9, 20, 0.16);
+
+  --services-grid-color: rgba(255, 255, 255, 0.055);
+}
+
+[data-theme="light"] {
+  --services-bg:
+    radial-gradient(circle at 15% 15%,
+      rgba(229, 9, 20, 0.07),
+      transparent 30%),
+    radial-gradient(circle at 85% 80%,
+      rgba(229, 9, 20, 0.055),
+      transparent 32%),
+    linear-gradient(135deg,
+      #ffffff 0%,
+      #fafafa 52%,
+      #fff2f2 100%);
+
+  --services-svg-primary: #e50914;
+  --services-svg-secondary: #b0000b;
+  --services-svg-opacity: 0.18;
+  --services-svg-glow: rgba(229, 9, 20, 0.07);
+
+  --services-grid-color: rgba(0, 0, 0, 0.045);
+}
+
 
 
 /* =========================================
