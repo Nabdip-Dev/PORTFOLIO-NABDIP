@@ -1,8 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { FiSearch, FiSliders, FiArrowRight } from "react-icons/fi";
+import { motion, useReducedMotion } from "framer-motion";
+import {
+  FiSearch,
+  FiSliders,
+  FiArrowRight,
+} from "react-icons/fi";
 import { useQuery } from "@tanstack/react-query";
 
 import { fetchProjects } from "@/services/api/projectService";
@@ -24,26 +28,32 @@ const CATEGORIES = [
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.08,
-    },
-  },
-};
+/* =========================================================
+   LIGHTWEIGHT ANIMATION
+========================================================= */
 
-const itemVariants = {
+const revealVariants = {
   hidden: {
     opacity: 0,
-    y: 30,
+    y: 14,
   },
+
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.65,
+      duration: 0.45,
       ease,
+    },
+  },
+};
+
+const gridVariants = {
+  hidden: {},
+
+  visible: {
+    transition: {
+      staggerChildren: 0.045,
     },
   },
 };
@@ -53,21 +63,39 @@ export function Portfolio() {
   const [category, setCategory] = useState("all");
   const [page, setPage] = useState(1);
 
+  const shouldReduceMotion = useReducedMotion();
+
   const debouncedSearch = useDebounce(search);
+
   const { t } = useLanguage();
 
   const { data, isLoading } = useQuery({
-    queryKey: ["projects", debouncedSearch, category, page],
+    queryKey: [
+      "projects",
+      debouncedSearch,
+      category,
+      page,
+    ],
+
     queryFn: () =>
       fetchProjects({
         page,
         limit: 6,
         search: debouncedSearch || undefined,
-        category: category === "all" ? undefined : category,
+        category:
+          category === "all"
+            ? undefined
+            : category,
       }),
   });
 
+  /* =========================================================
+     HANDLERS
+  ========================================================= */
+
   const handleCategoryChange = (cat: string) => {
+    if (cat === category) return;
+
     setCategory(cat);
     setPage(1);
   };
@@ -92,44 +120,39 @@ export function Portfolio() {
         text-[var(--foreground)]
 
         transition-colors
-        duration-700
+        duration-500
       "
     >
       {/* =========================================================
-          PORTFOLIO ONLY BACKGROUND
+          BACKGROUND
+          STATIC = MUCH SMOOTHER
       ========================================================= */}
 
-      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        {/* Section-specific gradient */}
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          -z-10
+          overflow-hidden
+        "
+      >
+        {/* Main background */}
 
         <div
           className="
             absolute
             inset-0
             bg-[var(--portfolio-gradient)]
-            transition-all
-            duration-700
           "
         />
 
-        {/* Top-right red glow */}
+        {/* =======================================================
+            TOP RIGHT GLOW
+            Static instead of animated
+        ======================================================== */}
 
-        <motion.div
-          initial={{
-            opacity: 0,
-            scale: 0.75,
-          }}
-          whileInView={{
-            opacity: 1,
-            scale: 1,
-          }}
-          viewport={{
-            once: true,
-          }}
-          transition={{
-            duration: 1.5,
-            ease,
-          }}
+        <div
           className="
             absolute
             -right-40
@@ -137,14 +160,16 @@ export function Portfolio() {
             h-[460px]
             w-[460px]
             rounded-full
-            bg-[var(--accent)]/[0.06]
-            blur-[140px]
+            bg-[var(--accent)]/[0.055]
+            blur-[120px]
 
-            dark:bg-[var(--accent)]/[0.14]
+            dark:bg-[var(--accent)]/[0.11]
           "
         />
 
-        {/* Bottom-left glow */}
+        {/* =======================================================
+            BOTTOM LEFT GLOW
+        ======================================================== */}
 
         <div
           className="
@@ -154,48 +179,54 @@ export function Portfolio() {
             h-[440px]
             w-[440px]
             rounded-full
-            bg-[var(--accent)]/[0.045]
-            blur-[140px]
+            bg-[var(--accent)]/[0.035]
+            blur-[120px]
 
-            dark:bg-[var(--accent)]/[0.10]
+            dark:bg-[var(--accent)]/[0.08]
           "
         />
 
-        {/* Center soft glow */}
+        {/* =======================================================
+            CENTER LIGHT
+        ======================================================== */}
 
         <div
           className="
             absolute
             left-1/2
             top-1/3
-            h-[300px]
-            w-[650px]
+            h-[280px]
+            w-[600px]
             -translate-x-1/2
             rounded-full
-            bg-[var(--accent)]/[0.025]
-            blur-[130px]
+            bg-[var(--accent)]/[0.018]
+            blur-[110px]
 
-            dark:bg-[var(--accent)]/[0.05]
+            dark:bg-[var(--accent)]/[0.04]
           "
         />
 
-        {/* Minimal grid */}
+        {/* =======================================================
+            GRID
+        ======================================================== */}
 
         <div
           className="
             absolute
             inset-0
-            opacity-[0.018]
+            opacity-[0.016]
 
             [background-image:linear-gradient(rgba(0,0,0,0.6)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.6)_1px,transparent_1px)]
             [background-size:90px_90px]
 
-            dark:opacity-[0.035]
+            dark:opacity-[0.03]
             dark:[background-image:linear-gradient(rgba(255,255,255,0.5)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.5)_1px,transparent_1px)]
           "
         />
 
-        {/* Bottom fade */}
+        {/* =======================================================
+            BOTTOM FADE
+        ======================================================== */}
 
         <div
           className="
@@ -204,36 +235,35 @@ export function Portfolio() {
             bottom-0
             h-48
             bg-gradient-to-t
-            from-black/[0.025]
+            from-black/[0.02]
             to-transparent
 
-            dark:from-black/40
+            dark:from-black/35
           "
         />
       </div>
 
       <Container>
         {/* =========================================================
-            SECTION HEADING
+            HEADING
         ========================================================= */}
 
         <motion.div
-          initial={{
-            opacity: 0,
-            y: 30,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
+          initial={
+            shouldReduceMotion
+              ? false
+              : "hidden"
+          }
+          whileInView={
+            shouldReduceMotion
+              ? undefined
+              : "visible"
+          }
           viewport={{
             once: true,
-            amount: 0.3,
+            amount: 0.2,
           }}
-          transition={{
-            duration: 0.8,
-            ease,
-          }}
+          variants={revealVariants}
         >
           <SectionHeading
             eyebrow={t.sections.portfolio.eyebrow}
@@ -246,23 +276,21 @@ export function Portfolio() {
         ========================================================= */}
 
         <motion.div
-          initial={{
-            opacity: 0,
-            y: 25,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
+          initial={
+            shouldReduceMotion
+              ? false
+              : "hidden"
+          }
+          whileInView={
+            shouldReduceMotion
+              ? undefined
+              : "visible"
+          }
           viewport={{
             once: true,
-            amount: 0.25,
+            amount: 0.15,
           }}
-          transition={{
-            duration: 0.7,
-            delay: 0.12,
-            ease,
-          }}
+          variants={revealVariants}
           className="
             mt-14
             rounded-[1.75rem]
@@ -270,11 +298,12 @@ export function Portfolio() {
             border-[var(--border)]
             bg-[var(--glass-bg)]
             p-3
-            backdrop-blur-xl
 
-            shadow-[0_20px_60px_rgba(0,0,0,0.04)]
+            backdrop-blur-lg
 
-            dark:shadow-[0_20px_60px_rgba(0,0,0,0.25)]
+            shadow-[0_15px_45px_rgba(0,0,0,0.035)]
+
+            dark:shadow-[0_15px_45px_rgba(0,0,0,0.2)]
           "
         >
           <div
@@ -289,11 +318,18 @@ export function Portfolio() {
             "
           >
             {/* =====================================================
-                CATEGORY FILTERS
+                CATEGORIES
             ====================================================== */}
 
-            <div className="flex min-w-0 items-center gap-2">
-              {/* Filter icon */}
+            <div
+              className="
+                flex
+                min-w-0
+                items-center
+                gap-2
+              "
+            >
+              {/* Filter Icon */}
 
               <div
                 className="
@@ -315,7 +351,7 @@ export function Portfolio() {
                 <FiSliders size={15} />
               </div>
 
-              {/* Categories */}
+              {/* Category List */}
 
               <div
                 className="
@@ -328,6 +364,8 @@ export function Portfolio() {
 
                   lg:flex-wrap
                   lg:overflow-visible
+
+                  scrollbar-none
                 "
               >
                 {CATEGORIES.map((cat) => {
@@ -340,7 +378,7 @@ export function Portfolio() {
                       onClick={() =>
                         handleCategoryChange(cat)
                       }
-                      className="
+                      className={`
                         relative
                         shrink-0
                         overflow-hidden
@@ -352,37 +390,37 @@ export function Portfolio() {
                         capitalize
                         tracking-wide
 
-                        transition-all
-                        duration-300
+                        outline-none
 
-                        hover:-translate-y-0.5
+                        transition-[color,background-color,border-color,transform]
+                        duration-200
+                        ease-out
 
-                        focus:outline-none
+                        ${
+                          active
+                            ? "text-[var(--accent-foreground)]"
+                            : "text-[var(--foreground-muted)] hover:-translate-y-[1px] hover:text-[var(--foreground)]"
+                        }
+
                         focus-visible:ring-2
                         focus-visible:ring-[var(--accent)]/40
-                      "
+                      `}
                     >
-                      {/* Active pill */}
+                      {/* Active */}
 
                       {active && (
-                        <motion.span
-                          layoutId="portfolio-category-active"
-                          transition={{
-                            type: "spring",
-                            stiffness: 380,
-                            damping: 28,
-                          }}
+                        <span
                           className="
                             absolute
                             inset-0
                             rounded-full
                             bg-[var(--gradient-accent)]
-                            shadow-[0_8px_25px_rgba(229,9,20,0.22)]
+                            shadow-[0_6px_18px_rgba(229,9,20,0.16)]
                           "
                         />
                       )}
 
-                      {/* Inactive background */}
+                      {/* Inactive */}
 
                       {!active && (
                         <span
@@ -393,24 +431,14 @@ export function Portfolio() {
                             bg-[var(--surface-elevated)]
                             opacity-0
                             transition-opacity
-                            duration-300
+                            duration-200
 
-                            group-hover:opacity-100
+                            hover:opacity-100
                           "
                         />
                       )}
 
-                      <span
-                        className={`
-                          relative
-                          z-10
-                          ${
-                            active
-                              ? "text-[var(--accent-foreground)]"
-                              : "text-[var(--foreground-muted)]"
-                          }
-                        `}
-                      >
+                      <span className="relative z-10">
                         {cat}
                       </span>
                     </button>
@@ -427,14 +455,12 @@ export function Portfolio() {
               <FiSearch
                 size={16}
                 className="
+                  pointer-events-none
                   absolute
                   left-4
                   top-1/2
                   -translate-y-1/2
                   text-[var(--foreground-muted)]
-
-                  transition-colors
-                  duration-300
                 "
               />
 
@@ -454,13 +480,16 @@ export function Portfolio() {
                   bg-[var(--surface)]
                   pl-11
                   pr-5
+
                   text-sm
                   text-[var(--foreground)]
+
                   placeholder:text-[var(--foreground-muted)]
+
                   outline-none
 
-                  transition-all
-                  duration-300
+                  transition-[border-color,box-shadow]
+                  duration-200
 
                   focus:border-[var(--accent)]
                   focus:ring-4
@@ -468,16 +497,10 @@ export function Portfolio() {
                 "
               />
 
-              {/* Search active line */}
+              {/* Active Search Line */}
 
-              <motion.div
-                initial={{
-                  scaleX: 0,
-                }}
-                animate={{
-                  scaleX: search ? 1 : 0,
-                }}
-                className="
+              <span
+                className={`
                   pointer-events-none
                   absolute
                   bottom-0
@@ -486,7 +509,17 @@ export function Portfolio() {
                   h-px
                   origin-left
                   bg-[var(--accent)]
-                "
+
+                  transition-transform
+                  duration-300
+                  ease-out
+
+                  ${
+                    search
+                      ? "scale-x-100"
+                      : "scale-x-0"
+                  }
+                `}
               />
             </div>
           </div>
@@ -510,68 +543,51 @@ export function Portfolio() {
                 lg:grid-cols-3
               "
             >
-              {Array.from({ length: 6 }).map(
-                (_, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{
-                      opacity: 0,
-                      y: 20,
-                    }}
-                    animate={{
-                      opacity: 1,
-                      y: 0,
-                    }}
-                    transition={{
-                      duration: 0.5,
-                      delay: index * 0.06,
-                    }}
+              {Array.from({
+                length: 6,
+              }).map((_, index) => (
+                <div
+                  key={index}
+                  className="
+                    overflow-hidden
+                    rounded-[1.5rem]
+                    border
+                    border-[var(--border)]
+                    bg-[var(--glass-bg)]
+                    p-2
+                  "
+                >
+                  <Skeleton
                     className="
-                      overflow-hidden
-                      rounded-[1.5rem]
-                      border
-                      border-[var(--border)]
-                      bg-[var(--glass-bg)]
-                      p-2
+                      h-52
+                      w-full
+                      rounded-[1.15rem]
                     "
-                  >
-                    <Skeleton
-                      className="
-                        h-52
-                        w-full
-                        rounded-[1.15rem]
-                      "
-                    />
+                  />
 
-                    <div className="space-y-3 p-4">
-                      <Skeleton className="h-5 w-3/4" />
-                      <Skeleton className="h-4 w-full" />
-                      <Skeleton className="h-4 w-5/6" />
+                  <div className="space-y-3 p-4">
+                    <Skeleton className="h-5 w-3/4" />
 
-                      <div className="flex gap-2 pt-2">
-                        <Skeleton className="h-6 w-16 rounded-full" />
-                        <Skeleton className="h-6 w-20 rounded-full" />
-                      </div>
+                    <Skeleton className="h-4 w-full" />
+
+                    <Skeleton className="h-4 w-5/6" />
+
+                    <div className="flex gap-2 pt-2">
+                      <Skeleton className="h-6 w-16 rounded-full" />
+
+                      <Skeleton className="h-6 w-20 rounded-full" />
                     </div>
-                  </motion.div>
-                ),
-              )}
+                  </div>
+                </div>
+              ))}
             </div>
           ) : data && data.data.length > 0 ? (
             <>
               {/* ===================================================
-                  RESULTS LABEL
+                  RESULT LABEL
               ==================================================== */}
 
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  y: 10,
-                }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                }}
+              <div
                 className="
                   mb-7
                   flex
@@ -586,7 +602,6 @@ export function Portfolio() {
                       w-1.5
                       rounded-full
                       bg-[var(--accent)]
-                      shadow-[0_0_12px_rgba(229,9,20,0.8)]
                     "
                   />
 
@@ -613,120 +628,146 @@ export function Portfolio() {
                 >
                   {data.data.length} projects
                 </span>
-              </motion.div>
+              </div>
 
               {/* ===================================================
                   PROJECT GRID
               ==================================================== */}
 
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={`${category}-${debouncedSearch}-${page}`}
-                  variants={containerVariants}
-                  initial="hidden"
-                  animate="visible"
-                  className="
-                    grid
-                    gap-7
-                    sm:grid-cols-2
-                    lg:grid-cols-3
-                  "
-                >
-                  {data.data.map(
-                    (project, index) => (
-                      <motion.div
-                        key={project._id}
-                        variants={itemVariants}
-                        whileHover={{
-                          y: -8,
-                        }}
-                        className="group relative"
+              <motion.div
+                key={`${category}-${debouncedSearch}-${page}`}
+                variants={
+                  shouldReduceMotion
+                    ? undefined
+                    : gridVariants
+                }
+                initial={
+                  shouldReduceMotion
+                    ? false
+                    : "hidden"
+                }
+                animate={
+                  shouldReduceMotion
+                    ? undefined
+                    : "visible"
+                }
+                className="
+                  grid
+                  gap-7
+                  sm:grid-cols-2
+                  lg:grid-cols-3
+                "
+              >
+                {data.data.map(
+                  (project, index) => (
+                    <motion.div
+                      key={project._id}
+                      variants={
+                        shouldReduceMotion
+                          ? undefined
+                          : revealVariants
+                      }
+                      className="
+                        group
+                        relative
+                        min-w-0
+                      "
+                    >
+                      {/* =================================================
+                          VERY LIGHT GLOW
+                      ================================================== */}
+
+                      <div
+                        className="
+                          pointer-events-none
+                          absolute
+                          -inset-2
+                          rounded-[2rem]
+                          bg-[var(--accent)]
+                          opacity-0
+                          blur-xl
+
+                          transition-opacity
+                          duration-300
+
+                          group-hover:opacity-[0.06]
+                        "
+                      />
+
+                      {/* =================================================
+                          PROJECT NUMBER
+                      ================================================== */}
+
+                      <div
+                        className="
+                          pointer-events-none
+                          absolute
+                          right-4
+                          top-4
+                          z-20
+                          flex
+                          h-7
+                          min-w-7
+                          items-center
+                          justify-center
+                          rounded-full
+                          border
+                          border-white/15
+                          bg-black/30
+                          px-2
+                          text-[9px]
+                          font-semibold
+                          tracking-widest
+                          text-white
+
+                          opacity-0
+
+                          backdrop-blur-sm
+
+                          transition-opacity
+                          duration-200
+
+                          group-hover:opacity-100
+                        "
                       >
-                        {/* Hover glow */}
+                        {String(index + 1).padStart(
+                          2,
+                          "0",
+                        )}
+                      </div>
 
-                        <div
-                          className="
-                            pointer-events-none
-                            absolute
-                            -inset-3
-                            rounded-[2rem]
-                            bg-[var(--accent)]
-                            opacity-0
-                            blur-2xl
+                      {/* =================================================
+                          CARD
+                      ================================================== */}
 
-                            transition-opacity
-                            duration-500
+                      <div
+                        className="
+                          relative
 
-                            group-hover:opacity-[0.10]
-                          "
+                          transition-transform
+                          duration-300
+                          ease-out
+
+                          group-hover:-translate-y-1
+
+                          motion-reduce:transform-none
+                        "
+                      >
+                        <ProjectCard
+                          project={project}
                         />
-
-                        {/* Project number */}
-
-                        <div
-                          className="
-                            pointer-events-none
-                            absolute
-                            right-4
-                            top-4
-                            z-20
-                            flex
-                            h-7
-                            min-w-7
-                            items-center
-                            justify-center
-                            rounded-full
-                            border
-                            border-white/15
-                            bg-black/30
-                            px-2
-                            text-[9px]
-                            font-semibold
-                            tracking-widest
-                            text-white
-                            opacity-0
-                            backdrop-blur-md
-
-                            transition-all
-                            duration-300
-
-                            group-hover:opacity-100
-                          "
-                        >
-                          {String(index + 1).padStart(
-                            2,
-                            "0",
-                          )}
-                        </div>
-
-                        <ProjectCard project={project} />
-                      </motion.div>
-                    ),
-                  )}
-                </motion.div>
-              </AnimatePresence>
+                      </div>
+                    </motion.div>
+                  ),
+                )}
+              </motion.div>
 
               {/* ===================================================
                   PAGINATION
               ==================================================== */}
 
               {data.pagination.pages > 1 && (
-                <motion.div
-                  initial={{
-                    opacity: 0,
-                    y: 20,
-                  }}
-                  whileInView={{
-                    opacity: 1,
-                    y: 0,
-                  }}
-                  viewport={{
-                    once: true,
-                  }}
-                  transition={{
-                    duration: 0.6,
-                    ease,
-                  }}
+                <div
                   className="
                     mt-16
                     flex
@@ -735,6 +776,8 @@ export function Portfolio() {
                     gap-5
                   "
                 >
+                  {/* Divider */}
+
                   <div
                     className="
                       h-px
@@ -747,27 +790,26 @@ export function Portfolio() {
                     "
                   />
 
+                  {/* Pages */}
+
                   <div className="flex items-center gap-2">
                     {Array.from({
-                      length: data.pagination.pages,
+                      length:
+                        data.pagination.pages,
                     }).map((_, index) => {
-                      const pageNumber = index + 1;
+                      const pageNumber =
+                        index + 1;
+
                       const active =
                         page === pageNumber;
 
                       return (
-                        <motion.button
+                        <button
                           key={pageNumber}
                           type="button"
                           onClick={() =>
                             setPage(pageNumber)
                           }
-                          whileHover={{
-                            y: -2,
-                          }}
-                          whileTap={{
-                            scale: 0.92,
-                          }}
                           className={`
                             relative
                             flex
@@ -780,39 +822,39 @@ export function Portfolio() {
                             text-xs
                             font-semibold
 
-                            transition-all
-                            duration-300
+                            transition-[color,background-color,border-color,transform]
+                            duration-200
+
+                            hover:-translate-y-[1px]
+
+                            active:scale-95
 
                             ${
                               active
-                                ? "text-[var(--accent-foreground)] shadow-[0_8px_25px_rgba(229,9,20,0.22)]"
+                                ? "text-[var(--accent-foreground)] shadow-[0_6px_18px_rgba(229,9,20,0.16)]"
                                 : "border border-[var(--border)] bg-[var(--surface-elevated)] text-[var(--foreground-muted)] hover:border-[var(--accent)]/40 hover:text-[var(--accent)]"
                             }
                           `}
                         >
                           {active && (
-                            <motion.span
-                              layoutId="portfolio-page-active"
+                            <span
                               className="
                                 absolute
                                 inset-0
                                 bg-[var(--gradient-accent)]
                               "
-                              transition={{
-                                type: "spring",
-                                stiffness: 350,
-                                damping: 28,
-                              }}
                             />
                           )}
 
                           <span className="relative z-10">
                             {pageNumber}
                           </span>
-                        </motion.button>
+                        </button>
                       );
                     })}
                   </div>
+
+                  {/* Page info */}
 
                   <div
                     className="
@@ -833,7 +875,7 @@ export function Portfolio() {
                       className="text-[var(--accent)]"
                     />
                   </div>
-                </motion.div>
+                </div>
               )}
             </>
           ) : (
@@ -841,19 +883,7 @@ export function Portfolio() {
                EMPTY STATE
             ====================================================== */
 
-            <motion.div
-              initial={{
-                opacity: 0,
-                y: 25,
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-              }}
-              transition={{
-                duration: 0.6,
-                ease,
-              }}
+            <div
               className="
                 relative
                 mx-auto
@@ -865,23 +895,27 @@ export function Portfolio() {
                 bg-[var(--glass-bg)]
                 p-12
                 text-center
-                backdrop-blur-xl
+                backdrop-blur-lg
               "
             >
+              {/* Small glow */}
+
               <div
                 className="
                   pointer-events-none
                   absolute
                   left-1/2
                   top-0
-                  h-32
-                  w-64
+                  h-28
+                  w-56
                   -translate-x-1/2
                   rounded-full
-                  bg-[var(--accent)]/[0.08]
-                  blur-3xl
+                  bg-[var(--accent)]/[0.06]
+                  blur-2xl
                 "
               />
+
+              {/* Icon */}
 
               <div
                 className="
@@ -926,30 +960,15 @@ export function Portfolio() {
                 No projects match your current
                 search or category filters.
               </p>
-            </motion.div>
+            </div>
           )}
         </div>
 
         {/* =========================================================
-            SECTION BOTTOM DECORATION
+            BOTTOM DECORATION
         ========================================================= */}
 
-        <motion.div
-          initial={{
-            opacity: 0,
-            scaleX: 0,
-          }}
-          whileInView={{
-            opacity: 1,
-            scaleX: 1,
-          }}
-          viewport={{
-            once: true,
-          }}
-          transition={{
-            duration: 1,
-            ease,
-          }}
+        <div
           className="
             mx-auto
             mt-20
@@ -976,7 +995,6 @@ export function Portfolio() {
               shrink-0
               rounded-full
               bg-[var(--accent)]
-              shadow-[0_0_14px_rgba(229,9,20,0.9)]
             "
           />
 
@@ -989,7 +1007,7 @@ export function Portfolio() {
               to-[var(--accent)]/30
             "
           />
-        </motion.div>
+        </div>
       </Container>
     </section>
   );
