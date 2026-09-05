@@ -22,34 +22,29 @@ import { Skeleton } from "@/components/ui/Skeleton";
 const smoothEase = [0.22, 1, 0.36, 1] as const;
 
 /* =========================================================
-   GRID
+   LIGHTWEIGHT ANIMATION
 ========================================================= */
+
+const revealVariants = {
+  hidden: {
+    opacity: 0,
+    y: 12,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.45,
+      ease: smoothEase,
+    },
+  },
+};
 
 const gridVariants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.045,
-    },
-  },
-};
-
-/* =========================================================
-   CARD REVEAL
-========================================================= */
-
-const cardVariants = {
-  hidden: {
-    opacity: 0,
-    y: 14,
-  },
-
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.55,
-      ease: smoothEase,
+      staggerChildren: 0.035,
     },
   },
 };
@@ -94,7 +89,6 @@ export function PricingTable() {
       ====================================================== */}
 
       <div className="pointer-events-none absolute inset-0 -z-20 overflow-hidden">
-
         {/* Base */}
 
         <div
@@ -106,6 +100,7 @@ export function PricingTable() {
 
         {/* ===================================================
             STATIC SVG
+            NO FRAMER ANIMATION
         ==================================================== */}
 
         <svg
@@ -122,7 +117,6 @@ export function PricingTable() {
           aria-hidden="true"
         >
           <defs>
-
             <linearGradient
               id="pricingFlow"
               x1="0"
@@ -173,7 +167,6 @@ export function PricingTable() {
                 stopOpacity="0"
               />
             </radialGradient>
-
           </defs>
 
           {/* Center Glow */}
@@ -242,96 +235,43 @@ export function PricingTable() {
         </svg>
 
         {/* ===================================================
-            SOFT ORB 01
+            ORB 01
+            STATIC = MUCH LIGHTER ON SCROLL
         ==================================================== */}
 
-        {!shouldReduceMotion && (
-          <motion.div
-            className="
-              pricing-orb
-              absolute
-              left-[5%]
-              top-[14%]
-              h-56
-              w-56
-              rounded-full
-              bg-[var(--pricing-svg-glow)]
-              blur-[90px]
-              will-change-transform
-            "
-            animate={{
-              x: [0, 10, 0],
-              y: [0, 6, 0],
-            }}
-            transition={{
-              duration: 30,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        )}
-
-        {shouldReduceMotion && (
-          <div
-            className="
-              pricing-orb
-              absolute
-              left-[5%]
-              top-[14%]
-              h-56
-              w-56
-              rounded-full
-              bg-[var(--pricing-svg-glow)]
-              blur-[90px]
-            "
-          />
-        )}
+        <div
+          className="
+            pricing-orb
+            absolute
+            left-[5%]
+            top-[14%]
+            h-56
+            w-56
+            rounded-full
+            bg-[var(--pricing-svg-glow)]
+            blur-[90px]
+            opacity-80
+          "
+        />
 
         {/* ===================================================
-            SOFT ORB 02
+            ORB 02
         ==================================================== */}
 
-        {!shouldReduceMotion && (
-          <motion.div
-            className="
-              pricing-orb
-              absolute
-              bottom-[8%]
-              right-[5%]
-              h-64
-              w-64
-              rounded-full
-              bg-[var(--pricing-svg-glow)]
-              blur-[100px]
-              will-change-transform
-            "
-            animate={{
-              x: [0, -10, 0],
-              y: [0, -7, 0],
-            }}
-            transition={{
-              duration: 34,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        )}
-
-        {shouldReduceMotion && (
-          <div
-            className="
-              pricing-orb
-              absolute
-              bottom-[8%]
-              right-[5%]
-              h-64
-              w-64
-              rounded-full
-              bg-[var(--pricing-svg-glow)]
-              blur-[100px]
-            "
-          />
-        )}
+        <div
+          className="
+            pricing-orb
+            absolute
+            bottom-[8%]
+            right-[5%]
+            h-64
+            w-64
+            rounded-full
+            bg-[var(--pricing-svg-glow)]
+            blur-[100px]
+            opacity-80
+          "
+        />
 
         {/* ===================================================
             SUBTLE GRID
@@ -396,42 +336,23 @@ export function PricingTable() {
       ====================================================== */}
 
       <Container>
-
         {/* ===================================================
             HEADER
         ==================================================== */}
 
         <motion.div
-          initial={
-            shouldReduceMotion
-              ? false
-              : {
-                  opacity: 0,
-                  y: 12,
-                }
-          }
-          whileInView={
-            shouldReduceMotion
-              ? undefined
-              : {
-                  opacity: 1,
-                  y: 0,
-                }
-          }
+          initial={shouldReduceMotion ? false : "hidden"}
+          whileInView={shouldReduceMotion ? undefined : "visible"}
           viewport={{
             once: true,
-            margin: "-80px",
+            amount: 0.15,
           }}
-          transition={{
-            duration: 0.65,
-            ease: smoothEase,
-          }}
+          variants={revealVariants}
           className="relative mb-16 sm:mb-20"
         >
           {/* Eyebrow */}
 
           <div className="mb-5 flex items-center gap-3">
-
             <span className="h-px w-10 bg-[var(--accent)]" />
 
             <span
@@ -467,29 +388,7 @@ export function PricingTable() {
 
           {/* Divider */}
 
-          <motion.div
-            initial={
-              shouldReduceMotion
-                ? false
-                : {
-                    scaleX: 0,
-                  }
-            }
-            whileInView={
-              shouldReduceMotion
-                ? undefined
-                : {
-                    scaleX: 1,
-                  }
-            }
-            viewport={{
-              once: true,
-            }}
-            transition={{
-              duration: 0.7,
-              delay: 0.12,
-              ease: smoothEase,
-            }}
+          <div
             className="
               mt-8
               h-px
@@ -522,23 +421,20 @@ export function PricingTable() {
             ))}
           </div>
         ) : isError ? (
-
           /* =================================================
               ERROR
           ================================================= */
 
           <motion.div
-            initial={{
-              opacity: 0,
-            }}
-            whileInView={{
-              opacity: 1,
-            }}
+            initial={shouldReduceMotion ? false : { opacity: 0 }}
+            whileInView={shouldReduceMotion ? undefined : { opacity: 1 }}
             viewport={{
               once: true,
+              amount: 0.1,
             }}
             transition={{
-              duration: 0.5,
+              duration: 0.35,
+              ease: smoothEase,
             }}
             className="
               rounded-[1.75rem]
@@ -554,9 +450,7 @@ export function PricingTable() {
               Unable to load pricing plans right now.
             </p>
           </motion.div>
-
         ) : (
-
           /* =================================================
               PRICING GRID
           ================================================= */
@@ -567,7 +461,7 @@ export function PricingTable() {
             whileInView="visible"
             viewport={{
               once: true,
-              margin: "-60px",
+              amount: 0.08,
             }}
             className="
               grid
@@ -577,17 +471,15 @@ export function PricingTable() {
             "
           >
             {plans!.map((plan, index) => (
-
               <motion.article
                 key={plan._id}
-                variants={cardVariants}
+                variants={revealVariants}
                 className="
                   group
                   relative
-                  will-change-transform
+                  transform-gpu
                 "
               >
-
                 {/* =========================================
                     OUTER GLOW
                 ========================================== */}
@@ -602,7 +494,7 @@ export function PricingTable() {
                     opacity-0
                     blur-xl
                     transition-opacity
-                    duration-500
+                    duration-300
                     group-hover:opacity-[0.07]
                   "
                 />
@@ -611,18 +503,7 @@ export function PricingTable() {
                     CARD
                 ========================================== */}
 
-                <motion.div
-                  whileHover={
-                    shouldReduceMotion
-                      ? undefined
-                      : {
-                          y: -3,
-                        }
-                  }
-                  transition={{
-                    duration: 0.35,
-                    ease: smoothEase,
-                  }}
+                <div
                   className="
                     relative
                     flex
@@ -632,27 +513,31 @@ export function PricingTable() {
                     rounded-[1.75rem]
                     p-7
                     backdrop-blur-xl
+
+                    transform-gpu
+                    transition-transform
+                    duration-300
+                    ease-out
+
+                    group-hover:-translate-y-[3px]
+
                     sm:p-8
                   "
                   style={
                     plan.highlighted
                       ? {
-                          background:
-                            "var(--surface-elevated)",
-                          border:
-                            "1px solid var(--accent)",
+                          background: "var(--surface-elevated)",
+                          border: "1px solid var(--accent)",
                           boxShadow:
                             "0 18px 60px rgba(229,9,20,0.08)",
                         }
                       : {
-                          background:
-                            "var(--glass-bg)",
+                          background: "var(--glass-bg)",
                           border:
                             "1px solid var(--glass-border)",
                         }
                   }
                 >
-
                   {/* =======================================
                       CARD AMBIENT LIGHT
                   ======================================== */}
@@ -717,7 +602,6 @@ export function PricingTable() {
                     "
                   >
                     <div className="flex items-center gap-3">
-
                       <span
                         className="
                           font-mono-tag
@@ -735,7 +619,7 @@ export function PricingTable() {
                           w-6
                           bg-[var(--border)]
                           transition-all
-                          duration-500
+                          duration-300
                           group-hover:w-10
                           group-hover:bg-[var(--accent)]
                         "
@@ -753,12 +637,10 @@ export function PricingTable() {
                         border
                         border-[var(--border)]
                         text-[var(--foreground-muted)]
-                        transition-all
-                        duration-500
+                        transition-colors
+                        duration-300
                         group-hover:border-[var(--accent)]
                         group-hover:text-[var(--accent)]
-                        group-hover:-translate-y-0.5
-                        group-hover:translate-x-0.5
                       "
                     >
                       <FiArrowUpRight size={15} />
@@ -770,7 +652,6 @@ export function PricingTable() {
                   ======================================== */}
 
                   <div className="relative z-10 mt-10">
-
                     <h3
                       className="
                         font-display
@@ -779,7 +660,7 @@ export function PricingTable() {
                         tracking-[-0.025em]
                         text-[var(--foreground)]
                         transition-colors
-                        duration-500
+                        duration-300
                         group-hover:text-[var(--accent)]
                       "
                     >
@@ -941,8 +822,12 @@ export function PricingTable() {
                       py-3
                       text-sm
                       font-medium
-                      transition-all
-                      duration-500
+
+                      transform-gpu
+                      transition-transform
+                      duration-300
+                      ease-out
+
                       hover:-translate-y-0.5
                     "
                     style={
@@ -963,15 +848,14 @@ export function PricingTable() {
                           }
                     }
                   >
-                    <span>
-                      Get started
-                    </span>
+                    <span>Get started</span>
 
                     <FiArrowUpRight
                       size={14}
                       className="
+                        transform-gpu
                         transition-transform
-                        duration-500
+                        duration-300
                         group-hover/button:-translate-y-0.5
                         group-hover/button:translate-x-0.5
                       "
@@ -998,8 +882,8 @@ export function PricingTable() {
                         h-full
                         w-[18%]
                         bg-[var(--accent)]
-                        transition-all
-                        duration-700
+                        transition-[width]
+                        duration-500
                         ease-out
                         group-hover:w-[65%]
                       "
@@ -1009,8 +893,7 @@ export function PricingTable() {
                       }}
                     />
                   </div>
-
-                </motion.div>
+                </div>
               </motion.article>
             ))}
           </motion.div>
@@ -1022,26 +905,14 @@ export function PricingTable() {
 
         {!isLoading && plans && plans.length > 0 && (
           <motion.div
-            initial={
-              shouldReduceMotion
-                ? false
-                : {
-                    opacity: 0,
-                  }
-            }
-            whileInView={
-              shouldReduceMotion
-                ? undefined
-                : {
-                    opacity: 1,
-                  }
-            }
+            initial={shouldReduceMotion ? false : { opacity: 0 }}
+            whileInView={shouldReduceMotion ? undefined : { opacity: 1 }}
             viewport={{
               once: true,
+              amount: 0.1,
             }}
             transition={{
-              duration: 0.6,
-              delay: 0.15,
+              duration: 0.4,
               ease: smoothEase,
             }}
             className="
@@ -1098,7 +969,6 @@ export function PricingTable() {
             />
           </motion.div>
         )}
-
       </Container>
     </section>
   );
