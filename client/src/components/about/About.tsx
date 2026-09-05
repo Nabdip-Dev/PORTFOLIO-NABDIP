@@ -1,5 +1,6 @@
 "use client";
 
+import { memo, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -10,22 +11,261 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Skeleton } from "@/components/ui/Skeleton";
 
+/* =========================================================
+   EASING
+========================================================= */
+
 const ease = [0.22, 1, 0.36, 1] as const;
+
+/* =========================================================
+   ANIMATION VARIANTS
+========================================================= */
 
 const fadeUp = {
   hidden: {
     opacity: 0,
-    y: 35,
+    y: 28,
   },
+
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.8,
+      duration: 0.65,
       ease,
     },
   },
 };
+
+const contentContainer = {
+  hidden: {},
+
+  visible: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+/* =========================================================
+   ACHIEVEMENT ITEM
+========================================================= */
+
+const AchievementItem = memo(function AchievementItem({
+  item,
+  index,
+}: {
+  item: string;
+  index: number;
+}) {
+  return (
+    <motion.div
+      initial={{
+        opacity: 0,
+        x: -18,
+      }}
+      whileInView={{
+        opacity: 1,
+        x: 0,
+      }}
+      viewport={{
+        once: true,
+        amount: 0.2,
+      }}
+      transition={{
+        duration: 0.5,
+        delay: index * 0.06,
+        ease,
+      }}
+      whileHover={{
+        x: 5,
+      }}
+      className="
+        group
+        flex
+        items-start
+        gap-4
+        rounded-2xl
+        border
+        border-[var(--border)]
+        bg-[var(--glass-bg)]
+        p-4
+        transform-gpu
+
+        transition-[transform,border-color,background-color]
+        duration-300
+        ease-out
+
+        hover:border-[var(--accent)]/30
+        hover:bg-[var(--accent)]/[0.04]
+      "
+      style={{
+        backfaceVisibility: "hidden",
+      }}
+    >
+      {/* NUMBER */}
+
+      <span
+        className="
+          flex
+          h-8
+          w-8
+          shrink-0
+          items-center
+          justify-center
+          rounded-full
+          border
+          border-[var(--accent)]/30
+          bg-[var(--accent)]/10
+          text-[10px]
+          font-bold
+          text-[var(--accent)]
+
+          transition-[background-color,border-color,color]
+          duration-300
+
+          group-hover:border-[var(--accent)]
+          group-hover:bg-[var(--accent)]
+          group-hover:text-white
+        "
+      >
+        {String(index + 1).padStart(2, "0")}
+      </span>
+
+      {/* TEXT */}
+
+      <span
+        className="
+          pt-1
+          text-sm
+          leading-7
+          text-[var(--foreground-muted)]
+        "
+      >
+        {item}
+      </span>
+    </motion.div>
+  );
+});
+
+/* =========================================================
+   STAT CARD
+========================================================= */
+
+const StatCard = memo(function StatCard({
+  stat,
+  index,
+}: {
+  stat: {
+    value: string;
+    label: string;
+  };
+  index: number;
+}) {
+  return (
+    <motion.div
+      initial={{
+        opacity: 0,
+        y: 20,
+      }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+      }}
+      viewport={{
+        once: true,
+        amount: 0.25,
+      }}
+      transition={{
+        duration: 0.55,
+        delay: index * 0.07,
+        ease,
+      }}
+      whileHover={{
+        y: -5,
+      }}
+      className="
+        group
+        relative
+        overflow-hidden
+        rounded-2xl
+        border
+        border-[var(--border)]
+        bg-[var(--glass-bg)]
+        p-5
+        transform-gpu
+
+        transition-[transform,border-color]
+        duration-300
+        ease-out
+
+        hover:border-[var(--accent)]/30
+      "
+      style={{
+        backfaceVisibility: "hidden",
+      }}
+    >
+      {/* STATIC LIGHT */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          -right-10
+          -top-10
+          h-24
+          w-24
+          rounded-full
+          bg-[var(--accent)]/10
+          blur-2xl
+          opacity-0
+
+          transition-opacity
+          duration-500
+
+          group-hover:opacity-100
+        "
+      />
+
+      <div className="relative">
+        {/* VALUE */}
+
+        <div
+          className="
+            font-display
+            text-3xl
+            font-semibold
+            tracking-tight
+            text-[var(--foreground)]
+          "
+        >
+          <span className="text-[var(--accent)]">
+            {stat.value}
+          </span>
+        </div>
+
+        {/* LABEL */}
+
+        <div
+          className="
+            mt-2
+            text-[10px]
+            font-medium
+            uppercase
+            tracking-[0.16em]
+            text-[var(--foreground-muted)]
+          "
+        >
+          {stat.label}
+        </div>
+      </div>
+    </motion.div>
+  );
+});
+
+/* =========================================================
+   ABOUT
+========================================================= */
 
 export function About() {
   const {
@@ -39,67 +279,68 @@ export function About() {
 
   const { t } = useLanguage();
 
+  const achievements = useMemo(
+    () => about?.achievements ?? [],
+    [about?.achievements],
+  );
+
+  const stats = useMemo(
+    () => about?.stats ?? [],
+    [about?.stats],
+  );
+
   return (
     <section
       id="about"
       className="
-        relative isolate
+        relative
+        isolate
         overflow-visible
-        py-24 sm:py-32 lg:py-40
-
         bg-[var(--background)]
+        py-24
         text-[var(--foreground)]
+        sm:py-32
+        lg:py-40
 
         transition-colors
         duration-700
       "
     >
       {/* =========================================================
-          LUXURY THEME BACKGROUND
-
+          BACKGROUND
+          
           IMPORTANT:
-          overflow-hidden is only used here.
-          It does NOT affect sticky photo.
+          Entire background is isolated.
+          No continuous Framer Motion animation.
       ========================================================= */}
 
-      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        {/* -------------------------------------------------------
-            LIGHT / DARK MAIN GRADIENT
-
-            Add --about-gradient in globals.css
-        ------------------------------------------------------- */}
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          -z-10
+          overflow-hidden
+        "
+        style={{
+          contain: "paint",
+        }}
+      >
+        {/* MAIN GRADIENT */}
 
         <div
           className="
             absolute
             inset-0
             bg-[var(--about-gradient)]
-
-            transition-all
-            duration-700
           "
         />
 
-        {/* -------------------------------------------------------
-            EXTRA RED AMBIENT GLOW
-        ------------------------------------------------------- */}
+        {/* =====================================================
+            LEFT RED AMBIENT
+        ====================================================== */}
 
-        <motion.div
-          initial={{
-            opacity: 0,
-            scale: 0.8,
-          }}
-          whileInView={{
-            opacity: 1,
-            scale: 1,
-          }}
-          viewport={{
-            once: true,
-          }}
-          transition={{
-            duration: 1.5,
-            ease,
-          }}
+        <div
           className="
             absolute
             -left-40
@@ -113,6 +354,10 @@ export function About() {
             dark:bg-red-600/[0.13]
           "
         />
+
+        {/* =====================================================
+            RIGHT RED AMBIENT
+        ====================================================== */}
 
         <div
           className="
@@ -129,9 +374,9 @@ export function About() {
           "
         />
 
-        {/* -------------------------------------------------------
+        {/* =====================================================
             CENTER LIGHT
-        ------------------------------------------------------- */}
+        ====================================================== */}
 
         <div
           className="
@@ -149,9 +394,9 @@ export function About() {
           "
         />
 
-        {/* -------------------------------------------------------
-            SUBTLE GRID
-        ------------------------------------------------------- */}
+        {/* =====================================================
+            GRID
+        ====================================================== */}
 
         <div
           className="
@@ -167,24 +412,23 @@ export function About() {
           "
         />
 
-        {/* -------------------------------------------------------
-            TOP RADIAL LIGHT
-        ------------------------------------------------------- */}
+        {/* =====================================================
+            TOP RADIAL
+        ====================================================== */}
 
         <div
           className="
             absolute
             inset-0
-
             bg-[radial-gradient(circle_at_50%_10%,rgba(229,9,20,0.035),transparent_35%)]
 
             dark:bg-[radial-gradient(circle_at_50%_10%,rgba(229,9,20,0.09),transparent_35%)]
           "
         />
 
-        {/* -------------------------------------------------------
+        {/* =====================================================
             BOTTOM FADE
-        ------------------------------------------------------- */}
+        ====================================================== */}
 
         <div
           className="
@@ -192,7 +436,6 @@ export function About() {
             inset-x-0
             bottom-0
             h-64
-
             bg-gradient-to-t
             from-black/[0.035]
             to-transparent
@@ -202,10 +445,14 @@ export function About() {
         />
       </div>
 
+      {/* =========================================================
+          CONTENT
+      ========================================================= */}
+
       <Container>
-        {/* =========================================================
-            SECTION HEADING
-        ========================================================= */}
+        {/* =====================================================
+            HEADING
+        ====================================================== */}
 
         <motion.div
           initial="hidden"
@@ -223,9 +470,9 @@ export function About() {
           </motion.div>
         </motion.div>
 
-        {/* =========================================================
-            LOADING STATE
-        ========================================================= */}
+        {/* =====================================================
+            LOADING
+        ====================================================== */}
 
         {isLoading && (
           <div
@@ -276,15 +523,15 @@ export function About() {
           </div>
         )}
 
-        {/* =========================================================
-            ERROR STATE
-        ========================================================= */}
+        {/* =====================================================
+            ERROR
+        ====================================================== */}
 
         {!isLoading && (isError || !about) && (
           <motion.div
             initial={{
               opacity: 0,
-              y: 20,
+              y: 18,
             }}
             whileInView={{
               opacity: 1,
@@ -294,7 +541,7 @@ export function About() {
               once: true,
             }}
             transition={{
-              duration: 0.6,
+              duration: 0.5,
               ease,
             }}
             className="
@@ -342,9 +589,9 @@ export function About() {
           </motion.div>
         )}
 
-        {/* =========================================================
-            MAIN CONTENT
-        ========================================================= */}
+        {/* =====================================================
+            MAIN
+        ====================================================== */}
 
         {!isLoading && about && !isError && (
           <div
@@ -357,9 +604,9 @@ export function About() {
               lg:gap-20
             "
           >
-            {/* =====================================================
-                STICKY PHOTO
-            ====================================================== */}
+            {/* =================================================
+                PHOTO
+            ================================================== */}
 
             {about.photo?.url ? (
               <div
@@ -373,8 +620,8 @@ export function About() {
                 <motion.div
                   initial={{
                     opacity: 0,
-                    y: 35,
-                    scale: 0.96,
+                    y: 28,
+                    scale: 0.97,
                   }}
                   whileInView={{
                     opacity: 1,
@@ -386,10 +633,17 @@ export function About() {
                     amount: 0.2,
                   }}
                   transition={{
-                    duration: 0.9,
+                    duration: 0.7,
                     ease,
                   }}
-                  className="group relative"
+                  className="
+                    group
+                    relative
+                    transform-gpu
+                  "
+                  style={{
+                    backfaceVisibility: "hidden",
+                  }}
                 >
                   {/* PHOTO GLOW */}
 
@@ -403,11 +657,10 @@ export function About() {
                       opacity-[0.10]
                       blur-2xl
 
-                      transition-all
-                      duration-700
+                      transition-opacity
+                      duration-500
 
-                      group-hover:opacity-[0.20]
-                      group-hover:blur-3xl
+                      group-hover:opacity-[0.18]
                     "
                   />
 
@@ -421,12 +674,9 @@ export function About() {
                       border-[var(--glass-border)]
                       bg-[var(--glass-bg)]
                       p-2
-
                       shadow-[0_30px_80px_rgba(0,0,0,0.12)]
 
-                      backdrop-blur-xl
-
-                      transition-all
+                      transition-[border-color]
                       duration-500
 
                       group-hover:border-[var(--accent)]/25
@@ -452,11 +702,11 @@ export function About() {
                         sizes="(max-width: 1024px) 100vw, 380px"
                         className="
                           object-cover
-
                           grayscale-[15%]
+                          transform-gpu
 
-                          transition-all
-                          duration-[1200ms]
+                          transition-[transform,filter]
+                          duration-[900ms]
                           ease-out
 
                           group-hover:scale-105
@@ -482,6 +732,7 @@ export function About() {
 
                       <div
                         className="
+                          pointer-events-none
                           absolute
                           -right-24
                           -top-24
@@ -491,10 +742,10 @@ export function About() {
                           bg-[var(--accent)]/25
                           blur-3xl
 
-                          transition-all
-                          duration-700
+                          transition-[background-color]
+                          duration-500
 
-                          group-hover:bg-[var(--accent)]/45
+                          group-hover:bg-[var(--accent)]/40
                         "
                       />
 
@@ -537,7 +788,7 @@ export function About() {
                     </div>
                   </div>
 
-                  {/* BOTTOM RIGHT DECORATION */}
+                  {/* BOTTOM RIGHT */}
 
                   <div
                     className="
@@ -552,14 +803,14 @@ export function About() {
                       border-r-2
                       border-[var(--accent)]/50
 
-                      transition-all
+                      transition-[border-color]
                       duration-500
 
                       group-hover:border-[var(--accent)]
                     "
                   />
 
-                  {/* TOP LEFT DECORATION */}
+                  {/* TOP LEFT */}
 
                   <div
                     className="
@@ -581,9 +832,9 @@ export function About() {
               <div className="hidden lg:block" />
             )}
 
-            {/* =====================================================
-                RIGHT SIDE CONTENT
-            ====================================================== */}
+            {/* =================================================
+                RIGHT CONTENT
+            ================================================== */}
 
             <motion.div
               initial="hidden"
@@ -592,19 +843,10 @@ export function About() {
                 once: true,
                 amount: 0.08,
               }}
-              variants={{
-                hidden: {},
-                visible: {
-                  transition: {
-                    staggerChildren: 0.12,
-                  },
-                },
-              }}
+              variants={contentContainer}
               className="min-w-0"
             >
-              {/* =================================================
-                  INTRODUCTION
-              ================================================== */}
+              {/* INTRODUCTION */}
 
               <motion.div
                 variants={fadeUp}
@@ -635,9 +877,7 @@ export function About() {
                 </div>
               </motion.div>
 
-              {/* =================================================
-                  BIOGRAPHY
-              ================================================== */}
+              {/* BIO */}
 
               <motion.div variants={fadeUp}>
                 <p
@@ -658,284 +898,93 @@ export function About() {
                   ACHIEVEMENTS
               ================================================== */}
 
-              {about.achievements &&
-                about.achievements.length > 0 && (
-                  <motion.div
-                    variants={fadeUp}
-                    className="mt-14"
-                  >
-                    {/* HEADING */}
+              {achievements.length > 0 && (
+                <motion.div
+                  variants={fadeUp}
+                  className="mt-14"
+                >
+                  <div className="mb-6 flex items-center gap-4">
+                    <h3
+                      className="
+                        shrink-0
+                        text-xs
+                        font-semibold
+                        uppercase
+                        tracking-[0.25em]
+                        text-[var(--foreground)]
+                      "
+                    >
+                      Highlights
+                    </h3>
 
-                    <div className="mb-6 flex items-center gap-4">
-                      <h3
-                        className="
-                          shrink-0
-                          text-xs
-                          font-semibold
-                          uppercase
-                          tracking-[0.25em]
-                          text-[var(--foreground)]
-                        "
-                      >
-                        Highlights
-                      </h3>
+                    <div
+                      className="
+                        h-px
+                        flex-1
+                        bg-gradient-to-r
+                        from-[var(--border)]
+                        to-transparent
+                      "
+                    />
+                  </div>
 
-                      <div
-                        className="
-                          h-px
-                          flex-1
-                          bg-gradient-to-r
-                          from-[var(--border)]
-                          to-transparent
-                        "
+                  <div className="space-y-3">
+                    {achievements.map((item, index) => (
+                      <AchievementItem
+                        key={`${item}-${index}`}
+                        item={item}
+                        index={index}
                       />
-                    </div>
-
-                    {/* ITEMS */}
-
-                    <div className="space-y-3">
-                      {about.achievements.map(
-                        (item, index) => (
-                          <motion.div
-                            key={`${item}-${index}`}
-                            initial={{
-                              opacity: 0,
-                              x: -25,
-                            }}
-                            whileInView={{
-                              opacity: 1,
-                              x: 0,
-                            }}
-                            viewport={{
-                              once: true,
-                              amount: 0.25,
-                            }}
-                            transition={{
-                              duration: 0.6,
-                              delay: index * 0.08,
-                              ease,
-                            }}
-                            whileHover={{
-                              x: 7,
-                              transition: {
-                                duration: 0.25,
-                              },
-                            }}
-                            className="
-                              group
-                              flex
-                              items-start
-                              gap-4
-                              rounded-2xl
-                              border
-                              border-[var(--border)]
-                              bg-[var(--glass-bg)]
-                              p-4
-
-                              transition-all
-                              duration-300
-
-                              hover:border-[var(--accent)]/30
-                              hover:bg-[var(--accent)]/[0.04]
-                              hover:shadow-[0_10px_35px_rgba(229,9,20,0.08)]
-                            "
-                          >
-                            {/* NUMBER */}
-
-                            <span
-                              className="
-                                flex
-                                h-8
-                                w-8
-                                shrink-0
-                                items-center
-                                justify-center
-                                rounded-full
-                                border
-                                border-[var(--accent)]/30
-                                bg-[var(--accent)]/10
-                                text-[10px]
-                                font-bold
-                                text-[var(--accent)]
-
-                                transition-all
-                                duration-300
-
-                                group-hover:border-[var(--accent)]
-                                group-hover:bg-[var(--accent)]
-                                group-hover:text-white
-                              "
-                            >
-                              {String(index + 1).padStart(
-                                2,
-                                "0",
-                              )}
-                            </span>
-
-                            {/* TEXT */}
-
-                            <span
-                              className="
-                                pt-1
-                                text-sm
-                                leading-7
-                                text-[var(--foreground-muted)]
-                              "
-                            >
-                              {item}
-                            </span>
-                          </motion.div>
-                        ),
-                      )}
-                    </div>
-                  </motion.div>
-                )}
+                    ))}
+                  </div>
+                </motion.div>
+              )}
 
               {/* =================================================
                   STATS
               ================================================== */}
 
-              {about.stats &&
-                about.stats.length > 0 && (
-                  <motion.div
-                    variants={fadeUp}
-                    className="mt-14"
-                  >
-                    {/* HEADING */}
+              {stats.length > 0 && (
+                <motion.div
+                  variants={fadeUp}
+                  className="mt-14"
+                >
+                  <div className="mb-6 flex items-center gap-4">
+                    <h3
+                      className="
+                        shrink-0
+                        text-xs
+                        font-semibold
+                        uppercase
+                        tracking-[0.25em]
+                        text-[var(--foreground)]
+                      "
+                    >
+                      By The Numbers
+                    </h3>
 
-                    <div className="mb-6 flex items-center gap-4">
-                      <h3
-                        className="
-                          shrink-0
-                          text-xs
-                          font-semibold
-                          uppercase
-                          tracking-[0.25em]
-                          text-[var(--foreground)]
-                        "
-                      >
-                        By The Numbers
-                      </h3>
+                    <div
+                      className="
+                        h-px
+                        flex-1
+                        bg-gradient-to-r
+                        from-[var(--border)]
+                        to-transparent
+                      "
+                    />
+                  </div>
 
-                      <div
-                        className="
-                          h-px
-                          flex-1
-                          bg-gradient-to-r
-                          from-[var(--border)]
-                          to-transparent
-                        "
+                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                    {stats.map((stat, index) => (
+                      <StatCard
+                        key={`${stat.label}-${index}`}
+                        stat={stat}
+                        index={index}
                       />
-                    </div>
-
-                    {/* STATS */}
-
-                    <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-                      {about.stats.map(
-                        (stat, index) => (
-                          <motion.div
-                            key={`${stat.label}-${index}`}
-                            initial={{
-                              opacity: 0,
-                              y: 25,
-                            }}
-                            whileInView={{
-                              opacity: 1,
-                              y: 0,
-                            }}
-                            viewport={{
-                              once: true,
-                              amount: 0.35,
-                            }}
-                            transition={{
-                              duration: 0.65,
-                              delay: index * 0.1,
-                              ease,
-                            }}
-                            whileHover={{
-                              y: -7,
-                              transition: {
-                                duration: 0.25,
-                              },
-                            }}
-                            className="
-                              group
-                              relative
-                              overflow-hidden
-                              rounded-2xl
-                              border
-                              border-[var(--border)]
-                              bg-[var(--glass-bg)]
-                              p-5
-                              backdrop-blur-xl
-
-                              transition-all
-                              duration-300
-
-                              hover:border-[var(--accent)]/30
-                              hover:shadow-[0_20px_45px_rgba(229,9,20,0.12)]
-                            "
-                          >
-                            {/* HOVER GLOW */}
-
-                            <div
-                              className="
-                                pointer-events-none
-                                absolute
-                                -right-10
-                                -top-10
-                                h-24
-                                w-24
-                                rounded-full
-                                bg-[var(--accent)]/10
-                                blur-2xl
-                                opacity-0
-
-                                transition-opacity
-                                duration-500
-
-                                group-hover:opacity-100
-                              "
-                            />
-
-                            <div className="relative">
-                              {/* VALUE */}
-
-                              <div
-                                className="
-                                  font-display
-                                  text-3xl
-                                  font-semibold
-                                  tracking-tight
-                                  text-[var(--foreground)]
-                                "
-                              >
-                                <span className="text-[var(--accent)]">
-                                  {stat.value}
-                                </span>
-                              </div>
-
-                              {/* LABEL */}
-
-                              <div
-                                className="
-                                  mt-2
-                                  text-[10px]
-                                  font-medium
-                                  uppercase
-                                  tracking-[0.16em]
-                                  text-[var(--foreground-muted)]
-                                "
-                              >
-                                {stat.label}
-                              </div>
-                            </div>
-                          </motion.div>
-                        ),
-                      )}
-                    </div>
-                  </motion.div>
-                )}
+                    ))}
+                  </div>
+                </motion.div>
+              )}
 
               {/* =================================================
                   BOTTOM ACCENT
@@ -943,7 +992,12 @@ export function About() {
 
               <motion.div
                 variants={fadeUp}
-                className="mt-14 flex items-center gap-4"
+                className="
+                  mt-14
+                  flex
+                  items-center
+                  gap-4
+                "
               >
                 <div
                   className="

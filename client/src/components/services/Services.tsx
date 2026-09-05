@@ -1,5 +1,6 @@
 "use client";
 
+import { memo, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { motion, useReducedMotion } from "framer-motion";
 import {
@@ -22,7 +23,7 @@ import { Skeleton } from "@/components/ui/Skeleton";
 const smoothEase = [0.22, 1, 0.36, 1] as const;
 
 /* =========================================================
-   GRID
+   VARIANTS
 ========================================================= */
 
 const gridVariants = {
@@ -33,10 +34,6 @@ const gridVariants = {
     },
   },
 };
-
-/* =========================================================
-   CARD
-========================================================= */
 
 const cardVariants = {
   hidden: {
@@ -53,6 +50,455 @@ const cardVariants = {
     },
   },
 };
+
+/* =========================================================
+   STATIC STYLES
+========================================================= */
+
+const gridStyle = {
+  backgroundImage: `
+    linear-gradient(
+      to right,
+      var(--services-grid-color) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      var(--services-grid-color) 1px,
+      transparent 1px
+    )
+  `,
+  backgroundSize: "70px 70px",
+};
+
+const progressStyle = {
+  boxShadow: "0 0 8px var(--accent)",
+};
+
+/* =========================================================
+   SERVICE CARD
+========================================================= */
+
+const ServiceCard = memo(function ServiceCard({
+  service,
+  index,
+  shouldReduceMotion,
+}: {
+  service: any;
+  index: number;
+  shouldReduceMotion: boolean;
+}) {
+  const Icon = useMemo(
+    () => resolveIcon(service.icon),
+    [service.icon]
+  );
+
+  return (
+    <motion.article
+      variants={cardVariants}
+      className="
+        group
+        relative
+        transform-gpu
+      "
+      style={{
+        contain: "layout",
+      }}
+    >
+      {/* ===================================================
+          GLOW
+      ==================================================== */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          -inset-1
+          rounded-[1.85rem]
+          bg-[var(--accent)]
+          opacity-0
+          blur-xl
+          transition-opacity
+          duration-500
+          group-hover:opacity-[0.07]
+        "
+      />
+
+      {/* ===================================================
+          CARD
+      ==================================================== */}
+
+      <motion.div
+        whileHover={
+          shouldReduceMotion
+            ? undefined
+            : {
+                y: -3,
+              }
+        }
+        transition={{
+          duration: 0.3,
+          ease: smoothEase,
+        }}
+        className="
+          relative
+          flex
+          min-h-[450px]
+          flex-col
+          overflow-hidden
+          rounded-[1.75rem]
+          border
+          border-[var(--glass-border)]
+          bg-[var(--glass-bg)]
+          p-7
+          sm:p-8
+        "
+        style={{
+          transform: "translateZ(0)",
+          backfaceVisibility: "hidden",
+          isolation: "isolate",
+        }}
+      >
+        {/* =================================================
+            CARD LIGHT
+        ================================================== */}
+
+        <div
+          className="
+            pointer-events-none
+            absolute
+            -right-24
+            -top-24
+            h-64
+            w-64
+            rounded-full
+            bg-[var(--accent)]/[0.08]
+            blur-[75px]
+            opacity-60
+          "
+        />
+
+        {/* =================================================
+            TOP
+        ================================================== */}
+
+        <div
+          className="
+            relative
+            z-10
+            flex
+            items-center
+            justify-between
+          "
+        >
+          <div className="flex items-center gap-3">
+            <span
+              className="
+                font-mono-tag
+                text-[10px]
+                tracking-[0.22em]
+                text-[var(--foreground-muted)]
+              "
+            >
+              {String(index + 1).padStart(2, "0")}
+            </span>
+
+            <span
+              className="
+                h-px
+                w-6
+                bg-[var(--border)]
+                transition-[width,background-color]
+                duration-500
+                ease-out
+                group-hover:w-10
+                group-hover:bg-[var(--accent)]
+              "
+            />
+          </div>
+
+          <div
+            className="
+              flex
+              h-9
+              w-9
+              transform-gpu
+              items-center
+              justify-center
+              rounded-full
+              border
+              border-[var(--border)]
+              text-[var(--foreground-muted)]
+              transition-[transform,border-color,color]
+              duration-500
+              ease-out
+              group-hover:translate-x-0.5
+              group-hover:-translate-y-0.5
+              group-hover:border-[var(--accent)]
+              group-hover:text-[var(--accent)]
+            "
+          >
+            <FiArrowUpRight size={15} />
+          </div>
+        </div>
+
+        {/* =================================================
+            ICON
+        ================================================== */}
+
+        <div className="relative z-10 mt-10">
+          <div
+            className="
+              relative
+              flex
+              h-[70px]
+              w-[70px]
+              transform-gpu
+              items-center
+              justify-center
+              overflow-hidden
+              rounded-2xl
+              border
+              border-[var(--accent)]/20
+              bg-[var(--accent)]/[0.07]
+              text-[var(--accent)]
+              shadow-[0_0_30px_rgba(229,9,20,0.06)]
+              transition-[transform,border-color,background-color]
+              duration-500
+              ease-out
+              group-hover:-translate-y-1
+              group-hover:border-[var(--accent)]/40
+              group-hover:bg-[var(--accent)]/[0.1]
+            "
+          >
+            <div
+              className="
+                absolute
+                inset-0
+                rounded-2xl
+                bg-[var(--accent)]/[0.05]
+              "
+            />
+
+            <Icon
+              size={28}
+              strokeWidth={1.6}
+              className="
+                relative
+                z-10
+                transform-gpu
+                transition-transform
+                duration-500
+                ease-out
+                group-hover:scale-105
+              "
+            />
+          </div>
+        </div>
+
+        {/* =================================================
+            TITLE
+        ================================================== */}
+
+        <div className="relative z-10 mt-7">
+          <h3
+            className="
+              font-display
+              max-w-[92%]
+              text-xl
+              font-semibold
+              tracking-[-0.025em]
+              text-[var(--foreground)]
+              transition-colors
+              duration-500
+              ease-out
+              group-hover:text-[var(--accent)]
+            "
+          >
+            {service.title}
+          </h3>
+
+          <p
+            className="
+              mt-3
+              max-w-[96%]
+              text-sm
+              leading-7
+              text-[var(--foreground-muted)]
+            "
+          >
+            {service.description}
+          </p>
+        </div>
+
+        {/* =================================================
+            FEATURES
+        ================================================== */}
+
+        {service.features?.length > 0 && (
+          <div className="relative z-10 mt-6">
+            <div
+              className="
+                mb-4
+                h-px
+                w-full
+                bg-gradient-to-r
+                from-[var(--border)]
+                via-[var(--border)]/40
+                to-transparent
+              "
+            />
+
+            <ul className="space-y-2.5">
+              {service.features.map((feature: string) => (
+                <li
+                  key={feature}
+                  className="
+                    flex
+                    items-start
+                    gap-2.5
+                    text-xs
+                    text-[var(--foreground-muted)]
+                  "
+                >
+                  <span
+                    className="
+                      mt-[2px]
+                      flex
+                      h-4
+                      w-4
+                      shrink-0
+                      items-center
+                      justify-center
+                      rounded-full
+                      bg-[var(--accent)]/10
+                      text-[var(--accent)]
+                    "
+                  >
+                    <FiCheck
+                      size={9}
+                      strokeWidth={3}
+                    />
+                  </span>
+
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* =================================================
+            FOOTER
+        ================================================== */}
+
+        <div className="relative z-10 mt-auto pt-8">
+          <div
+            className="
+              flex
+              items-end
+              justify-between
+              gap-4
+            "
+          >
+            {typeof service.price === "number" ? (
+              <div>
+                <div
+                  className="
+                    font-mono-tag
+                    text-[9px]
+                    uppercase
+                    tracking-[0.2em]
+                    text-[var(--foreground-muted)]
+                  "
+                >
+                  Starting from
+                </div>
+
+                <div
+                  className="
+                    font-display
+                    mt-1
+                    text-2xl
+                    font-semibold
+                    text-[var(--accent)]
+                  "
+                >
+                  ${service.price}
+                </div>
+              </div>
+            ) : (
+              <div
+                className="
+                  font-mono-tag
+                  text-[9px]
+                  uppercase
+                  tracking-[0.2em]
+                  text-[var(--foreground-muted)]
+                "
+              >
+                Custom engagement
+              </div>
+            )}
+
+            <div className="flex items-center gap-2">
+              <span
+                className="
+                  font-mono-tag
+                  text-[9px]
+                  uppercase
+                  tracking-[0.15em]
+                  text-[var(--foreground-muted)]
+                "
+              >
+                Explore
+              </span>
+
+              <FiArrowUpRight
+                size={14}
+                className="
+                  transform-gpu
+                  text-[var(--accent)]
+                  transition-transform
+                  duration-500
+                  ease-out
+                  group-hover:translate-x-0.5
+                  group-hover:-translate-y-0.5
+                "
+              />
+            </div>
+          </div>
+
+          {/* Progress */}
+
+          <div
+            className="
+              mt-5
+              h-px
+              w-full
+              overflow-hidden
+              bg-[var(--border)]
+            "
+          >
+            <div
+              className="
+                h-full
+                w-[18%]
+                transform-gpu
+                bg-[var(--accent)]
+                transition-[width]
+                duration-700
+                ease-out
+                group-hover:w-[65%]
+              "
+              style={progressStyle}
+            />
+          </div>
+        </div>
+      </motion.div>
+    </motion.article>
+  );
+});
 
 /* =========================================================
    SERVICES
@@ -72,8 +518,9 @@ export function Services() {
 
   const { t } = useLanguage();
 
-  const active = (services ?? []).filter(
-    (service) => service.active
+  const active = useMemo(
+    () => (services ?? []).filter((service) => service.active),
+    [services]
   );
 
   return (
@@ -89,13 +536,23 @@ export function Services() {
         lg:py-40
       "
     >
-      {/* =====================================================
+      {/* ===================================================
           BACKGROUND
-      ====================================================== */}
+      ==================================================== */}
 
-      <div className="pointer-events-none absolute inset-0 -z-20 overflow-hidden">
-
-        {/* Base Background */}
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          -z-20
+          overflow-hidden
+        "
+        style={{
+          contain: "paint",
+        }}
+      >
+        {/* Base */}
 
         <div
           className="absolute inset-0"
@@ -104,11 +561,9 @@ export function Services() {
           }}
         />
 
-        {/* ===================================================
-            STATIC SVG
-            IMPORTANT:
-            No Framer animation on SVG.
-        ==================================================== */}
+        {/* =================================================
+            SVG
+        ================================================== */}
 
         <svg
           className="
@@ -122,9 +577,11 @@ export function Services() {
           fill="none"
           preserveAspectRatio="none"
           aria-hidden="true"
+          style={{
+            display: "block",
+          }}
         >
           <defs>
-
             <linearGradient
               id="servicesFlow"
               x1="0"
@@ -175,10 +632,7 @@ export function Services() {
                 stopOpacity="0"
               />
             </radialGradient>
-
           </defs>
-
-          {/* Ambient Glow */}
 
           <ellipse
             cx="720"
@@ -187,8 +641,6 @@ export function Services() {
             ry="480"
             fill="url(#servicesCenterGlow)"
           />
-
-          {/* Main Flow */}
 
           <path
             d="
@@ -200,8 +652,6 @@ export function Services() {
             stroke="url(#servicesFlow)"
             strokeWidth="1"
           />
-
-          {/* Secondary Flow */}
 
           <path
             d="
@@ -215,8 +665,6 @@ export function Services() {
             strokeDasharray="8 14"
             opacity="0.4"
           />
-
-          {/* Nodes */}
 
           <circle
             cx="1110"
@@ -243,104 +691,46 @@ export function Services() {
           />
         </svg>
 
-        {/* ===================================================
+        {/* =================================================
             ORB 01
-            Very slow + transform only
-        ==================================================== */}
+            Static = no continuous GPU work
+        ================================================== */}
 
-        {!shouldReduceMotion && (
-          <motion.div
-            className="
-              services-orb
-              absolute
-              left-[4%]
-              top-[13%]
-              h-56
-              w-56
-              rounded-full
-              bg-[var(--services-svg-glow)]
-              blur-[90px]
-              will-change-transform
-            "
-            animate={{
-              x: [0, 10, 0],
-              y: [0, 6, 0],
-            }}
-            transition={{
-              duration: 28,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        )}
+        <div
+          className="
+            services-orb
+            absolute
+            left-[4%]
+            top-[13%]
+            h-56
+            w-56
+            rounded-full
+            bg-[var(--services-svg-glow)]
+            blur-[90px]
+          "
+        />
 
-        {/* Static Orb for Reduced Motion */}
-
-        {shouldReduceMotion && (
-          <div
-            className="
-              services-orb
-              absolute
-              left-[4%]
-              top-[13%]
-              h-56
-              w-56
-              rounded-full
-              bg-[var(--services-svg-glow)]
-              blur-[90px]
-            "
-          />
-        )}
-
-        {/* ===================================================
+        {/* =================================================
             ORB 02
-        ==================================================== */}
+        ================================================== */}
 
-        {!shouldReduceMotion && (
-          <motion.div
-            className="
-              services-orb
-              absolute
-              bottom-[7%]
-              right-[4%]
-              h-64
-              w-64
-              rounded-full
-              bg-[var(--services-svg-glow)]
-              blur-[100px]
-              will-change-transform
-            "
-            animate={{
-              x: [0, -10, 0],
-              y: [0, -7, 0],
-            }}
-            transition={{
-              duration: 32,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        )}
+        <div
+          className="
+            services-orb
+            absolute
+            bottom-[7%]
+            right-[4%]
+            h-64
+            w-64
+            rounded-full
+            bg-[var(--services-svg-glow)]
+            blur-[100px]
+          "
+        />
 
-        {shouldReduceMotion && (
-          <div
-            className="
-              services-orb
-              absolute
-              bottom-[7%]
-              right-[4%]
-              h-64
-              w-64
-              rounded-full
-              bg-[var(--services-svg-glow)]
-              blur-[100px]
-            "
-          />
-        )}
-
-        {/* ===================================================
+        {/* =================================================
             GRID
-        ==================================================== */}
+        ================================================== */}
 
         <div
           className="
@@ -348,26 +738,12 @@ export function Services() {
             inset-0
             opacity-[0.16]
           "
-          style={{
-            backgroundImage: `
-              linear-gradient(
-                to right,
-                var(--services-grid-color) 1px,
-                transparent 1px
-              ),
-              linear-gradient(
-                to bottom,
-                var(--services-grid-color) 1px,
-                transparent 1px
-              )
-            `,
-            backgroundSize: "70px 70px",
-          }}
+          style={gridStyle}
         />
 
-        {/* ===================================================
+        {/* =================================================
             TOP FADE
-        ==================================================== */}
+        ================================================== */}
 
         <div
           className="
@@ -382,9 +758,9 @@ export function Services() {
           }}
         />
 
-        {/* ===================================================
+        {/* =================================================
             BOTTOM FADE
-        ==================================================== */}
+        ================================================== */}
 
         <div
           className="
@@ -400,15 +776,14 @@ export function Services() {
         />
       </div>
 
-      {/* =====================================================
+      {/* ===================================================
           CONTENT
-      ====================================================== */}
+      ==================================================== */}
 
       <Container>
-
-        {/* ===================================================
+        {/* =================================================
             HEADER
-        ==================================================== */}
+        ================================================== */}
 
         <motion.div
           initial={
@@ -435,12 +810,13 @@ export function Services() {
             duration: 0.65,
             ease: smoothEase,
           }}
-          className="relative mb-16 sm:mb-20"
+          className="
+            relative
+            mb-16
+            sm:mb-20
+          "
         >
-          {/* Eyebrow */}
-
           <div className="mb-5 flex items-center gap-3">
-
             <span className="h-px w-10 bg-[var(--accent)]" />
 
             <span
@@ -466,14 +842,10 @@ export function Services() {
             />
           </div>
 
-          {/* Title */}
-
           <SectionHeading
             eyebrow=""
             title={t.sections.services.title}
           />
-
-          {/* Divider */}
 
           <motion.div
             initial={
@@ -504,6 +876,7 @@ export function Services() {
               w-full
               max-w-2xl
               origin-left
+              transform-gpu
               bg-gradient-to-r
               from-[var(--accent)]/70
               via-[var(--accent)]/20
@@ -512,12 +885,19 @@ export function Services() {
           />
         </motion.div>
 
-        {/* ===================================================
+        {/* =================================================
             LOADING
-        ==================================================== */}
+        ================================================== */}
 
         {isLoading ? (
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <div
+            className="
+              grid
+              gap-6
+              md:grid-cols-2
+              xl:grid-cols-3
+            "
+          >
             {Array.from({ length: 3 }).map((_, index) => (
               <Skeleton
                 key={index}
@@ -530,11 +910,6 @@ export function Services() {
             ))}
           </div>
         ) : isError ? (
-
-          /* =================================================
-              ERROR
-          ================================================= */
-
           <motion.div
             initial={{
               opacity: 0,
@@ -562,13 +937,7 @@ export function Services() {
               Unable to load services right now.
             </p>
           </motion.div>
-
         ) : active.length === 0 ? (
-
-          /* =================================================
-              EMPTY
-          ================================================= */
-
           <motion.div
             initial={{
               opacity: 0,
@@ -596,12 +965,10 @@ export function Services() {
               No services available at the moment.
             </p>
           </motion.div>
-
         ) : (
-
           /* =================================================
               SERVICE GRID
-          ================================================= */
+          ================================================== */
 
           <motion.div
             variants={gridVariants}
@@ -618,428 +985,22 @@ export function Services() {
               xl:grid-cols-3
             "
           >
-            {active.map((service, index) => {
-              const Icon = resolveIcon(service.icon);
-
-              return (
-                <motion.article
-                  key={service._id}
-                  variants={cardVariants}
-                  className="
-                    group
-                    relative
-                    will-change-transform
-                  "
-                >
-                  {/* =======================================
-                      CARD GLOW
-                  ======================================== */}
-
-                  <div
-                    className="
-                      pointer-events-none
-                      absolute
-                      -inset-1
-                      rounded-[1.85rem]
-                      bg-[var(--accent)]
-                      opacity-0
-                      blur-xl
-                      transition-opacity
-                      duration-500
-                      group-hover:opacity-[0.07]
-                    "
-                  />
-
-                  {/* =======================================
-                      CARD
-                  ======================================== */}
-
-                  <motion.div
-                    whileHover={
-                      shouldReduceMotion
-                        ? undefined
-                        : {
-                            y: -3,
-                          }
-                    }
-                    transition={{
-                      duration: 0.35,
-                      ease: smoothEase,
-                    }}
-                    className="
-                      relative
-                      flex
-                      min-h-[450px]
-                      flex-col
-                      overflow-hidden
-                      rounded-[1.75rem]
-                      border
-                      border-[var(--glass-border)]
-                      bg-[var(--glass-bg)]
-                      p-7
-                      backdrop-blur-xl
-                      sm:p-8
-                    "
-                  >
-
-                    {/* =====================================
-                        CARD LIGHT
-                    ====================================== */}
-
-                    <div
-                      className="
-                        pointer-events-none
-                        absolute
-                        -right-24
-                        -top-24
-                        h-64
-                        w-64
-                        rounded-full
-                        bg-[var(--accent)]/[0.08]
-                        blur-[75px]
-                        opacity-60
-                      "
-                    />
-
-                    {/* =====================================
-                        TOP
-                    ====================================== */}
-
-                    <div
-                      className="
-                        relative
-                        z-10
-                        flex
-                        items-center
-                        justify-between
-                      "
-                    >
-                      <div className="flex items-center gap-3">
-
-                        <span
-                          className="
-                            font-mono-tag
-                            text-[10px]
-                            tracking-[0.22em]
-                            text-[var(--foreground-muted)]
-                          "
-                        >
-                          {String(index + 1).padStart(2, "0")}
-                        </span>
-
-                        <span
-                          className="
-                            h-px
-                            w-6
-                            bg-[var(--border)]
-                            transition-all
-                            duration-500
-                            group-hover:w-10
-                            group-hover:bg-[var(--accent)]
-                          "
-                        />
-                      </div>
-
-                      {/* Arrow */}
-
-                      <div
-                        className="
-                          flex
-                          h-9
-                          w-9
-                          items-center
-                          justify-center
-                          rounded-full
-                          border
-                          border-[var(--border)]
-                          text-[var(--foreground-muted)]
-                          transition-all
-                          duration-500
-                          group-hover:border-[var(--accent)]
-                          group-hover:text-[var(--accent)]
-                          group-hover:translate-x-0.5
-                          group-hover:-translate-y-0.5
-                        "
-                      >
-                        <FiArrowUpRight size={15} />
-                      </div>
-                    </div>
-
-                    {/* =====================================
-                        ICON
-                    ====================================== */}
-
-                    <div className="relative z-10 mt-10">
-
-                      <div
-                        className="
-                          relative
-                          flex
-                          h-[70px]
-                          w-[70px]
-                          items-center
-                          justify-center
-                          overflow-hidden
-                          rounded-2xl
-                          border
-                          border-[var(--accent)]/20
-                          bg-[var(--accent)]/[0.07]
-                          text-[var(--accent)]
-                          shadow-[0_0_30px_rgba(229,9,20,0.06)]
-                          transition-all
-                          duration-500
-                          group-hover:-translate-y-1
-                          group-hover:border-[var(--accent)]/40
-                          group-hover:bg-[var(--accent)]/[0.1]
-                        "
-                      >
-
-                        <div
-                          className="
-                            absolute
-                            inset-0
-                            rounded-2xl
-                            bg-[var(--accent)]/[0.05]
-                          "
-                        />
-
-                        <Icon
-                          size={28}
-                          strokeWidth={1.6}
-                          className="
-                            relative
-                            z-10
-                            transition-transform
-                            duration-500
-                            group-hover:scale-105
-                          "
-                        />
-                      </div>
-                    </div>
-
-                    {/* =====================================
-                        TITLE
-                    ====================================== */}
-
-                    <div className="relative z-10 mt-7">
-
-                      <h3
-                        className="
-                          font-display
-                          max-w-[92%]
-                          text-xl
-                          font-semibold
-                          tracking-[-0.025em]
-                          text-[var(--foreground)]
-                          transition-colors
-                          duration-500
-                          group-hover:text-[var(--accent)]
-                        "
-                      >
-                        {service.title}
-                      </h3>
-
-                      <p
-                        className="
-                          mt-3
-                          max-w-[96%]
-                          text-sm
-                          leading-7
-                          text-[var(--foreground-muted)]
-                        "
-                      >
-                        {service.description}
-                      </p>
-                    </div>
-
-                    {/* =====================================
-                        FEATURES
-                    ====================================== */}
-
-                    {service.features?.length > 0 && (
-                      <div className="relative z-10 mt-6">
-
-                        <div
-                          className="
-                            mb-4
-                            h-px
-                            w-full
-                            bg-gradient-to-r
-                            from-[var(--border)]
-                            via-[var(--border)]/40
-                            to-transparent
-                          "
-                        />
-
-                        <ul className="space-y-2.5">
-                          {service.features.map((feature) => (
-                            <li
-                              key={feature}
-                              className="
-                                flex
-                                items-start
-                                gap-2.5
-                                text-xs
-                                text-[var(--foreground-muted)]
-                              "
-                            >
-                              <span
-                                className="
-                                  mt-[2px]
-                                  flex
-                                  h-4
-                                  w-4
-                                  shrink-0
-                                  items-center
-                                  justify-center
-                                  rounded-full
-                                  bg-[var(--accent)]/10
-                                  text-[var(--accent)]
-                                "
-                              >
-                                <FiCheck
-                                  size={9}
-                                  strokeWidth={3}
-                                />
-                              </span>
-
-                              <span>
-                                {feature}
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-
-                    {/* =====================================
-                        FOOTER
-                    ====================================== */}
-
-                    <div className="relative z-10 mt-auto pt-8">
-
-                      <div
-                        className="
-                          flex
-                          items-end
-                          justify-between
-                          gap-4
-                        "
-                      >
-
-                        {/* Price */}
-
-                        {typeof service.price === "number" ? (
-                          <div>
-
-                            <div
-                              className="
-                                font-mono-tag
-                                text-[9px]
-                                uppercase
-                                tracking-[0.2em]
-                                text-[var(--foreground-muted)]
-                              "
-                            >
-                              Starting from
-                            </div>
-
-                            <div
-                              className="
-                                font-display
-                                mt-1
-                                text-2xl
-                                font-semibold
-                                text-[var(--accent)]
-                              "
-                            >
-                              ${service.price}
-                            </div>
-
-                          </div>
-                        ) : (
-                          <div
-                            className="
-                              font-mono-tag
-                              text-[9px]
-                              uppercase
-                              tracking-[0.2em]
-                              text-[var(--foreground-muted)]
-                            "
-                          >
-                            Custom engagement
-                          </div>
-                        )}
-
-                        {/* Explore */}
-
-                        <div className="flex items-center gap-2">
-
-                          <span
-                            className="
-                              font-mono-tag
-                              text-[9px]
-                              uppercase
-                              tracking-[0.15em]
-                              text-[var(--foreground-muted)]
-                            "
-                          >
-                            Explore
-                          </span>
-
-                          <FiArrowUpRight
-                            size={14}
-                            className="
-                              text-[var(--accent)]
-                              transition-transform
-                              duration-500
-                              group-hover:translate-x-0.5
-                              group-hover:-translate-y-0.5
-                            "
-                          />
-
-                        </div>
-                      </div>
-
-                      {/* Bottom Progress */}
-
-                      <div
-                        className="
-                          mt-5
-                          h-px
-                          w-full
-                          overflow-hidden
-                          bg-[var(--border)]
-                        "
-                      >
-                        <div
-                          className="
-                            h-full
-                            w-[18%]
-                            bg-[var(--accent)]
-                            transition-all
-                            duration-700
-                            ease-out
-                            group-hover:w-[65%]
-                          "
-                          style={{
-                            boxShadow:
-                              "0 0 8px var(--accent)",
-                          }}
-                        />
-                      </div>
-                    </div>
-
-                  </motion.div>
-                </motion.article>
-              );
-            })}
+            {active.map((service, index) => (
+              <ServiceCard
+                key={service._id}
+                service={service}
+                index={index}
+                shouldReduceMotion={Boolean(
+                  shouldReduceMotion
+                )}
+              />
+            ))}
           </motion.div>
         )}
 
-        {/* =====================================================
+        {/* =================================================
             BOTTOM
-        ====================================================== */}
+        ================================================== */}
 
         {!isLoading && active.length > 0 && (
           <motion.div
@@ -1119,7 +1080,6 @@ export function Services() {
             />
           </motion.div>
         )}
-
       </Container>
     </section>
   );
