@@ -1420,6 +1420,63 @@
 }
 
 
+
+/* =========================================
+   EXPERIENCE — LIGHT
+========================================= */
+
+[data-theme="light"] {
+  --experience-bg:
+    radial-gradient(circle at 85% 10%,
+      rgba(229, 9, 20, 0.08),
+      transparent 32%),
+    radial-gradient(circle at 10% 90%,
+      rgba(229, 9, 20, 0.04),
+      transparent 32%),
+    linear-gradient(135deg,
+      #ffffff 0%,
+      #fafafa 55%,
+      #fff1f2 100%);
+
+  --experience-card-bg:
+    linear-gradient(135deg,
+      #ffffff 0%,
+      #ffffff 60%,
+      #fff5f5 100%);
+
+  --experience-card-border:
+    rgba(0, 0, 0, 0.09);
+}
+
+
+/* =========================================
+   EXPERIENCE — DARK
+========================================= */
+
+[data-theme="dark"] {
+  --experience-bg:
+    radial-gradient(circle at 85% 10%,
+      rgba(229, 9, 20, 0.18),
+      transparent 32%),
+    radial-gradient(circle at 10% 90%,
+      rgba(229, 9, 20, 0.08),
+      transparent 32%),
+    linear-gradient(135deg,
+      #020202 0%,
+      #090909 55%,
+      #180506 100%);
+
+  --experience-card-bg:
+    linear-gradient(135deg,
+      #171717 0%,
+      #0c0c0c 60%,
+      #1a0708 100%);
+
+  --experience-card-border:
+    rgba(255, 255, 255, 0.10);
+}
+
+
 /* =========================================
    ACCENT = RED ONLY
    ========================================= */
