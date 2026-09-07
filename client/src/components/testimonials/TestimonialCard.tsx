@@ -1,36 +1,81 @@
-import { FiStar } from "react-icons/fi";
+import { FiSquare, FiStar} from "react-icons/fi";
 import type { TestimonialData } from "@/types/content";
 
-export function TestimonialCard({ testimonial }: { testimonial: TestimonialData }) {
+export function TestimonialCard({
+  testimonial,
+}: {
+  testimonial: TestimonialData;
+}) {
   return (
-    <div className="flex h-full flex-col rounded-card glass card-premium p-6">
-      <div className="flex gap-0.5">
-        {Array.from({ length: 5 }).map((_, i) => (
-          <FiStar
-            key={i}
-            size={14}
-            fill={i < testimonial.rating ? "var(--accent)" : "none"}
-            color={i < testimonial.rating ? "var(--accent)" : "var(--foreground-muted)"}
-          />
-        ))}
+    <article className="testimonial-card">
+      {/* Top accent line */}
+      <div className="testimonial-card-accent" />
+
+      {/* Quote icon */}
+      <div className="testimonial-card-quote">
+        <FiSquare size={17} />
       </div>
-      <p className="mt-3 flex-1 text-sm text-[var(--foreground-muted)]">&ldquo;{testimonial.comment}&rdquo;</p>
-      <div className="mt-4 flex items-center gap-3">
+
+      {/* Rating */}
+      <div className="testimonial-card-rating">
+        {Array.from({ length: 5 }).map((_, i) => {
+          const active = i < testimonial.rating;
+
+          return (
+            <FiStar
+              key={i}
+              size={15}
+              strokeWidth={1.8}
+              fill={active ? "currentColor" : "none"}
+              className={
+                active
+                  ? "testimonial-star-active"
+                  : "testimonial-star-inactive"
+              }
+            />
+          );
+        })}
+      </div>
+
+      {/* Review */}
+      <p className="testimonial-card-comment">
+        &ldquo;{testimonial.comment}&rdquo;
+      </p>
+
+      {/* Divider */}
+      <div className="testimonial-card-divider" />
+
+      {/* Author */}
+      <div className="testimonial-card-author">
+        {/* Avatar */}
         {testimonial.photo?.url ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={testimonial.photo.url} alt={testimonial.name} className="h-9 w-9 rounded-full object-cover" />
+          <img
+            src={testimonial.photo.url}
+            alt={testimonial.name}
+            className="testimonial-card-avatar"
+          />
         ) : (
-          <div className="flex h-9 w-9 items-center justify-center rounded-full text-xs font-semibold text-[var(--accent-foreground)]" style={{ background: "var(--gradient-accent)" }}>
+          <div className="testimonial-card-avatar testimonial-card-avatar-fallback">
             {testimonial.name.charAt(0).toUpperCase()}
           </div>
         )}
-        <div>
-          <div className="text-sm font-medium">{testimonial.name}</div>
-          <div className="text-xs text-[var(--foreground-muted)]">
-            {[testimonial.company, testimonial.country].filter(Boolean).join(" · ")}
+
+        {/* Author info */}
+        <div className="testimonial-card-author-info">
+          <div className="testimonial-card-name">
+            {testimonial.name}
           </div>
+
+          {(testimonial.company || testimonial.country) && (
+            <div className="testimonial-card-meta">
+              {[testimonial.company, testimonial.country]
+                .filter(Boolean)
+                .join(" · ")}
+            </div>
+          )}
         </div>
       </div>
-    </div>
+    </article>
   );
 }

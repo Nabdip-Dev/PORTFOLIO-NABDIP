@@ -15,126 +15,158 @@ import { TestimonialForm } from "./TestimonialForm";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export function Testimonials() {
-  const [page, setPage] = useState(1);
   const [showForm, setShowForm] = useState(false);
 
+  const { t } = useLanguage();
+
   const { data, isLoading } = useQuery({
-    queryKey: ["testimonials", page],
-    queryFn: () => fetchTestimonials(page),
+    queryKey: ["testimonials"],
+    queryFn: () => fetchTestimonials(1),
   });
 
-  const { t } = useLanguage();
+  const testimonials = data?.data ?? [];
 
   return (
     <section
       id="testimonials"
-      className="testimonials-section relative isolate overflow-hidden py-24 sm:py-28 lg:py-32"
+      className="testimonials-section"
     >
+      {/* ================================================
+          BACKGROUND DECORATION
+      ================================================= */}
+
+      <div
+        aria-hidden="true"
+        className="testimonials-bg-glow testimonials-bg-glow-one"
+      />
+
+      <div
+        aria-hidden="true"
+        className="testimonials-bg-glow testimonials-bg-glow-two"
+      />
+
       <Container>
-        <div className="relative z-10">
-          {/* Heading */}
+        <div className="testimonials-content">
+          {/* ================================================
+              HEADING
+          ================================================= */}
 
           <div className="testimonial-heading">
             <SectionHeading
               eyebrow={t.sections.testimonials.eyebrow}
               title={t.sections.testimonials.title}
             />
+
+            <p className="testimonials-description">
+              Real experiences from people who trusted our work.
+            </p>
           </div>
 
-          {/* Luxury divider */}
+          {/* ================================================
+              DIVIDER
+          ================================================= */}
 
-          <div className="mx-auto mb-12 mt-7 flex max-w-24 items-center gap-3">
-            <span className="h-px flex-1 bg-black/10 dark:bg-white/10" />
-
-            <span className="h-1.5 w-1.5 rotate-45 bg-[var(--accent)]" />
-
-            <span className="h-px flex-1 bg-black/10 dark:bg-white/10" />
+          <div className="testimonials-divider">
+            <span />
+            <i />
+            <span />
           </div>
 
-          {/* Loading */}
+          {/* ================================================
+              TESTIMONIALS
+          ================================================= */}
 
           {isLoading ? (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {Array.from({ length: 3 }).map((_, i) => (
+            <div className="testimonials-loading">
+              {Array.from({ length: 3 }).map((_, index) => (
                 <Skeleton
-                  key={i}
-                  className="h-52 w-full rounded-[1.5rem]"
+                  key={index}
+                  className="testimonial-skeleton"
                 />
               ))}
             </div>
-          ) : data && data.data.length > 0 ? (
-            <>
-              {/* Testimonials */}
+          ) : testimonials.length > 0 ? (
+            <div className="testimonials-marquee-area">
+              {/* LEFT FADE */}
 
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {data.data.map((testimonial, index) => (
-                  <div
-                    key={testimonial._id}
-                    className="testimonial-card-animation"
-                    style={{
-                      animationDelay: `${index * 70}ms`,
-                    }}
-                  >
-                    <TestimonialCard testimonial={testimonial} />
+              <div
+                aria-hidden="true"
+                className="
+                  testimonial-edge
+                  testimonial-edge-left
+                "
+              />
+
+              {/* RIGHT FADE */}
+
+              <div
+                aria-hidden="true"
+                className="
+                  testimonial-edge
+                  testimonial-edge-right
+                "
+              />
+
+              {/* MARQUEE */}
+
+              <div className="testimonial-marquee-wrapper">
+                <div className="testimonial-marquee-track">
+                  {/* GROUP 1 */}
+
+                  <div className="testimonial-marquee-group">
+                    {testimonials.map((testimonial) => (
+                      <div
+                        key={testimonial._id}
+                        className="testimonial-marquee-card"
+                      >
+                        <TestimonialCard
+                          testimonial={testimonial}
+                        />
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
 
-              {/* Pagination */}
+                  {/* GROUP 2
+                      Duplicate is only for seamless looping
+                  */}
 
-              {data.pagination.pages > 1 && (
-                <div className="mt-10 flex items-center justify-center gap-2">
-                  {Array.from({
-                    length: data.pagination.pages,
-                  }).map((_, i) => {
-                    const currentPage = i + 1;
-                    const active = page === currentPage;
-
-                    return (
-                      <button
-                        key={currentPage}
-                        type="button"
-                        onClick={() => setPage(currentPage)}
-                        aria-label={`Go to testimonial page ${currentPage}`}
-                        aria-current={active ? "page" : undefined}
-                        className={`
-                          h-2 rounded-full
-                          transition-all duration-300
-                          focus-visible:outline-none
-                          focus-visible:ring-2
-                          focus-visible:ring-[var(--accent)]
-                          ${
-                            active
-                              ? "w-7 bg-[var(--accent)]"
-                              : "w-2 bg-black/15 hover:bg-[var(--accent)] dark:bg-white/15"
-                          }
-                        `}
-                      />
-                    );
-                  })}
+                  <div
+                    className="testimonial-marquee-group"
+                    aria-hidden="true"
+                  >
+                    {testimonials.map((testimonial) => (
+                      <div
+                        key={`duplicate-${testimonial._id}`}
+                        className="testimonial-marquee-card"
+                      >
+                        <TestimonialCard
+                          testimonial={testimonial}
+                        />
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              )}
-            </>
+              </div>
+            </div>
           ) : (
-            /* Empty */
-
-            <div className="mx-auto max-w-xl rounded-[1.5rem] border border-black/10 bg-white/60 px-6 py-12 text-center backdrop-blur-md dark:border-white/10 dark:bg-white/[0.035]">
-              <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-full border border-[var(--accent)]/20 bg-[var(--accent)]/5">
-                <span className="text-xl text-[var(--accent)]">
-                  “
-                </span>
+            <div className="testimonial-empty">
+              <div className="testimonial-empty-icon">
+                “
               </div>
 
-              <p className="text-sm text-[var(--foreground-muted)]">
-                No reviews yet — be the first to leave one below.
+              <p>
+                No reviews yet — be the first to leave one
+                below.
               </p>
             </div>
           )}
 
-          {/* Review CTA */}
+          {/* ================================================
+              REVIEW CTA
+          ================================================= */}
 
-          <div className="mt-16 flex flex-col items-center">
-            <p className="mb-4 font-mono-tag text-[10px] uppercase tracking-[0.3em] text-black/40 dark:text-white/40">
+          <div className="testimonial-cta">
+            <p className="testimonial-cta-label">
               Your experience matters
             </p>
 
@@ -143,42 +175,11 @@ export function Testimonials() {
               onClick={() => setShowForm((value) => !value)}
               aria-expanded={showForm}
               aria-controls="testimonial-form"
-              className="
-                group
-                relative
-                overflow-hidden
-                rounded-full
-                bg-[var(--accent)]
-                px-7
-                py-3.5
-                text-sm
-                font-medium
-                text-white
-                shadow-[0_14px_38px_-16px_rgba(229,9,20,0.65)]
-                transition-all
-                duration-300
-                hover:-translate-y-0.5
-                hover:bg-[var(--accent-hover)]
-                hover:shadow-[0_20px_45px_-16px_rgba(229,9,20,0.75)]
-                active:translate-y-0
-              "
+              className="testimonial-cta-button"
             >
-              <span
-                className="
-                  pointer-events-none
-                  absolute
-                  inset-y-0
-                  -left-12
-                  w-8
-                  -skew-x-12
-                  bg-white/20
-                  transition-transform
-                  duration-700
-                  group-hover:translate-x-[260px]
-                "
-              />
+              <span className="testimonial-button-shine" />
 
-              <span className="relative z-10 flex items-center gap-3">
+              <span className="testimonial-button-content">
                 <span>
                   {showForm
                     ? "Close Review Form"
@@ -186,48 +187,29 @@ export function Testimonials() {
                 </span>
 
                 <span
-                  className={`
-                    flex h-5 w-5 items-center justify-center
-                    rounded-full bg-white/15
-                    transition-transform duration-300
-                    ${showForm ? "rotate-45" : ""}
-                  `}
+                  className={`testimonial-button-icon ${
+                    showForm
+                      ? "testimonial-button-icon-open"
+                      : ""
+                  }`}
                 >
                   +
                 </span>
               </span>
             </button>
 
-            {/* Form */}
+            {/* FORM */}
 
             <div
               id="testimonial-form"
-              className={`
-                grid w-full
-                transition-all duration-500 ease-out
-                ${
-                  showForm
-                    ? "mt-10 grid-rows-[1fr] opacity-100"
-                    : "mt-0 grid-rows-[0fr] opacity-0"
-                }
-              `}
+              className={`testimonial-form-wrapper ${
+                showForm
+                  ? "testimonial-form-open"
+                  : ""
+              }`}
             >
-              <div className="min-h-0 overflow-hidden">
-                <div
-                  className="
-                    mx-auto
-                    max-w-2xl
-                    rounded-[1.5rem]
-                    border border-black/10
-                    bg-white/80
-                    p-5
-                    shadow-[0_30px_80px_-40px_rgba(0,0,0,0.35)]
-                    backdrop-blur-xl
-                    dark:border-white/10
-                    dark:bg-white/[0.045]
-                    sm:p-8
-                  "
-                >
+              <div className="testimonial-form-inner">
+                <div className="testimonial-form-card">
                   <TestimonialForm />
                 </div>
               </div>

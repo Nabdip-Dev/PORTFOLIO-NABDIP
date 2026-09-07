@@ -19,10 +19,6 @@ import {
   SiTailwindcss,
 } from "react-icons/si";
 
-/* =========================================================
-   TYPES
-========================================================= */
-
 type Skill = {
   id: number;
   name: string;
@@ -31,33 +27,9 @@ type Skill = {
   Icon: IconType;
 };
 
-/* =========================================================
-   SETTINGS
-========================================================= */
-
 const TOTAL_SKILLS = 10;
-
-/*
- * One complete trip:
- *
- * skill icon -> center
- *
- * Slow enough so the points don't rush.
- */
 const TRAVEL_TIME = 12;
-
-/*
- * 10 points are distributed across the animation.
- *
- * Every point keeps moving.
- * They only start at different times.
- */
-const STAGGER =
-  TRAVEL_TIME / TOTAL_SKILLS;
-
-/* =========================================================
-   SKILLS
-========================================================= */
+const STAGGER = TRAVEL_TIME / TOTAL_SKILLS;
 
 const SKILLS: Skill[] = [
   {
@@ -132,19 +104,13 @@ const SKILLS: Skill[] = [
   },
 ];
 
-/* =========================================================
-   NODE POSITIONS
-========================================================= */
-
 const NODE_POSITIONS = [
-  /* LEFT */
   { left: "9%", top: "10%" },
   { left: "5.5%", top: "30%" },
   { left: "4.5%", top: "50%" },
   { left: "5.5%", top: "70%" },
   { left: "9%", top: "90%" },
 
-  /* RIGHT */
   { left: "91%", top: "10%" },
   { left: "94.5%", top: "30%" },
   { left: "95.5%", top: "50%" },
@@ -152,58 +118,19 @@ const NODE_POSITIONS = [
   { left: "91%", top: "90%" },
 ];
 
-/* =========================================================
-   SVG PATHS
-========================================================= */
-
-/*
- * IMPORTANT:
- *
- * Every path starts exactly around the skill node
- * and finishes at the CENTER.
- *
- * Direction:
- *
- * SKILL ---------------> CENTER
- *
- * Never CENTER -> SKILL.
- */
-
 const PATHS = [
-  /* LEFT 1 */
   "M 90 56 C 205 25, 320 45, 405 190 C 450 255, 480 275, 500 280",
-
-  /* LEFT 2 */
   "M 55 168 C 175 118, 290 135, 385 225 C 435 270, 475 280, 500 280",
-
-  /* LEFT 3 */
   "M 45 280 C 165 280, 285 280, 390 280 C 440 280, 475 280, 500 280",
-
-  /* LEFT 4 */
   "M 55 392 C 175 442, 290 425, 385 335 C 435 290, 475 280, 500 280",
-
-  /* LEFT 5 */
   "M 90 504 C 205 535, 320 515, 405 370 C 450 305, 480 285, 500 280",
 
-  /* RIGHT 1 */
   "M 910 56 C 795 25, 680 45, 595 190 C 550 255, 520 275, 500 280",
-
-  /* RIGHT 2 */
   "M 945 168 C 825 118, 710 135, 615 225 C 565 270, 525 280, 500 280",
-
-  /* RIGHT 3 */
   "M 955 280 C 835 280, 715 280, 610 280 C 560 280, 525 280, 500 280",
-
-  /* RIGHT 4 */
   "M 945 392 C 825 442, 710 425, 615 335 C 565 290, 525 280, 500 280",
-
-  /* RIGHT 5 */
   "M 910 504 C 795 535, 680 515, 595 370 C 550 305, 520 285, 500 280",
 ];
-
-/* =========================================================
-   MOVING POINT
-========================================================= */
 
 function MovingPoint({
   path,
@@ -212,29 +139,36 @@ function MovingPoint({
   path: string;
   index: number;
 }) {
-  /*
-   * Serial start:
-   *
-   * 0s
-   * 1.2s
-   * 2.4s
-   * 3.6s
-   * ...
-   *
-   * But ALL points repeat indefinitely.
-   */
-
-  const delay =
-    index * STAGGER;
+  const delay = index * STAGGER;
 
   return (
     <g>
-      {/* subtle glow */}
       <circle
-        r="5"
+        r="7"
         fill="#38bdf8"
-        opacity="0.13"
+        opacity="0.08"
         filter="url(#pointGlow)"
+      >
+        <animateMotion
+          path={path}
+          dur={`${TRAVEL_TIME}s`}
+          begin={`${delay}s`}
+          repeatCount="indefinite"
+        />
+
+        <animate
+          attributeName="opacity"
+          values="0.04;0.12;0.04"
+          dur="2.2s"
+          repeatCount="indefinite"
+        />
+      </circle>
+
+      <circle
+        r="4.5"
+        fill="#38bdf8"
+        opacity="0.16"
+        filter="url(#smallPointGlow)"
       >
         <animateMotion
           path={path}
@@ -244,7 +178,6 @@ function MovingPoint({
         />
       </circle>
 
-      {/* SINGLE BLUE POINT */}
       <circle
         r="2.8"
         fill="#38bdf8"
@@ -255,14 +188,17 @@ function MovingPoint({
           begin={`${delay}s`}
           repeatCount="indefinite"
         />
+
+        <animate
+          attributeName="r"
+          values="2.4;3.1;2.4"
+          dur="1.8s"
+          repeatCount="indefinite"
+        />
       </circle>
     </g>
   );
 }
-
-/* =========================================================
-   CURVED CONNECTION
-========================================================= */
 
 function CurvedConnection({
   path,
@@ -273,14 +209,7 @@ function CurvedConnection({
 }) {
   return (
     <svg
-      className="
-        pointer-events-none
-        absolute
-        inset-0
-        h-full
-        w-full
-        overflow-visible
-      "
+      className="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
       viewBox="0 0 1000 560"
       preserveAspectRatio="none"
       aria-hidden="true"
@@ -316,13 +245,20 @@ function CurvedConnection({
           width="1000%"
           height="1000%"
         >
-          <feGaussianBlur
-            stdDeviation="2.5"
-          />
+          <feGaussianBlur stdDeviation="2.5" />
+        </filter>
+
+        <filter
+          id="smallPointGlow"
+          x="-500%"
+          y="-500%"
+          width="1000%"
+          height="1000%"
+        >
+          <feGaussianBlur stdDeviation="1.5" />
         </filter>
       </defs>
 
-      {/* soft line */}
       <path
         d={path}
         fill="none"
@@ -331,16 +267,22 @@ function CurvedConnection({
         strokeLinecap="round"
       />
 
-      {/* main curved line */}
       <path
         d={path}
         fill="none"
         stroke={`url(#curve-${index})`}
         strokeWidth="1.25"
         strokeLinecap="round"
-      />
+      >
+        <animate
+          attributeName="opacity"
+          values="0.65;1;0.65"
+          dur={`${4 + (index % 3)}s`}
+          begin={`${index * 0.15}s`}
+          repeatCount="indefinite"
+        />
+      </path>
 
-      {/* moving point */}
       <MovingPoint
         path={path}
         index={index}
@@ -348,10 +290,6 @@ function CurvedConnection({
     </svg>
   );
 }
-
-/* =========================================================
-   SKILL NODE
-========================================================= */
 
 function SkillNode({
   skill,
@@ -361,17 +299,11 @@ function SkillNode({
   index: number;
 }) {
   const Icon = skill.Icon;
-  const position =
-    NODE_POSITIONS[index];
+  const position = NODE_POSITIONS[index];
 
   return (
     <div
-      className="
-        absolute
-        z-30
-        -translate-x-1/2
-        -translate-y-1/2
-      "
+      className="absolute z-30 -translate-x-1/2 -translate-y-1/2 group"
       style={{
         left: position.left,
         top: position.top,
@@ -379,6 +311,28 @@ function SkillNode({
     >
       <div
         className="
+          pointer-events-none
+          absolute
+          left-1/2
+          top-1/2
+          h-[64px]
+          w-[64px]
+          -translate-x-1/2
+          -translate-y-1/2
+          rounded-full
+          bg-sky-400/[0.04]
+          opacity-0
+          blur-xl
+          transition-all
+          duration-500
+          group-hover:scale-125
+          group-hover:opacity-100
+        "
+      />
+
+      <div
+        className="
+          skill-node
           relative
           flex
           h-[50px]
@@ -390,9 +344,18 @@ function SkillNode({
           border-white/[0.11]
           bg-[#070c13]
           shadow-[0_8px_25px_rgba(0,0,0,0.35)]
+          transition-all
+          duration-500
+          ease-out
+          group-hover:scale-[1.08]
+          group-hover:border-sky-400/[0.25]
+          group-hover:shadow-[0_0_30px_rgba(56,189,248,0.10)]
         "
+        style={{
+          animationDuration: `${3.5 + (index % 3) * 0.5}s`,
+          animationDelay: `${index * 0.12}s`,
+        }}
       >
-        {/* inner circle */}
         <div
           className="
             pointer-events-none
@@ -401,30 +364,28 @@ function SkillNode({
             rounded-full
             border
             border-white/[0.035]
+            transition-all
+            duration-500
+            group-hover:border-sky-400/[0.10]
           "
         />
 
-        {/* REAL ICON */}
         <Icon
           size={21}
           color={skill.color}
+          className="
+            relative
+            z-10
+            transition-transform
+            duration-500
+            ease-out
+            group-hover:scale-110
+          "
         />
-
-        {/* =================================================
-            NO PERCENTAGE HERE
-        ================================================= */}
-
-        {/* =================================================
-            BLUE ORIGIN DOT
-
-            This is only the STARTING POSITION.
-
-            The animated point starts from the same area,
-            covers the icon and then travels to center.
-        ================================================= */}
 
         <span
           className="
+            origin-dot
             absolute
             top-1/2
             h-[5px]
@@ -436,18 +397,20 @@ function SkillNode({
           "
           style={
             index < 5
-              ? { right: "-2px" }
-              : { left: "-2px" }
+              ? {
+                  right: "-2px",
+                  animationDelay: `${index * 0.15}s`,
+                }
+              : {
+                  left: "-2px",
+                  animationDelay: `${index * 0.15}s`,
+                }
           }
         />
       </div>
     </div>
   );
 }
-
-/* =========================================================
-   CENTER CONTENT
-========================================================= */
 
 function Center({
   skill,
@@ -467,7 +430,6 @@ function Center({
         -translate-y-1/2
       "
     >
-      {/* ambient glow */}
       <div
         className="
           pointer-events-none
@@ -482,11 +444,51 @@ function Center({
           bg-sky-400/[0.025]
           blur-[85px]
         "
+        style={{
+          animation: "ambientPulse 5s ease-in-out infinite",
+        }}
       />
 
-      {/* orbit */}
       <div
         className="
+          pulse-ring
+          pointer-events-none
+          absolute
+          left-1/2
+          top-1/2
+          h-[145px]
+          w-[145px]
+          -translate-x-1/2
+          -translate-y-1/2
+          rounded-full
+          border
+          border-sky-400/[0.07]
+        "
+      />
+
+      <div
+        className="
+          pulse-ring
+          pointer-events-none
+          absolute
+          left-1/2
+          top-1/2
+          h-[145px]
+          w-[145px]
+          -translate-x-1/2
+          -translate-y-1/2
+          rounded-full
+          border
+          border-sky-400/[0.035]
+        "
+        style={{
+          animationDelay: "1.7s",
+        }}
+      />
+
+      <div
+        className="
+          orbit
           pointer-events-none
           absolute
           left-1/2
@@ -502,12 +504,9 @@ function Center({
         "
       />
 
-      {/* =================================================
-          CENTER CIRCLE
-      ================================================= */}
-
       <div
         className="
+          center-circle
           relative
           flex
           h-[120px]
@@ -522,7 +521,6 @@ function Center({
           shadow-[0_0_60px_rgba(56,189,248,0.08)]
         "
       >
-        {/* inner ring */}
         <div
           className="
             pointer-events-none
@@ -534,56 +532,52 @@ function Center({
           "
         />
 
-        {/* =================================================
-            ACTIVE SKILL ICON
-        ================================================= */}
-
-        <Icon
-          key={`icon-${skill.id}`}
-          size={31}
-          color={skill.color}
-        />
-
-        {/* =================================================
-            SKILL NAME
-        ================================================= */}
-
-        <span
-          key={`name-${skill.id}`}
-          className="
-            mt-1
-            max-w-[80px]
-            truncate
-            text-[8px]
-            font-medium
-            tracking-wide
-            text-white/55
-          "
+        <div
+          key={skill.id}
+          className="relative z-10 flex flex-col items-center"
+          style={{
+            animation:
+              "skillContentIn 550ms cubic-bezier(0.22,1,0.36,1)",
+          }}
         >
-          {skill.name}
-        </span>
+          <Icon
+            size={31}
+            color={skill.color}
+            style={{
+              filter: `drop-shadow(0 0 8px ${skill.color}25)`,
+            }}
+          />
 
-        {/* =================================================
-            PERCENTAGE
-            INSIDE CENTER CIRCLE
-        ================================================= */}
+          <span
+            className="
+              mt-1
+              max-w-[80px]
+              truncate
+              text-[8px]
+              font-medium
+              tracking-wide
+              text-white/55
+            "
+          >
+            {skill.name}
+          </span>
+
+          <span
+            className="
+              mt-[1px]
+              font-mono
+              text-[9px]
+              font-medium
+              text-sky-400/80
+            "
+          >
+            {skill.percentage}%
+          </span>
+        </div>
 
         <span
-          key={`percentage-${skill.id}`}
           className="
-            mt-[1px]
-            font-mono
-            text-[9px]
-            font-medium
-            text-sky-400/80
-          "
-        >
-          {skill.percentage}%
-        </span>
-
-        {/* center blue dot */}
-        <span
-          className="
+            center-dot
             absolute
             bottom-[12px]
             h-[4px]
@@ -598,32 +592,16 @@ function Center({
   );
 }
 
-/* =========================================================
-   MAIN COMPONENT
-========================================================= */
-
 export function Skills() {
-  const [
-    activeSkill,
-    setActiveSkill,
-  ] = useState(0);
-
-  /*
-   * Center skill changes serially.
-   *
-   * This animation is separate from
-   * the 10 blue moving points.
-   */
+  const [activeSkill, setActiveSkill] = useState(0);
 
   useEffect(() => {
-    const timer =
-      window.setInterval(() => {
-        setActiveSkill(
-          (current) =>
-            (current + 1) %
-            SKILLS.length
-        );
-      }, 3200);
+    const timer = window.setInterval(() => {
+      setActiveSkill(
+        (current) =>
+          (current + 1) % SKILLS.length
+      );
+    }, 3200);
 
     return () => {
       window.clearInterval(timer);
@@ -631,132 +609,291 @@ export function Skills() {
   }, []);
 
   return (
-    <section
-      id="skills"
-      className="
-        relative
-        overflow-hidden
-        py-14
-        sm:py-16
-        lg:py-18
-      "
-    >
-      <div
+    <>
+      {/* =====================================================
+          GLOBAL ANIMATIONS
+      ===================================================== */}
+
+      <style>{`
+        .skill-node {
+          animation-name: skillBreath;
+          animation-timing-function: ease-in-out;
+          animation-iteration-count: infinite;
+        }
+
+        .origin-dot {
+          animation: originPulse 1.8s ease-in-out infinite;
+        }
+
+        .pulse-ring {
+          animation: centerPulse 3.5s ease-out infinite;
+        }
+
+        .orbit {
+          animation: orbitRotate 28s linear infinite;
+        }
+
+        .center-circle {
+          animation: centerFloat 5s ease-in-out infinite;
+        }
+
+        .center-dot {
+          animation: centerDotPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes skillBreath {
+          0%,
+          100% {
+            transform: scale(1);
+          }
+
+          50% {
+            transform: scale(1.025);
+          }
+        }
+
+        @keyframes originPulse {
+          0%,
+          100% {
+            opacity: 0.7;
+            transform: translateY(-50%) scale(0.85);
+            box-shadow:
+              0 0 6px rgba(56, 189, 248, 0.55);
+          }
+
+          50% {
+            opacity: 1;
+            transform: translateY(-50%) scale(1.2);
+            box-shadow:
+              0 0 14px rgba(56, 189, 248, 0.95);
+          }
+        }
+
+        @keyframes ambientPulse {
+          0%,
+          100% {
+            opacity: 0.45;
+            transform:
+              translate(-50%, -50%)
+              scale(0.92);
+          }
+
+          50% {
+            opacity: 0.8;
+            transform:
+              translate(-50%, -50%)
+              scale(1.08);
+          }
+        }
+
+        @keyframes centerPulse {
+          0% {
+            opacity: 0;
+            transform:
+              translate(-50%, -50%)
+              scale(0.82);
+          }
+
+          20% {
+            opacity: 0.65;
+          }
+
+          70% {
+            opacity: 0.18;
+          }
+
+          100% {
+            opacity: 0;
+            transform:
+              translate(-50%, -50%)
+              scale(1.35);
+          }
+        }
+
+        @keyframes orbitRotate {
+          from {
+            transform:
+              translate(-50%, -50%)
+              rotate(0deg);
+          }
+
+          to {
+            transform:
+              translate(-50%, -50%)
+              rotate(360deg);
+          }
+        }
+
+        @keyframes centerFloat {
+          0%,
+          100% {
+            transform: translateY(0);
+          }
+
+          50% {
+            transform: translateY(-2px);
+          }
+        }
+
+        @keyframes skillContentIn {
+          0% {
+            opacity: 0;
+            transform:
+              translateY(5px)
+              scale(0.92);
+            filter: blur(2px);
+          }
+
+          55% {
+            opacity: 1;
+            filter: blur(0);
+          }
+
+          100% {
+            opacity: 1;
+            transform:
+              translateY(0)
+              scale(1);
+            filter: blur(0);
+          }
+        }
+
+        @keyframes centerDotPulse {
+          0%,
+          100% {
+            transform: scale(0.8);
+            opacity: 0.7;
+          }
+
+          50% {
+            transform: scale(1.25);
+            opacity: 1;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          *,
+          *::before,
+          *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+          }
+        }
+      `}</style>
+
+      <section
+        id="skills"
         className="
-          mx-auto
-          w-full
-          max-w-7xl
-          px-5
-          sm:px-6
+          relative
+          overflow-hidden
+          py-14
+          sm:py-16
+          lg:py-18
         "
       >
-        {/* =================================================
-            HEADING
-        ================================================= */}
-
-        <div className="mb-5">
-          <p
-            className="
-              font-mono
-              text-[9px]
-              uppercase
-              tracking-[0.30em]
-              text-white/35
-            "
-          >
-            Skills
-          </p>
-
-          <h2
-            className="
-              mt-2
-              text-2xl
-              font-semibold
-              tracking-tight
-              text-white
-              sm:text-3xl
-            "
-          >
-            Technologies I Work With
-          </h2>
-        </div>
-
-        {/* =================================================
-            SKILL MAP
-
-            Compact height.
-            No internal scroll.
-        ================================================= */}
-
         <div
           className="
-            relative
             mx-auto
-            h-[520px]
             w-full
-            max-w-[1030px]
-
-            max-lg:h-[470px]
-            max-md:h-[400px]
-            max-sm:h-[340px]
+            max-w-7xl
+            px-5
+            sm:px-6
           "
         >
-          {/* background glow */}
-          <div
-            className="
-              pointer-events-none
-              absolute
-              left-1/2
-              top-1/2
-              h-[300px]
-              w-[300px]
-              -translate-x-1/2
-              -translate-y-1/2
-              rounded-full
-              bg-sky-400/[0.012]
-              blur-[90px]
-            "
-          />
-
           {/* =================================================
-              ALL 10 CURVED LINES
+              HEADING
           ================================================= */}
 
-          {PATHS.map(
-            (path, index) => (
+          <div className="mb-5">
+            <p
+              className="
+                font-mono
+                text-[9px]
+                uppercase
+                tracking-[0.30em]
+                text-white/35
+              "
+            >
+              Skills
+            </p>
+
+            <h2
+              className="
+                mt-2
+                text-2xl
+                font-semibold
+                tracking-tight
+                text-white
+                sm:text-3xl
+              "
+            >
+              Technologies I Work With
+            </h2>
+          </div>
+
+          {/* =================================================
+              SKILL MAP
+          ================================================= */}
+
+          <div
+            className="
+              relative
+              mx-auto
+              h-[520px]
+              w-full
+              max-w-[1030px]
+
+              max-lg:h-[470px]
+              max-md:h-[400px]
+              max-sm:h-[340px]
+            "
+          >
+            {/* Background glow */}
+
+            <div
+              className="
+                pointer-events-none
+                absolute
+                left-1/2
+                top-1/2
+                h-[300px]
+                w-[300px]
+                -translate-x-1/2
+                -translate-y-1/2
+                rounded-full
+                bg-sky-400/[0.012]
+                blur-[90px]
+              "
+            />
+
+            {/* Curved connections */}
+
+            {PATHS.map((path, index) => (
               <CurvedConnection
                 key={index}
                 path={path}
                 index={index}
               />
-            )
-          )}
+            ))}
 
-          {/* =================================================
-              CENTER
+            {/* Center */}
 
-              Icon + Name + Percentage
-          ================================================= */}
+            <Center
+              skill={SKILLS[activeSkill]}
+            />
 
-          <Center
-            skill={SKILLS[activeSkill]}
-          />
+            {/* Skill nodes */}
 
-          {/* =================================================
-              ALL 10 SKILL ICONS
-          ================================================= */}
-
-          {SKILLS.map(
-            (skill, index) => (
+            {SKILLS.map((skill, index) => (
               <SkillNode
                 key={skill.id}
                 skill={skill}
                 index={index}
               />
-            )
-          )}
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
