@@ -10,6 +10,8 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Skeleton } from "@/components/ui/Skeleton";
+import CurvedLoop from "./CurvedLoop";
+import CircularText from "./CircularText";
 
 /* =========================================================
    EASING
@@ -714,6 +716,20 @@ export function About() {
                         "
                         priority
                       />
+
+
+
+
+                      <div>
+
+
+                        <CircularText
+                          text="REACT*BITS*COMPONENTS*"
+                          onHover="speedUp"
+                          spinDuration={20}
+                          className="custom-class"
+                        />
+                      </div>
 
                       {/* CINEMATIC OVERLAY */}
 

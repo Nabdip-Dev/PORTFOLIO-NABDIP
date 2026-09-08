@@ -4,38 +4,50 @@
   --radius-card: 1.25rem;
 }
 
-/* =========================================
-   RED / BLACK / WHITE THEME
-   ========================================= */
+/* =========================================================
+   THEME VARIABLES
+========================================================= */
 
-/* ---------- Dark Mode ---------- */
+/* ---------- DARK THEME ---------- */
+
 [data-theme="dark"] {
   --background: #050505;
+
   --about-gradient:
-    radial-gradient(circle at 10% 15%,
+    radial-gradient(
+      circle at 10% 15%,
       rgba(229, 9, 20, 0.18),
-      transparent 32%),
-    radial-gradient(circle at 90% 75%,
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 90% 75%,
       rgba(229, 9, 20, 0.12),
-      transparent 35%),
-    linear-gradient(135deg,
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
       #050505 0%,
       #080808 50%,
-      #170607 100%);
+      #170607 100%
+    );
 
-
-  /* Portfolio আলাদা */
   --portfolio-gradient:
-    radial-gradient(circle at 85% 15%,
+    radial-gradient(
+      circle at 85% 15%,
       rgba(229, 9, 20, 0.16),
-      transparent 28%),
-    radial-gradient(circle at 15% 85%,
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 15% 85%,
       rgba(229, 9, 20, 0.08),
-      transparent 30%),
-    linear-gradient(120deg,
+      transparent 30%
+    ),
+    linear-gradient(
+      120deg,
       #080808 0%,
       #101010 50%,
-      #1b0708 100%);
+      #1b0708 100%
+    );
 
   --surface: #0b0b0b;
   --surface-elevated: #141414;
@@ -47,32 +59,119 @@
 
   --glass-bg: rgba(255, 255, 255, 0.04);
   --glass-border: rgba(255, 255, 255, 0.10);
+
+  /* Services */
+  --services-bg:
+    radial-gradient(
+      circle at 15% 15%,
+      rgba(229, 9, 20, 0.14),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 85% 80%,
+      rgba(229, 9, 20, 0.10),
+      transparent 32%
+    ),
+    linear-gradient(
+      135deg,
+      #020202 0%,
+      #080808 48%,
+      #130405 100%
+    );
+
+  --services-svg-primary: #ff1a25;
+  --services-svg-secondary: #e50914;
+  --services-svg-opacity: 0.32;
+  --services-svg-glow: rgba(229, 9, 20, 0.16);
+  --services-grid-color: rgba(255, 255, 255, 0.055);
+
+  /* Hero */
+  --hero-bg:
+    radial-gradient(
+      circle at 70% 40%,
+      rgba(255, 0, 0, 0.45) 0%,
+      rgba(120, 0, 0, 0.2) 35%,
+      rgba(0, 0, 0, 1) 75%
+    ),
+    linear-gradient(
+      135deg,
+      #000000 0%,
+      #0a0000 50%,
+      #1a0000 100%
+    );
+
+  --hero-dot-color: rgba(255, 255, 255, 0.75);
+  --hero-dot-opacity: 0.35;
+  --hero-glow-color: #ff0000;
+  --hero-glow-opacity: 0.08;
+
+  /* Experience */
+  --experience-bg:
+    radial-gradient(
+      circle at 85% 10%,
+      rgba(229, 9, 20, 0.18),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 10% 90%,
+      rgba(229, 9, 20, 0.08),
+      transparent 32%
+    ),
+    linear-gradient(
+      135deg,
+      #020202 0%,
+      #090909 55%,
+      #180506 100%
+    );
+
+  --experience-card-bg:
+    linear-gradient(
+      135deg,
+      #171717 0%,
+      #0c0c0c 60%,
+      #1a0708 100%
+    );
+
+  --experience-card-border:
+    rgba(255, 255, 255, 0.10);
 }
 
-/* ---------- Light Mode ---------- */
+
+/* ---------- LIGHT THEME ---------- */
+
 [data-theme="light"] {
   --background: #fcf8ca;
+
   --about-gradient:
-    radial-gradient(circle at 10% 15%,
+    radial-gradient(
+      circle at 10% 15%,
       rgba(229, 9, 20, 0.10),
-      transparent 32%),
-    radial-gradient(circle at 90% 75%,
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 90% 75%,
       rgba(229, 9, 20, 0.07),
-      transparent 35%),
-    linear-gradient(135deg,
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
       #ffffff 0%,
       #fafafa 50%,
-      #fff1f2 100%);
+      #fff1f2 100%
+    );
 
-  /* Portfolio আলাদা */
   --portfolio-gradient:
-    radial-gradient(circle at 85% 15%,
+    radial-gradient(
+      circle at 85% 15%,
       rgba(229, 9, 20, 0.08),
-      transparent 28%),
-    linear-gradient(120deg,
+      transparent 28%
+    ),
+    linear-gradient(
+      120deg,
       #f7f7f7 0%,
       #ffffff 45%,
-      #fceced 100%);
+      #fceced 100%
+    );
 
   --surface: #fafafa;
   --surface-elevated: #f0f0f0;
@@ -84,212 +183,554 @@
 
   --glass-bg: rgba(0, 0, 0, 0.03);
   --glass-border: rgba(0, 0, 0, 0.10);
-}
 
-
-/* =========================================
-   SERVICES — DEDICATED BACKGROUND
-   Same SVG / Different Theme Colors
-   ========================================= */
-
-[data-theme="dark"] {
+  /* Services */
   --services-bg:
-    radial-gradient(circle at 15% 15%,
-      rgba(229, 9, 20, 0.14),
-      transparent 30%),
-    radial-gradient(circle at 85% 80%,
-      rgba(229, 9, 20, 0.10),
-      transparent 32%),
-    linear-gradient(135deg,
-      #020202 0%,
-      #080808 48%,
-      #130405 100%);
-
-  --services-svg-primary: #ff1a25;
-  --services-svg-secondary: #e50914;
-  --services-svg-opacity: 0.32;
-  --services-svg-glow: rgba(229, 9, 20, 0.16);
-
-  --services-grid-color: rgba(255, 255, 255, 0.055);
-}
-
-[data-theme="light"] {
-  --services-bg:
-    radial-gradient(circle at 15% 15%,
+    radial-gradient(
+      circle at 15% 15%,
       rgba(229, 9, 20, 0.07),
-      transparent 30%),
-    radial-gradient(circle at 85% 80%,
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 85% 80%,
       rgba(229, 9, 20, 0.055),
-      transparent 32%),
-    linear-gradient(135deg,
+      transparent 32%
+    ),
+    linear-gradient(
+      135deg,
       #ffffff 0%,
       #fafafa 52%,
-      #fff2f2 100%);
+      #fff2f2 100%
+    );
 
   --services-svg-primary: #e50914;
   --services-svg-secondary: #b0000b;
   --services-svg-opacity: 0.18;
   --services-svg-glow: rgba(229, 9, 20, 0.07);
-
   --services-grid-color: rgba(0, 0, 0, 0.045);
-}
 
-
-/* =========================================
-   HERO BACKGROUND
-   LIGHT / DARK
-========================================= */
-
-
-/* ---------- DARK ---------- */
-
-[data-theme="dark"] {
+  /* Hero */
   --hero-bg:
-    radial-gradient(circle at 70% 40%,
-      rgba(255, 0, 0, 0.45) 0%,
-      rgba(120, 0, 0, 0.2) 35%,
-      rgba(0, 0, 0, 1) 75%),
-    linear-gradient(135deg,
-      #000000 0%,
-      #0a0000 50%,
-      #1a0000 100%);
-
-  --hero-dot-color: rgba(255, 255, 255, 0.75);
-  --hero-dot-opacity: 0.35;
-
-  --hero-glow-color: #ff0000;
-  --hero-glow-opacity: 0.08;
-}
-
-
-/* ---------- LIGHT ---------- */
-
-[data-theme="light"] {
-  --hero-bg:
-    radial-gradient(circle at 70% 40%,
+    radial-gradient(
+      circle at 70% 40%,
       rgba(229, 9, 20, 0.14) 0%,
       rgba(229, 9, 20, 0.055) 35%,
-      rgba(255, 255, 255, 0.98) 75%),
-    linear-gradient(135deg,
+      rgba(255, 255, 255, 0.98) 75%
+    ),
+    linear-gradient(
+      135deg,
       #ffffff 0%,
       #fffafa 50%,
-      #fff1f2 100%);
+      #fff1f2 100%
+    );
 
   --hero-dot-color: rgba(80, 0, 0, 0.42);
   --hero-dot-opacity: 0.24;
-
   --hero-glow-color: #e50914;
   --hero-glow-opacity: 0.045;
+
+  /* Experience */
+  --experience-bg:
+    radial-gradient(
+      circle at 85% 10%,
+      rgba(229, 9, 20, 0.08),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 10% 90%,
+      rgba(229, 9, 20, 0.04),
+      transparent 32%
+    ),
+    linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #fafafa 55%,
+      #fff1f2 100%
+    );
+
+  --experience-card-bg:
+    linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #ffffff 60%,
+      #fff5f5 100%
+    );
+
+  --experience-card-border:
+    rgba(0, 0, 0, 0.09);
 }
+
+
+/* =========================================================
+   ACCENT
+========================================================= */
+
+[data-accent="red"],
+[data-accent="purple"],
+[data-accent="blue"],
+[data-accent="black"] {
+  --accent: #e50914;
+  --accent-hover: #ff1a25;
+  --accent-muted: #ff4d57;
+  --accent-foreground: #ffffff;
+
+  --gradient-accent:
+    linear-gradient(
+      135deg,
+      #ff1a25 0%,
+      #b0000b 100%
+    );
+}
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+
+  font-family:
+    var(--font-body),
+    system-ui,
+    sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+h1,
+h2,
+h3,
+h4,
+.font-display {
+  font-family:
+    var(--font-display),
+    var(--font-body),
+    system-ui,
+    sans-serif;
+
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.font-mono-tag {
+  font-family: var(--font-mono), monospace;
+  letter-spacing: 0.02em;
+}
+
+p {
+  line-height: 1.65;
+}
+
+
+/* =========================================================
+   PREMIUM CARD
+========================================================= */
+
+.card-premium {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.card-premium:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 40px -12px rgba(0, 0, 0, 0.5);
+
+  border-color: var(--accent);
+}
+
+
+/* =========================================================
+   FORM FIELD
+========================================================= */
+
+.field {
+  width: 100%;
+
+  border-radius: 0.75rem;
+  border: 1px solid var(--border);
+
+  background: var(--surface);
+  color: var(--foreground);
+
+  padding: 0.65rem 0.9rem;
+
+  font-size: 0.875rem;
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.field:focus {
+  border-color: var(--accent);
+
+  box-shadow:
+    0 0 0 3px color-mix(
+      in srgb,
+      var(--accent) 20%,
+      transparent
+    );
+}
+
+
+/* =========================================================
+   GLASS
+========================================================= */
+
+.glass {
+  background: var(--glass-bg);
+
+  border: 1px solid var(--glass-border);
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+
+/* =========================================================
+   SELECTION
+========================================================= */
+
+::selection {
+  background: #e50914;
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   RED UTILITIES
+========================================================= */
+
+.text-accent {
+  color: var(--accent);
+}
+
+.bg-accent {
+  background: var(--accent);
+}
+
+.border-accent {
+  border-color: var(--accent);
+}
+
+.hover-accent:hover {
+  color: var(--accent);
+}
+
+
+/* =========================================================
+   RED GLOW
+========================================================= */
+
+.red-glow {
+  box-shadow:
+    0 0 30px rgba(229, 9, 20, 0.25);
+}
+
+.red-glow-strong {
+  box-shadow:
+    0 0 50px rgba(229, 9, 20, 0.40);
+}
+
+
+/* =========================================================
+   RED GRADIENT TEXT
+========================================================= */
+
+.text-gradient {
+  background:
+    linear-gradient(
+      135deg,
+      #ff1a25,
+      #e50914,
+      #ffffff
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* =========================================================
+   RED BUTTON
+========================================================= */
+
+.btn-accent {
+  background: #e50914;
+  color: #ffffff;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.btn-accent:hover {
+  background: #ff1a25;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 30px rgba(229, 9, 20, 0.30);
+}
+
+
+/* =========================================================
+   RED DIVIDER
+========================================================= */
+
+.red-divider {
+  height: 2px;
+
+  background: #e50914;
+
+  border-radius: 999px;
+}
+
+
+/* =========================================================
+   RED DOT
+========================================================= */
+
+.red-dot {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #e50914;
+
+  box-shadow:
+    0 0 12px rgba(229, 9, 20, 0.7);
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e50914;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff1a25;
+}
+
 
 /* =========================================================
    TESTIMONIALS SECTION
-   OWN LIGHT + DARK BACKGROUND
 ========================================================= */
 
 .testimonials-section {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-
-  width: 100%;
-
-  /*
-    LIGHT MODE BACKGROUND
-    Completely independent from body background
-  */
-
   background:
-    radial-gradient(circle at 15% 20%,
+    radial-gradient(
+      circle at 15% 20%,
       rgba(229, 9, 20, 0.055) 0%,
-      transparent 28%),
-    radial-gradient(circle at 88% 75%,
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 88% 75%,
       rgba(229, 9, 20, 0.075) 0%,
-      transparent 30%),
-    linear-gradient(135deg,
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
       #ffffff 0%,
       #fffdfd 35%,
       #fff7f7 68%,
-      #ffeded 100%);
+      #ffeded 100%
+    );
 
   color: #080808;
-
-  padding-top: 6rem;
-  padding-bottom: 6rem;
 
   transition:
     background 0.5s ease,
     color 0.4s ease;
 }
 
-
-/* =========================================================
-   DARK MODE BACKGROUND
-========================================================= */
-
 [data-theme="dark"] .testimonials-section {
   background:
-    radial-gradient(circle at 12% 18%,
+    radial-gradient(
+      circle at 12% 18%,
       rgba(229, 9, 20, 0.16) 0%,
-      transparent 28%),
-    radial-gradient(circle at 88% 78%,
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 88% 78%,
       rgba(229, 9, 20, 0.12) 0%,
-      transparent 32%),
-    linear-gradient(135deg,
+      transparent 32%
+    ),
+    linear-gradient(
+      135deg,
       #020202 0%,
       #070707 38%,
       #100304 70%,
-      #170506 100%);
+      #170506 100%
+    );
 
   color: #ffffff;
 }
 
 
 /* =========================================================
-   CONTENT
+   TESTIMONIALS DESCRIPTION
 ========================================================= */
 
-.testimonials-content {
-  position: relative;
-  z-index: 5;
+.testimonials-description {
+  color: rgba(0, 0, 0, 0.48);
+}
+
+[data-theme="dark"] .testimonials-description {
+  color: rgba(255, 255, 255, 0.45);
 }
 
 
 /* =========================================================
-   SOFT BACKGROUND GLOWS
+   TESTIMONIALS DIVIDER
 ========================================================= */
 
-.testimonials-bg-glow {
-  position: absolute;
+.testimonials-divider span {
+  height: 1px;
+  flex: 1;
 
-  pointer-events: none;
-
-  z-index: -1;
-
-  border-radius: 999px;
-
-  filter: blur(90px);
-
-  opacity: 0.5;
+  background: rgba(0, 0, 0, 0.1);
 }
 
+[data-theme="dark"] .testimonials-divider span {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.testimonials-divider i {
+  display: block;
+
+  width: 7px;
+  height: 7px;
+
+  flex-shrink: 0;
+
+  background: var(--accent);
+
+  transform: rotate(45deg);
+
+  box-shadow:
+    0 0 12px rgba(229, 9, 20, 0.45);
+}
+
+
+/* =========================================================
+   TESTIMONIAL EMPTY
+========================================================= */
+
+.testimonial-empty {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+
+  border-radius: 24px;
+
+  background: rgba(255, 255, 255, 0.65);
+
+  backdrop-filter: blur(18px);
+}
+
+.testimonial-empty p {
+  margin: 0;
+
+  color: rgba(0, 0, 0, 0.5);
+
+  font-size: 14px;
+}
+
+[data-theme="dark"] .testimonial-empty {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+[data-theme="dark"] .testimonial-empty p {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+
+/* =========================================================
+   TESTIMONIAL CTA LABEL
+========================================================= */
+
+.testimonial-cta-label {
+  color: rgba(0, 0, 0, 0.35);
+
+  font-family:
+    var(--font-mono),
+    monospace;
+
+  font-size: 10px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.3em;
+}
+
+[data-theme="dark"] .testimonial-cta-label {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+
+/* =========================================================
+   TESTIMONIAL FORM CARD
+========================================================= */
+
+.testimonial-form-card {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+
+  border-radius: 24px;
+
+  background: rgba(255, 255, 255, 0.75);
+
+  box-shadow:
+    0 30px 80px -40px rgba(0, 0, 0, 0.35);
+
+  backdrop-filter: blur(20px);
+}
+
+[data-theme="dark"] .testimonial-form-card {
+  border-color: rgba(255, 255, 255, 0.08);
+
+  background: rgba(255, 255, 255, 0.04);
+}
+
+
+/* =========================================================
+   TESTIMONIAL BACKGROUND GLOWS
+========================================================= */
+
 .testimonials-bg-glow-one {
-  width: 280px;
-  height: 280px;
-
-  top: 15%;
-  left: -140px;
-
   background: rgba(229, 9, 20, 0.08);
 }
 
 .testimonials-bg-glow-two {
-  width: 350px;
-  height: 350px;
-
-  right: -170px;
-  bottom: 8%;
-
   background: rgba(229, 9, 20, 0.09);
 }
 
@@ -303,7 +744,7 @@
 
 
 /* =========================================================
-   DECORATIVE SPEECH BUBBLE
+   TESTIMONIAL DECORATIVE SPEECH BUBBLE
 ========================================================= */
 
 .testimonials-section::before {
@@ -331,9 +772,6 @@
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 620 470' fill='none'%3E%3Cpath d='M92 55H500C535 55 560 80 560 115V285C560 320 535 345 500 345H345C315 345 290 358 270 382L225 430L236 370C238 356 225 345 208 345H92C57 345 32 320 32 285V115C32 80 57 55 92 55Z' stroke='%23000000' stroke-opacity='.07' stroke-width='1.5'/%3E%3Cpath d='M115 85H475C494 85 510 101 510 120V260C510 279 494 295 475 295H350' stroke='%23000000' stroke-opacity='.035' stroke-width='1' stroke-dasharray='3 8'/%3E%3Cpath d='M135 160C118 160 108 172 108 188C108 204 119 216 135 216C151 216 162 204 162 188C162 179 158 171 150 166C157 157 166 151 177 148M195 160C178 160 168 172 168 188C168 204 179 216 195 216C211 216 222 204 222 188C222 179 218 171 210 166C217 157 226 151 237 148' stroke='%23e50914' stroke-opacity='.35' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M340 155L346 168L360 169L349 179L352 193L340 186L328 193L331 179L320 169L334 168Z' stroke='%23e50914' stroke-opacity='.3' stroke-width='1'/%3E%3Cpath d='M382 155L388 168L402 169L391 179L394 193L382 186L370 193L373 179L362 169L376 168Z' stroke='%23e50914' stroke-opacity='.25' stroke-width='1'/%3E%3C/svg%3E");
 }
 
-
-/* DARK DECORATION */
-
 [data-theme="dark"] .testimonials-section::before {
   opacity: 0.7;
 
@@ -343,30 +781,12 @@
 
 
 /* =========================================================
-   HEADING
+   TESTIMONIAL HEADING
 ========================================================= */
 
 .testimonial-heading {
-  text-align: center;
-
   animation:
     testimonial-heading-in 0.6s ease-out both;
-}
-
-.testimonials-description {
-  max-width: 560px;
-
-  margin: 20px auto 0;
-
-  color: rgba(0, 0, 0, 0.48);
-
-  font-size: 14px;
-
-  line-height: 1.7;
-}
-
-[data-theme="dark"] .testimonials-description {
-  color: rgba(255, 255, 255, 0.45);
 }
 
 @keyframes testimonial-heading-in {
@@ -383,119 +803,15 @@
 
 
 /* =========================================================
-   DIVIDER
-========================================================= */
-
-.testimonials-divider {
-  display: flex;
-
-  align-items: center;
-
-  gap: 12px;
-
-  width: 128px;
-
-  margin: 28px auto 0;
-}
-
-.testimonials-divider span {
-  height: 1px;
-
-  flex: 1;
-
-  background: rgba(0, 0, 0, 0.1);
-}
-
-[data-theme="dark"] .testimonials-divider span {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.testimonials-divider i {
-  width: 7px;
-  height: 7px;
-
-  flex-shrink: 0;
-
-  display: block;
-
-  background: var(--accent);
-
-  transform: rotate(45deg);
-
-  box-shadow:
-    0 0 12px rgba(229, 9, 20, 0.45);
-}
-
-
-/* =========================================================
-   MARQUEE AREA
-========================================================= */
-
-.testimonials-marquee-area {
-  position: relative;
-
-  width: 100%;
-
-  margin-top: 56px;
-}
-
-
-/* =========================================================
-   MARQUEE WRAPPER
-========================================================= */
-
-.testimonial-marquee-wrapper {
-  width: 100%;
-
-  overflow: hidden;
-}
-
-
-/* =========================================================
-   MARQUEE TRACK
+   TESTIMONIAL MARQUEE
 ========================================================= */
 
 .testimonial-marquee-track {
-  display: flex;
-
-  width: max-content;
-
   animation:
     testimonial-marquee-scroll 38s linear infinite;
 
   will-change: transform;
 }
-
-
-/* =========================================================
-   MARQUEE GROUP
-========================================================= */
-
-.testimonial-marquee-group {
-  display: flex;
-
-  flex-shrink: 0;
-
-  gap: 24px;
-
-  padding-right: 24px;
-}
-
-
-/* =========================================================
-   CARD WIDTH
-========================================================= */
-
-.testimonial-marquee-card {
-  width: 390px;
-
-  flex-shrink: 0;
-}
-
-
-/* =========================================================
-   RIGHT → LEFT ANIMATION
-========================================================= */
 
 @keyframes testimonial-marquee-scroll {
   from {
@@ -507,511 +823,68 @@
   }
 }
 
-
-/* =========================================================
-   PAUSE ON HOVER
-========================================================= */
-
-.testimonial-marquee-wrapper:hover .testimonial-marquee-track {
+.testimonial-marquee-track:hover {
   animation-play-state: paused;
 }
 
 
 /* =========================================================
-   EDGE FADE
+   TESTIMONIAL EDGE FADE
 ========================================================= */
-
-.testimonial-edge {
-  position: absolute;
-
-  top: 0;
-  bottom: 0;
-
-  z-index: 20;
-
-  width: 110px;
-
-  pointer-events: none;
-}
-
-
-/* LIGHT LEFT */
 
 [data-theme="light"] .testimonial-edge-left {
-  left: 0;
-
   background:
-    linear-gradient(90deg,
+    linear-gradient(
+      90deg,
       #ffffff 0%,
       rgba(255, 255, 255, 0.9) 25%,
-      rgba(255, 255, 255, 0) 100%);
+      rgba(255, 255, 255, 0) 100%
+    );
 }
-
-
-/* LIGHT RIGHT */
 
 [data-theme="light"] .testimonial-edge-right {
-  right: 0;
-
   background:
-    linear-gradient(270deg,
+    linear-gradient(
+      270deg,
       #ffffff 0%,
       rgba(255, 255, 255, 0.9) 25%,
-      rgba(255, 255, 255, 0) 100%);
+      rgba(255, 255, 255, 0) 100%
+    );
 }
-
-
-/* DARK LEFT */
 
 [data-theme="dark"] .testimonial-edge-left {
-  left: 0;
-
   background:
-    linear-gradient(90deg,
+    linear-gradient(
+      90deg,
       #020202 0%,
       rgba(2, 2, 2, 0.9) 25%,
-      rgba(2, 2, 2, 0) 100%);
+      rgba(2, 2, 2, 0) 100%
+    );
 }
-
-
-/* DARK RIGHT */
 
 [data-theme="dark"] .testimonial-edge-right {
-  right: 0;
-
   background:
-    linear-gradient(270deg,
+    linear-gradient(
+      270deg,
       #020202 0%,
       rgba(2, 2, 2, 0.9) 25%,
-      rgba(2, 2, 2, 0) 100%);
+      rgba(2, 2, 2, 0) 100%
+    );
 }
 
 
 /* =========================================================
-   EMPTY STATE
-========================================================= */
-
-.testimonial-empty {
-  max-width: 520px;
-
-  margin: 56px auto 0;
-
-  padding: 48px 24px;
-
-  text-align: center;
-
-  border: 1px solid rgba(0, 0, 0, 0.08);
-
-  border-radius: 24px;
-
-  background: rgba(255, 255, 255, 0.65);
-
-  backdrop-filter: blur(18px);
-}
-
-[data-theme="dark"] .testimonial-empty {
-  border-color: rgba(255, 255, 255, 0.08);
-
-  background: rgba(255, 255, 255, 0.035);
-}
-
-.testimonial-empty-icon {
-  width: 48px;
-  height: 48px;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  margin: 0 auto 20px;
-
-  border-radius: 50%;
-
-  color: var(--accent);
-
-  border: 1px solid rgba(229, 9, 20, 0.2);
-
-  background: rgba(229, 9, 20, 0.05);
-
-  font-size: 22px;
-}
-
-.testimonial-empty p {
-  margin: 0;
-
-  color: rgba(0, 0, 0, 0.5);
-
-  font-size: 14px;
-}
-
-[data-theme="dark"] .testimonial-empty p {
-  color: rgba(255, 255, 255, 0.45);
-}
-
-
-/* =========================================================
-   CTA
-========================================================= */
-
-.testimonial-cta {
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: center;
-
-  margin-top: 64px;
-}
-
-.testimonial-cta-label {
-  margin: 0 0 16px;
-
-  color: rgba(0, 0, 0, 0.35);
-
-  font-family: var(--font-mono), monospace;
-
-  font-size: 10px;
-
-  text-transform: uppercase;
-
-  letter-spacing: 0.3em;
-}
-
-[data-theme="dark"] .testimonial-cta-label {
-  color: rgba(255, 255, 255, 0.35);
-}
-
-
-/* =========================================================
-   CTA BUTTON
-========================================================= */
-
-.testimonial-cta-button {
-  position: relative;
-
-  overflow: hidden;
-
-  border: 0;
-
-  border-radius: 999px;
-
-  padding: 14px 28px;
-
-  background: var(--accent);
-
-  color: white;
-
-  cursor: pointer;
-
-  box-shadow:
-    0 14px 38px -16px rgba(229, 9, 20, 0.7);
-
-  transition:
-    transform 0.3s ease,
-    background 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
-.testimonial-cta-button:hover {
-  transform: translateY(-2px);
-
-  background: var(--accent-hover);
-
-  box-shadow:
-    0 20px 45px -16px rgba(229, 9, 20, 0.8);
-}
-
-.testimonial-cta-button:active {
-  transform: translateY(0);
-}
-
-
-/* =========================================================
-   BUTTON SHINE
-========================================================= */
-
-.testimonial-button-shine {
-  position: absolute;
-
-  top: 0;
-  bottom: 0;
-
-  left: -45px;
-
-  width: 28px;
-
-  transform: skewX(-12deg);
-
-  background: rgba(255, 255, 255, 0.2);
-
-  transition:
-    transform 0.7s ease;
-}
-
-.testimonial-cta-button:hover .testimonial-button-shine {
-  transform:
-    translateX(240px) skewX(-12deg);
-}
-
-
-/* =========================================================
-   BUTTON CONTENT
-========================================================= */
-
-.testimonial-button-content {
-  position: relative;
-
-  z-index: 2;
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 12px;
-
-  font-size: 14px;
-
-  font-weight: 600;
-}
-
-.testimonial-button-icon {
-  width: 22px;
-  height: 22px;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
-
-  background: rgba(255, 255, 255, 0.15);
-
-  font-size: 16px;
-
-  line-height: 1;
-
-  transition:
-    transform 0.3s ease;
-}
-
-.testimonial-button-icon-open {
-  transform: rotate(45deg);
-}
-
-
-/* =========================================================
-   FORM
-========================================================= */
-
-.testimonial-form-wrapper {
-  display: grid;
-
-  width: 100%;
-
-  max-width: 700px;
-
-  margin-top: 0;
-
-  grid-template-rows: 0fr;
-
-  opacity: 0;
-
-  transition:
-    grid-template-rows 0.5s ease,
-    opacity 0.5s ease,
-    margin-top 0.5s ease;
-}
-
-.testimonial-form-open {
-  margin-top: 40px;
-
-  grid-template-rows: 1fr;
-
-  opacity: 1;
-}
-
-.testimonial-form-inner {
-  min-height: 0;
-
-  overflow: hidden;
-}
-
-.testimonial-form-card {
-  padding: 32px;
-
-  border: 1px solid rgba(0, 0, 0, 0.08);
-
-  border-radius: 24px;
-
-  background: rgba(255, 255, 255, 0.75);
-
-  box-shadow:
-    0 30px 80px -40px rgba(0, 0, 0, 0.35);
-
-  backdrop-filter: blur(20px);
-}
-
-[data-theme="dark"] .testimonial-form-card {
-  border-color: rgba(255, 255, 255, 0.08);
-
-  background: rgba(255, 255, 255, 0.04);
-}
-
-
-/* =========================================================
-   LOADING
-========================================================= */
-
-.testimonials-loading {
-  display: flex;
-
-  gap: 24px;
-
-  overflow: hidden;
-
-  margin-top: 56px;
-}
-
-.testimonial-skeleton {
-  width: 390px;
-  height: 290px;
-
-  flex-shrink: 0;
-
-  border-radius: 24px;
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 640px) {
-  .testimonials-section {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-  }
-
-  .testimonials-description {
-    padding: 0 20px;
-
-    font-size: 13px;
-  }
-
-  .testimonials-marquee-area {
-    margin-top: 44px;
-  }
-
-  .testimonial-marquee-group {
-    gap: 16px;
-
-    padding-right: 16px;
-  }
-
-  .testimonial-marquee-card {
-    width: 300px;
-  }
-
-  .testimonial-marquee-track {
-    animation-duration: 28s;
-  }
-
-  .testimonial-edge {
-    width: 45px;
-  }
-
-  .testimonial-form-card {
-    padding: 20px;
-  }
-
-  .testimonial-skeleton {
-    width: 300px;
-    height: 270px;
-  }
-
-  .testimonials-section::before {
-    top: -20px;
-    right: -220px;
-
-    width: 500px;
-    height: 380px;
-
-    opacity: 0.45;
-  }
-
-  .testimonials-bg-glow-one {
-    left: -180px;
-  }
-
-  .testimonials-bg-glow-two {
-    right: -200px;
-  }
-}
-
-
-/* =========================================================
-   TABLET
-========================================================= */
-
-@media (min-width: 641px) and (max-width: 1024px) {
-  .testimonial-marquee-card {
-    width: 350px;
-  }
-
-  .testimonial-marquee-track {
-    animation-duration: 34s;
-  }
-}
-
-
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-  .testimonial-marquee-track {
-    animation: none !important;
-
-    transform: none !important;
-  }
-
-  .testimonial-heading {
-    animation: none !important;
-  }
-}
-
-
-
-/* =========================================================
-   TESTIMONIAL CARD
-   PREMIUM LIGHT / DARK
+   TESTIMONIAL CARD — LIGHT
 ========================================================= */
 
 .testimonial-card {
-  position: relative;
-
-  display: flex;
-  flex-direction: column;
-
-  min-height: 285px;
-
-  padding: 28px;
-
-  overflow: hidden;
-
-  border-radius: 24px;
-
-  /*
-    LIGHT CARD
-  */
-
   background:
-    linear-gradient(145deg,
+    linear-gradient(
+      145deg,
       rgba(255, 255, 255, 0.98) 0%,
       rgba(255, 255, 255, 0.90) 55%,
-      rgba(255, 247, 247, 0.96) 100%);
+      rgba(255, 247, 247, 0.96) 100%
+    );
 
   border: 1px solid rgba(0, 0, 0, 0.075);
 
@@ -1032,15 +905,17 @@
 
 
 /* =========================================================
-   DARK CARD
+   TESTIMONIAL CARD — DARK
 ========================================================= */
 
 [data-theme="dark"] .testimonial-card {
   background:
-    linear-gradient(145deg,
+    linear-gradient(
+      145deg,
       rgba(25, 25, 25, 0.92) 0%,
       rgba(14, 14, 14, 0.96) 58%,
-      rgba(29, 5, 7, 0.95) 100%);
+      rgba(29, 5, 7, 0.95) 100%
+    );
 
   border-color: rgba(255, 255, 255, 0.085);
 
@@ -1051,7 +926,7 @@
 
 
 /* =========================================================
-   CARD HOVER
+   TESTIMONIAL CARD HOVER
 ========================================================= */
 
 .testimonial-card:hover {
@@ -1074,25 +949,17 @@
 
 
 /* =========================================================
-   RED TOP ACCENT
+   TESTIMONIAL CARD ACCENT
 ========================================================= */
 
 .testimonial-card-accent {
-  position: absolute;
-
-  top: 0;
-  left: 28px;
-  right: 28px;
-
-  height: 2px;
-
-  border-radius: 0 0 999px 999px;
-
   background:
-    linear-gradient(90deg,
+    linear-gradient(
+      90deg,
       transparent,
       var(--accent),
-      transparent);
+      transparent
+    );
 
   opacity: 0.65;
 
@@ -1105,31 +972,15 @@
 .testimonial-card:hover .testimonial-card-accent {
   left: 20px;
   right: 20px;
-
   opacity: 1;
 }
 
 
 /* =========================================================
-   QUOTE ICON
+   TESTIMONIAL CARD QUOTE
 ========================================================= */
 
 .testimonial-card-quote {
-  position: absolute;
-
-  top: 24px;
-  right: 24px;
-
-  width: 38px;
-  height: 38px;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
-
   color: var(--accent);
 
   background: rgba(229, 9, 20, 0.055);
@@ -1143,38 +994,30 @@
 
 [data-theme="dark"] .testimonial-card-quote {
   background: rgba(229, 9, 20, 0.08);
-
   border-color: rgba(229, 9, 20, 0.13);
 }
 
 .testimonial-card:hover .testimonial-card-quote {
   transform: rotate(-8deg) scale(1.06);
-
   background: rgba(229, 9, 20, 0.10);
 }
 
 
 /* =========================================================
-   RATING
+   TESTIMONIAL RATING
 ========================================================= */
 
 .testimonial-card-rating {
-  display: flex;
-
-  align-items: center;
-
-  gap: 4px;
-
   color: var(--accent);
-
-  margin-bottom: 17px;
 }
 
 .testimonial-star-active {
   color: var(--accent);
 
   filter:
-    drop-shadow(0 0 4px rgba(229, 9, 20, 0.20));
+    drop-shadow(
+      0 0 4px rgba(229, 9, 20, 0.20)
+    );
 }
 
 .testimonial-star-inactive {
@@ -1187,23 +1030,11 @@
 
 
 /* =========================================================
-   COMMENT
+   TESTIMONIAL COMMENT
 ========================================================= */
 
 .testimonial-card-comment {
-  flex: 1;
-
-  margin: 0;
-
-  padding-right: 34px;
-
   color: rgba(0, 0, 0, 0.68);
-
-  font-size: 14px;
-
-  line-height: 1.75;
-
-  letter-spacing: -0.005em;
 }
 
 [data-theme="dark"] .testimonial-card-comment {
@@ -1212,60 +1043,35 @@
 
 
 /* =========================================================
-   DIVIDER
+   TESTIMONIAL CARD DIVIDER
 ========================================================= */
 
 .testimonial-card-divider {
-  width: 100%;
-
-  height: 1px;
-
-  margin-top: 22px;
-  margin-bottom: 18px;
-
   background:
-    linear-gradient(90deg,
+    linear-gradient(
+      90deg,
       rgba(0, 0, 0, 0.08),
       rgba(0, 0, 0, 0.025),
-      transparent);
+      transparent
+    );
 }
 
 [data-theme="dark"] .testimonial-card-divider {
   background:
-    linear-gradient(90deg,
+    linear-gradient(
+      90deg,
       rgba(255, 255, 255, 0.10),
       rgba(255, 255, 255, 0.025),
-      transparent);
+      transparent
+    );
 }
 
 
 /* =========================================================
-   AUTHOR
-========================================================= */
-
-.testimonial-card-author {
-  display: flex;
-
-  align-items: center;
-
-  gap: 12px;
-}
-
-
-/* =========================================================
-   AVATAR
+   TESTIMONIAL AVATAR
 ========================================================= */
 
 .testimonial-card-avatar {
-  width: 42px;
-  height: 42px;
-
-  flex-shrink: 0;
-
-  border-radius: 50%;
-
-  object-fit: cover;
-
   border: 2px solid rgba(255, 255, 255, 0.8);
 
   box-shadow:
@@ -1281,27 +1087,20 @@
 
 
 /* =========================================================
-   FALLBACK AVATAR
+   TESTIMONIAL FALLBACK AVATAR
 ========================================================= */
 
 .testimonial-card-avatar-fallback {
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
   color: #ffffff;
 
   border: none;
 
   background:
-    linear-gradient(135deg,
+    linear-gradient(
+      135deg,
       #ff1a25 0%,
-      #b0000b 100%);
-
-  font-size: 13px;
-
-  font-weight: 700;
+      #b0000b 100%
+    );
 
   box-shadow:
     0 7px 18px rgba(229, 9, 20, 0.24);
@@ -1309,51 +1108,24 @@
 
 
 /* =========================================================
-   AUTHOR INFO
+   TESTIMONIAL NAME
 ========================================================= */
-
-.testimonial-card-author-info {
-  min-width: 0;
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 2px;
-}
 
 .testimonial-card-name {
   color: #090909;
-
-  font-size: 14px;
-
-  font-weight: 650;
-
-  line-height: 1.35;
-
-  white-space: nowrap;
-
-  overflow: hidden;
-
-  text-overflow: ellipsis;
 }
 
 [data-theme="dark"] .testimonial-card-name {
   color: #ffffff;
 }
 
+
+/* =========================================================
+   TESTIMONIAL META
+========================================================= */
+
 .testimonial-card-meta {
   color: rgba(0, 0, 0, 0.42);
-
-  font-size: 11px;
-
-  line-height: 1.4;
-
-  white-space: nowrap;
-
-  overflow: hidden;
-
-  text-overflow: ellipsis;
 }
 
 [data-theme="dark"] .testimonial-card-meta {
@@ -1362,41 +1134,85 @@
 
 
 /* =========================================================
-   MOBILE CARD
+   CTA SHINE
+========================================================= */
+
+.testimonial-button-shine {
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+  left: -45px;
+
+  width: 28px;
+
+  transform: skewX(-12deg);
+
+  background: rgba(255, 255, 255, 0.2);
+
+  transition: transform 0.7s ease;
+}
+
+.testimonial-cta-button:hover .testimonial-button-shine {
+  transform:
+    translateX(240px)
+    skewX(-12deg);
+}
+
+
+/* =========================================================
+   TESTIMONIAL FORM OPEN
+========================================================= */
+
+.testimonial-form-open {
+  margin-top: 40px;
+
+  grid-template-rows: 1fr;
+
+  opacity: 1;
+}
+
+
+/* =========================================================
+   RESPONSIVE
 ========================================================= */
 
 @media (max-width: 640px) {
-  .testimonial-card {
-    min-height: 270px;
+  .testimonials-section::before {
+    top: -20px;
+    right: -220px;
 
-    padding: 23px;
+    width: 500px;
+    height: 380px;
 
-    border-radius: 20px;
+    opacity: 0.45;
   }
 
-  .testimonial-card-quote {
-    top: 19px;
-    right: 19px;
-
-    width: 34px;
-    height: 34px;
+  .testimonials-bg-glow-one {
+    left: -180px;
   }
 
-  .testimonial-card-comment {
-    padding-right: 28px;
-
-    font-size: 13px;
-
-    line-height: 1.7;
+  .testimonials-bg-glow-two {
+    right: -200px;
   }
 
-  .testimonial-card-accent {
-    left: 22px;
-    right: 22px;
+  .testimonial-marquee-track {
+    animation-duration: 28s;
   }
 
   .testimonial-card:hover {
     transform: translateY(-3px);
+  }
+
+  .testimonial-card:hover .testimonial-card-accent {
+    left: 20px;
+    right: 20px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .testimonial-marquee-track {
+    animation-duration: 34s;
   }
 }
 
@@ -1406,6 +1222,15 @@
 ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
+  .testimonial-marquee-track {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .testimonial-heading {
+    animation: none !important;
+  }
+
   .testimonial-card {
     transition: none;
   }
@@ -1417,357 +1242,6 @@
   .testimonial-card-quote {
     transition: none;
   }
-}
-
-
-
-/* =========================================
-   EXPERIENCE — LIGHT
-========================================= */
-
-[data-theme="light"] {
-  --experience-bg:
-    radial-gradient(circle at 85% 10%,
-      rgba(229, 9, 20, 0.08),
-      transparent 32%),
-    radial-gradient(circle at 10% 90%,
-      rgba(229, 9, 20, 0.04),
-      transparent 32%),
-    linear-gradient(135deg,
-      #ffffff 0%,
-      #fafafa 55%,
-      #fff1f2 100%);
-
-  --experience-card-bg:
-    linear-gradient(135deg,
-      #ffffff 0%,
-      #ffffff 60%,
-      #fff5f5 100%);
-
-  --experience-card-border:
-    rgba(0, 0, 0, 0.09);
-}
-
-
-/* =========================================
-   EXPERIENCE — DARK
-========================================= */
-
-[data-theme="dark"] {
-  --experience-bg:
-    radial-gradient(circle at 85% 10%,
-      rgba(229, 9, 20, 0.18),
-      transparent 32%),
-    radial-gradient(circle at 10% 90%,
-      rgba(229, 9, 20, 0.08),
-      transparent 32%),
-    linear-gradient(135deg,
-      #020202 0%,
-      #090909 55%,
-      #180506 100%);
-
-  --experience-card-bg:
-    linear-gradient(135deg,
-      #171717 0%,
-      #0c0c0c 60%,
-      #1a0708 100%);
-
-  --experience-card-border:
-    rgba(255, 255, 255, 0.10);
-}
-
-
-/* =========================================
-   ACCENT = RED ONLY
-   ========================================= */
-
-[data-accent="red"],
-[data-accent="purple"],
-[data-accent="blue"],
-[data-accent="black"] {
-  --accent: #e50914;
-  --accent-hover: #ff1a25;
-  --accent-muted: #ff4d57;
-
-  --accent-foreground: #ffffff;
-
-  --gradient-accent:
-    linear-gradient(135deg,
-      #ff1a25 0%,
-      #b0000b 100%);
-}
-
-
-/* =========================================
-   GLOBAL
-   ========================================= */
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-
-  font-family: var(--font-body), system-ui, sans-serif;
-
-  -webkit-font-smoothing: antialiased;
-
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease;
-}
-
-
-/* ---------- Headings ---------- */
-
-h1,
-h2,
-h3,
-h4,
-.font-display {
-  font-family:
-    var(--font-display),
-    var(--font-body),
-    system-ui,
-    sans-serif;
-
-  letter-spacing: -0.02em;
-  line-height: 1.15;
-}
-
-
-/* ---------- Mono ---------- */
-
-.font-mono-tag {
-  font-family: var(--font-mono), monospace;
-  letter-spacing: 0.02em;
-}
-
-
-/* ---------- Paragraph ---------- */
-
-p {
-  line-height: 1.65;
-}
-
-
-/* =========================================
-   PREMIUM CARD
-   ========================================= */
-
-.card-premium {
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    border-color 0.25s ease;
-}
-
-.card-premium:hover {
-  transform: translateY(-3px);
-
-  box-shadow:
-    0 12px 40px -12px rgba(0, 0, 0, 0.5);
-
-  border-color: var(--accent);
-}
-
-
-/* =========================================
-   FORM FIELD
-   ========================================= */
-
-.field {
-  width: 100%;
-
-  border-radius: 0.75rem;
-
-  border: 1px solid var(--border);
-
-  background: var(--surface);
-
-  color: var(--foreground);
-
-  padding: 0.65rem 0.9rem;
-
-  font-size: 0.875rem;
-
-  outline: none;
-
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.field:focus {
-  border-color: var(--accent);
-
-  box-shadow:
-    0 0 0 3px color-mix(in srgb,
-      var(--accent) 20%,
-      transparent);
-}
-
-
-/* =========================================
-   GLASS
-   ========================================= */
-
-.glass {
-  background: var(--glass-bg);
-
-  border: 1px solid var(--glass-border);
-
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-}
-
-
-/* =========================================
-   SELECTION = RED
-   ========================================= */
-
-::selection {
-  background: #e50914;
-  color: #ffffff;
-}
-
-
-/* =========================================
-   RED UTILITY HELPERS
-   ========================================= */
-
-.text-accent {
-  color: var(--accent);
-}
-
-.bg-accent {
-  background: var(--accent);
-}
-
-.border-accent {
-  border-color: var(--accent);
-}
-
-.hover-accent:hover {
-  color: var(--accent);
-}
-
-
-/* =========================================
-   RED GLOW
-   ========================================= */
-
-.red-glow {
-  box-shadow:
-    0 0 30px rgba(229, 9, 20, 0.25);
-}
-
-.red-glow-strong {
-  box-shadow:
-    0 0 50px rgba(229, 9, 20, 0.40);
-}
-
-
-/* =========================================
-   RED GRADIENT TEXT
-   ========================================= */
-
-.text-gradient {
-  background: linear-gradient(135deg,
-      #ff1a25,
-      #e50914,
-      #ffffff);
-
-  -webkit-background-clip: text;
-  background-clip: text;
-
-  -webkit-text-fill-color: transparent;
-}
-
-
-/* =========================================
-   RED BUTTON
-   ========================================= */
-
-.btn-accent {
-  background: #e50914;
-  color: #ffffff;
-
-  transition:
-    background-color 0.2s ease,
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.btn-accent:hover {
-  background: #ff1a25;
-
-  transform: translateY(-2px);
-
-  box-shadow:
-    0 10px 30px rgba(229, 9, 20, 0.30);
-}
-
-
-/* =========================================
-   RED DIVIDER
-   ========================================= */
-
-.red-divider {
-  height: 2px;
-
-  background: #e50914;
-
-  border-radius: 999px;
-}
-
-
-/* =========================================
-   RED DOT
-   ========================================= */
-
-.red-dot {
-  width: 8px;
-  height: 8px;
-
-  border-radius: 50%;
-
-  background: #e50914;
-
-  box-shadow:
-    0 0 12px rgba(229, 9, 20, 0.7);
-}
-
-
-/* =========================================
-   RED SCROLLBAR
-   ========================================= */
-
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #050505;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #e50914;
-  border-radius: 999px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #ff1a25;
-}
-
-
-/* =========================================
-   REDUCED MOTION
-   ========================================= */
-
-@media (prefers-reduced-motion: reduce) {
 
   *,
   *::before,

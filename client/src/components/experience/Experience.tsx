@@ -109,9 +109,7 @@ function ExperienceCard({
    */
 
   const stackStart = start + step;
-
-  const stackEnd =
-    stackStart + step * 0.28;
+  const stackEnd = stackStart + step * 0.28;
 
   const stackProgress = useTransform(
     progress,
@@ -147,65 +145,43 @@ function ExperienceCard({
         opacity: stackOpacity,
         zIndex: index + 1,
       }}
-      className="
-        absolute
-        left-0
-        top-0
-
-        h-full
-        w-full
-
-        will-change-transform
-      "
+      className="absolute left-0 top-0 h-full w-full will-change-transform"
     >
       <div
         className="
           relative
           mx-auto
-
           h-full
           w-[calc(100%-1rem)]
           max-w-[660px]
-
           overflow-hidden
-
           rounded-[1.25rem]
           sm:rounded-[1.4rem]
-
           border
           border-[var(--experience-card-border)]
-
           bg-[var(--experience-card-bg)]
-
           p-5
           sm:p-6
           lg:p-7
-
           shadow-[0_25px_70px_-42px_rgba(0,0,0,0.32)]
-
           backdrop-blur-xl
-
           dark:shadow-[0_25px_70px_-38px_rgba(0,0,0,0.9)]
         "
       >
         {/* =====================================
             TOP RED LINE
         ===================================== */}
-
         <div
           className="
             absolute
             left-6
             right-6
             top-0
-
             h-px
-
             bg-gradient-to-r
             from-transparent
             via-[var(--accent)]
             to-transparent
-
             opacity-70
           "
         />
@@ -213,17 +189,14 @@ function ExperienceCard({
         {/* =====================================
             CARD NUMBER
         ===================================== */}
-
         <span
           className="
             absolute
             right-5
             top-5
-
             font-mono-tag
             text-[9px]
             tracking-[0.18em]
-
             text-black/20
             dark:text-white/20
           "
@@ -234,28 +207,21 @@ function ExperienceCard({
         {/* =====================================
             DATE
         ===================================== */}
-
         <div
           className="
             inline-flex
             max-w-full
             items-center
-
             rounded-full
-
             border
             border-[var(--accent)]/15
-
             bg-[var(--accent)]/[0.045]
-
             px-2.5
             py-1.5
-
             font-mono-tag
             text-[9px]
             uppercase
             tracking-[0.08em]
-
             text-[var(--accent)]
           "
         >
@@ -275,16 +241,13 @@ function ExperienceCard({
         {/* =====================================
             LABEL
         ===================================== */}
-
         <p
           className="
             mt-5
-
             font-mono-tag
             text-[8px]
             uppercase
             tracking-[0.25em]
-
             text-black/40
             dark:text-white/40
           "
@@ -295,23 +258,17 @@ function ExperienceCard({
         {/* =====================================
             ROLE
         ===================================== */}
-
         <h3
           className="
             mt-2
             max-w-[85%]
-
             font-display
-
             text-xl
             font-semibold
             leading-tight
             tracking-[-0.025em]
-
             text-[#111111]
-
             sm:text-2xl
-
             dark:text-white
           "
         >
@@ -321,20 +278,15 @@ function ExperienceCard({
         {/* =====================================
             COMPANY
         ===================================== */}
-
         <div
           className="
             mt-2
-
             flex
             min-w-0
             items-center
             gap-2
-
             text-xs
-
             text-[#555555]
-
             dark:text-white/55
           "
         >
@@ -344,7 +296,6 @@ function ExperienceCard({
               w-1.5
               shrink-0
               rounded-full
-
               bg-[var(--accent)]
             "
           />
@@ -357,21 +308,15 @@ function ExperienceCard({
         {/* =====================================
             DESCRIPTION
         ===================================== */}
-
         {item.description && (
           <p
             className="
               mt-4
-
               max-w-xl
-
               text-xs
               leading-6
-
               text-[#555555]
-
               sm:text-[13px]
-
               dark:text-white/55
             "
           >
@@ -382,36 +327,21 @@ function ExperienceCard({
         {/* =====================================
             TECHNOLOGIES
         ===================================== */}
-
         {item.technologies?.length ? (
-          <div
-            className="
-              mt-4
-
-              flex
-              flex-wrap
-              gap-1.5
-            "
-          >
+          <div className="mt-4 flex flex-wrap gap-1.5">
             {item.technologies.map((tech) => (
               <span
                 key={tech}
                 className="
                   rounded-full
-
                   border
                   border-black/[0.07]
-
                   bg-black/[0.025]
-
                   px-2
                   py-1
-
                   font-mono-tag
                   text-[8px]
-
                   text-[#555555]
-
                   dark:border-white/[0.08]
                   dark:bg-white/[0.035]
                   dark:text-white/50
@@ -426,24 +356,17 @@ function ExperienceCard({
         {/* =====================================
             DECORATIVE GLOW
         ===================================== */}
-
         <div
           className="
             pointer-events-none
-
             absolute
             -bottom-20
             -right-20
-
             h-40
             w-40
-
             rounded-full
-
             bg-[var(--accent)]/[0.035]
-
             blur-3xl
-
             dark:bg-[var(--accent)]/[0.07]
           "
         />
@@ -453,23 +376,19 @@ function ExperienceCard({
 }
 
 export function Experience() {
-  const { data: items, isLoading } =
-    useQuery({
-      queryKey: ["experience"],
-      queryFn: fetchExperience,
-    });
+  const { data: items, isLoading } = useQuery({
+    queryKey: ["experience"],
+    queryFn: fetchExperience,
+  });
 
   const { t } = useLanguage();
 
-  const experiences =
-    (items ?? []) as ExperienceItem[];
+  const experiences = (items ?? []) as ExperienceItem[];
 
-  const stackRef =
-    useRef<HTMLDivElement>(null);
+  const stackRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
     target: stackRef,
-
     /*
      * When stack reaches viewport top:
      * progress = 0
@@ -489,11 +408,8 @@ export function Experience() {
       className="
         relative
         isolate
-
         overflow-x-clip
-
         bg-[var(--experience-bg)]
-
         py-24
         sm:py-28
         lg:py-32
@@ -502,24 +418,17 @@ export function Experience() {
       {/* =====================================
           BACKGROUND
       ===================================== */}
-
       <div
         className="
           pointer-events-none
-
           absolute
           right-[-120px]
           top-10
-
           h-80
           w-80
-
           rounded-full
-
           bg-[var(--accent)]/[0.035]
-
           blur-3xl
-
           dark:bg-[var(--accent)]/[0.075]
         "
       />
@@ -527,50 +436,36 @@ export function Experience() {
       <div
         className="
           pointer-events-none
-
           absolute
           bottom-0
           left-[-120px]
-
           h-72
           w-72
-
           rounded-full
-
           bg-[var(--accent)]/[0.025]
-
           blur-3xl
-
           dark:bg-[var(--accent)]/[0.06]
         "
       />
 
       <Container>
         <div className="relative z-10 min-w-0">
-
           {/* ===================================
               HEADING
           =================================== */}
-
           <SectionHeading
-            eyebrow={
-              t.sections.experience.eyebrow
-            }
-            title={
-              t.sections.experience.title
-            }
+            eyebrow={t.sections.experience.eyebrow}
+            title={t.sections.experience.title}
           />
 
           {/* ===================================
               DIVIDER
           =================================== */}
-
           <div
             className="
               mx-auto
               mb-14
               mt-7
-
               flex
               w-24
               items-center
@@ -592,7 +487,6 @@ export function Experience() {
                 w-1.5
                 shrink-0
                 rotate-45
-
                 bg-[var(--accent)]
               "
             />
@@ -610,7 +504,6 @@ export function Experience() {
           {/* ===================================
               LOADING
           =================================== */}
-
           {isLoading ? (
             <div
               className="
@@ -620,15 +513,12 @@ export function Experience() {
                 space-y-4
               "
             >
-              {Array.from({
-                length: 3,
-              }).map((_, index) => (
+              {Array.from({ length: 3 }).map((_, index) => (
                 <Skeleton
                   key={index}
                   className="
                     h-[280px]
                     w-full
-
                     rounded-[1.25rem]
                   "
                 />
@@ -639,19 +529,13 @@ export function Experience() {
               className="
                 mx-auto
                 max-w-xl
-
                 rounded-[1.25rem]
-
                 border
                 border-black/10
-
                 bg-white/70
-
                 px-6
                 py-12
-
                 text-center
-
                 dark:border-white/10
                 dark:bg-white/[0.035]
               "
@@ -659,9 +543,7 @@ export function Experience() {
               <p
                 className="
                   text-sm
-
                   text-[#555555]
-
                   dark:text-white/55
                 "
               >
@@ -675,42 +557,31 @@ export function Experience() {
              * =================================
              *
              * Each card gets 100vh.
-             *
              * 3 cards = 300vh
              *
              * This means the user must scroll
              * through all cards before leaving
              * this section.
              */
-
             <div
               ref={stackRef}
               style={{
-                height: `${
-                  experiences.length * 100
-                }vh`,
+                height: `${experiences.length * 100}vh`,
               }}
-              className="
-                relative
-                w-full
-              "
+              className="relative w-full"
             >
               {/* =================================
                   STICKY AREA
               ================================= */}
-
               <div
                 className="
                   sticky
                   top-0
-
                   flex
                   h-screen
                   w-full
-
                   items-center
                   justify-center
-
                   overflow-hidden
                 "
               >
@@ -721,34 +592,24 @@ export function Experience() {
                  * This is important because Framer
                  * controls transform itself.
                  */}
-
                 <div
                   className="
                     relative
-
                     h-[300px]
                     w-full
-
                     sm:h-[320px]
-
                     lg:h-[330px]
                   "
                 >
-                  {experiences.map(
-                    (item, index) => (
-                      <ExperienceCard
-                        key={item._id}
-                        item={item}
-                        index={index}
-                        total={
-                          experiences.length
-                        }
-                        progress={
-                          scrollYProgress
-                        }
-                      />
-                    ),
-                  )}
+                  {experiences.map((item, index) => (
+                    <ExperienceCard
+                      key={item._id}
+                      item={item}
+                      index={index}
+                      total={experiences.length}
+                      progress={scrollYProgress}
+                    />
+                  ))}
                 </div>
               </div>
             </div>

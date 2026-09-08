@@ -18,7 +18,6 @@ import {
   FiTwitter,
   FiMail,
 } from "react-icons/fi";
-import CircularText from './CircularText';
 import CurvedLoop from './CurvedLoop';
 
 import { fetchHero } from "@/services/api/heroService";
@@ -386,16 +385,7 @@ export function Hero() {
           >
             {/* NAME */}
 
-            <div>
-
-
-              <CircularText
-                text="REACT*BITS*COMPONENTS*"
-                onHover="speedUp"
-                spinDuration={20}
-                className="custom-class"
-              />
-            </div>
+           
 
             <motion.h1
               variants={{
