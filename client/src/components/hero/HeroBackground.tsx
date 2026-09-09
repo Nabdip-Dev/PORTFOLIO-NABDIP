@@ -10,7 +10,7 @@ export function HeroBackground() {
       ====================================================== */}
 
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 rounded-b-[120px] border-b-1 border-red-600 "
         style={{
           background: "var(--hero-bg)",
         }}

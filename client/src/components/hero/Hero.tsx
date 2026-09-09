@@ -25,7 +25,7 @@ import { useTypewriter } from "@/hooks/useTypewriter";
 import { toAttachmentUrl } from "@/utils/cloudinaryUrl";
 import { ButtonLink } from "@/components/ui/Button";
 import { HeroBackground } from "./HeroBackground";
-import profile from "@/assets/pp.png";
+import profile from "@/assets/ppp.png";
 
 
 // =========================================================
@@ -385,7 +385,7 @@ export function Hero() {
           >
             {/* NAME */}
 
-           
+
 
             <motion.h1
               variants={{
@@ -1044,17 +1044,16 @@ export function Hero() {
 
                     {/* PROFILE */}
 
-                    <Image
-                      src={profile}
-                      alt="Profile"
-                      fill
-                      priority
-                      className="
-                        object-cover
-                        object-top
-                        grayscale
-                      "
-                    />
+                    <div className="relative w-[200px] h-[270px]">
+                      <Image
+                        src={profile}
+                        alt="Profile"
+                        fill
+                        priority
+                        className="object-cover object-top grayscale"
+                      />
+                    </div>
+                    
 
                     {/* DARK BOTTOM */}
 

@@ -18,6 +18,7 @@ const schema = z.object({
   comment: z.string().trim().min(5, "Please write a bit more").max(1000),
   honeypot: z.string().max(0).optional().or(z.literal("")),
 });
+
 type FormValues = z.infer<typeof schema>;
 
 export function TestimonialForm() {
@@ -31,28 +32,49 @@ export function TestimonialForm() {
     setValue,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<FormValues>({ resolver: zodResolver(schema), defaultValues: { rating: 5 } });
+  } = useForm<FormValues>({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      rating: 5,
+    },
+  });
 
   const rating = watch("rating");
 
   const mutation = useMutation({
     mutationFn: submitTestimonial,
+
     onSuccess: () => {
       toast.success("Thank you! Your review is pending approval.");
       reset();
-      queryClient.invalidateQueries({ queryKey: ["testimonials"] });
+      queryClient.invalidateQueries({
+        queryKey: ["testimonials"],
+      });
     },
-    onError: () => toast.error("Something went wrong. Please try again."),
+
+    onError: () => {
+      toast.error("Something went wrong. Please try again.");
+    },
   });
 
   return (
     <form
       onSubmit={handleSubmit((values) => mutation.mutate(values))}
-      className="mx-auto max-w-lg space-y-4 rounded-card glass p-6"
+      className="
+        testimonial-form-card
+        mx-auto
+        max-w-lg
+        space-y-4
+        rounded-card
+        glass
+        p-6
+      "
     >
-      <h3 className="font-display text-lg font-semibold">Leave a review</h3>
+      <h3 className="font-display text-lg font-semibold">
+        Leave a review
+      </h3>
 
-      {/* Honeypot: real visitors never see or fill this. */}
+      {/* Honeypot */}
       <input
         type="text"
         tabIndex={-1}
@@ -62,6 +84,7 @@ export function TestimonialForm() {
         {...register("honeypot")}
       />
 
+      {/* Name + Company */}
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <input
@@ -69,8 +92,14 @@ export function TestimonialForm() {
             placeholder="Your name"
             className="field"
           />
-          {errors.name && <p className="mt-1 text-xs text-red-400">{errors.name.message}</p>}
+
+          {errors.name && (
+            <p className="mt-1 text-xs text-red-400">
+              {errors.name.message}
+            </p>
+          )}
         </div>
+
         <input
           {...register("company")}
           placeholder="Company (optional)"
@@ -78,31 +107,47 @@ export function TestimonialForm() {
         />
       </div>
 
+      {/* Country */}
       <input
         {...register("country")}
         placeholder="Country (optional)"
         className="field"
       />
 
+      {/* Rating */}
       <div className="flex items-center gap-1">
-        {[1, 2, 3, 4, 5].map((n) => (
-          <button
-            key={n}
-            type="button"
-            onMouseEnter={() => setHoverRating(n)}
-            onMouseLeave={() => setHoverRating(0)}
-            onClick={() => setValue("rating", n, { shouldValidate: true })}
-            aria-label={`${n} star${n > 1 ? "s" : ""}`}
-          >
-            <FiStar
-              size={20}
-              fill={(hoverRating || rating) >= n ? "var(--accent)" : "none"}
-              color={(hoverRating || rating) >= n ? "var(--accent)" : "var(--foreground-muted)"}
-            />
-          </button>
-        ))}
+        {[1, 2, 3, 4, 5].map((n) => {
+          const active = (hoverRating || rating) >= n;
+
+          return (
+            <button
+              key={n}
+              type="button"
+              onMouseEnter={() => setHoverRating(n)}
+              onMouseLeave={() => setHoverRating(0)}
+              onClick={() =>
+                setValue("rating", n, {
+                  shouldValidate: true,
+                })
+              }
+              aria-label={`${n} star${n > 1 ? "s" : ""}`}
+              className="cursor-pointer"
+            >
+              <FiStar
+                size={20}
+                fill={active ? "var(--accent)" : "none"}
+                color={
+                  active
+                    ? "var(--accent)"
+                    : "var(--foreground-muted)"
+                }
+              />
+            </button>
+          );
+        })}
       </div>
 
+      {/* Comment */}
       <div>
         <textarea
           {...register("comment")}
@@ -110,11 +155,23 @@ export function TestimonialForm() {
           rows={4}
           className="field resize-none"
         />
-        {errors.comment && <p className="mt-1 text-xs text-red-400">{errors.comment.message}</p>}
+
+        {errors.comment && (
+          <p className="mt-1 text-xs text-red-400">
+            {errors.comment.message}
+          </p>
+        )}
       </div>
 
-      <Button type="submit" disabled={isSubmitting || mutation.isPending} className="w-full">
-        {mutation.isPending ? "Submitting..." : "Submit review"}
+      {/* Submit */}
+      <Button
+        type="submit"
+        disabled={isSubmitting || mutation.isPending}
+        className="w-full"
+      >
+        {mutation.isPending
+          ? "Submitting..."
+          : "Submit review"}
       </Button>
     </form>
   );
