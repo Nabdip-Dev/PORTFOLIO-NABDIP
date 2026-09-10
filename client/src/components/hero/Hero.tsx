@@ -1176,9 +1176,13 @@ export function Hero() {
           className="
       absolute
       left-[-180px]
-      top-[60px]
-      w-[650px]
-      rotate-[-25deg]
+      top-[80px]
+      w-[700px]
+      rotate-[-20deg]
+      md:top-[30px]
+      md:w-[650px]
+      md:rotate-[-25deg]
+      
     "
         >
           <CurvedLoop
@@ -1190,8 +1194,8 @@ export function Hero() {
         <div
           className="
     absolute
-    top-[50px]
-    right-[-180px]
+    top-[100px]
+    right-[-290px]
     w-[700px]
     rotate-[20deg]
 
