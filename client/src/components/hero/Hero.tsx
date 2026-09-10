@@ -1053,7 +1053,7 @@ export function Hero() {
                         className="object-cover object-top grayscale"
                       />
                     </div>
-                    
+
 
                     {/* DARK BOTTOM */}
 
@@ -1168,19 +1168,52 @@ export function Hero() {
 
       )}
 
-      <div className="w-full z-50 justify-center items-end-safe -mt-15">
-        <CurvedLoop marqueeText="Welcome to React Bits ✦" />
-        <CurvedLoop
-          marqueeText="Be ✦ Creative ✦ With ✦ React ✦ Bits ✦ loremjkhsfhkjsdffhkjsfhkjsdhfkjsdfhkjsfh"
-          speed={2}
-          curveAmount={400}
-          direction="right"
-          interactive
-          className="custom-text-style"
-        />
-        <CurvedLoop
-        />
+      {/* CURVED LOOPS */}
+      <div className="pointer-events-none absolute inset-0 z-20 overflow-hidden">
+
+        {/* LEFT / TOP LOOP */}
+        <div
+          className="
+      absolute
+      left-[-180px]
+      top-[60px]
+      w-[650px]
+      rotate-[-25deg]
+    "
+        >
+          <CurvedLoop
+            marqueeText="Welcome to React Bits ✦"
+          />
+        </div>
+
+        {/* RIGHT / TOP LOOP */}
+        <div
+          className="
+    absolute
+    top-[50px]
+    right-[-180px]
+    w-[700px]
+    rotate-[20deg]
+
+    md:left-[-180px]
+    md:right-auto
+    md:top-[80px]
+    md:rotate-[-25deg]
+  "
+        >
+          <CurvedLoop
+            marqueeText="Be ✦ Creative ✦ With ✦ React ✦ Bits ✦"
+            speed={2}
+            curveAmount={400}
+            direction="right"
+            interactive
+            className="custom-text-style"
+          />
+        </div>
+
       </div>
+
+
     </section>
   );
 }

@@ -44,7 +44,7 @@ const CurvedLoop: FC<CurvedLoopProps> = ({
 
   const [spacing, setSpacing] = useState(0);
 
-  const pathD = `M-100,30 Q720,${250 + curveAmount * 0.1} 1540,30`;
+  const pathD = `M-100,30 Q720,${400 + curveAmount * 0.1} 1200,30`;
 
 
   const totalText = spacing
