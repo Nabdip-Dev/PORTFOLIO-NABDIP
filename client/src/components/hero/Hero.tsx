@@ -372,12 +372,14 @@ export function Hero() {
                   delayChildren: 0.15,
                 },
               },
-            }} className=" relative z-10 order-2 flex max-w-3xl flex-col items-start justify-center gap-5 lg:order-1 ">
+            }} className=" relative z-10 order-2 flex max-w-3xl flex-col items-start justify-center gap-5 lg:order-1">
 
             {/* HELLO TEXT */}
-
-            <motion.div initial="hidden" animate="show" className="relative inline-flex items-center">
-
+            <motion.div
+              initial="hidden"
+              animate="show"
+              className="relative inline-flex items-center"
+            >
               {/* LIVE SVG — continuous flowing orbit */}
               <motion.svg
                 viewBox="0 0 260 90"
@@ -487,7 +489,8 @@ export function Hero() {
 
               {/* Premium text */}
               <motion.p
-                className=" relative
+                className="
+      relative
       z-10
       font-serif
       text-[clamp(2rem,5vw,2.6rem)]
@@ -496,8 +499,6 @@ export function Hero() {
       leading-[0.9]
       tracking-[-0.055em]
       text-[var(--foreground-muted)]
-      transition-colors
-      duration-500
     "
                 variants={{
                   hidden: {
@@ -508,7 +509,7 @@ export function Hero() {
                   },
                   show: {
                     opacity: 1,
-                    y: 0,
+                    y: 12,
                     rotateX: 0,
                     filter: "blur(0px)",
                     transition: {
@@ -519,7 +520,7 @@ export function Hero() {
                   },
                 }}
                 animate={{
-                  y: [0, -2, 0, 2, 0],
+                  y: [12, 10, 12, 14, 12],
                 }}
                 transition={{
                   y: {
@@ -532,36 +533,7 @@ export function Hero() {
                 Hello, I am
               </motion.p>
 
-
-
-
-              {/* Soft living glow */}
-              <motion.div
-                className="
-      pointer-events-none
-      absolute
-      -inset-x-8
-      -inset-y-5
-      -z-10
-      rounded-full
-      bg-[var(--foreground-muted)]
-      opacity-[0.04]
-      blur-2xl
-    "
-                animate={{
-                  opacity: [0.02, 0.07, 0.02],
-                  scale: [0.95, 1.08, 0.95],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
             </motion.div>
-
-
-
 
             {/* NAME */}
             <StrokeText
@@ -580,13 +552,6 @@ export function Hero() {
               letterSpacing={-3}
               reverse={false}
             />
-
-
-
-
-
-
-
 
 
             {/* TYPEWRITER */}
@@ -645,11 +610,12 @@ export function Hero() {
             </motion.div>
 
             {/* BUTTONS */}
+            {/* ANIMATED BUTTONS */}
             <motion.div
               variants={{
                 hidden: {
                   opacity: 0,
-                  y: 25,
+                  y: 18,
                 },
                 show: {
                   opacity: 1,
@@ -660,104 +626,254 @@ export function Hero() {
                   },
                 },
               }}
-              className="
-      mt-4
-      flex
-      flex-wrap
-      items-center
-      justify-center
-      gap-3
-    "
+              className="mt-4 flex flex-wrap items-center justify-center gap-2.5"
             >
               {/* HIRE ME */}
               <motion.div
-                whileHover={{
-                  y: -4,
-                  scale: 1.03,
-                }}
-                whileTap={{
-                  scale: 0.96,
+                initial="rest"
+                whileHover="hover"
+                whileTap="tap"
+                animate="rest"
+                variants={{
+                  rest: {
+                    y: 0,
+                    scale: 1,
+                  },
+                  hover: {
+                    y: -4,
+                    scale: 1.035,
+                  },
+                  tap: {
+                    scale: 0.95,
+                  },
                 }}
                 transition={{
                   type: "spring",
                   stiffness: 400,
                   damping: 20,
+                  mass: 0.7,
                 }}
               >
                 <ButtonLink
                   href="#contact"
                   variant="primary"
+                  className="group relative !px-4 !py-2 !text-sm overflow-hidden"
                 >
-                  Hire Me
+                  {/* moving shine */}
                   <motion.span
-                    whileHover={{ x: 4 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <FiArrowRight size={15} />
-                  </motion.span>
+                    className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent"
+                    animate={{
+                      x: ["-120%", "120%"],
+                    }}
+                    transition={{
+                      duration: 2.8,
+                      repeat: Infinity,
+                      repeatDelay: 1.8,
+                      ease: "easeInOut",
+                    }}
+                  />
+
+                  {/* soft glow */}
+                  <motion.span
+                    className="pointer-events-none absolute -inset-2 rounded-full opacity-0 blur-md"
+                    animate={{
+                      opacity: [0, 0.35, 0],
+                      scale: [0.95, 1.08, 0.95],
+                    }}
+                    transition={{
+                      duration: 2.5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  />
+
+                  <span className="relative z-10 flex items-center gap-1.5">
+                    <span>Hire Me</span>
+
+                    <motion.span
+                      className="inline-flex"
+                      variants={{
+                        rest: { x: 0, rotate: 0 },
+                        hover: { x: 4, rotate: -3 },
+                      }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 500,
+                        damping: 16,
+                      }}
+                    >
+                      <FiArrowRight size={14} />
+                    </motion.span>
+                  </span>
                 </ButtonLink>
               </motion.div>
 
               {/* CONTACT */}
               <motion.div
-                whileHover={{
-                  y: -4,
-                  scale: 1.03,
-                }}
-                whileTap={{
-                  scale: 0.96,
+                initial="rest"
+                whileHover="hover"
+                whileTap="tap"
+                variants={{
+                  rest: {
+                    y: 0,
+                    scale: 1,
+                  },
+                  hover: {
+                    y: -4,
+                    scale: 1.035,
+                  },
+                  tap: {
+                    scale: 0.95,
+                  },
                 }}
                 transition={{
                   type: "spring",
                   stiffness: 400,
                   damping: 20,
+                  mass: 0.7,
                 }}
               >
                 <ButtonLink
                   href="#contact"
                   variant="secondary"
+                  className="group relative !px-4 !py-2 !text-sm overflow-hidden"
                 >
-                  Contact
+                  {/* animated border sweep */}
+                  <motion.span
+                    className="pointer-events-none absolute inset-0 rounded-[inherit]"
+                    style={{
+                      background:
+                        "linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent)",
+                    }}
+                    animate={{
+                      x: ["-120%", "120%"],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      repeatDelay: 1.5,
+                      ease: "easeInOut",
+                    }}
+                  />
+
+                  {/* floating dot */}
+                  <motion.span
+                    className="pointer-events-none absolute right-2 top-1.5 h-1 w-1 rounded-full bg-current opacity-40"
+                    animate={{
+                      y: [0, 3, 0],
+                      opacity: [0.25, 0.7, 0.25],
+                    }}
+                    transition={{
+                      duration: 1.8,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  />
+
+                  <motion.span
+                    className="relative z-10"
+                    variants={{
+                      rest: {
+                        letterSpacing: "0em",
+                      },
+                      hover: {
+                        letterSpacing: "0.04em",
+                      },
+                    }}
+                    transition={{ duration: 0.25 }}
+                  >
+                    Contact
+                  </motion.span>
                 </ButtonLink>
               </motion.div>
 
               {/* RESUME */}
               {hero.resumeUrl && (
                 <motion.div
-                  whileHover={{
-                    y: -4,
-                    scale: 1.03,
-                  }}
-                  whileTap={{
-                    scale: 0.96,
+                  initial="rest"
+                  whileHover="hover"
+                  whileTap="tap"
+                  variants={{
+                    rest: {
+                      y: 0,
+                      scale: 1,
+                    },
+                    hover: {
+                      y: -4,
+                      scale: 1.035,
+                    },
+                    tap: {
+                      scale: 0.95,
+                    },
                   }}
                   transition={{
                     type: "spring",
                     stiffness: 400,
                     damping: 20,
+                    mass: 0.7,
                   }}
                 >
                   <ButtonLink
                     href={toAttachmentUrl(hero.resumeUrl)}
                     download
                     variant="secondary"
+                    className="group relative !px-4 !py-2 !text-sm overflow-hidden"
                   >
+                    {/* diagonal shine */}
                     <motion.span
-                      whileHover={{
-                        y: 2,
+                      className="pointer-events-none absolute inset-0 -translate-x-full skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/15 to-transparent"
+                      animate={{
+                        x: ["-130%", "130%"],
                       }}
                       transition={{
-                        duration: 0.2,
+                        duration: 3.2,
+                        repeat: Infinity,
+                        repeatDelay: 2,
+                        ease: "easeInOut",
                       }}
-                    >
-                      <FiDownload size={15} />
-                    </motion.span>
+                    />
 
-                    Resume
+                    <span className="relative z-10 flex items-center gap-1.5">
+                      <motion.span
+                        className="inline-flex"
+                        variants={{
+                          rest: {
+                            y: 0,
+                            rotate: 0,
+                          },
+                          hover: {
+                            y: 2,
+                            rotate: 8,
+                          },
+                        }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 450,
+                          damping: 12,
+                        }}
+                      >
+                        <FiDownload size={14} />
+                      </motion.span>
+
+                      <motion.span
+                        variants={{
+                          rest: { x: 0 },
+                          hover: { x: 2 },
+                        }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 400,
+                          damping: 18,
+                        }}
+                      >
+                        Resume
+                      </motion.span>
+                    </span>
                   </ButtonLink>
                 </motion.div>
               )}
             </motion.div>
+
 
             {/* SOCIAL LINKS */}
             {hero.socialLinks?.length > 0 && (
