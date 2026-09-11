@@ -26,6 +26,7 @@ import { toAttachmentUrl } from "@/utils/cloudinaryUrl";
 import { ButtonLink } from "@/components/ui/Button";
 import { HeroBackground } from "./HeroBackground";
 import profile from "@/assets/ppp.png";
+import StrokeText from "./StrokeText";
 
 
 // =========================================================
@@ -363,9 +364,7 @@ export function Hero() {
 
           {/* left side */}
           <motion.div
-            initial="hidden"
-            animate="show"
-            variants={{
+            initial="hidden" animate="show" variants={{
               hidden: {},
               show: {
                 transition: {
@@ -373,31 +372,17 @@ export function Hero() {
                   delayChildren: 0.15,
                 },
               },
-            }}
-            className="
-    relative
-    z-10
-    order-2
-    flex
-    max-w-3xl
-    flex-col
-    items-start
-    justify-center
-    gap-5
-    lg:order-1
-  "
-          >
+            }} className=" relative z-10 order-2 flex max-w-3xl flex-col items-start justify-center gap-5 lg:order-1 ">
+
             {/* HELLO TEXT */}
-            <motion.div
-  initial="hidden"
-  animate="show"
-  className="relative inline-flex items-center"
->
-  {/* LIVE SVG — continuous flowing orbit */}
-  <motion.svg
-    viewBox="0 0 260 90"
-    fill="none"
-    className="
+
+            <motion.div initial="hidden" animate="show" className="relative inline-flex items-center">
+
+              {/* LIVE SVG — continuous flowing orbit */}
+              <motion.svg
+                viewBox="0 0 260 90"
+                fill="none"
+                className="
       pointer-events-none
       absolute
       -left-8
@@ -407,106 +392,105 @@ export function Hero() {
       overflow-visible
       text-[var(--foreground-muted)]
     "
-    variants={{
-      hidden: {
-        opacity: 0,
-        scale: 0.9,
-      },
-      show: {
-        opacity: 1,
-        scale: 1,
-        transition: {
-          duration: 1.2,
-          ease: [0.16, 1, 0.3, 1],
-        },
-      },
-    }}
-  >
-    {/* Main flowing stroke */}
-    <motion.path
-      d="
+                variants={{
+                  hidden: {
+                    opacity: 0,
+                    scale: 0.9,
+                  },
+                  show: {
+                    opacity: 1,
+                    scale: 1,
+                    transition: {
+                      duration: 1.2,
+                      ease: [0.16, 1, 0.3, 1],
+                    },
+                  },
+                }}
+              >
+                {/* Main flowing stroke */}
+                <motion.path
+                  d="
         M8 48
         C28 8 65 5 92 30
         C120 56 145 82 176 58
         C204 36 218 18 252 38
       "
-      stroke="currentColor"
-      strokeWidth="0.8"
-      strokeLinecap="round"
-      strokeDasharray="2 8"
-      animate={{
-        strokeDashoffset: [0, -80],
-        opacity: [0.25, 0.8, 0.25],
-      }}
-      transition={{
-        strokeDashoffset: {
-          duration: 3,
-          repeat: Infinity,
-          ease: "linear",
-        },
-        opacity: {
-          duration: 2.5,
-          repeat: Infinity,
-          ease: "easeInOut",
-        },
-      }}
-    />
+                  stroke="currentColor"
+                  strokeWidth="0.8"
+                  strokeLinecap="round"
+                  strokeDasharray="2 8"
+                  animate={{
+                    strokeDashoffset: [0, -80],
+                    opacity: [0.25, 0.8, 0.25],
+                  }}
+                  transition={{
+                    strokeDashoffset: {
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "linear",
+                    },
+                    opacity: {
+                      duration: 2.5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    },
+                  }}
+                />
 
-    {/* Second atmospheric stroke */}
-    <motion.path
-      d="
+                {/* Second atmospheric stroke */}
+                <motion.path
+                  d="
         M15 62
         C48 84 73 72 102 48
         C130 25 153 20 180 42
         C207 64 228 66 250 48
       "
-      stroke="currentColor"
-      strokeWidth="0.5"
-      strokeLinecap="round"
-      strokeDasharray="1 11"
-      animate={{
-        strokeDashoffset: [0, 100],
-        opacity: [0.1, 0.45, 0.1],
-      }}
-      transition={{
-        strokeDashoffset: {
-          duration: 5,
-          repeat: Infinity,
-          ease: "linear",
-        },
-        opacity: {
-          duration: 3,
-          repeat: Infinity,
-          ease: "easeInOut",
-        },
-      }}
-    />
+                  stroke="currentColor"
+                  strokeWidth="0.5"
+                  strokeLinecap="round"
+                  strokeDasharray="1 11"
+                  animate={{
+                    strokeDashoffset: [0, 100],
+                    opacity: [0.1, 0.45, 0.1],
+                  }}
+                  transition={{
+                    strokeDashoffset: {
+                      duration: 5,
+                      repeat: Infinity,
+                      ease: "linear",
+                    },
+                    opacity: {
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    },
+                  }}
+                />
 
-    {/* Moving energy particle */}
-    <motion.circle
-      r="2"
-      fill="currentColor"
-      animate={{
-        cx: [12, 70, 130, 190, 248],
-        cy: [47, 12, 53, 50, 38],
-        opacity: [0, 1, 1, 1, 0],
-        scale: [0.5, 1, 1.4, 1, 0.5],
-      }}
-      transition={{
-        duration: 3.8,
-        repeat: Infinity,
-        ease: "easeInOut",
-      }}
-    />
-  </motion.svg>
+                {/* Moving energy particle */}
+                <motion.circle
+                  r="2"
+                  fill="currentColor"
+                  animate={{
+                    cx: [12, 70, 130, 190, 248],
+                    cy: [47, 12, 53, 50, 38],
+                    opacity: [0, 1, 1, 1, 0],
+                    scale: [0.5, 1, 1.4, 1, 0.5],
+                  }}
+                  transition={{
+                    duration: 3.8,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+              </motion.svg>
 
-  {/* Premium text */}
-  <motion.p
-    className="
-      relative
+              {/* Premium text */}
+              <motion.p
+                className=" relative
       z-10
       font-serif
-      text-[clamp(2rem,5vw,4.2rem)]
+      text-[clamp(2rem,5vw,2.6rem)]
       font-normal
       italic
       leading-[0.9]
@@ -515,42 +499,45 @@ export function Hero() {
       transition-colors
       duration-500
     "
-    variants={{
-      hidden: {
-        opacity: 0,
-        y: 30,
-        rotateX: 45,
-        filter: "blur(14px)",
-      },
-      show: {
-        opacity: 1,
-        y: 0,
-        rotateX: 0,
-        filter: "blur(0px)",
-        transition: {
-          duration: 1.1,
-          delay: 0.15,
-          ease: [0.16, 1, 0.3, 1],
-        },
-      },
-    }}
-    animate={{
-      y: [0, -2, 0, 2, 0],
-    }}
-    transition={{
-      y: {
-        duration: 5,
-        repeat: Infinity,
-        ease: "easeInOut",
-      },
-    }}
-  >
-    Hello, I am
-  </motion.p>
+                variants={{
+                  hidden: {
+                    opacity: 0,
+                    y: 30,
+                    rotateX: 45,
+                    filter: "blur(14px)",
+                  },
+                  show: {
+                    opacity: 1,
+                    y: 0,
+                    rotateX: 0,
+                    filter: "blur(0px)",
+                    transition: {
+                      duration: 1.1,
+                      delay: 0.15,
+                      ease: [0.16, 1, 0.3, 1],
+                    },
+                  },
+                }}
+                animate={{
+                  y: [0, -2, 0, 2, 0],
+                }}
+                transition={{
+                  y: {
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  },
+                }}
+              >
+                Hello, I am
+              </motion.p>
 
-  {/* Soft living glow */}
-  <motion.div
-    className="
+
+
+
+              {/* Soft living glow */}
+              <motion.div
+                className="
       pointer-events-none
       absolute
       -inset-x-8
@@ -561,59 +548,46 @@ export function Hero() {
       opacity-[0.04]
       blur-2xl
     "
-    animate={{
-      opacity: [0.02, 0.07, 0.02],
-      scale: [0.95, 1.08, 0.95],
-    }}
-    transition={{
-      duration: 4,
-      repeat: Infinity,
-      ease: "easeInOut",
-    }}
-  />
-</motion.div>
+                animate={{
+                  opacity: [0.02, 0.07, 0.02],
+                  scale: [0.95, 1.08, 0.95],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+            </motion.div>
 
 
 
 
             {/* NAME */}
-            <motion.h1
-              variants={{
-                hidden: {
-                  opacity: 0,
-                  y: 35,
-                  scale: 0.96,
-                  filter: "blur(10px)",
-                },
-                show: {
-                  opacity: 1,
-                  y: 0,
-                  scale: 1,
-                  filter: "blur(0px)",
-                  transition: {
-                    duration: 0.9,
-                    ease: [0.16, 1, 0.3, 1],
-                  },
-                },
-              }}
-              whileHover={{
-                x: 4,
-                transition: {
-                  duration: 0.25,
-                  ease: "easeOut",
-                },
-              }}
-              className="
-      font-display
-      text-4xl
-      font-semibold
-      leading-tight
-      text-[var(--accent)]
-      sm:text-6xl
-    "
-            >
-              {hero.name}
-            </motion.h1>
+            <StrokeText
+              text={hero.name}
+              strokeColor="var(--hero-name-red)"
+              fillColor="var(--hero-name-white)"
+              strokeWidth={1.5}
+              drawDuration={3.6}
+              fillDelay={0.6}
+              stagger={0.1}
+              ease="power3.out"
+              trigger="loop"
+              fillMode="wipe"
+              fontSize={62}
+              fontWeight={900}
+              letterSpacing={-3}
+              reverse={false}
+            />
+
+
+
+
+
+
+
+
 
             {/* TYPEWRITER */}
             <motion.div

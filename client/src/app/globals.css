@@ -40,7 +40,7 @@
   --surface: #0b0b0b;
   --surface-elevated: #141414;
 
-  --foreground: #fbf6ab;
+  --foreground: #FFF9FA;
   --foreground-muted: #b8b8b8;
 
   --border: rgba(255, 255, 255, 0.10);
@@ -86,7 +86,7 @@
   --hero-glow-opacity: 0.045;
 
 
-  
+
   /* Experience */
   --experience-bg:
     radial-gradient(circle at 85% 10%,
@@ -114,7 +114,7 @@
 /* ---------- LIGHT THEME ---------- */
 
 [data-theme="light"] {
-  --background: #fcf8ca;
+  --background: #FFF9FA;
 
   --about-gradient:
     radial-gradient(circle at 10% 15%,
@@ -1196,4 +1196,23 @@ p {
 
 [data-theme="dark"] .testimonial-form-card .field::placeholder {
   color: rgba(255, 255, 255, 0.42);
+}
+/* =========================================================
+   HERO NAME — DAY / NIGHT
+========================================================= */
+
+/* ☀️ DAY */
+[data-theme="light"] {
+  --hero-name-white: #FFF9FA;
+  --hero-name-red: #FD1843;
+  --hero-name-black: #171717;
+  --hero-name-glow: rgba(185, 28, 28, 0.22);
+}
+
+/* 🌙 NIGHT */
+[data-theme="dark"] {
+  --hero-name-white: #FFF9FA;
+  --hero-name-red: #FD1843;
+  --hero-name-black: #030303;
+  --hero-name-glow: rgba(139, 0, 0, 0.42);
 }
