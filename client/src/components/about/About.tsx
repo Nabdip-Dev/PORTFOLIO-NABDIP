@@ -226,52 +226,424 @@ export function About() {
             {/* Photo */}
             {about.photo?.url ? (
               <div className="relative lg:sticky lg:top-24 lg:self-start">
-                <motion.div
-                  initial={{ opacity: 0, y: 28, scale: 0.97 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.7, ease }}
-                  className="group relative transform-gpu"
-                  style={{ backfaceVisibility: "hidden" }}
-                >
-                  <div className="pointer-events-none absolute -inset-5 rounded-[2.5rem] bg-[var(--accent)] opacity-[0.10] blur-2xl transition-opacity duration-500 group-hover:opacity-[0.18]" />
 
-                  <div className="relative rounded-[2rem] border border-[var(--glass-border)] bg-[var(--glass-bg)] p-2 shadow-[0_30px_80px_rgba(0,0,0,0.12)] transition-[border-color] duration-500 group-hover:border-[var(--accent)]/25 dark:shadow-[0_30px_90px_rgba(0,0,0,0.55)]">
-                    <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-[var(--surface)]">
-                      <Image
-                        src={about.photo.url}
-                        alt="Profile photo"
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 380px"
-                        className="object-cover grayscale-[15%] transform-gpu transition-[transform,filter] duration-[900ms] ease-out group-hover:scale-105 group-hover:grayscale-0"
-                        priority
+                {/* =====================================================
+      CIRCULAR TEXT
+      Card-এর পিছনে থাকবে
+  ====================================================== */}
+                <div className="pointer-events-none absolute -right-15 -top-15 z-0">
+                  <CircularText
+                    text="BUILD*CREATE*DESIGN*DEVELOP*REACT*"
+                    onHover="speedUp"
+                    spinDuration={20}
+                    className="custom-class"
+                  />
+                </div>
+
+
+                {/* =====================================================
+      FULL CARD HOVER AREA
+  ====================================================== */}
+                <div
+                  className="
+      group
+      relative
+      z-10
+      mx-auto
+      w-[92%]
+      [perspective:1600px]
+    "
+                >
+
+                  {/* ===================================================
+        FLIP CARD
+    ==================================================== */}
+                  <div
+                    className="
+        relative
+        aspect-[5/6]
+        w-full
+        transform-gpu
+        transition-transform
+        duration-[900ms]
+        ease-[cubic-bezier(0.22,1,0.36,1)]
+        [transform-style:preserve-3d]
+        group-hover:[transform:rotateY(180deg)]
+      "
+                  >
+
+                    {/* =================================================
+          FRONT
+      ================================================== */}
+                    <div
+                      className="
+          absolute
+          inset-0
+          h-full
+          w-full
+          [backface-visibility:hidden]
+          [-webkit-backface-visibility:hidden]
+        "
+                    >
+
+                      {/* Outer Accent Glow */}
+                      <div
+                        className="
+            pointer-events-none
+            absolute
+            -inset-5
+            rounded-[2.5rem]
+            bg-[var(--accent)]
+            opacity-[0.10]
+            blur-2xl
+            transition-opacity
+            duration-500
+            group-hover:opacity-[0.18]
+          "
                       />
 
-                      <div>
-                        <CircularText
-                          text="REACT*BITS*COMPONENTS*"
-                          onHover="speedUp"
-                          spinDuration={20}
-                          className="custom-class"
-                        />
+                      {/* Main Glass Card */}
+                      <div
+                        className="
+            relative
+            h-full
+            w-full
+            rounded-[2rem]
+            border
+            border-[var(--glass-border)]
+            bg-[var(--glass-bg)]
+            p-2
+            shadow-[0_30px_80px_rgba(0,0,0,0.12)]
+            transition-[border-color,box-shadow]
+            duration-500
+            group-hover:border-[var(--accent)]/25
+            dark:shadow-[0_30px_90px_rgba(0,0,0,0.55)]
+          "
+                      >
+
+                        {/* Image Container */}
+                        <div
+                          className="
+              relative
+              h-full
+              w-full
+              overflow-hidden
+              rounded-[1.5rem]
+              bg-[var(--surface)]
+            "
+                        >
+
+                          <Image
+                            src={about.photo.url}
+                            alt="Profile photo"
+                            fill
+                            sizes="(max-width: 1024px) 92vw, 350px"
+                            priority
+                            className="
+                object-cover
+                grayscale-[15%]
+                transform-gpu
+                transition-[transform,filter]
+                duration-[900ms]
+                ease-out
+                group-hover:scale-105
+                group-hover:grayscale-0
+              "
+                          />
+
+                          {/* Bottom Gradient */}
+                          <div
+                            className="
+                pointer-events-none
+                absolute
+                inset-0
+                bg-gradient-to-t
+                from-black/65
+                via-black/5
+                to-transparent
+              "
+                          />
+
+                          {/* Top Accent Glow */}
+                          <div
+                            className="
+                pointer-events-none
+                absolute
+                -right-24
+                -top-24
+                h-56
+                w-56
+                rounded-full
+                bg-[var(--accent)]/25
+                blur-3xl
+                transition-[background-color]
+                duration-500
+                group-hover:bg-[var(--accent)]/40
+              "
+                          />
+
+                          {/* About Me Badge */}
+                          <div
+                            className="
+                absolute
+                bottom-5
+                left-5
+                flex
+                items-center
+                gap-2
+                rounded-full
+                border
+                border-white/20
+                bg-black/35
+                px-4
+                py-2
+                text-[10px]
+                font-semibold
+                uppercase
+                tracking-[0.25em]
+                text-white
+                backdrop-blur-md
+              "
+                          >
+
+                            <span
+                              className="
+                  h-1.5
+                  w-1.5
+                  rounded-full
+                  bg-[var(--accent)]
+                  shadow-[0_0_12px_rgba(229,9,20,1)]
+                "
+                            />
+
+                            About Me
+
+                          </div>
+
+                        </div>
+
                       </div>
 
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/5 to-transparent" />
 
-                      <div className="pointer-events-none absolute -right-24 -top-24 h-56 w-56 rounded-full bg-[var(--accent)]/25 blur-3xl transition-[background-color] duration-500 group-hover:bg-[var(--accent)]/40" />
+                      {/* Bottom Right Corner */}
+                      <div
+                        className="
+            pointer-events-none
+            absolute
+            -bottom-3
+            -right-3
+            h-20
+            w-20
+            rounded-br-[2rem]
+            border-b-2
+            border-r-2
+            border-[var(--accent)]/50
+            transition-[border-color]
+            duration-500
+            group-hover:border-[var(--accent)]
+          "
+                      />
 
-                      <div className="absolute bottom-5 left-5 flex items-center gap-2 rounded-full border border-white/20 bg-black/35 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.25em] text-white backdrop-blur-md">
-                        <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)] shadow-[0_0_12px_rgba(229,9,20,1)]" />
-                        About Me
-                      </div>
+
+                      {/* Top Left Corner */}
+                      <div
+                        className="
+            pointer-events-none
+            absolute
+            -left-3
+            -top-3
+            h-16
+            w-16
+            rounded-tl-[1.5rem]
+            border-l
+            border-t
+            border-[var(--border)]
+          "
+                      />
+
                     </div>
+
+
+                    {/* =================================================
+          BACK
+      ================================================== */}
+                    <div
+                      className="
+          absolute
+          inset-0
+          h-full
+          w-full
+          rounded-[2rem]
+          border
+          border-[var(--glass-border)]
+          bg-[var(--glass-bg)]
+          p-2
+          shadow-[0_30px_80px_rgba(0,0,0,0.12)]
+          dark:shadow-[0_30px_90px_rgba(0,0,0,0.55)]
+          [backface-visibility:hidden]
+          [-webkit-backface-visibility:hidden]
+          [transform:rotateY(180deg)]
+        "
+                    >
+
+                      {/* Back Inner */}
+                      <div
+                        className="
+            relative
+            flex
+            h-full
+            w-full
+            flex-col
+            justify-between
+            overflow-hidden
+            rounded-[1.5rem]
+            bg-[var(--surface)]
+            p-8
+          "
+                      >
+
+                        {/* Back Accent Glow */}
+                        <div
+                          className="
+              pointer-events-none
+              absolute
+              -right-24
+              -top-24
+              h-64
+              w-64
+              rounded-full
+              bg-[var(--accent)]/15
+              blur-3xl
+            "
+                        />
+
+
+                        {/* Content */}
+                        <div className="relative z-10">
+
+                          <span
+                            className="
+                text-[10px]
+                font-semibold
+                uppercase
+                tracking-[0.3em]
+                text-[var(--accent)]
+              "
+                          >
+                            About Me
+                          </span>
+
+
+                          <h3
+                            className="
+                mt-5
+                text-3xl
+                font-bold
+                tracking-tight
+              "
+                          >
+                            Creative Developer
+                          </h3>
+
+
+                          <p
+                            className="
+                mt-5
+                text-sm
+                leading-7
+                opacity-70
+              "
+                          >
+                            I build modern, interactive and visually engaging
+                            web experiences using React, Next.js and modern
+                            UI technologies.
+                          </p>
+
+                        </div>
+
+
+                        {/* Technologies */}
+                        <div className="relative z-10">
+
+                          <p
+                            className="
+                mb-3
+                text-[10px]
+                font-semibold
+                uppercase
+                tracking-[0.3em]
+                opacity-50
+              "
+                          >
+                            Technologies
+                          </p>
+
+
+                          <div className="flex flex-wrap gap-2">
+
+                            {[
+                              "React",
+                              "Next.js",
+                              "TypeScript",
+                              "Tailwind",
+                            ].map((item) => (
+                              <span
+                                key={item}
+                                className="
+                    rounded-full
+                    border
+                    border-[var(--border)]
+                    bg-white/[0.03]
+                    px-3
+                    py-1.5
+                    text-xs
+                    transition-colors
+                    duration-300
+                    hover:border-[var(--accent)]/50
+                    hover:text-[var(--accent)]
+                  "
+                              >
+                                {item}
+                              </span>
+                            ))}
+
+                          </div>
+
+                        </div>
+
+
+                        {/* Back Decorative Line */}
+                        <div
+                          className="
+              pointer-events-none
+              absolute
+              bottom-5
+              right-5
+              h-16
+              w-16
+              rounded-br-xl
+              border-b
+              border-r
+              border-[var(--accent)]/40
+            "
+                        />
+
+                      </div>
+
+                    </div>
+
                   </div>
 
-                  <div className="pointer-events-none absolute -bottom-3 -right-3 h-20 w-20 rounded-br-[2rem] border-b-2 border-r-2 border-[var(--accent)]/50 transition-[border-color] duration-500 group-hover:border-[var(--accent)]" />
+                </div>
 
-                  <div className="pointer-events-none absolute -left-3 -top-3 h-16 w-16 rounded-tl-[1.5rem] border-l border-t border-[var(--border)]" />
-                </motion.div>
               </div>
+
+
+
+
+
+
+
             ) : (
               <div className="hidden lg:block" />
             )}
