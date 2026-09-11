@@ -363,161 +363,453 @@ export function Hero() {
 
           {/* left side */}
           <motion.div
-            initial="hidden" animate="show" variants={{
+            initial="hidden"
+            animate="show"
+            variants={{
               hidden: {},
               show: {
                 transition: {
-                  staggerChildren: 0.12,
+                  staggerChildren: 0.14,
+                  delayChildren: 0.15,
                 },
               },
             }}
             className="
-              relative
-              z-10
-              order-2
-              flex
-              max-w-3xl
-              flex-col
-              items-start justify-center
-              gap-5
-              lg:order-1
-            "
+    relative
+    z-10
+    order-2
+    flex
+    max-w-3xl
+    flex-col
+    items-start
+    justify-center
+    gap-5
+    lg:order-1
+  "
           >
+            {/* HELLO TEXT */}
+            <motion.div
+  initial="hidden"
+  animate="show"
+  className="relative inline-flex items-center"
+>
+  {/* LIVE SVG — continuous flowing orbit */}
+  <motion.svg
+    viewBox="0 0 260 90"
+    fill="none"
+    className="
+      pointer-events-none
+      absolute
+      -left-8
+      -top-6
+      h-[calc(100%+3rem)]
+      w-[calc(100%+4rem)]
+      overflow-visible
+      text-[var(--foreground-muted)]
+    "
+    variants={{
+      hidden: {
+        opacity: 0,
+        scale: 0.9,
+      },
+      show: {
+        opacity: 1,
+        scale: 1,
+        transition: {
+          duration: 1.2,
+          ease: [0.16, 1, 0.3, 1],
+        },
+      },
+    }}
+  >
+    {/* Main flowing stroke */}
+    <motion.path
+      d="
+        M8 48
+        C28 8 65 5 92 30
+        C120 56 145 82 176 58
+        C204 36 218 18 252 38
+      "
+      stroke="currentColor"
+      strokeWidth="0.8"
+      strokeLinecap="round"
+      strokeDasharray="2 8"
+      animate={{
+        strokeDashoffset: [0, -80],
+        opacity: [0.25, 0.8, 0.25],
+      }}
+      transition={{
+        strokeDashoffset: {
+          duration: 3,
+          repeat: Infinity,
+          ease: "linear",
+        },
+        opacity: {
+          duration: 2.5,
+          repeat: Infinity,
+          ease: "easeInOut",
+        },
+      }}
+    />
+
+    {/* Second atmospheric stroke */}
+    <motion.path
+      d="
+        M15 62
+        C48 84 73 72 102 48
+        C130 25 153 20 180 42
+        C207 64 228 66 250 48
+      "
+      stroke="currentColor"
+      strokeWidth="0.5"
+      strokeLinecap="round"
+      strokeDasharray="1 11"
+      animate={{
+        strokeDashoffset: [0, 100],
+        opacity: [0.1, 0.45, 0.1],
+      }}
+      transition={{
+        strokeDashoffset: {
+          duration: 5,
+          repeat: Infinity,
+          ease: "linear",
+        },
+        opacity: {
+          duration: 3,
+          repeat: Infinity,
+          ease: "easeInOut",
+        },
+      }}
+    />
+
+    {/* Moving energy particle */}
+    <motion.circle
+      r="2"
+      fill="currentColor"
+      animate={{
+        cx: [12, 70, 130, 190, 248],
+        cy: [47, 12, 53, 50, 38],
+        opacity: [0, 1, 1, 1, 0],
+        scale: [0.5, 1, 1.4, 1, 0.5],
+      }}
+      transition={{
+        duration: 3.8,
+        repeat: Infinity,
+        ease: "easeInOut",
+      }}
+    />
+  </motion.svg>
+
+  {/* Premium text */}
+  <motion.p
+    className="
+      relative
+      z-10
+      font-serif
+      text-[clamp(2rem,5vw,4.2rem)]
+      font-normal
+      italic
+      leading-[0.9]
+      tracking-[-0.055em]
+      text-[var(--foreground-muted)]
+      transition-colors
+      duration-500
+    "
+    variants={{
+      hidden: {
+        opacity: 0,
+        y: 30,
+        rotateX: 45,
+        filter: "blur(14px)",
+      },
+      show: {
+        opacity: 1,
+        y: 0,
+        rotateX: 0,
+        filter: "blur(0px)",
+        transition: {
+          duration: 1.1,
+          delay: 0.15,
+          ease: [0.16, 1, 0.3, 1],
+        },
+      },
+    }}
+    animate={{
+      y: [0, -2, 0, 2, 0],
+    }}
+    transition={{
+      y: {
+        duration: 5,
+        repeat: Infinity,
+        ease: "easeInOut",
+      },
+    }}
+  >
+    Hello, I am
+  </motion.p>
+
+  {/* Soft living glow */}
+  <motion.div
+    className="
+      pointer-events-none
+      absolute
+      -inset-x-8
+      -inset-y-5
+      -z-10
+      rounded-full
+      bg-[var(--foreground-muted)]
+      opacity-[0.04]
+      blur-2xl
+    "
+    animate={{
+      opacity: [0.02, 0.07, 0.02],
+      scale: [0.95, 1.08, 0.95],
+    }}
+    transition={{
+      duration: 4,
+      repeat: Infinity,
+      ease: "easeInOut",
+    }}
+  />
+</motion.div>
+
+
+
+
             {/* NAME */}
-
-
-
             <motion.h1
               variants={{
                 hidden: {
                   opacity: 0,
-                  y: 12,
+                  y: 35,
+                  scale: 0.96,
+                  filter: "blur(10px)",
                 },
                 show: {
                   opacity: 1,
                   y: 0,
+                  scale: 1,
+                  filter: "blur(0px)",
+                  transition: {
+                    duration: 0.9,
+                    ease: [0.16, 1, 0.3, 1],
+                  },
+                },
+              }}
+              whileHover={{
+                x: 4,
+                transition: {
+                  duration: 0.25,
+                  ease: "easeOut",
                 },
               }}
               className="
-                font-display
-                text-4xl
-                
-                text-[var(--accent)]
-                font-semibold
-                leading-tight
-                sm:text-6xl
-              "
+      font-display
+      text-4xl
+      font-semibold
+      leading-tight
+      text-[var(--accent)]
+      sm:text-6xl
+    "
             >
               {hero.name}
             </motion.h1>
 
             {/* TYPEWRITER */}
-
             <motion.div
               variants={{
                 hidden: {
                   opacity: 0,
-                  y: 12,
+                  y: 20,
+                  filter: "blur(5px)",
                 },
                 show: {
                   opacity: 1,
                   y: 0,
+                  filter: "blur(0px)",
+                  transition: {
+                    duration: 0.7,
+                    ease: [0.22, 1, 0.36, 1],
+                  },
                 },
               }}
               className="
-                font-mono-tag
-                flex
-                h-8
-                items-center
-                text-lg
-                text-[var(--foreground-muted)]
-                sm:text-xl
-              "
+      font-mono-tag
+      flex
+      h-8
+      items-center
+      text-lg
+      text-[var(--foreground-muted)]
+      sm:text-xl
+    "
             >
-              {typedTitle}
+              <span className="inline-block min-w-[1px]">
+                {typedTitle}
+              </span>
 
-              <span
+              <motion.span
+                animate={{
+                  opacity: [1, 0.2, 1],
+                }}
+                transition={{
+                  duration: 0.8,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
                 className="
-                  ml-0.5
-                  inline-block
-                  h-5
-                  w-[2px]
-                  animate-pulse
-                "
+        ml-1
+        inline-block
+        h-5
+        w-[2px]
+        rounded-full
+      "
                 style={{
                   background: "var(--accent)",
+                  boxShadow: "0 0 10px var(--accent)",
                 }}
               />
             </motion.div>
 
             {/* BUTTONS */}
-
             <motion.div
               variants={{
                 hidden: {
                   opacity: 0,
-                  y: 12,
+                  y: 25,
                 },
                 show: {
                   opacity: 1,
                   y: 0,
+                  transition: {
+                    duration: 0.7,
+                    ease: [0.22, 1, 0.36, 1],
+                  },
                 },
               }}
               className="
-                mt-4
-                flex
-                flex-wrap
-                items-center
-                justify-center
-                gap-3
-              "
+      mt-4
+      flex
+      flex-wrap
+      items-center
+      justify-center
+      gap-3
+    "
             >
-              <ButtonLink
-                href="#contact"
-                variant="primary"
+              {/* HIRE ME */}
+              <motion.div
+                whileHover={{
+                  y: -4,
+                  scale: 1.03,
+                }}
+                whileTap={{
+                  scale: 0.96,
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 400,
+                  damping: 20,
+                }}
               >
-                Hire Me <FiArrowRight size={15} />
-              </ButtonLink>
-
-              <ButtonLink
-                href="#contact"
-                variant="secondary"
-              >
-                Contact
-              </ButtonLink>
-
-              {hero.resumeUrl && (
                 <ButtonLink
-                  href={toAttachmentUrl(hero.resumeUrl)}
-                  download
+                  href="#contact"
+                  variant="primary"
+                >
+                  Hire Me
+                  <motion.span
+                    whileHover={{ x: 4 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <FiArrowRight size={15} />
+                  </motion.span>
+                </ButtonLink>
+              </motion.div>
+
+              {/* CONTACT */}
+              <motion.div
+                whileHover={{
+                  y: -4,
+                  scale: 1.03,
+                }}
+                whileTap={{
+                  scale: 0.96,
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 400,
+                  damping: 20,
+                }}
+              >
+                <ButtonLink
+                  href="#contact"
                   variant="secondary"
                 >
-                  <FiDownload size={15} />
-                  Resume
+                  Contact
                 </ButtonLink>
+              </motion.div>
+
+              {/* RESUME */}
+              {hero.resumeUrl && (
+                <motion.div
+                  whileHover={{
+                    y: -4,
+                    scale: 1.03,
+                  }}
+                  whileTap={{
+                    scale: 0.96,
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 400,
+                    damping: 20,
+                  }}
+                >
+                  <ButtonLink
+                    href={toAttachmentUrl(hero.resumeUrl)}
+                    download
+                    variant="secondary"
+                  >
+                    <motion.span
+                      whileHover={{
+                        y: 2,
+                      }}
+                      transition={{
+                        duration: 0.2,
+                      }}
+                    >
+                      <FiDownload size={15} />
+                    </motion.span>
+
+                    Resume
+                  </ButtonLink>
+                </motion.div>
               )}
             </motion.div>
 
             {/* SOCIAL LINKS */}
-
             {hero.socialLinks?.length > 0 && (
               <motion.div
                 variants={{
                   hidden: {
                     opacity: 0,
+                    y: 20,
                   },
                   show: {
                     opacity: 1,
+                    y: 0,
+                    transition: {
+                      duration: 0.7,
+                      ease: [0.22, 1, 0.36, 1],
+                    },
                   },
                 }}
                 className="
-                  mt-2
-                  flex
-                  items-center
-                  gap-4
-                "
+        mt-2
+        flex
+        items-center
+        gap-4
+      "
               >
-                {hero.socialLinks.map((link) => {
+                {hero.socialLinks.map((link, index) => {
                   const Icon =
                     SOCIAL_ICONS[link.icon] ?? FiGithub;
 
@@ -528,36 +820,62 @@ export function Hero() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={link.platform}
-                      whileHover={{
-                        scale: 1.12,
-                        y: -2,
+                      initial={{
+                        opacity: 0,
+                        y: 15,
+                        scale: 0.7,
                       }}
-                      whileTap={{
-                        scale: 0.95,
+                      animate={{
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
                       }}
                       transition={{
-                        duration: 0.15,
+                        delay: 0.45 + index * 0.08,
+                        type: "spring",
+                        stiffness: 350,
+                        damping: 18,
+                      }}
+                      whileHover={{
+                        scale: 1.15,
+                        y: -5,
+                        boxShadow:
+                          "0 10px 30px color-mix(in srgb, var(--accent) 25%, transparent)",
+                      }}
+                      whileTap={{
+                        scale: 0.92,
                       }}
                       className="
-                        flex
-                        h-10
-                        w-10
-                        items-center
-                        justify-center
-                        rounded-full
-                        glass
-                        text-[var(--foreground-muted)]
-                        transition-colors
-                        hover:text-[var(--accent)]
-                      "
+              flex
+              h-10
+              w-10
+              items-center
+              justify-center
+              rounded-full
+              glass
+              text-[var(--foreground-muted)]
+              transition-colors
+              duration-300
+              hover:text-[var(--accent)]
+            "
                     >
-                      <Icon size={16} />
+                      <motion.span
+                        whileHover={{
+                          rotate: 8,
+                        }}
+                        transition={{
+                          duration: 0.2,
+                        }}
+                      >
+                        <Icon size={16} />
+                      </motion.span>
                     </motion.a>
                   );
                 })}
               </motion.div>
             )}
           </motion.div>
+
 
           {/*right side*/}
           <div
@@ -573,7 +891,7 @@ export function Hero() {
               className="
                 relative
                 mx-auto
-                top-[-150px]
+                top-[-200px]
                 h-[520px]
                 w-[340px]
                 overflow-visible
