@@ -7,7 +7,6 @@ import Image from "next/image";
 
 import { fetchAbout } from "@/services/api/aboutService";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Skeleton } from "@/components/ui/Skeleton";
 import CircularText from "./CircularText";
@@ -45,14 +44,17 @@ const AchievementItem = memo(function AchievementItem({
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.5, delay: index * 0.06, ease }}
       whileHover={{ x: 5 }}
-      className="group flex items-start gap-4 rounded-2xl border border-[var(--border)] bg-[var(--glass-bg)] p-4 transform-gpu transition-[transform,border-color,background-color] duration-300 ease-out hover:border-[var(--accent)]/30 hover:bg-[var(--accent)]/[0.04]"
-      style={{ backfaceVisibility: "hidden" }}
+      className="group flex items-start gap-3 rounded-2xl border border-[var(--border)] bg-[var(--glass-bg)] p-3.5 transition-[transform,border-color,background-color] duration-300 ease-out hover:border-[var(--accent)]/30 hover:bg-[var(--accent)]/[0.04] sm:gap-4 sm:p-4"
+      style={{
+        backfaceVisibility: "hidden",
+        transform: "translateZ(0)",
+      }}
     >
       <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/10 text-[10px] font-bold text-[var(--accent)] transition-[background-color,border-color,color] duration-300 group-hover:border-[var(--accent)] group-hover:bg-[var(--accent)] group-hover:text-white">
         {String(index + 1).padStart(2, "0")}
       </span>
 
-      <span className="pt-1 text-sm leading-7 text-[var(--foreground-muted)]">
+      <span className="min-w-0 pt-1 text-sm leading-6 text-[var(--foreground-muted)] sm:leading-7">
         {item}
       </span>
     </motion.div>
@@ -73,17 +75,22 @@ const StatCard = memo(function StatCard({
       viewport={{ once: true, amount: 0.25 }}
       transition={{ duration: 0.55, delay: index * 0.07, ease }}
       whileHover={{ y: -5 }}
-      className="group relative overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--glass-bg)] p-5 transform-gpu transition-[transform,border-color] duration-300 ease-out hover:border-[var(--accent)]/30"
-      style={{ backfaceVisibility: "hidden" }}
+      className="group relative min-w-0 overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--glass-bg)] p-4 transition-[transform,border-color] duration-300 ease-out hover:border-[var(--accent)]/30 sm:p-5"
+      style={{
+        backfaceVisibility: "hidden",
+        transform: "translateZ(0)",
+      }}
     >
       <div className="pointer-events-none absolute -right-10 -top-10 h-24 w-24 rounded-full bg-[var(--accent)]/10 blur-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
-      <div className="relative">
-        <div className="font-display text-3xl font-semibold tracking-tight text-[var(--foreground)]">
-          <span className="text-[var(--accent)]">{stat.value}</span>
+      <div className="relative min-w-0">
+        <div className="font-display text-2xl font-semibold tracking-tight text-[var(--foreground)] sm:text-3xl">
+          <span className="break-words text-[var(--accent)]">
+            {stat.value}
+          </span>
         </div>
 
-        <div className="mt-2 text-[10px] font-medium uppercase tracking-[0.16em] text-[var(--foreground-muted)]">
+        <div className="mt-2 break-words text-[9px] font-medium uppercase tracking-[0.12em] text-[var(--foreground-muted)] sm:text-[10px] sm:tracking-[0.16em]">
           {stat.label}
         </div>
       </div>
@@ -113,7 +120,7 @@ export function About() {
   return (
     <section
       id="about"
-      className="relative isolate overflow-visible bg-[var(--background)] py-24 text-[var(--foreground)] transition-colors duration-700 sm:py-32 lg:py-40"
+      className="relative isolate overflow-visible bg-[var(--background)] py-16 text-[var(--foreground)] transition-colors duration-700 sm:py-24 md:py-28 lg:py-40"
     >
       {/* Background */}
       <div
@@ -141,19 +148,21 @@ export function About() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
+          className="w-full"
         >
-
-          {/* heding name  */}
+          {/* Heading Name */}
           <motion.div
             variants={fadeUp}
-            className="mx-auto -mt-50 w-full max-w-5xl"
+            className="mx-auto -mt-8 w-full max-w-5xl sm:-mt-16 md:-mt-24 lg:-mt-50"
           >
             <div
-              className="relative h-[220px] w-full sm:h-[280px] lg:h-[320px]"
-              style={{
-                "--particle-color": "var(--foreground)",
-                "--particle-accent": "var(--accent)",
-              } as React.CSSProperties}
+              className="relative h-[150px] w-full sm:h-[200px] md:h-[240px] lg:h-[320px]"
+              style={
+                {
+                  "--particle-color": "var(--foreground)",
+                  "--particle-accent": "var(--accent)",
+                } as React.CSSProperties
+              }
             >
               <ParticleText
                 text={t.sections.about.title}
@@ -168,32 +177,31 @@ export function About() {
                 repelRadius={120}
                 idleDrift={0.8}
                 trigger="mount"
-                fontSize="clamp(3.5rem, 13vw, 4rem)"
+                fontSize="clamp(2.2rem, 11vw, 4rem)"
                 fontWeight={800}
                 fontFamily="inherit"
                 glow
               />
             </div>
           </motion.div>
-
         </motion.div>
 
         {/* Loading */}
         {isLoading && (
-          <div className="mt-16 grid items-start gap-12 lg:grid-cols-[380px_minmax(0,1fr)] lg:gap-20">
-            <Skeleton className="aspect-[4/5] w-full rounded-[2rem]" />
+          <div className="mt-8 grid items-start gap-8 sm:mt-12 md:gap-10 lg:mt-16 lg:grid-cols-[380px_minmax(0,1fr)] lg:gap-20">
+            <Skeleton className="mx-auto aspect-[4/5] w-full max-w-[420px] rounded-[2rem]" />
 
-            <div className="space-y-5">
+            <div className="min-w-0 space-y-5">
               <Skeleton className="h-5 w-full" />
               <Skeleton className="h-5 w-11/12" />
               <Skeleton className="h-5 w-10/12" />
               <Skeleton className="h-5 w-8/12" />
 
-              <div className="grid grid-cols-2 gap-4 pt-6 sm:grid-cols-4">
+              <div className="grid grid-cols-2 gap-3 pt-6 sm:grid-cols-4 sm:gap-4">
                 {[0, 1, 2, 3].map((item) => (
                   <Skeleton
                     key={item}
-                    className="h-28 w-full rounded-2xl"
+                    className="h-24 w-full rounded-2xl sm:h-28"
                   />
                 ))}
               </div>
@@ -208,7 +216,7 @@ export function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease }}
-            className="mx-auto mt-16 max-w-xl rounded-2xl border border-[var(--accent)]/20 bg-[var(--accent)]/[0.04] p-8 text-center"
+            className="mx-auto mt-8 max-w-xl rounded-2xl border border-[var(--accent)]/20 bg-[var(--accent)]/[0.04] p-6 text-center sm:mt-12 sm:p-8 lg:mt-16"
           >
             <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/10 text-lg font-semibold text-[var(--accent)]">
               !
@@ -222,16 +230,12 @@ export function About() {
 
         {/* Main */}
         {!isLoading && about && !isError && (
-          <div className="mt-2 grid items-start gap-14 lg:grid-cols-[380px_minmax(0,1fr)] lg:gap-20">
+          <div className="mt-0 grid items-start gap-10 sm:gap-12 md:gap-14 lg:grid-cols-[380px_minmax(0,1fr)] lg:gap-20">
             {/* Photo */}
             {about.photo?.url ? (
-              <div className="relative lg:sticky lg:top-24 lg:self-start">
-
-                {/* =====================================================
-      CIRCULAR TEXT
-      Card-এর পিছনে থাকবে
-  ====================================================== */}
-                <div className="pointer-events-none absolute -right-15 -top-15 z-0">
+              <div className="relative w-full lg:sticky lg:top-24 lg:self-start">
+                {/* Circular Text */}
+                <div className="pointer-events-none absolute -right-7 -top-7 z-0 sm:-right-10 sm:-top-10 md:-right-12 md:-top-12 lg:-right-15 lg:-top-15">
                   <CircularText
                     text="BUILD*CREATE*DESIGN*DEVELOP*REACT*"
                     onHover="speedUp"
@@ -240,347 +244,350 @@ export function About() {
                   />
                 </div>
 
-
-                {/* =====================================================
-      FULL CARD HOVER AREA
-  ====================================================== */}
-                <div
-                  className="
-      group
-      relative
-      z-10
-      mx-auto
-      w-[92%]
-      [perspective:1600px]
-    "
-                >
-
-                  {/* ===================================================
-        FLIP CARD
-    ==================================================== */}
+                {/* Full Card Hover Area */}
+                <div className="group relative z-10 mx-auto w-full max-w-[420px] [perspective:1600px] sm:w-[92%]">
+                  {/* Flip Card */}
                   <div
                     className="
-        relative
-        aspect-[5/6]
-        w-full
-        transform-gpu
-        transition-transform
-        duration-[900ms]
-        ease-[cubic-bezier(0.22,1,0.36,1)]
-        [transform-style:preserve-3d]
-        group-hover:[transform:rotateY(180deg)]
-      "
+                      relative
+                      aspect-[5/6]
+                      w-full
+                      transform-gpu
+                      transition-transform
+                      duration-[900ms]
+                      ease-[cubic-bezier(0.22,1,0.36,1)]
+                      [transform-style:preserve-3d]
+                      group-hover:[transform:rotateY(180deg)]
+                    "
                   >
-
-                    {/* =================================================
-          FRONT
-      ================================================== */}
+                    {/* FRONT */}
                     <div
                       className="
-          absolute
-          inset-0
-          h-full
-          w-full
-          [backface-visibility:hidden]
-          [-webkit-backface-visibility:hidden]
-        "
+                        absolute
+                        inset-0
+                        h-full
+                        w-full
+                        [backface-visibility:hidden]
+                        [-webkit-backface-visibility:hidden]
+                      "
                     >
-
                       {/* Outer Accent Glow */}
                       <div
                         className="
-            pointer-events-none
-            absolute
-            -inset-5
-            rounded-[2.5rem]
-            bg-[var(--accent)]
-            opacity-[0.10]
-            blur-2xl
-            transition-opacity
-            duration-500
-            group-hover:opacity-[0.18]
-          "
+                          pointer-events-none
+                          absolute
+                          -inset-3
+                          rounded-[2.5rem]
+                          bg-[var(--accent)]
+                          opacity-[0.10]
+                          blur-2xl
+                          transition-opacity
+                          duration-500
+                          group-hover:opacity-[0.18]
+                          sm:-inset-5
+                        "
                       />
 
                       {/* Main Glass Card */}
                       <div
                         className="
-            relative
-            h-full
-            w-full
-            rounded-[2rem]
-            border
-            border-[var(--glass-border)]
-            bg-[var(--glass-bg)]
-            p-2
-            shadow-[0_30px_80px_rgba(0,0,0,0.12)]
-            transition-[border-color,box-shadow]
-            duration-500
-            group-hover:border-[var(--accent)]/25
-            dark:shadow-[0_30px_90px_rgba(0,0,0,0.55)]
-          "
+                          relative
+                          h-full
+                          w-full
+                          rounded-[1.5rem]
+                          border
+                          border-[var(--glass-border)]
+                          bg-[var(--glass-bg)]
+                          p-1.5
+                          shadow-[0_30px_80px_rgba(0,0,0,0.12)]
+                          transition-[border-color,box-shadow]
+                          duration-500
+                          group-hover:border-[var(--accent)]/25
+                          sm:rounded-[2rem]
+                          sm:p-2
+                          dark:shadow-[0_30px_90px_rgba(0,0,0,0.55)]
+                        "
                       >
-
                         {/* Image Container */}
                         <div
                           className="
-              relative
-              h-full
-              w-full
-              overflow-hidden
-              rounded-[1.5rem]
-              bg-[var(--surface)]
-            "
+                            relative
+                            h-full
+                            w-full
+                            overflow-hidden
+                            rounded-[1.15rem]
+                            bg-[var(--surface)]
+                            sm:rounded-[1.5rem]
+                          "
                         >
-
                           <Image
                             src={about.photo.url}
                             alt="Profile photo"
                             fill
-                            sizes="(max-width: 1024px) 92vw, 350px"
+                            sizes="(max-width: 640px) 88vw, (max-width: 1024px) 70vw, 350px"
                             priority
                             className="
-                object-cover
-                grayscale-[15%]
-                transform-gpu
-                transition-[transform,filter]
-                duration-[900ms]
-                ease-out
-                group-hover:scale-105
-                group-hover:grayscale-0
-              "
+                              object-cover
+                              grayscale-[15%]
+                              transform-gpu
+                              transition-[transform,filter]
+                              duration-[900ms]
+                              ease-out
+                              group-hover:scale-105
+                              group-hover:grayscale-0
+                            "
                           />
 
                           {/* Bottom Gradient */}
                           <div
                             className="
-                pointer-events-none
-                absolute
-                inset-0
-                bg-gradient-to-t
-                from-black/65
-                via-black/5
-                to-transparent
-              "
+                              pointer-events-none
+                              absolute
+                              inset-0
+                              bg-gradient-to-t
+                              from-black/65
+                              via-black/5
+                              to-transparent
+                            "
                           />
 
                           {/* Top Accent Glow */}
                           <div
                             className="
-                pointer-events-none
-                absolute
-                -right-24
-                -top-24
-                h-56
-                w-56
-                rounded-full
-                bg-[var(--accent)]/25
-                blur-3xl
-                transition-[background-color]
-                duration-500
-                group-hover:bg-[var(--accent)]/40
-              "
+                              pointer-events-none
+                              absolute
+                              -right-20
+                              -top-20
+                              h-48
+                              w-48
+                              rounded-full
+                              bg-[var(--accent)]/25
+                              blur-3xl
+                              transition-[background-color]
+                              duration-500
+                              group-hover:bg-[var(--accent)]/40
+                              sm:-right-24
+                              sm:-top-24
+                              sm:h-56
+                              sm:w-56
+                            "
                           />
 
                           {/* About Me Badge */}
                           <div
                             className="
-                absolute
-                bottom-5
-                left-5
-                flex
-                items-center
-                gap-2
-                rounded-full
-                border
-                border-white/20
-                bg-black/35
-                px-4
-                py-2
-                text-[10px]
-                font-semibold
-                uppercase
-                tracking-[0.25em]
-                text-white
-                backdrop-blur-md
-              "
+                              absolute
+                              bottom-4
+                              left-4
+                              flex
+                              max-w-[calc(100%-2rem)]
+                              items-center
+                              gap-2
+                              rounded-full
+                              border
+                              border-white/20
+                              bg-black/35
+                              px-3
+                              py-1.5
+                              text-[9px]
+                              font-semibold
+                              uppercase
+                              tracking-[0.2em]
+                              text-white
+                              backdrop-blur-md
+                              sm:bottom-5
+                              sm:left-5
+                              sm:px-4
+                              sm:py-2
+                              sm:text-[10px]
+                              sm:tracking-[0.25em]
+                            "
                           >
-
                             <span
                               className="
-                  h-1.5
-                  w-1.5
-                  rounded-full
-                  bg-[var(--accent)]
-                  shadow-[0_0_12px_rgba(229,9,20,1)]
-                "
+                                h-1.5
+                                w-1.5
+                                shrink-0
+                                rounded-full
+                                bg-[var(--accent)]
+                                shadow-[0_0_12px_rgba(229,9,20,1)]
+                              "
                             />
 
                             About Me
-
                           </div>
-
                         </div>
-
                       </div>
-
 
                       {/* Bottom Right Corner */}
                       <div
                         className="
-            pointer-events-none
-            absolute
-            -bottom-3
-            -right-3
-            h-20
-            w-20
-            rounded-br-[2rem]
-            border-b-2
-            border-r-2
-            border-[var(--accent)]/50
-            transition-[border-color]
-            duration-500
-            group-hover:border-[var(--accent)]
-          "
+                          pointer-events-none
+                          absolute
+                          -bottom-2
+                          -right-2
+                          h-14
+                          w-14
+                          rounded-br-[1.5rem]
+                          border-b-2
+                          border-r-2
+                          border-[var(--accent)]/50
+                          transition-[border-color]
+                          duration-500
+                          group-hover:border-[var(--accent)]
+                          sm:-bottom-3
+                          sm:-right-3
+                          sm:h-20
+                          sm:w-20
+                          sm:rounded-br-[2rem]
+                        "
                       />
-
 
                       {/* Top Left Corner */}
                       <div
                         className="
-            pointer-events-none
-            absolute
-            -left-3
-            -top-3
-            h-16
-            w-16
-            rounded-tl-[1.5rem]
-            border-l
-            border-t
-            border-[var(--border)]
-          "
+                          pointer-events-none
+                          absolute
+                          -left-2
+                          -top-2
+                          h-12
+                          w-12
+                          rounded-tl-[1.25rem]
+                          border-l
+                          border-t
+                          border-[var(--border)]
+                          sm:-left-3
+                          sm:-top-3
+                          sm:h-16
+                          sm:w-16
+                          sm:rounded-tl-[1.5rem]
+                        "
                       />
-
                     </div>
 
-
-                    {/* =================================================
-          BACK
-      ================================================== */}
+                    {/* BACK */}
                     <div
                       className="
-          absolute
-          inset-0
-          h-full
-          w-full
-          rounded-[2rem]
-          border
-          border-[var(--glass-border)]
-          bg-[var(--glass-bg)]
-          p-2
-          shadow-[0_30px_80px_rgba(0,0,0,0.12)]
-          dark:shadow-[0_30px_90px_rgba(0,0,0,0.55)]
-          [backface-visibility:hidden]
-          [-webkit-backface-visibility:hidden]
-          [transform:rotateY(180deg)]
-        "
+                        absolute
+                        inset-0
+                        h-full
+                        w-full
+                        rounded-[1.5rem]
+                        border
+                        border-[var(--glass-border)]
+                        bg-[var(--glass-bg)]
+                        p-1.5
+                        shadow-[0_30px_80px_rgba(0,0,0,0.12)]
+                        [backface-visibility:hidden]
+                        [-webkit-backface-visibility:hidden]
+                        [transform:rotateY(180deg)]
+                        sm:rounded-[2rem]
+                        sm:p-2
+                        dark:shadow-[0_30px_90px_rgba(0,0,0,0.55)]
+                      "
                     >
-
                       {/* Back Inner */}
                       <div
                         className="
-            relative
-            flex
-            h-full
-            w-full
-            flex-col
-            justify-between
-            overflow-hidden
-            rounded-[1.5rem]
-            bg-[var(--surface)]
-            p-8
-          "
+                          relative
+                          flex
+                          h-full
+                          w-full
+                          flex-col
+                          justify-between
+                          overflow-hidden
+                          rounded-[1.15rem]
+                          bg-[var(--surface)]
+                          p-5
+                          sm:rounded-[1.5rem]
+                          sm:p-6
+                          md:p-8
+                        "
                       >
-
                         {/* Back Accent Glow */}
                         <div
                           className="
-              pointer-events-none
-              absolute
-              -right-24
-              -top-24
-              h-64
-              w-64
-              rounded-full
-              bg-[var(--accent)]/15
-              blur-3xl
-            "
+                            pointer-events-none
+                            absolute
+                            -right-20
+                            -top-20
+                            h-52
+                            w-52
+                            rounded-full
+                            bg-[var(--accent)]/15
+                            blur-3xl
+                            sm:-right-24
+                            sm:-top-24
+                            sm:h-64
+                            sm:w-64
+                          "
                         />
-
 
                         {/* Content */}
                         <div className="relative z-10">
-
                           <span
                             className="
-                text-[10px]
-                font-semibold
-                uppercase
-                tracking-[0.3em]
-                text-[var(--accent)]
-              "
+                              text-[9px]
+                              font-semibold
+                              uppercase
+                              tracking-[0.25em]
+                              text-[var(--accent)]
+                              sm:text-[10px]
+                              sm:tracking-[0.3em]
+                            "
                           >
                             About Me
                           </span>
 
-
                           <h3
                             className="
-                mt-5
-                text-3xl
-                font-bold
-                tracking-tight
-              "
+                              mt-3
+                              text-2xl
+                              font-bold
+                              tracking-tight
+                              sm:mt-5
+                              sm:text-3xl
+                            "
                           >
                             Creative Developer
                           </h3>
 
-
                           <p
                             className="
-                mt-5
-                text-sm
-                leading-7
-                opacity-70
-              "
+                              mt-3
+                              text-xs
+                              leading-6
+                              opacity-70
+                              sm:mt-5
+                              sm:text-sm
+                              sm:leading-7
+                            "
                           >
                             I build modern, interactive and visually engaging
-                            web experiences using React, Next.js and modern
-                            UI technologies.
+                            web experiences using React, Next.js and modern UI
+                            technologies.
                           </p>
-
                         </div>
 
-
                         {/* Technologies */}
-                        <div className="relative z-10">
-
+                        <div className="relative z-10 mt-6 sm:mt-8">
                           <p
                             className="
-                mb-3
-                text-[10px]
-                font-semibold
-                uppercase
-                tracking-[0.3em]
-                opacity-50
-              "
+                              mb-2
+                              text-[9px]
+                              font-semibold
+                              uppercase
+                              tracking-[0.25em]
+                              opacity-50
+                              sm:mb-3
+                              sm:text-[10px]
+                              sm:tracking-[0.3em]
+                            "
                           >
                             Technologies
                           </p>
 
-
-                          <div className="flex flex-wrap gap-2">
-
+                          <div className="flex flex-wrap gap-1.5 sm:gap-2">
                             {[
                               "React",
                               "Next.js",
@@ -590,60 +597,52 @@ export function About() {
                               <span
                                 key={item}
                                 className="
-                    rounded-full
-                    border
-                    border-[var(--border)]
-                    bg-white/[0.03]
-                    px-3
-                    py-1.5
-                    text-xs
-                    transition-colors
-                    duration-300
-                    hover:border-[var(--accent)]/50
-                    hover:text-[var(--accent)]
-                  "
+                                  rounded-full
+                                  border
+                                  border-[var(--border)]
+                                  bg-white/[0.03]
+                                  px-2.5
+                                  py-1
+                                  text-[10px]
+                                  transition-colors
+                                  duration-300
+                                  hover:border-[var(--accent)]/50
+                                  hover:text-[var(--accent)]
+                                  sm:px-3
+                                  sm:py-1.5
+                                  sm:text-xs
+                                "
                               >
                                 {item}
                               </span>
                             ))}
-
                           </div>
-
                         </div>
-
 
                         {/* Back Decorative Line */}
                         <div
                           className="
-              pointer-events-none
-              absolute
-              bottom-5
-              right-5
-              h-16
-              w-16
-              rounded-br-xl
-              border-b
-              border-r
-              border-[var(--accent)]/40
-            "
+                            pointer-events-none
+                            absolute
+                            bottom-4
+                            right-4
+                            h-12
+                            w-12
+                            rounded-br-xl
+                            border-b
+                            border-r
+                            border-[var(--accent)]/40
+                            sm:bottom-5
+                            sm:right-5
+                            sm:h-16
+                            sm:w-16
+                          "
                         />
-
                       </div>
-
                     </div>
-
                   </div>
-
                 </div>
-
               </div>
-
-
-
-
-
-
-
             ) : (
               <div className="hidden lg:block" />
             )}
@@ -654,33 +653,33 @@ export function About() {
               whileInView="visible"
               viewport={{ once: true, amount: 0.08 }}
               variants={contentContainer}
-              className="min-w-0"
+              className="min-w-0 w-full"
             >
-              <motion.div variants={fadeUp} className="mb-8">
+              <motion.div variants={fadeUp} className="mb-6 sm:mb-8">
                 <div className="flex items-center gap-3">
-                  <span className="h-px w-10 bg-gradient-to-r from-[var(--accent)] to-transparent" />
+                  <span className="h-px w-8 bg-gradient-to-r from-[var(--accent)] to-transparent sm:w-10" />
 
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[var(--accent)]">
+                  <span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[var(--accent)] sm:text-[11px] sm:tracking-[0.3em]">
                     Introduction
                   </span>
                 </div>
               </motion.div>
 
               <motion.div variants={fadeUp}>
-                <p className="max-w-3xl whitespace-pre-line text-lg leading-[1.9] text-[var(--foreground-muted)] sm:text-xl">
+                <p className="max-w-3xl whitespace-pre-line text-base leading-[1.8] text-[var(--foreground-muted)] sm:text-lg sm:leading-[1.9] md:text-xl">
                   {about.biography}
                 </p>
               </motion.div>
 
               {/* Achievements */}
               {achievements.length > 0 && (
-                <motion.div variants={fadeUp} className="mt-14">
-                  <div className="mb-6 flex items-center gap-4">
-                    <h3 className="shrink-0 text-xs font-semibold uppercase tracking-[0.25em] text-[var(--foreground)]">
+                <motion.div variants={fadeUp} className="mt-10 sm:mt-14">
+                  <div className="mb-5 flex items-center gap-3 sm:mb-6 sm:gap-4">
+                    <h3 className="shrink-0 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--foreground)] sm:text-xs sm:tracking-[0.25em]">
                       Highlights
                     </h3>
 
-                    <div className="h-px flex-1 bg-gradient-to-r from-[var(--border)] to-transparent" />
+                    <div className="h-px min-w-0 flex-1 bg-gradient-to-r from-[var(--border)] to-transparent" />
                   </div>
 
                   <div className="space-y-3">
@@ -697,16 +696,16 @@ export function About() {
 
               {/* Stats */}
               {stats.length > 0 && (
-                <motion.div variants={fadeUp} className="mt-14">
-                  <div className="mb-6 flex items-center gap-4">
-                    <h3 className="shrink-0 text-xs font-semibold uppercase tracking-[0.25em] text-[var(--foreground)]">
+                <motion.div variants={fadeUp} className="mt-10 sm:mt-14">
+                  <div className="mb-5 flex items-center gap-3 sm:mb-6 sm:gap-4">
+                    <h3 className="shrink-0 text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--foreground)] sm:text-xs sm:tracking-[0.25em]">
                       By The Numbers
                     </h3>
 
-                    <div className="h-px flex-1 bg-gradient-to-r from-[var(--border)] to-transparent" />
+                    <div className="h-px min-w-0 flex-1 bg-gradient-to-r from-[var(--border)] to-transparent" />
                   </div>
 
-                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                  <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-2 sm:gap-3 md:grid-cols-4">
                     {stats.map((stat, index) => (
                       <StatCard
                         key={`${stat.label}-${index}`}
@@ -721,13 +720,13 @@ export function About() {
               {/* Accent */}
               <motion.div
                 variants={fadeUp}
-                className="mt-14 flex items-center gap-4"
+                className="mt-10 flex items-center gap-3 sm:mt-14 sm:gap-4"
               >
-                <div className="h-px w-20 bg-gradient-to-r from-[var(--accent)] to-transparent" />
+                <div className="h-px w-12 bg-gradient-to-r from-[var(--accent)] to-transparent sm:w-20" />
 
-                <div className="h-1.5 w-1.5 rounded-full bg-[var(--accent)] shadow-[0_0_12px_rgba(229,9,20,0.9)]" />
+                <div className="h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)] shadow-[0_0_12px_rgba(229,9,20,0.9)]" />
 
-                <div className="h-px flex-1 bg-gradient-to-r from-[var(--accent)]/30 to-transparent" />
+                <div className="h-px min-w-0 flex-1 bg-gradient-to-r from-[var(--accent)]/30 to-transparent" />
               </motion.div>
             </motion.div>
           </div>

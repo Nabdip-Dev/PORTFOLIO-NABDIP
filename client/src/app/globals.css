@@ -1197,6 +1197,7 @@ p {
 [data-theme="dark"] .testimonial-form-card .field::placeholder {
   color: rgba(255, 255, 255, 0.42);
 }
+
 /* =========================================================
    HERO NAME — DAY / NIGHT
 ========================================================= */
@@ -1215,4 +1216,100 @@ p {
   --hero-name-red: #FD1843;
   --hero-name-black: #030303;
   --hero-name-glow: rgba(139, 0, 0, 0.42);
+}
+
+
+
+
+
+/* =========================================================
+   SKILLS — DARK THEME
+========================================================= */
+
+[data-theme="dark"] {
+  --skills-background: #040404;
+
+  --skills-heading: #ffffff;
+  --skills-label: rgba(255, 255, 255, 0.35);
+
+  --skills-point: #38bdf8;
+
+  --skills-line-start: rgba(255, 255, 255, 0.17);
+  --skills-line-middle: rgba(255, 255, 255, 0.055);
+  --skills-line-end: rgba(56, 189, 248, 0.14);
+
+  --skills-track: rgba(255, 255, 255, 0.025);
+
+  --skills-node-bg: #070c13;
+  --skills-node-border: rgba(255, 255, 255, 0.11);
+
+  --skills-node-shadow: rgba(0, 0, 0, 0.35);
+  --skills-node-glow: rgba(56, 189, 248, 0.10);
+
+  --skills-inner-border: rgba(255, 255, 255, 0.035);
+
+  --skills-orbit-border: rgba(255, 255, 255, 0.055);
+
+  --skills-center-bg: #060a10;
+  --skills-center-border: rgba(255, 255, 255, 0.12);
+
+  --skills-center-glow: rgba(56, 189, 248, 0.08);
+
+  --skills-center-muted: rgba(255, 255, 255, 0.55);
+}
+
+/* =========================================================
+   SKILLS — LIGHT THEME
+========================================================= */
+
+[data-theme="light"] {
+  --skills-background: #fff9fa;
+
+  --skills-heading: #090909;
+  --skills-label: rgba(0, 0, 0, 0.38);
+
+  --skills-point: #e50914;
+
+  --skills-line-start: rgba(0, 0, 0, 0.14);
+  --skills-line-middle: rgba(0, 0, 0, 0.045);
+  --skills-line-end: rgba(229, 9, 20, 0.18);
+
+  --skills-track: rgba(0, 0, 0, 0.025);
+
+  --skills-node-bg: #ffffff;
+  --skills-node-border: rgba(0, 0, 0, 0.11);
+
+  --skills-node-shadow: rgba(0, 0, 0, 0.14);
+  --skills-node-glow: rgba(229, 9, 20, 0.10);
+
+  --skills-inner-border: rgba(0, 0, 0, 0.045);
+
+  --skills-orbit-border: rgba(0, 0, 0, 0.07);
+
+  --skills-center-bg: #ffffff;
+  --skills-center-border: rgba(0, 0, 0, 0.12);
+
+  --skills-center-glow: rgba(229, 9, 20, 0.08);
+
+  --skills-center-muted: rgba(0, 0, 0, 0.55);
+}
+
+[data-theme="dark"] .skills-section {
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(229, 9, 20, 0.035),
+      transparent 45%
+    ),
+    #040404;
+}
+
+[data-theme="light"] .skills-section {
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(229, 9, 20, 0.045),
+      transparent 45%
+    ),
+    #fff9fa;
 }

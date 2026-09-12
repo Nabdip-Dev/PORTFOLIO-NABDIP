@@ -145,7 +145,7 @@ function MovingPoint({
     <g>
       <circle
         r="7"
-        fill="#38bdf8"
+        fill="var(--skills-point)"
         opacity="0.08"
         filter="url(#pointGlow)"
       >
@@ -166,7 +166,7 @@ function MovingPoint({
 
       <circle
         r="4.5"
-        fill="#38bdf8"
+        fill="var(--skills-point)"
         opacity="0.16"
         filter="url(#smallPointGlow)"
       >
@@ -180,7 +180,7 @@ function MovingPoint({
 
       <circle
         r="2.8"
-        fill="#38bdf8"
+        fill="var(--skills-point)"
       >
         <animateMotion
           path={path}
@@ -224,17 +224,17 @@ function CurvedConnection({
         >
           <stop
             offset="0%"
-            stopColor="rgba(255,255,255,0.17)"
+            stopColor="var(--skills-line-start)"
           />
 
           <stop
             offset="50%"
-            stopColor="rgba(255,255,255,0.055)"
+            stopColor="var(--skills-line-middle)"
           />
 
           <stop
             offset="100%"
-            stopColor="rgba(56,189,248,0.14)"
+            stopColor="var(--skills-line-end)"
           />
         </linearGradient>
 
@@ -262,7 +262,7 @@ function CurvedConnection({
       <path
         d={path}
         fill="none"
-        stroke="rgba(255,255,255,0.025)"
+        stroke="var(--skills-track)"
         strokeWidth="4"
         strokeLinecap="round"
       />
@@ -320,7 +320,7 @@ function SkillNode({
           -translate-x-1/2
           -translate-y-1/2
           rounded-full
-          bg-sky-400/[0.04]
+          bg-[var(--skills-point)]/[0.04]
           opacity-0
           blur-xl
           transition-all
@@ -341,15 +341,15 @@ function SkillNode({
           justify-center
           rounded-full
           border
-          border-white/[0.11]
-          bg-[#070c13]
-          shadow-[0_8px_25px_rgba(0,0,0,0.35)]
+          border-[var(--skills-node-border)]
+          bg-[var(--skills-node-bg)]
+          shadow-[0_8px_25px_var(--skills-node-shadow)]
           transition-all
           duration-500
           ease-out
           group-hover:scale-[1.08]
-          group-hover:border-sky-400/[0.25]
-          group-hover:shadow-[0_0_30px_rgba(56,189,248,0.10)]
+          group-hover:border-[var(--skills-point)]/[0.25]
+          group-hover:shadow-[0_0_30px_var(--skills-node-glow)]
         "
         style={{
           animationDuration: `${3.5 + (index % 3) * 0.5}s`,
@@ -363,10 +363,10 @@ function SkillNode({
             inset-[5px]
             rounded-full
             border
-            border-white/[0.035]
+            border-[var(--skills-inner-border)]
             transition-all
             duration-500
-            group-hover:border-sky-400/[0.10]
+            group-hover:border-[var(--skills-point)]/[0.10]
           "
         />
 
@@ -392,19 +392,19 @@ function SkillNode({
             w-[5px]
             -translate-y-1/2
             rounded-full
-            bg-sky-400
-            shadow-[0_0_10px_rgba(56,189,248,0.85)]
+            bg-[var(--skills-point)]
+            shadow-[0_0_10px_var(--skills-point)]
           "
           style={
             index < 5
               ? {
-                  right: "-2px",
-                  animationDelay: `${index * 0.15}s`,
-                }
+                right: "-2px",
+                animationDelay: `${index * 0.15}s`,
+              }
               : {
-                  left: "-2px",
-                  animationDelay: `${index * 0.15}s`,
-                }
+                left: "-2px",
+                animationDelay: `${index * 0.15}s`,
+              }
           }
         />
       </div>
@@ -441,7 +441,7 @@ function Center({
           -translate-x-1/2
           -translate-y-1/2
           rounded-full
-          bg-sky-400/[0.025]
+          bg-[var(--skills-point)]/[0.025]
           blur-[85px]
         "
         style={{
@@ -462,7 +462,7 @@ function Center({
           -translate-y-1/2
           rounded-full
           border
-          border-sky-400/[0.07]
+          border-[var(--skills-point)]/[0.07]
         "
       />
 
@@ -479,7 +479,7 @@ function Center({
           -translate-y-1/2
           rounded-full
           border
-          border-sky-400/[0.035]
+          border-[var(--skills-point)]/[0.035]
         "
         style={{
           animationDelay: "1.7s",
@@ -500,7 +500,7 @@ function Center({
           rounded-full
           border
           border-dashed
-          border-white/[0.055]
+          border-[var(--skills-orbit-border)]
         "
       />
 
@@ -516,9 +516,9 @@ function Center({
           justify-center
           rounded-full
           border
-          border-white/[0.12]
-          bg-[#060a10]
-          shadow-[0_0_60px_rgba(56,189,248,0.08)]
+          border-[var(--skills-center-border)]
+          bg-[var(--skills-center-bg)]
+          shadow-[0_0_60px_var(--skills-center-glow)]
         "
       >
         <div
@@ -528,7 +528,7 @@ function Center({
             inset-[13px]
             rounded-full
             border
-            border-white/[0.035]
+            border-[var(--skills-inner-border)]
           "
         />
 
@@ -556,7 +556,7 @@ function Center({
               text-[8px]
               font-medium
               tracking-wide
-              text-white/55
+              text-[var(--skills-center-muted)]
             "
           >
             {skill.name}
@@ -568,7 +568,7 @@ function Center({
               font-mono
               text-[9px]
               font-medium
-              text-sky-400/80
+              text-[var(--skills-point)]
             "
           >
             {skill.percentage}%
@@ -583,8 +583,8 @@ function Center({
             h-[4px]
             w-[4px]
             rounded-full
-            bg-sky-400
-            shadow-[0_0_10px_#38bdf8]
+            bg-[var(--skills-point)]
+            shadow-[0_0_10px_var(--skills-point)]
           "
         />
       </div>
@@ -599,7 +599,7 @@ export function Skills() {
     const timer = window.setInterval(() => {
       setActiveSkill(
         (current) =>
-          (current + 1) % SKILLS.length
+          (current + 1) % SKILLS.length,
       );
     }, 3200);
 
@@ -610,10 +610,6 @@ export function Skills() {
 
   return (
     <>
-      {/* =====================================================
-          GLOBAL ANIMATIONS
-      ===================================================== */}
-
       <style>{`
         .skill-node {
           animation-name: skillBreath;
@@ -658,14 +654,14 @@ export function Skills() {
             opacity: 0.7;
             transform: translateY(-50%) scale(0.85);
             box-shadow:
-              0 0 6px rgba(56, 189, 248, 0.55);
+              0 0 6px var(--skills-point);
           }
 
           50% {
             opacity: 1;
             transform: translateY(-50%) scale(1.2);
             box-shadow:
-              0 0 14px rgba(56, 189, 248, 0.95);
+              0 0 14px var(--skills-point);
           }
         }
 
@@ -786,7 +782,10 @@ export function Skills() {
         className="
           relative
           overflow-hidden
+          bg-[var(--skills-background)]
           py-14
+          transition-colors
+          duration-500
           sm:py-16
           lg:py-18
         "
@@ -800,9 +799,7 @@ export function Skills() {
             sm:px-6
           "
         >
-          {/* =================================================
-              HEADING
-          ================================================= */}
+          {/* Heading */}
 
           <div className="mb-5">
             <p
@@ -811,7 +808,7 @@ export function Skills() {
                 text-[9px]
                 uppercase
                 tracking-[0.30em]
-                text-white/35
+                text-[var(--skills-label)]
               "
             >
               Skills
@@ -823,7 +820,7 @@ export function Skills() {
                 text-2xl
                 font-semibold
                 tracking-tight
-                text-white
+                text-[var(--skills-heading)]
                 sm:text-3xl
               "
             >
@@ -831,9 +828,7 @@ export function Skills() {
             </h2>
           </div>
 
-          {/* =================================================
-              SKILL MAP
-          ================================================= */}
+          {/* Skill Map */}
 
           <div
             className="
@@ -848,8 +843,6 @@ export function Skills() {
               max-sm:h-[340px]
             "
           >
-            {/* Background glow */}
-
             <div
               className="
                 pointer-events-none
@@ -861,12 +854,10 @@ export function Skills() {
                 -translate-x-1/2
                 -translate-y-1/2
                 rounded-full
-                bg-sky-400/[0.012]
+                bg-[var(--skills-point)]/[0.012]
                 blur-[90px]
               "
             />
-
-            {/* Curved connections */}
 
             {PATHS.map((path, index) => (
               <CurvedConnection
@@ -876,13 +867,9 @@ export function Skills() {
               />
             ))}
 
-            {/* Center */}
-
             <Center
               skill={SKILLS[activeSkill]}
             />
-
-            {/* Skill nodes */}
 
             {SKILLS.map((skill, index) => (
               <SkillNode

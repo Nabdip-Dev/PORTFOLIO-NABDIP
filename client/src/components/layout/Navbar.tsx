@@ -6,11 +6,12 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiMenu, FiX, FiMessageCircle } from "react-icons/fi";
 import { ThemeSwitcher } from "@/components/theme/ThemeSwitcher";
-
-import { WhatsAppButton } from "./WhatsAppButton";
 import { NAV_LINKS } from "@/constants/navigation";
 import { useChatUI } from "@/contexts/ChatUIContext";
 import { useLanguage } from "@/contexts/LanguageContext";
+import Image from "next/image";
+import profilePhoto from "../../assets/ttt.png";
+
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -44,9 +45,74 @@ export function Navbar() {
     >
 
       <nav className="mx-auto flex max-w-6xl items-center justify-center gap-8 px-6 py-4 sm:px-10">
-        <a href="#home" className="font-display text-lg font-semibold tracking-tight">
-          Portfolio<span style={{ color: "var(--accent)" }}>.</span>
+        <a
+          href="#home"
+          className="
+    group
+    relative
+    flex
+    h-12
+    w-12
+    shrink-0
+    items-center
+    justify-center
+    rounded-full
+    border-1
+    border-white/20
+    p-0.5
+    transition-all
+    duration-300
+    hover:scale-105
+    hover:border-[var(--accent)]
+  "
+        >
+          {/* Live animated ring */}
+          <span
+            className="
+      pointer-events-none
+      absolute
+      inset-0
+      rounded-full
+      border
+      border-[var(--accent)]/50
+      animate-[ping_2.5s_ease-in-out_infinite]
+    "
+          />
+
+          {/* Rotating accent */}
+          <span
+            className="
+      pointer-events-none
+      absolute
+      -inset-[2px]
+      rounded-full
+      border
+      border-transparent
+      border-t-[var(--accent)]
+      border-r-[var(--accent)]/40
+      animate-[spin_4s_linear_infinite]
+    "
+          />
+
+          {/* Photo */}
+          <div className="relative h-full w-full overflow-hidden rounded-full">
+            <Image
+              src={profilePhoto}
+              alt="Profile"
+              fill
+              sizes="48px"
+              className="
+        object-cover
+        transition-transform
+        duration-500
+        group-hover:scale-110
+      "
+            />
+          </div>
         </a>
+
+
+
 
         <ul className={`hidden rounded-l-full rounded-r-full py-3 px-8 items-center gap-7 lg:flex ${scrolled
           ? "glass shadow-soft"
