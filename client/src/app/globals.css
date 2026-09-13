@@ -48,25 +48,6 @@
   --glass-bg: rgba(255, 255, 255, 0.04);
   --glass-border: rgba(255, 255, 255, 0.10);
 
-  /* Services */
-  --services-bg:
-    radial-gradient(circle at 15% 15%,
-      rgba(229, 9, 20, 0.14),
-      transparent 30%),
-    radial-gradient(circle at 85% 80%,
-      rgba(229, 9, 20, 0.10),
-      transparent 32%),
-    linear-gradient(135deg,
-      #020202 0%,
-      #080808 48%,
-      #130405 100%);
-
-  --services-svg-primary: #ff1a25;
-  --services-svg-secondary: #e50914;
-  --services-svg-opacity: 0.32;
-  --services-svg-glow: rgba(229, 9, 20, 0.16);
-  --services-grid-color: rgba(255, 255, 255, 0.055);
-
   --hero-bg:
     radial-gradient(circle at 92% 45%,
       rgba(176, 3, 17, 0.3) 0%,
@@ -147,36 +128,6 @@
 
   --glass-bg: rgba(0, 0, 0, 0.03);
   --glass-border: rgba(0, 0, 0, 0.10);
-
-  /* Services */
-  --services-bg:
-    radial-gradient(circle at 15% 15%,
-      rgba(229, 9, 20, 0.07),
-      transparent 30%),
-    radial-gradient(circle at 85% 80%,
-      rgba(229, 9, 20, 0.055),
-      transparent 32%),
-    linear-gradient(135deg,
-      #ffffff 0%,
-      #fafafa 52%,
-      #fff2f2 100%);
-
-  --services-svg-primary: #e50914;
-  --services-svg-secondary: #b0000b;
-  --services-svg-opacity: 0.18;
-  --services-svg-glow: rgba(229, 9, 20, 0.07);
-  --services-grid-color: rgba(0, 0, 0, 0.045);
-
-  /* Hero */
-  --hero-bg:
-    radial-gradient(circle at 70% 40%,
-      rgba(229, 9, 20, 0.14) 0%,
-      rgba(229, 9, 20, 0.055) 35%,
-      rgba(255, 255, 255, 0.98) 75%),
-    linear-gradient(135deg,
-      #ffffff 0%,
-      #fffafa 50%,
-      #fff1f2 100%);
 
   --hero-dot-color: rgba(80, 0, 0, 0.42);
   --hero-dot-opacity: 0.24;
@@ -1296,20 +1247,199 @@ p {
 
 [data-theme="dark"] .skills-section {
   background:
-    radial-gradient(
-      circle at 50% 50%,
+    radial-gradient(circle at 50% 50%,
       rgba(229, 9, 20, 0.035),
-      transparent 45%
-    ),
+      transparent 45%),
     #040404;
 }
 
 [data-theme="light"] .skills-section {
   background:
-    radial-gradient(
-      circle at 50% 50%,
+    radial-gradient(circle at 50% 50%,
       rgba(229, 9, 20, 0.045),
-      transparent 45%
-    ),
+      transparent 45%),
     #fff9fa;
+}
+
+
+
+
+/* =========================================================
+   FAQ — PREMIUM SMOOTH THEME
+========================================================= */
+
+/* =========================================================
+   NIGHT / DARK
+========================================================= */
+
+[data-theme="dark"] {
+  --faq-bg: #030303;
+
+  --faq-heading: #ffffff;
+  --faq-question: rgba(255, 255, 255, 0.88);
+  --faq-hover-heading: #ffffff;
+  --faq-open-heading: #ffffff;
+
+  --faq-muted: rgba(255, 255, 255, 0.48);
+  --faq-answer: rgba(255, 255, 255, 0.58);
+  --faq-label: rgba(255, 255, 255, 0.30);
+
+  --faq-accent: #ff1f2d;
+  --faq-accent-bg: rgba(229, 9, 20, 0.09);
+  --faq-accent-border: rgba(255, 31, 45, 0.25);
+
+  --faq-glow: rgba(229, 9, 20, 0.09);
+  --faq-orb: rgba(229, 9, 20, 0.07);
+  --faq-orb-soft: rgba(140, 0, 10, 0.055);
+
+  --faq-grid-color: rgba(255, 255, 255, 0.04);
+  --faq-grid-opacity: 0.50;
+
+  --faq-pill-bg: rgba(255, 255, 255, 0.03);
+  --faq-pill-border: rgba(255, 255, 255, 0.08);
+
+  --faq-card-bg:
+    linear-gradient(135deg,
+      rgba(255, 255, 255, 0.045),
+      rgba(255, 255, 255, 0.015));
+
+  --faq-card-border: rgba(255, 255, 255, 0.075);
+
+  --faq-hover-bg:
+    linear-gradient(135deg,
+      rgba(255, 255, 255, 0.055),
+      rgba(229, 9, 20, 0.02));
+
+  --faq-hover-border: rgba(255, 31, 45, 0.20);
+
+  --faq-open-bg:
+    linear-gradient(135deg,
+      rgba(255, 255, 255, 0.06),
+      rgba(229, 9, 20, 0.035));
+
+  --faq-open-border: rgba(255, 31, 45, 0.28);
+
+  --faq-feature-bg:
+    radial-gradient(circle at 90% 0%,
+      rgba(229, 9, 20, 0.10),
+      transparent 40%),
+    linear-gradient(145deg,
+      rgba(255, 255, 255, 0.045),
+      rgba(255, 255, 255, 0.012));
+
+  --faq-card-shadow:
+    0 25px 70px -45px rgba(0, 0, 0, 0.9);
+
+  --faq-open-shadow:
+    0 18px 60px -40px rgba(229, 9, 20, 0.16);
+
+  --faq-icon-bg: rgba(229, 9, 20, 0.075);
+  --faq-icon-border: rgba(255, 31, 45, 0.19);
+  --faq-icon-glow: rgba(229, 9, 20, 0.16);
+
+  --faq-number-bg: rgba(255, 255, 255, 0.025);
+  --faq-number-border: rgba(255, 255, 255, 0.07);
+  --faq-number: rgba(255, 255, 255, 0.32);
+
+  --faq-icon-muted: rgba(255, 255, 255, 0.32);
+
+  --faq-divider: rgba(255, 255, 255, 0.065);
+
+  --faq-shine: rgba(255, 31, 45, 0.42);
+}
+
+
+/* =========================================================
+   DAY / LIGHT
+========================================================= */
+
+[data-theme="light"] {
+  --faq-bg: #fffafb;
+
+  --faq-heading: #090909;
+  --faq-question: rgba(10, 10, 10, 0.82);
+  --faq-hover-heading: #050505;
+  --faq-open-heading: #050505;
+
+  --faq-muted: rgba(0, 0, 0, 0.46);
+  --faq-answer: rgba(0, 0, 0, 0.56);
+  --faq-label: rgba(0, 0, 0, 0.32);
+
+  --faq-accent: #e50914;
+  --faq-accent-bg: rgba(229, 9, 20, 0.055);
+  --faq-accent-border: rgba(229, 9, 20, 0.19);
+
+  --faq-glow: rgba(229, 9, 20, 0.06);
+  --faq-orb: rgba(229, 9, 20, 0.045);
+  --faq-orb-soft: rgba(229, 9, 20, 0.035);
+
+  --faq-grid-color: rgba(0, 0, 0, 0.04);
+  --faq-grid-opacity: 0.55;
+
+  --faq-pill-bg: rgba(255, 255, 255, 0.70);
+  --faq-pill-border: rgba(0, 0, 0, 0.07);
+
+  --faq-card-bg:
+    linear-gradient(135deg,
+      rgba(255, 255, 255, 0.94),
+      rgba(255, 249, 250, 0.88));
+
+  --faq-card-border: rgba(0, 0, 0, 0.07);
+
+  --faq-hover-bg:
+    linear-gradient(135deg,
+      #ffffff,
+      rgba(255, 244, 245, 0.94));
+
+  --faq-hover-border: rgba(229, 9, 20, 0.16);
+
+  --faq-open-bg:
+    linear-gradient(135deg,
+      #ffffff,
+      rgba(255, 244, 245, 0.97));
+
+  --faq-open-border: rgba(229, 9, 20, 0.23);
+
+  --faq-feature-bg:
+    radial-gradient(circle at 90% 0%,
+      rgba(229, 9, 20, 0.07),
+      transparent 42%),
+    linear-gradient(145deg,
+      #ffffff,
+      #fff7f8);
+
+  --faq-card-shadow:
+    0 22px 65px -45px rgba(0, 0, 0, 0.25);
+
+  --faq-open-shadow:
+    0 18px 55px -38px rgba(229, 9, 20, 0.14);
+
+  --faq-icon-bg: rgba(229, 9, 20, 0.05);
+  --faq-icon-border: rgba(229, 9, 20, 0.15);
+  --faq-icon-glow: rgba(229, 9, 20, 0.11);
+
+  --faq-number-bg: rgba(0, 0, 0, 0.02);
+  --faq-number-border: rgba(0, 0, 0, 0.07);
+  --faq-number: rgba(0, 0, 0, 0.32);
+
+  --faq-icon-muted: rgba(0, 0, 0, 0.30);
+
+  --faq-divider: rgba(0, 0, 0, 0.065);
+
+  --faq-shine: rgba(229, 9, 20, 0.30);
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  #faq *,
+  #faq *::before,
+  #faq *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }

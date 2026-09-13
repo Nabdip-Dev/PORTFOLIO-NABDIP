@@ -3,7 +3,6 @@ import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/hero/Hero";
 import { About } from "@/components/about/About";
 import { Skills } from "@/components/skills/Skills";
-import { Services } from "@/components/services/Services";
 import { PricingTable } from "@/components/services/PricingTable";
 import { Portfolio } from "@/components/portfolio/Portfolio";
 import { Experience } from "@/components/experience/Experience";
@@ -52,14 +51,13 @@ export default async function HomePage() {
         <Hero />
         <About />
         <Skills />
-        <Services />
-        <PricingTable />
         <Portfolio />
         <Experience />
-        <Education />
+        <PricingTable />
         <Testimonials />
-        <FAQ />
+        <Education />
         <Contact />
+        <FAQ />
       </main>
       <ChatButton />
       <WhatsAppButton/>
