@@ -16,12 +16,12 @@ export function ChatButton() {
       className="
         group
         fixed
-        bottom-20
-        right-5
-        z-50
+        right-3
+        bottom-[calc(5rem+env(safe-area-inset-bottom))]
+        z-[9999]
         flex
-        h-12
-        w-12
+        h-11
+        w-11
         items-center
         justify-center
         rounded-full
@@ -29,11 +29,27 @@ export function ChatButton() {
         shadow-lg
         transition-transform
         duration-300
-        hover:scale-110
-      "
-      style={{ background: "var(--gradient-accent)" }}
-    >
 
+        sm:right-4
+        sm:bottom-[calc(5rem+env(safe-area-inset-bottom))]
+        sm:h-12
+        sm:w-12
+
+        md:right-5
+        md:bottom-20
+        md:h-12
+        md:w-12
+
+        lg:right-6
+        lg:bottom-20
+
+        hover:scale-110
+        active:scale-95
+      "
+      style={{
+        background: "var(--gradient-accent)",
+      }}
+    >
       {/* Soft Live Pulse */}
       <span
         className="
@@ -93,9 +109,13 @@ export function ChatButton() {
           group-hover:rotate-[-8deg]
         "
       >
-        <FiMessageCircle size={20} />
+        <FiMessageCircle
+          className="
+            h-[18px] w-[18px]
+            sm:h-5 sm:w-5
+          "
+        />
       </span>
-
     </button>
   );
 }

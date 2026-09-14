@@ -239,7 +239,7 @@ function CurvedConnection({
         </linearGradient>
 
         <filter
-          id="pointGlow"
+          id={`pointGlow-${index}`}
           x="-500%"
           y="-500%"
           width="1000%"
@@ -249,7 +249,7 @@ function CurvedConnection({
         </filter>
 
         <filter
-          id="smallPointGlow"
+          id={`smallPointGlow-${index}`}
           x="-500%"
           y="-500%"
           width="1000%"
@@ -303,53 +303,78 @@ function SkillNode({
 
   return (
     <div
-      className="absolute z-30 -translate-x-1/2 -translate-y-1/2 group"
+      className="
+        absolute
+        z-30
+        -translate-x-1/2
+        -translate-y-1/2
+        group
+      "
       style={{
         left: position.left,
         top: position.top,
       }}
     >
+      {/* Glow */}
       <div
         className="
           pointer-events-none
           absolute
           left-1/2
           top-1/2
-          h-[64px]
-          w-[64px]
+          h-12
+          w-12
           -translate-x-1/2
           -translate-y-1/2
           rounded-full
           bg-[var(--skills-point)]/[0.04]
           opacity-0
-          blur-xl
+          blur-lg
           transition-all
           duration-500
           group-hover:scale-125
           group-hover:opacity-100
+          sm:h-[58px]
+          sm:w-[58px]
+          sm:blur-xl
+          lg:h-[64px]
+          lg:w-[64px]
         "
       />
 
+      {/* Node */}
       <div
         className="
           skill-node
           relative
           flex
-          h-[50px]
-          w-[50px]
+          h-[38px]
+          w-[38px]
           items-center
           justify-center
           rounded-full
           border
           border-[var(--skills-node-border)]
           bg-[var(--skills-node-bg)]
-          shadow-[0_8px_25px_var(--skills-node-shadow)]
+          shadow-[0_6px_18px_var(--skills-node-shadow)]
           transition-all
           duration-500
           ease-out
           group-hover:scale-[1.08]
           group-hover:border-[var(--skills-point)]/[0.25]
-          group-hover:shadow-[0_0_30px_var(--skills-node-glow)]
+          group-hover:shadow-[0_0_25px_var(--skills-node-glow)]
+
+          xs:h-[42px]
+          xs:w-[42px]
+
+          sm:h-[46px]
+          sm:w-[46px]
+
+          md:h-[50px]
+          md:w-[50px]
+
+          lg:shadow-[0_8px_25px_var(--skills-node-shadow)]
+          lg:group-hover:shadow-[0_0_30px_var(--skills-node-glow)]
         "
         style={{
           animationDuration: `${3.5 + (index % 3) * 0.5}s`,
@@ -360,18 +385,19 @@ function SkillNode({
           className="
             pointer-events-none
             absolute
-            inset-[5px]
+            inset-[4px]
             rounded-full
             border
             border-[var(--skills-inner-border)]
             transition-all
             duration-500
             group-hover:border-[var(--skills-point)]/[0.10]
+            sm:inset-[5px]
           "
         />
 
         <Icon
-          size={21}
+          size={17}
           color={skill.color}
           className="
             relative
@@ -380,6 +406,12 @@ function SkillNode({
             duration-500
             ease-out
             group-hover:scale-110
+
+            sm:[&]:!h-[19px]
+            sm:[&]:!w-[19px]
+
+            md:[&]:!h-[21px]
+            md:[&]:!w-[21px]
           "
         />
 
@@ -388,23 +420,25 @@ function SkillNode({
             origin-dot
             absolute
             top-1/2
-            h-[5px]
-            w-[5px]
+            h-[4px]
+            w-[4px]
             -translate-y-1/2
             rounded-full
             bg-[var(--skills-point)]
-            shadow-[0_0_10px_var(--skills-point)]
+            shadow-[0_0_8px_var(--skills-point)]
+            sm:h-[5px]
+            sm:w-[5px]
           "
           style={
             index < 5
               ? {
-                right: "-2px",
-                animationDelay: `${index * 0.15}s`,
-              }
+                  right: "-2px",
+                  animationDelay: `${index * 0.15}s`,
+                }
               : {
-                left: "-2px",
-                animationDelay: `${index * 0.15}s`,
-              }
+                  left: "-2px",
+                  animationDelay: `${index * 0.15}s`,
+                }
           }
         />
       </div>
@@ -430,25 +464,33 @@ function Center({
         -translate-y-1/2
       "
     >
+      {/* Ambient Glow */}
       <div
         className="
           pointer-events-none
           absolute
           left-1/2
           top-1/2
-          h-[270px]
-          w-[270px]
+          h-[170px]
+          w-[170px]
           -translate-x-1/2
           -translate-y-1/2
           rounded-full
           bg-[var(--skills-point)]/[0.025]
-          blur-[85px]
+          blur-[55px]
+          sm:h-[220px]
+          sm:w-[220px]
+          sm:blur-[70px]
+          lg:h-[270px]
+          lg:w-[270px]
+          lg:blur-[85px]
         "
         style={{
           animation: "ambientPulse 5s ease-in-out infinite",
         }}
       />
 
+      {/* Pulse Rings */}
       <div
         className="
           pulse-ring
@@ -456,13 +498,17 @@ function Center({
           absolute
           left-1/2
           top-1/2
-          h-[145px]
-          w-[145px]
+          h-[105px]
+          w-[105px]
           -translate-x-1/2
           -translate-y-1/2
           rounded-full
           border
           border-[var(--skills-point)]/[0.07]
+          sm:h-[125px]
+          sm:w-[125px]
+          md:h-[145px]
+          md:w-[145px]
         "
       />
 
@@ -473,19 +519,24 @@ function Center({
           absolute
           left-1/2
           top-1/2
-          h-[145px]
-          w-[145px]
+          h-[105px]
+          w-[105px]
           -translate-x-1/2
           -translate-y-1/2
           rounded-full
           border
           border-[var(--skills-point)]/[0.035]
+          sm:h-[125px]
+          sm:w-[125px]
+          md:h-[145px]
+          md:w-[145px]
         "
         style={{
           animationDelay: "1.7s",
         }}
       />
 
+      {/* Orbit */}
       <div
         className="
           orbit
@@ -493,24 +544,29 @@ function Center({
           absolute
           left-1/2
           top-1/2
-          h-[190px]
-          w-[190px]
+          h-[140px]
+          w-[140px]
           -translate-x-1/2
           -translate-y-1/2
           rounded-full
           border
           border-dashed
           border-[var(--skills-orbit-border)]
+          sm:h-[165px]
+          sm:w-[165px]
+          md:h-[190px]
+          md:w-[190px]
         "
       />
 
+      {/* Center Circle */}
       <div
         className="
           center-circle
           relative
           flex
-          h-[120px]
-          w-[120px]
+          h-[82px]
+          w-[82px]
           flex-col
           items-center
           justify-center
@@ -518,31 +574,54 @@ function Center({
           border
           border-[var(--skills-center-border)]
           bg-[var(--skills-center-bg)]
-          shadow-[0_0_60px_var(--skills-center-glow)]
+          shadow-[0_0_35px_var(--skills-center-glow)]
+
+          xs:h-[90px]
+          xs:w-[90px]
+
+          sm:h-[105px]
+          sm:w-[105px]
+
+          md:h-[120px]
+          md:w-[120px]
+
+          sm:shadow-[0_0_45px_var(--skills-center-glow)]
+          md:shadow-[0_0_60px_var(--skills-center-glow)]
         "
       >
         <div
           className="
             pointer-events-none
             absolute
-            inset-[13px]
+            inset-[9px]
             rounded-full
             border
             border-[var(--skills-inner-border)]
+            xs:inset-[10px]
+            sm:inset-[11px]
+            md:inset-[13px]
           "
         />
 
         <div
           key={skill.id}
-          className="relative z-10 flex flex-col items-center"
+          className="relative z-10 flex min-w-0 flex-col items-center"
           style={{
             animation:
               "skillContentIn 550ms cubic-bezier(0.22,1,0.36,1)",
           }}
         >
           <Icon
-            size={31}
+            size={23}
             color={skill.color}
+            className="
+              xs:[&]:!h-[25px]
+              xs:[&]:!w-[25px]
+              sm:[&]:!h-[28px]
+              sm:[&]:!w-[28px]
+              md:[&]:!h-[31px]
+              md:[&]:!w-[31px]
+            "
             style={{
               filter: `drop-shadow(0 0 8px ${skill.color}25)`,
             }}
@@ -550,13 +629,18 @@ function Center({
 
           <span
             className="
-              mt-1
-              max-w-[80px]
+              mt-0.5
+              max-w-[55px]
               truncate
-              text-[8px]
+              text-[7px]
               font-medium
               tracking-wide
               text-[var(--skills-center-muted)]
+              xs:max-w-[65px]
+              xs:text-[8px]
+              sm:max-w-[75px]
+              sm:text-[9px]
+              md:max-w-[80px]
             "
           >
             {skill.name}
@@ -566,9 +650,10 @@ function Center({
             className="
               mt-[1px]
               font-mono
-              text-[9px]
+              text-[8px]
               font-medium
               text-[var(--skills-point)]
+              sm:text-[9px]
             "
           >
             {skill.percentage}%
@@ -579,12 +664,16 @@ function Center({
           className="
             center-dot
             absolute
-            bottom-[12px]
-            h-[4px]
-            w-[4px]
+            bottom-[7px]
+            h-[3px]
+            w-[3px]
             rounded-full
             bg-[var(--skills-point)]
-            shadow-[0_0_10px_var(--skills-point)]
+            shadow-[0_0_8px_var(--skills-point)]
+            sm:bottom-[10px]
+            sm:h-[4px]
+            sm:w-[4px]
+            md:bottom-[12px]
           "
         />
       </div>
@@ -783,11 +872,14 @@ export function Skills() {
           relative
           overflow-hidden
           bg-[var(--skills-background)]
-          py-14
+          py-12
           transition-colors
           duration-500
+
+          xs:py-14
           sm:py-16
-          lg:py-18
+          md:py-18
+          lg:py-20
         "
       >
         <div
@@ -795,20 +887,28 @@ export function Skills() {
             mx-auto
             w-full
             max-w-7xl
-            px-5
+            px-4
+
+            xs:px-5
             sm:px-6
+            lg:px-8
           "
         >
           {/* Heading */}
 
-          <div className="mb-5">
+          <div className="mb-4 xs:mb-5 sm:mb-6">
             <p
               className="
                 font-mono
-                text-[9px]
+                text-[8px]
                 uppercase
-                tracking-[0.30em]
+                tracking-[0.25em]
                 text-[var(--skills-label)]
+
+                xs:text-[9px]
+                xs:tracking-[0.28em]
+
+                sm:tracking-[0.30em]
               "
             >
               Skills
@@ -816,12 +916,16 @@ export function Skills() {
 
             <h2
               className="
-                mt-2
-                text-2xl
+                mt-1.5
+                text-xl
                 font-semibold
                 tracking-tight
                 text-[var(--skills-heading)]
+
+                xs:text-2xl
+                sm:mt-2
                 sm:text-3xl
+                lg:text-[34px]
               "
             >
               Technologies I Work With
@@ -834,30 +938,53 @@ export function Skills() {
             className="
               relative
               mx-auto
-              h-[520px]
+              h-[330px]
               w-full
               max-w-[1030px]
 
-              max-lg:h-[470px]
-              max-md:h-[400px]
-              max-sm:h-[340px]
+              xs:h-[360px]
+
+              sm:h-[400px]
+
+              md:h-[440px]
+
+              lg:h-[500px]
+
+              xl:h-[540px]
             "
           >
+            {/* Ambient Map Glow */}
+
             <div
               className="
                 pointer-events-none
                 absolute
                 left-1/2
                 top-1/2
-                h-[300px]
-                w-[300px]
+                h-[190px]
+                w-[190px]
                 -translate-x-1/2
                 -translate-y-1/2
                 rounded-full
                 bg-[var(--skills-point)]/[0.012]
-                blur-[90px]
+                blur-[65px]
+
+                xs:h-[220px]
+                xs:w-[220px]
+
+                sm:h-[250px]
+                sm:w-[250px]
+
+                md:h-[280px]
+                md:w-[280px]
+
+                lg:h-[300px]
+                lg:w-[300px]
+                lg:blur-[90px]
               "
             />
+
+            {/* Connections */}
 
             {PATHS.map((path, index) => (
               <CurvedConnection
@@ -867,9 +994,13 @@ export function Skills() {
               />
             ))}
 
+            {/* Center */}
+
             <Center
               skill={SKILLS[activeSkill]}
             />
+
+            {/* Nodes */}
 
             {SKILLS.map((skill, index) => (
               <SkillNode

@@ -14,6 +14,7 @@ import { fetchHero } from "@/services/api/heroService";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { ChatButton } from "@/components/layout/ChatButton";
 
+
 // Server-rendered so the Person JSON-LD is present in the initial HTML —
 // structured data that only appears after client-side fetch is invisible
 // to most crawlers, so this fetch happens here rather than in <Hero />.

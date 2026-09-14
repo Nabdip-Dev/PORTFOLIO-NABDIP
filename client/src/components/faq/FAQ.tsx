@@ -32,9 +32,12 @@ export function FAQ() {
       className="
         relative overflow-hidden
         bg-[var(--faq-bg)]
-        py-24
+        py-16
         transition-colors duration-700 ease-in-out
-        sm:py-28 lg:py-32
+        sm:py-20
+        md:py-24
+        lg:py-28
+        xl:py-32
       "
     >
       {/* =====================================================
@@ -48,13 +51,17 @@ export function FAQ() {
         {/* Main soft glow */}
         <motion.div
           className="
-            absolute left-1/2 top-[12%]
-            h-[420px] w-[420px]
+            absolute left-1/2 top-[8%]
+            h-[260px] w-[260px]
             -translate-x-1/2
             rounded-full
             bg-[var(--faq-glow)]
-            blur-[120px]
+            blur-[80px]
             opacity-50
+            sm:h-[340px] sm:w-[340px]
+            sm:blur-[100px]
+            md:h-[420px] md:w-[420px]
+            md:blur-[120px]
           "
           animate={{
             opacity: [0.46, 0.54, 0.46],
@@ -70,10 +77,12 @@ export function FAQ() {
         <motion.div
           className="
             absolute -right-24 top-10
-            h-64 w-64
+            h-40 w-40
             rounded-full
             bg-[var(--faq-orb)]
             blur-3xl
+            sm:h-52 sm:w-52
+            md:h-64 md:w-64
           "
           animate={{
             x: [0, 6, 0],
@@ -90,10 +99,12 @@ export function FAQ() {
         <motion.div
           className="
             absolute -left-32 bottom-0
-            h-72 w-72
+            h-48 w-48
             rounded-full
             bg-[var(--faq-orb-soft)]
             blur-3xl
+            sm:h-60 sm:w-60
+            md:h-72 md:w-72
           "
           animate={{
             x: [0, -6, 0],
@@ -112,7 +123,9 @@ export function FAQ() {
             absolute inset-0
             opacity-[var(--faq-grid-opacity)]
             [background-image:linear-gradient(var(--faq-grid-color)_1px,transparent_1px),linear-gradient(90deg,var(--faq-grid-color)_1px,transparent_1px)]
-            [background-size:55px_55px]
+            [background-size:35px_35px]
+            sm:[background-size:45px_45px]
+            md:[background-size:55px_55px]
             [mask-image:radial-gradient(circle_at_center,black,transparent_75%)]
           "
         />
@@ -123,7 +136,17 @@ export function FAQ() {
             HEADER
         ====================================================== */}
 
-        <div className="relative z-10 mx-auto mb-16 max-w-3xl text-center">
+        <div
+          className="
+            relative z-10 mx-auto
+            mb-10
+            w-full max-w-3xl
+            px-1
+            text-center
+            sm:mb-12
+            md:mb-16
+          "
+        >
           {/* Eyebrow */}
           <motion.div
             initial={{
@@ -143,18 +166,23 @@ export function FAQ() {
               ease: "easeOut",
             }}
             className="
-              mb-5 inline-flex items-center gap-2
+              mb-4 inline-flex max-w-full
+              items-center gap-2
               rounded-full
               border border-[var(--faq-pill-border)]
               bg-[var(--faq-pill-bg)]
-              px-4 py-2
-              text-[10px] font-semibold uppercase
-              tracking-[0.28em]
+              px-3 py-1.5
+              text-[9px] font-semibold uppercase
+              tracking-[0.2em]
               text-[var(--faq-accent)]
               backdrop-blur-xl
+              sm:mb-5
+              sm:px-4 sm:py-2
+              sm:text-[10px]
+              sm:tracking-[0.28em]
             "
           >
-            <span className="relative flex h-2 w-2">
+            <span className="relative flex h-2 w-2 shrink-0">
               <span
                 className="
                   absolute inline-flex h-full w-full
@@ -173,7 +201,9 @@ export function FAQ() {
               />
             </span>
 
-            {t.sections.faq.eyebrow}
+            <span className="truncate">
+              {t.sections.faq.eyebrow}
+            </span>
           </motion.div>
 
           {/* Heading */}
@@ -195,6 +225,7 @@ export function FAQ() {
               delay: 0.05,
               ease: "easeOut",
             }}
+            className="w-full"
           >
             <SectionHeading
               eyebrow=""
@@ -221,12 +252,14 @@ export function FAQ() {
               ease: "easeOut",
             }}
             className="
-              mx-auto mt-7 h-[2px]
+              mx-auto mt-6 h-[2px]
+              max-w-[110px]
               rounded-full
               bg-gradient-to-r
               from-transparent
               via-[var(--faq-accent)]
               to-transparent
+              sm:mt-7
             "
           />
         </div>
@@ -236,7 +269,14 @@ export function FAQ() {
         ====================================================== */}
 
         {isLoading ? (
-          <div className="relative z-10 mx-auto max-w-5xl space-y-4">
+          <div
+            className="
+              relative z-10 mx-auto
+              w-full max-w-5xl
+              space-y-3
+              sm:space-y-4
+            "
+          >
             {Array.from({ length: 5 }).map((_, index) => (
               <motion.div
                 key={index}
@@ -251,18 +291,20 @@ export function FAQ() {
                   delay: index * 0.04,
                 }}
                 className="
-                  h-[82px]
+                  min-h-[76px]
                   rounded-2xl
                   border border-[var(--faq-card-border)]
                   bg-[var(--faq-card-bg)]
-                  p-5
+                  p-4
                   backdrop-blur-xl
+                  sm:min-h-[82px]
+                  sm:p-5
                 "
               >
-                <Skeleton className="h-5 w-3/5" />
+                <Skeleton className="h-5 w-3/5 max-w-full" />
 
                 <div className="mt-3">
-                  <Skeleton className="h-3 w-1/4" />
+                  <Skeleton className="h-3 w-1/4 max-w-full" />
                 </div>
               </motion.div>
             ))}
@@ -289,13 +331,17 @@ export function FAQ() {
               ease: "easeOut",
             }}
             className="
-              relative z-10 mx-auto max-w-2xl
+              relative z-10 mx-auto
+              w-full max-w-2xl
               rounded-3xl
               border border-[var(--faq-card-border)]
               bg-[var(--faq-card-bg)]
-              p-12 text-center
+              p-7
+              text-center
               shadow-[var(--faq-card-shadow)]
               backdrop-blur-xl
+              sm:p-10
+              md:p-12
             "
           >
             <div
@@ -314,6 +360,7 @@ export function FAQ() {
             <p
               className="
                 text-sm
+                leading-6
                 text-[var(--faq-muted)]
               "
             >
@@ -327,8 +374,11 @@ export function FAQ() {
 
           <div
             className="
-              relative z-10 mx-auto grid max-w-6xl
-              gap-5 lg:grid-cols-[0.34fr_0.66fr]
+              relative z-10 mx-auto
+              grid w-full max-w-6xl
+              gap-4
+              lg:grid-cols-[0.34fr_0.66fr]
+              lg:gap-5
             "
           >
             {/* =================================================
@@ -502,7 +552,7 @@ export function FAQ() {
                 FAQ LIST
             ================================================== */}
 
-            <div className="space-y-3">
+            <div className="min-w-0 space-y-3">
               {items.map((faq, index) => {
                 const isOpen = openId === faq._id;
 
@@ -526,7 +576,7 @@ export function FAQ() {
                       delay: index * 0.025,
                       ease: "easeOut",
                     }}
-                    className="group"
+                    className="group min-w-0"
                   >
                     <motion.div
                       layout
@@ -598,23 +648,27 @@ export function FAQ() {
                         aria-expanded={isOpen}
                         className="
                           flex w-full
-                          items-center gap-4
-                          px-5 py-5
+                          min-w-0
+                          items-center gap-3
+                          px-4 py-4
                           text-left
                           outline-none
+                          sm:gap-4
                           sm:px-6 sm:py-5
                         "
                       >
                         {/* Number */}
                         <span
                           className={`
-                            flex h-9 w-9
+                            flex h-8 w-8
                             shrink-0 items-center justify-center
                             rounded-xl
                             border
-                            font-mono text-[10px]
+                            font-mono text-[9px]
                             transition-all duration-500
                             ease-in-out
+                            sm:h-9 sm:w-9
+                            sm:text-[10px]
                             ${
                               isOpen
                                 ? "border-[var(--faq-accent-border)] bg-[var(--faq-accent-bg)] text-[var(--faq-accent)]"
@@ -628,11 +682,15 @@ export function FAQ() {
                         {/* Question */}
                         <span
                           className={`
-                            flex-1 pr-2
-                            text-sm font-medium
-                            leading-6
+                            min-w-0 flex-1 pr-1
+                            break-words
+                            text-[13px] font-medium
+                            leading-5
                             transition-colors duration-500
                             ease-in-out
+                            sm:pr-2
+                            sm:text-sm
+                            sm:leading-6
                             ${
                               isOpen
                                 ? "text-[var(--faq-open-heading)]"
@@ -653,12 +711,13 @@ export function FAQ() {
                             ease: "easeInOut",
                           }}
                           className={`
-                            flex h-9 w-9
+                            flex h-8 w-8
                             shrink-0 items-center justify-center
                             rounded-xl
                             border
                             transition-all duration-500
                             ease-in-out
+                            sm:h-9 sm:w-9
                             ${
                               isOpen
                                 ? "border-[var(--faq-accent-border)] bg-[var(--faq-accent-bg)] text-[var(--faq-accent)]"
@@ -666,7 +725,7 @@ export function FAQ() {
                             }
                           `}
                         >
-                          <FiChevronDown size={16} />
+                          <FiChevronDown size={15} />
                         </motion.span>
                       </button>
 
@@ -701,7 +760,17 @@ export function FAQ() {
                             }}
                             className="overflow-hidden"
                           >
-                            <div className="px-5 pb-6 pl-[4.75rem] pr-6 sm:pl-[4.9rem]">
+                            <div
+                              className="
+                                px-4 pb-5
+                                pl-[3.75rem]
+                                pr-4
+                                sm:px-5
+                                sm:pb-6
+                                sm:pl-[4.75rem]
+                                sm:pr-6
+                              "
+                            >
                               {/* Divider */}
                               <div
                                 className="
@@ -725,8 +794,12 @@ export function FAQ() {
                                 }}
                                 className="
                                   max-w-2xl
-                                  text-sm leading-7
+                                  break-words
+                                  text-[13px]
+                                  leading-6
                                   text-[var(--faq-answer)]
+                                  sm:text-sm
+                                  sm:leading-7
                                 "
                               >
                                 {faq.answer}
@@ -746,16 +819,21 @@ export function FAQ() {
                                   ease: "easeOut",
                                 }}
                                 className="
-                                  mt-5 flex items-center gap-2
-                                  text-[10px]
+                                  mt-5 flex
+                                  flex-wrap
+                                  items-center gap-2
+                                  text-[9px]
                                   font-mono uppercase
-                                  tracking-[0.18em]
+                                  tracking-[0.14em]
                                   text-[var(--faq-label)]
+                                  sm:text-[10px]
+                                  sm:tracking-[0.18em]
                                 "
                               >
                                 <span
                                   className="
-                                    h-1.5 w-1.5 rounded-full
+                                    h-1.5 w-1.5 shrink-0
+                                    rounded-full
                                     bg-[var(--faq-accent)]
                                   "
                                 />

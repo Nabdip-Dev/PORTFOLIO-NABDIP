@@ -1443,3 +1443,250 @@ p {
     transition: none !important;
   }
 }
+
+/* =========================================================
+    GLOBAL RESPONSIVE / HORIZONTAL OVERFLOW FIX
+    Mobile + Tablet + Laptop + Desktop
+ ========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  margin: 0;
+  padding: 0;
+
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+}
+
+/* Prevent main page wrappers from becoming wider than viewport */
+main,
+section,
+header,
+footer,
+nav,
+article,
+aside {
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* Images / videos / canvas should never force page width */
+img,
+video,
+canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+/* SVG safety */
+svg {
+  max-width: 100%;
+}
+
+/* =========================================================
+    ABSOLUTE / DECORATIVE ELEMENTS
+ ========================================================= */
+
+[class*="absolute"] {
+  max-width: 100%;
+}
+
+/* =========================================================
+    SKILLS SECTION
+ ========================================================= */
+
+#skills {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+#skills>div {
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* SVG connection lines */
+#skills svg {
+  max-width: none;
+}
+
+/* =========================================================
+    TESTIMONIALS
+ ========================================================= */
+
+.testimonials-section {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/*
+    Marquee itself can be wider than viewport.
+    Its parent must clip it.
+ */
+.testimonial-marquee-track {
+  width: max-content;
+  max-width: none;
+  flex-shrink: 0;
+}
+
+/* =========================================================
+    TEXT / FLEX / GRID SAFETY
+ ========================================================= */
+
+.min-w-0,
+[class*="flex"],
+[class*="grid"] {
+  min-width: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a {
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+/* Long URLs / email / code-like text */
+p,
+span,
+a {
+  max-width: 100%;
+}
+
+/* =========================================================
+    TABLE SAFETY
+ ========================================================= */
+
+table {
+  max-width: 100%;
+}
+
+/* =========================================================
+    FORM SAFETY
+ ========================================================= */
+
+input,
+textarea,
+select,
+button {
+  max-width: 100%;
+}
+
+/* =========================================================
+    MOBILE
+ ========================================================= */
+
+@media (max-width: 640px) {
+
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
+    overflow-x: hidden !important;
+  }
+
+  #skills,
+  .testimonials-section {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden !important;
+  }
+
+  /*
+      Keep skill map inside viewport.
+   */
+  #skills>div {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  /*
+      Prevent large decorative elements from
+      creating horizontal page size.
+   */
+  .testimonials-section::before {
+    max-width: 100vw;
+  }
+}
+
+/* =========================================================
+    TABLET
+ ========================================================= */
+
+@media (min-width: 641px) and (max-width: 1024px) {
+
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  #skills,
+  .testimonials-section {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+}
+
+/* =========================================================
+    LAPTOP / DESKTOP
+ ========================================================= */
+
+@media (min-width: 1025px) {
+
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  #skills,
+  .testimonials-section {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+}
+
+/* =========================================================
+    EXTRA SAFETY
+ ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
