@@ -1694,61 +1694,46 @@ button {
 
 
 
+
 /* =========================================================
    CONTACT — PREMIUM LIGHT / DARK THEME
+   OPTIMIZED — ORIGINAL COLORS PRESERVED
 ========================================================= */
 
 /* ---------- LIGHT ---------- */
 
 [data-theme="light"] {
   --contact-bg:
-    radial-gradient(circle at 8% 18%,
-      rgba(229, 9, 20, 0.07),
-      transparent 30%),
-    radial-gradient(circle at 92% 78%,
-      rgba(229, 9, 20, 0.055),
-      transparent 32%),
-    linear-gradient(135deg,
-      #fffefe 0%,
-      #fffafa 45%,
-      #fff2f3 100%);
+    radial-gradient(circle at 8% 18%, rgba(229, 9, 20, 0.07), transparent 30%),
+    radial-gradient(circle at 92% 78%, rgba(229, 9, 20, 0.055), transparent 32%),
+    linear-gradient(135deg, #fffefe 0%, #fffafa 45%, #fff2f3 100%);
 
   --contact-card:
-    linear-gradient(145deg,
-      rgba(255, 255, 255, 0.94),
-      rgba(255, 255, 255, 0.78));
+    linear-gradient(145deg, rgba(255,255,255,.94), rgba(255,255,255,.78));
 
   --contact-form:
-    linear-gradient(145deg,
-      rgba(255, 255, 255, 0.98),
-      rgba(255, 250, 250, 0.88));
+    linear-gradient(145deg, rgba(255,255,255,.98), rgba(255,250,250,.88));
 
-  --contact-border: rgba(0, 0, 0, 0.075);
-  --contact-border-strong: rgba(0, 0, 0, 0.11);
+  --contact-border: rgba(0,0,0,.075);
+  --contact-border-strong: rgba(0,0,0,.11);
 
-  --contact-input-bg: rgba(255, 255, 255, 0.82);
-  --contact-input-focus: rgba(229, 9, 20, 0.12);
+  --contact-input-bg: rgba(255,255,255,.82);
+  --contact-input-focus: rgba(229,9,20,.12);
 
   --contact-text: #090909;
-  --contact-muted: rgba(0, 0, 0, 0.52);
+  --contact-muted: rgba(0,0,0,.52);
 
   --contact-accent: #e50914;
   --contact-accent-bright: #ff2631;
 
-  --contact-orb-one: rgba(229, 9, 20, 0.10);
-  --contact-orb-two: rgba(255, 104, 112, 0.07);
+  --contact-orb-one: rgba(229,9,20,.10);
+  --contact-orb-two: rgba(255,104,112,.07);
 
-  --contact-shadow:
-    0 35px 90px -55px rgba(0, 0, 0, 0.28);
+  --contact-shadow: 0 25px 60px -45px rgba(0,0,0,.28);
+  --contact-shadow-hover: 0 30px 70px -42px rgba(229,9,20,.16);
 
-  --contact-shadow-hover:
-    0 40px 100px -50px rgba(229, 9, 20, 0.16);
-
-  --contact-grid:
-    rgba(0, 0, 0, 0.035);
-
-  --contact-quote-bg:
-    rgba(229, 9, 20, 0.035);
+  --contact-grid: rgba(0,0,0,.035);
+  --contact-quote-bg: rgba(229,9,20,.035);
 }
 
 
@@ -1756,53 +1741,36 @@ button {
 
 [data-theme="dark"] {
   --contact-bg:
-    radial-gradient(circle at 8% 18%,
-      rgba(229, 9, 20, 0.13),
-      transparent 31%),
-    radial-gradient(circle at 92% 78%,
-      rgba(176, 0, 12, 0.14),
-      transparent 34%),
-    linear-gradient(135deg,
-      #020202 0%,
-      #070707 48%,
-      #120304 100%);
+    radial-gradient(circle at 8% 18%, rgba(229,9,20,.13), transparent 31%),
+    radial-gradient(circle at 92% 78%, rgba(176,0,12,.14), transparent 34%),
+    linear-gradient(135deg, #020202 0%, #070707 48%, #120304 100%);
 
   --contact-card:
-    linear-gradient(145deg,
-      rgba(255, 255, 255, 0.055),
-      rgba(255, 255, 255, 0.018));
+    linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.018));
 
   --contact-form:
-    linear-gradient(145deg,
-      rgba(255, 255, 255, 0.065),
-      rgba(255, 255, 255, 0.018));
+    linear-gradient(145deg, rgba(255,255,255,.065), rgba(255,255,255,.018));
 
-  --contact-border: rgba(255, 255, 255, 0.085);
-  --contact-border-strong: rgba(255, 255, 255, 0.13);
+  --contact-border: rgba(255,255,255,.085);
+  --contact-border-strong: rgba(255,255,255,.13);
 
-  --contact-input-bg: rgba(255, 255, 255, 0.035);
-  --contact-input-focus: rgba(229, 9, 20, 0.16);
+  --contact-input-bg: rgba(255,255,255,.035);
+  --contact-input-focus: rgba(229,9,20,.16);
 
-  --contact-text: #ffffff;
-  --contact-muted: rgba(255, 255, 255, 0.50);
+  --contact-text: #fff;
+  --contact-muted: rgba(255,255,255,.50);
 
   --contact-accent: #ff1f2d;
   --contact-accent-bright: #ff3c48;
 
-  --contact-orb-one: rgba(229, 9, 20, 0.16);
-  --contact-orb-two: rgba(176, 0, 12, 0.13);
+  --contact-orb-one: rgba(229,9,20,.16);
+  --contact-orb-two: rgba(176,0,12,.13);
 
-  --contact-shadow:
-    0 40px 100px -55px rgba(0, 0, 0, 0.9);
+  --contact-shadow: 0 30px 70px -45px rgba(0,0,0,.9);
+  --contact-shadow-hover: 0 35px 80px -42px rgba(229,9,20,.22);
 
-  --contact-shadow-hover:
-    0 45px 110px -50px rgba(229, 9, 20, 0.22);
-
-  --contact-grid:
-    rgba(255, 255, 255, 0.035);
-
-  --contact-quote-bg:
-    rgba(229, 9, 20, 0.065);
+  --contact-grid: rgba(255,255,255,.035);
+  --contact-quote-bg: rgba(229,9,20,.065);
 }
 
 
@@ -1813,9 +1781,12 @@ button {
 .contact-section {
   background: var(--contact-bg);
   color: var(--contact-text);
+
   transition:
-    background 0.6s ease,
-    color 0.4s ease;
+    background .35s ease,
+    color .25s ease;
+
+  contain: paint;
 }
 
 
@@ -1825,39 +1796,43 @@ button {
 
 .contact-orb-one {
   background: var(--contact-orb-one);
-  animation: contact-orb-float-one 9s ease-in-out infinite;
+  animation: contact-orb-float-one 14s ease-in-out infinite;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 .contact-orb-two {
   background: var(--contact-orb-two);
-  animation: contact-orb-float-two 11s ease-in-out infinite;
+  animation: contact-orb-float-two 16s ease-in-out infinite;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 .contact-grid {
   background-image:
-    linear-gradient(to right,
-      var(--contact-grid) 1px,
-      transparent 1px),
-    linear-gradient(to bottom,
-      var(--contact-grid) 1px,
-      transparent 1px);
+    linear-gradient(to right, var(--contact-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--contact-grid) 1px, transparent 1px);
 
   background-size: 70px 70px;
 
-  mask-image:
-    radial-gradient(ellipse at center,
-      black 0%,
-      transparent 72%);
+  mask-image: radial-gradient(
+    ellipse at center,
+    black 0%,
+    transparent 72%
+  );
 
-  -webkit-mask-image:
-    radial-gradient(ellipse at center,
-      black 0%,
-      transparent 72%);
+  -webkit-mask-image: radial-gradient(
+    ellipse at center,
+    black 0%,
+    transparent 72%
+  );
 }
 
 .contact-ring {
   border-color: var(--contact-border);
-  animation: contact-ring-float 8s ease-in-out infinite;
+  animation: contact-ring-float 12s ease-in-out infinite;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 
@@ -1867,16 +1842,20 @@ button {
 
 .contact-reveal {
   opacity: 0;
-  transform: translateY(24px);
-  animation: contact-reveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transform: translate3d(0, 14px, 0);
+
+  animation:
+    contact-reveal .55s cubic-bezier(.22,1,.36,1) forwards;
+
+  will-change: transform, opacity;
 }
 
 .contact-reveal:nth-child(2) {
-  animation-delay: 0.12s;
+  animation-delay: .08s;
 }
 
 .contact-reveal:nth-child(3) {
-  animation-delay: 0.22s;
+  animation-delay: .14s;
 }
 
 
@@ -1890,14 +1869,19 @@ button {
   background: var(--contact-accent);
 
   box-shadow:
-    0 0 0 4px color-mix(in srgb,
+    0 0 0 3px color-mix(
+      in srgb,
       var(--contact-accent) 10%,
-      transparent),
-    0 0 14px color-mix(in srgb,
-      var(--contact-accent) 55%,
-      transparent);
+      transparent
+    ),
+    0 0 10px color-mix(
+      in srgb,
+      var(--contact-accent) 45%,
+      transparent
+    );
 
-  animation: contact-status-pulse 2.2s ease-in-out infinite;
+  animation: contact-status-pulse 3s ease-in-out infinite;
+  will-change: box-shadow;
 }
 
 
@@ -1907,12 +1891,15 @@ button {
 
 .contact-divider {
   background:
-    linear-gradient(90deg,
+    linear-gradient(
+      90deg,
       transparent,
       var(--contact-accent),
-      transparent);
+      transparent
+    );
 
-  animation: contact-divider 2.8s ease-in-out infinite;
+  animation: contact-divider 4s ease-in-out infinite;
+  will-change: transform, opacity;
 }
 
 
@@ -1926,20 +1913,27 @@ button {
 
   box-shadow: var(--contact-shadow);
 
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  /* lighter blur for better PC performance */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 
   transition:
-    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 0.4s ease,
-    box-shadow 0.5s ease;
+    transform .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease;
+
+  backface-visibility: hidden;
 }
 
 .contact-info-card:hover {
-  transform: translateY(-6px);
-  border-color: color-mix(in srgb,
-      var(--contact-accent) 25%,
-      var(--contact-border));
+  transform: translate3d(0,-4px,0);
+
+  border-color: color-mix(
+    in srgb,
+    var(--contact-accent) 25%,
+    var(--contact-border)
+  );
+
   box-shadow: var(--contact-shadow-hover);
 }
 
@@ -1954,19 +1948,23 @@ button {
 
   box-shadow: var(--contact-shadow);
 
-  backdrop-filter: blur(26px);
-  -webkit-backdrop-filter: blur(26px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 
   transition:
-    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 0.4s ease,
-    box-shadow 0.5s ease;
+    transform .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease;
+
+  backface-visibility: hidden;
 }
 
 .contact-form-card:hover {
-  border-color: color-mix(in srgb,
-      var(--contact-accent) 20%,
-      var(--contact-border));
+  border-color: color-mix(
+    in srgb,
+    var(--contact-accent) 20%,
+    var(--contact-border)
+  );
 
   box-shadow: var(--contact-shadow-hover);
 }
@@ -1979,20 +1977,24 @@ button {
 .contact-card-shine,
 .contact-form-accent {
   background:
-    linear-gradient(90deg,
+    linear-gradient(
+      90deg,
       transparent,
-      color-mix(in srgb,
+      color-mix(
+        in srgb,
         var(--contact-accent) 70%,
-        transparent),
-      transparent);
+        transparent
+      ),
+      transparent
+    );
 }
 
 .contact-card-shine {
-  opacity: 0.7;
+  opacity: .7;
 }
 
 .contact-form-accent {
-  opacity: 0.8;
+  opacity: .8;
 }
 
 
@@ -2014,34 +2016,43 @@ button {
   color: var(--contact-accent);
 
   background:
-    color-mix(in srgb,
+    color-mix(
+      in srgb,
       var(--contact-accent) 6%,
-      transparent);
+      transparent
+    );
 
   border-color:
-    color-mix(in srgb,
+    color-mix(
+      in srgb,
       var(--contact-accent) 16%,
-      var(--contact-border));
+      var(--contact-border)
+    );
 
   transition:
-    transform 0.35s ease,
-    background 0.35s ease,
-    box-shadow 0.35s ease;
+    transform .2s ease,
+    background .2s ease,
+    box-shadow .2s ease;
 }
 
 .contact-form-icon:hover,
 .contact-detail-icon:hover {
-  transform: translateY(-2px) scale(1.04);
+  transform: translate3d(0,-1px,0) scale(1.02);
 
   background:
-    color-mix(in srgb,
+    color-mix(
+      in srgb,
       var(--contact-accent) 11%,
-      transparent);
+      transparent
+    );
 
   box-shadow:
-    0 10px 30px -15px color-mix(in srgb,
+    0 8px 22px -15px
+    color-mix(
+      in srgb,
       var(--contact-accent) 55%,
-      transparent);
+      transparent
+    );
 }
 
 .contact-detail-group {
@@ -2070,18 +2081,20 @@ button {
   border-color: var(--contact-border);
 
   transition:
-    background 0.35s ease,
-    border-color 0.35s ease,
-    transform 0.35s ease;
+    background .2s ease,
+    border-color .2s ease,
+    transform .2s ease;
 }
 
 .contact-quote:hover {
-  transform: translateY(-2px);
+  transform: translate3d(0,-1px,0);
 
   border-color:
-    color-mix(in srgb,
+    color-mix(
+      in srgb,
       var(--contact-accent) 16%,
-      var(--contact-border));
+      var(--contact-border)
+    );
 }
 
 .contact-mini-line {
@@ -2101,7 +2114,7 @@ button {
 
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: .18em;
   text-transform: uppercase;
 }
 
@@ -2120,35 +2133,39 @@ button {
   background: var(--contact-input-bg);
 
   transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease,
-    background 0.3s ease,
-    transform 0.3s ease;
+    border-color .2s ease,
+    box-shadow .2s ease,
+    background .2s ease;
 }
 
 .contact-input-shell:focus-within,
 .contact-textarea-shell:focus-within {
-  transform: translateY(-1px);
-
   border-color:
-    color-mix(in srgb,
+    color-mix(
+      in srgb,
       var(--contact-accent) 70%,
-      var(--contact-border));
+      var(--contact-border)
+    );
 
   background:
-    color-mix(in srgb,
+    color-mix(
+      in srgb,
       var(--contact-accent) 2.5%,
-      var(--contact-input-bg));
+      var(--contact-input-bg)
+    );
 
   box-shadow:
-    0 0 0 4px var(--contact-input-focus),
-    0 12px 30px -22px color-mix(in srgb,
+    0 0 0 3px var(--contact-input-focus),
+    0 8px 22px -20px
+    color-mix(
+      in srgb,
       var(--contact-accent) 55%,
-      transparent);
+      transparent
+    );
 }
 
 .contact-input-error {
-  border-color: rgba(239, 68, 68, 0.65) !important;
+  border-color: rgba(239,68,68,.65) !important;
 }
 
 .contact-input {
@@ -2164,17 +2181,15 @@ button {
 
   font-size: 13px;
   line-height: 1.5;
-
-  transition: color 0.25s ease;
 }
 
 .contact-input::placeholder {
   color: var(--contact-muted);
-  opacity: 0.55;
+  opacity: .55;
 }
 
 .contact-input:focus::placeholder {
-  opacity: 0.35;
+  opacity: .35;
 }
 
 
@@ -2190,7 +2205,7 @@ button {
   font-size: 10px;
   line-height: 1.4;
 
-  animation: contact-error-in 0.25s ease-out;
+  animation: contact-error-in .2s ease-out;
 }
 
 
@@ -2200,41 +2215,49 @@ button {
 
 .contact-submit {
   background:
-    linear-gradient(135deg,
+    linear-gradient(
+      135deg,
       var(--contact-accent-bright),
-      var(--contact-accent)) !important;
+      var(--contact-accent)
+    ) !important;
 
-  color: #ffffff !important;
+  color: #fff !important;
 
   box-shadow:
-    0 14px 35px -18px color-mix(in srgb,
+    0 10px 28px -18px
+    color-mix(
+      in srgb,
       var(--contact-accent) 70%,
-      transparent);
+      transparent
+    );
 
   transition:
-    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.3s ease,
-    filter 0.3s ease;
+    transform .2s ease,
+    box-shadow .2s ease,
+    filter .2s ease;
 }
 
 .contact-submit:hover:not(:disabled) {
-  transform: translateY(-2px);
+  transform: translate3d(0,-2px,0);
 
-  filter: brightness(1.06);
+  filter: brightness(1.05);
 
   box-shadow:
-    0 20px 45px -18px color-mix(in srgb,
+    0 16px 35px -18px
+    color-mix(
+      in srgb,
       var(--contact-accent) 80%,
-      transparent);
+      transparent
+    );
 }
 
 .contact-submit:active:not(:disabled) {
-  transform: translateY(0) scale(0.99);
+  transform: translate3d(0,0,0) scale(.99);
 }
 
 .contact-submit:disabled {
   cursor: not-allowed;
-  opacity: 0.75;
+  opacity: .75;
 }
 
 
@@ -2243,9 +2266,12 @@ button {
 ========================================================= */
 
 .contact-button-shine {
-  background: rgba(255, 255, 255, 0.24);
+  background: rgba(255,255,255,.24);
 
-  animation: contact-button-shine 3.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation:
+    contact-button-shine 5s cubic-bezier(.4,0,.2,1) infinite;
+
+  will-change: left;
 }
 
 
@@ -2254,7 +2280,7 @@ button {
 ========================================================= */
 
 .contact-spinner {
-  animation: contact-spinner 0.75s linear infinite;
+  animation: contact-spinner .75s linear infinite;
 }
 
 
@@ -2274,17 +2300,23 @@ button {
 .contact-corner {
   pointer-events: none;
 
-  border-top: 1px solid color-mix(in srgb,
+  border-top: 1px solid
+    color-mix(
+      in srgb,
       var(--contact-accent) 20%,
-      transparent);
+      transparent
+    );
 
-  border-right: 1px solid color-mix(in srgb,
+  border-right: 1px solid
+    color-mix(
+      in srgb,
       var(--contact-accent) 20%,
-      transparent);
+      transparent
+    );
 
   border-top-right-radius: 2rem;
 
-  opacity: 0.6;
+  opacity: .6;
 }
 
 
@@ -2295,86 +2327,93 @@ button {
 @keyframes contact-reveal {
   from {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translate3d(0,14px,0);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0,0,0);
   }
 }
 
 @keyframes contact-status-pulse {
-
   0%,
   100% {
     box-shadow:
-      0 0 0 4px color-mix(in srgb,
+      0 0 0 3px
+      color-mix(
+        in srgb,
         var(--contact-accent) 9%,
-        transparent),
-      0 0 12px color-mix(in srgb,
-        var(--contact-accent) 45%,
-        transparent);
+        transparent
+      ),
+      0 0 10px
+      color-mix(
+        in srgb,
+        var(--contact-accent) 40%,
+        transparent
+      );
   }
 
   50% {
     box-shadow:
-      0 0 0 7px color-mix(in srgb,
+      0 0 0 5px
+      color-mix(
+        in srgb,
         var(--contact-accent) 3%,
-        transparent),
-      0 0 22px color-mix(in srgb,
-        var(--contact-accent) 65%,
-        transparent);
+        transparent
+      ),
+      0 0 16px
+      color-mix(
+        in srgb,
+        var(--contact-accent) 55%,
+        transparent
+      );
   }
 }
 
 @keyframes contact-divider {
-
   0%,
   100% {
-    opacity: 0.55;
-    transform: scaleX(0.7);
+    opacity: .55;
+    transform: scaleX(.8);
   }
 
   50% {
-    opacity: 1;
+    opacity: .9;
     transform: scaleX(1);
   }
 }
 
 @keyframes contact-orb-float-one {
-
   0%,
   100% {
-    transform: translate3d(0, 0, 0) scale(1);
+    transform: translate3d(0,0,0) scale(1);
   }
 
   50% {
-    transform: translate3d(20px, -18px, 0) scale(1.08);
+    transform: translate3d(12px,-10px,0) scale(1.04);
   }
 }
 
 @keyframes contact-orb-float-two {
-
   0%,
   100% {
-    transform: translate3d(0, 0, 0) scale(1);
+    transform: translate3d(0,0,0) scale(1);
   }
 
   50% {
-    transform: translate3d(-22px, 15px, 0) scale(1.06);
+    transform: translate3d(-12px,8px,0) scale(1.03);
   }
 }
 
 @keyframes contact-ring-float {
-
   0%,
   100% {
-    transform: translateY(0) rotate(0deg);
+    transform: translate3d(0,0,0) rotate(0deg);
   }
 
   50% {
-    transform: translateY(-12px) rotate(5deg);
+    transform: translate3d(0,-7px,0) rotate(3deg);
   }
 }
 
@@ -2383,7 +2422,7 @@ button {
     left: -90px;
   }
 
-  25%,
+  20%,
   100% {
     left: 120%;
   }
@@ -2398,12 +2437,12 @@ button {
 @keyframes contact-error-in {
   from {
     opacity: 0;
-    transform: translateY(-3px);
+    transform: translate3d(0,-2px,0);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0,0,0);
   }
 }
 
@@ -2438,11 +2477,10 @@ button {
 
 
 /* =========================================================
-   REDUCED MOTION
+   PERFORMANCE — LOW POWER / REDUCED MOTION
 ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-
   .contact-reveal,
   .contact-orb-one,
   .contact-orb-two,
@@ -2468,3 +2506,7 @@ button {
     transition: none !important;
   }
 }
+
+
+
+
