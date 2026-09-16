@@ -1690,3 +1690,781 @@ button {
     scroll-behavior: auto;
   }
 }
+
+
+
+
+/* =========================================================
+   CONTACT — PREMIUM LIGHT / DARK THEME
+========================================================= */
+
+/* ---------- LIGHT ---------- */
+
+[data-theme="light"] {
+  --contact-bg:
+    radial-gradient(circle at 8% 18%,
+      rgba(229, 9, 20, 0.07),
+      transparent 30%),
+    radial-gradient(circle at 92% 78%,
+      rgba(229, 9, 20, 0.055),
+      transparent 32%),
+    linear-gradient(135deg,
+      #fffefe 0%,
+      #fffafa 45%,
+      #fff2f3 100%);
+
+  --contact-card:
+    linear-gradient(145deg,
+      rgba(255, 255, 255, 0.94),
+      rgba(255, 255, 255, 0.78));
+
+  --contact-form:
+    linear-gradient(145deg,
+      rgba(255, 255, 255, 0.98),
+      rgba(255, 250, 250, 0.88));
+
+  --contact-border: rgba(0, 0, 0, 0.075);
+  --contact-border-strong: rgba(0, 0, 0, 0.11);
+
+  --contact-input-bg: rgba(255, 255, 255, 0.82);
+  --contact-input-focus: rgba(229, 9, 20, 0.12);
+
+  --contact-text: #090909;
+  --contact-muted: rgba(0, 0, 0, 0.52);
+
+  --contact-accent: #e50914;
+  --contact-accent-bright: #ff2631;
+
+  --contact-orb-one: rgba(229, 9, 20, 0.10);
+  --contact-orb-two: rgba(255, 104, 112, 0.07);
+
+  --contact-shadow:
+    0 35px 90px -55px rgba(0, 0, 0, 0.28);
+
+  --contact-shadow-hover:
+    0 40px 100px -50px rgba(229, 9, 20, 0.16);
+
+  --contact-grid:
+    rgba(0, 0, 0, 0.035);
+
+  --contact-quote-bg:
+    rgba(229, 9, 20, 0.035);
+}
+
+
+/* ---------- DARK ---------- */
+
+[data-theme="dark"] {
+  --contact-bg:
+    radial-gradient(circle at 8% 18%,
+      rgba(229, 9, 20, 0.13),
+      transparent 31%),
+    radial-gradient(circle at 92% 78%,
+      rgba(176, 0, 12, 0.14),
+      transparent 34%),
+    linear-gradient(135deg,
+      #020202 0%,
+      #070707 48%,
+      #120304 100%);
+
+  --contact-card:
+    linear-gradient(145deg,
+      rgba(255, 255, 255, 0.055),
+      rgba(255, 255, 255, 0.018));
+
+  --contact-form:
+    linear-gradient(145deg,
+      rgba(255, 255, 255, 0.065),
+      rgba(255, 255, 255, 0.018));
+
+  --contact-border: rgba(255, 255, 255, 0.085);
+  --contact-border-strong: rgba(255, 255, 255, 0.13);
+
+  --contact-input-bg: rgba(255, 255, 255, 0.035);
+  --contact-input-focus: rgba(229, 9, 20, 0.16);
+
+  --contact-text: #ffffff;
+  --contact-muted: rgba(255, 255, 255, 0.50);
+
+  --contact-accent: #ff1f2d;
+  --contact-accent-bright: #ff3c48;
+
+  --contact-orb-one: rgba(229, 9, 20, 0.16);
+  --contact-orb-two: rgba(176, 0, 12, 0.13);
+
+  --contact-shadow:
+    0 40px 100px -55px rgba(0, 0, 0, 0.9);
+
+  --contact-shadow-hover:
+    0 45px 110px -50px rgba(229, 9, 20, 0.22);
+
+  --contact-grid:
+    rgba(255, 255, 255, 0.035);
+
+  --contact-quote-bg:
+    rgba(229, 9, 20, 0.065);
+}
+
+
+/* =========================================================
+   CONTACT SECTION
+========================================================= */
+
+.contact-section {
+  background: var(--contact-bg);
+  color: var(--contact-text);
+  transition:
+    background 0.6s ease,
+    color 0.4s ease;
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.contact-orb-one {
+  background: var(--contact-orb-one);
+  animation: contact-orb-float-one 9s ease-in-out infinite;
+}
+
+.contact-orb-two {
+  background: var(--contact-orb-two);
+  animation: contact-orb-float-two 11s ease-in-out infinite;
+}
+
+.contact-grid {
+  background-image:
+    linear-gradient(to right,
+      var(--contact-grid) 1px,
+      transparent 1px),
+    linear-gradient(to bottom,
+      var(--contact-grid) 1px,
+      transparent 1px);
+
+  background-size: 70px 70px;
+
+  mask-image:
+    radial-gradient(ellipse at center,
+      black 0%,
+      transparent 72%);
+
+  -webkit-mask-image:
+    radial-gradient(ellipse at center,
+      black 0%,
+      transparent 72%);
+}
+
+.contact-ring {
+  border-color: var(--contact-border);
+  animation: contact-ring-float 8s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   REVEAL
+========================================================= */
+
+.contact-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: contact-reveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.contact-reveal:nth-child(2) {
+  animation-delay: 0.12s;
+}
+
+.contact-reveal:nth-child(3) {
+  animation-delay: 0.22s;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.contact-status-dot {
+  display: inline-block;
+  flex-shrink: 0;
+  background: var(--contact-accent);
+
+  box-shadow:
+    0 0 0 4px color-mix(in srgb,
+      var(--contact-accent) 10%,
+      transparent),
+    0 0 14px color-mix(in srgb,
+      var(--contact-accent) 55%,
+      transparent);
+
+  animation: contact-status-pulse 2.2s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.contact-divider {
+  background:
+    linear-gradient(90deg,
+      transparent,
+      var(--contact-accent),
+      transparent);
+
+  animation: contact-divider 2.8s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   INFO CARD
+========================================================= */
+
+.contact-info-card {
+  background: var(--contact-card);
+  border-color: var(--contact-border);
+
+  box-shadow: var(--contact-shadow);
+
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.4s ease,
+    box-shadow 0.5s ease;
+}
+
+.contact-info-card:hover {
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb,
+      var(--contact-accent) 25%,
+      var(--contact-border));
+  box-shadow: var(--contact-shadow-hover);
+}
+
+
+/* =========================================================
+   FORM CARD
+========================================================= */
+
+.contact-form-card {
+  background: var(--contact-form);
+  border-color: var(--contact-border);
+
+  box-shadow: var(--contact-shadow);
+
+  backdrop-filter: blur(26px);
+  -webkit-backdrop-filter: blur(26px);
+
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.4s ease,
+    box-shadow 0.5s ease;
+}
+
+.contact-form-card:hover {
+  border-color: color-mix(in srgb,
+      var(--contact-accent) 20%,
+      var(--contact-border));
+
+  box-shadow: var(--contact-shadow-hover);
+}
+
+
+/* =========================================================
+   TOP SHINE
+========================================================= */
+
+.contact-card-shine,
+.contact-form-accent {
+  background:
+    linear-gradient(90deg,
+      transparent,
+      color-mix(in srgb,
+        var(--contact-accent) 70%,
+        transparent),
+      transparent);
+}
+
+.contact-card-shine {
+  opacity: 0.7;
+}
+
+.contact-form-accent {
+  opacity: 0.8;
+}
+
+
+/* =========================================================
+   ACCENT TEXT
+========================================================= */
+
+.contact-accent-text {
+  color: var(--contact-accent);
+}
+
+
+/* =========================================================
+   ICON
+========================================================= */
+
+.contact-form-icon,
+.contact-detail-icon {
+  color: var(--contact-accent);
+
+  background:
+    color-mix(in srgb,
+      var(--contact-accent) 6%,
+      transparent);
+
+  border-color:
+    color-mix(in srgb,
+      var(--contact-accent) 16%,
+      var(--contact-border));
+
+  transition:
+    transform 0.35s ease,
+    background 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.contact-form-icon:hover,
+.contact-detail-icon:hover {
+  transform: translateY(-2px) scale(1.04);
+
+  background:
+    color-mix(in srgb,
+      var(--contact-accent) 11%,
+      transparent);
+
+  box-shadow:
+    0 10px 30px -15px color-mix(in srgb,
+      var(--contact-accent) 55%,
+      transparent);
+}
+
+.contact-detail-group {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.contact-detail-icon {
+  display: flex;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 11px;
+}
+
+
+/* =========================================================
+   QUOTE
+========================================================= */
+
+.contact-quote {
+  background: var(--contact-quote-bg);
+  border-color: var(--contact-border);
+
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    transform 0.35s ease;
+}
+
+.contact-quote:hover {
+  transform: translateY(-2px);
+
+  border-color:
+    color-mix(in srgb,
+      var(--contact-accent) 16%,
+      var(--contact-border));
+}
+
+.contact-mini-line {
+  background: var(--contact-accent);
+}
+
+
+/* =========================================================
+   LABEL
+========================================================= */
+
+.contact-label {
+  display: block;
+  margin-bottom: 8px;
+
+  color: var(--contact-muted);
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.contact-input-shell,
+.contact-textarea-shell {
+  overflow: hidden;
+
+  border: 1px solid var(--contact-border);
+  border-radius: 13px;
+
+  background: var(--contact-input-bg);
+
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease,
+    transform 0.3s ease;
+}
+
+.contact-input-shell:focus-within,
+.contact-textarea-shell:focus-within {
+  transform: translateY(-1px);
+
+  border-color:
+    color-mix(in srgb,
+      var(--contact-accent) 70%,
+      var(--contact-border));
+
+  background:
+    color-mix(in srgb,
+      var(--contact-accent) 2.5%,
+      var(--contact-input-bg));
+
+  box-shadow:
+    0 0 0 4px var(--contact-input-focus),
+    0 12px 30px -22px color-mix(in srgb,
+      var(--contact-accent) 55%,
+      transparent);
+}
+
+.contact-input-error {
+  border-color: rgba(239, 68, 68, 0.65) !important;
+}
+
+.contact-input {
+  width: 100%;
+
+  border: 0;
+  outline: 0;
+
+  background: transparent;
+  color: var(--contact-text);
+
+  padding: 13px 14px;
+
+  font-size: 13px;
+  line-height: 1.5;
+
+  transition: color 0.25s ease;
+}
+
+.contact-input::placeholder {
+  color: var(--contact-muted);
+  opacity: 0.55;
+}
+
+.contact-input:focus::placeholder {
+  opacity: 0.35;
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.contact-error {
+  margin-top: 6px;
+
+  color: #ef4444;
+
+  font-size: 10px;
+  line-height: 1.4;
+
+  animation: contact-error-in 0.25s ease-out;
+}
+
+
+/* =========================================================
+   SUBMIT BUTTON
+========================================================= */
+
+.contact-submit {
+  background:
+    linear-gradient(135deg,
+      var(--contact-accent-bright),
+      var(--contact-accent)) !important;
+
+  color: #ffffff !important;
+
+  box-shadow:
+    0 14px 35px -18px color-mix(in srgb,
+      var(--contact-accent) 70%,
+      transparent);
+
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease,
+    filter 0.3s ease;
+}
+
+.contact-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+
+  filter: brightness(1.06);
+
+  box-shadow:
+    0 20px 45px -18px color-mix(in srgb,
+      var(--contact-accent) 80%,
+      transparent);
+}
+
+.contact-submit:active:not(:disabled) {
+  transform: translateY(0) scale(0.99);
+}
+
+.contact-submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.75;
+}
+
+
+/* =========================================================
+   BUTTON SHINE
+========================================================= */
+
+.contact-button-shine {
+  background: rgba(255, 255, 255, 0.24);
+
+  animation: contact-button-shine 3.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+
+/* =========================================================
+   SPINNER
+========================================================= */
+
+.contact-spinner {
+  animation: contact-spinner 0.75s linear infinite;
+}
+
+
+/* =========================================================
+   TRUST
+========================================================= */
+
+.contact-trust-icon {
+  color: var(--contact-accent);
+}
+
+
+/* =========================================================
+   CORNER DECORATION
+========================================================= */
+
+.contact-corner {
+  pointer-events: none;
+
+  border-top: 1px solid color-mix(in srgb,
+      var(--contact-accent) 20%,
+      transparent);
+
+  border-right: 1px solid color-mix(in srgb,
+      var(--contact-accent) 20%,
+      transparent);
+
+  border-top-right-radius: 2rem;
+
+  opacity: 0.6;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes contact-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes contact-status-pulse {
+
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 4px color-mix(in srgb,
+        var(--contact-accent) 9%,
+        transparent),
+      0 0 12px color-mix(in srgb,
+        var(--contact-accent) 45%,
+        transparent);
+  }
+
+  50% {
+    box-shadow:
+      0 0 0 7px color-mix(in srgb,
+        var(--contact-accent) 3%,
+        transparent),
+      0 0 22px color-mix(in srgb,
+        var(--contact-accent) 65%,
+        transparent);
+  }
+}
+
+@keyframes contact-divider {
+
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scaleX(0.7);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes contact-orb-float-one {
+
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(20px, -18px, 0) scale(1.08);
+  }
+}
+
+@keyframes contact-orb-float-two {
+
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(-22px, 15px, 0) scale(1.06);
+  }
+}
+
+@keyframes contact-ring-float {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-12px) rotate(5deg);
+  }
+}
+
+@keyframes contact-button-shine {
+  0% {
+    left: -90px;
+  }
+
+  25%,
+  100% {
+    left: 120%;
+  }
+}
+
+@keyframes contact-spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes contact-error-in {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 640px) {
+  .contact-section {
+    padding-top: 5.5rem;
+    padding-bottom: 5.5rem;
+  }
+
+  .contact-grid {
+    background-size: 48px 48px;
+  }
+
+  .contact-orb-one {
+    left: -220px;
+  }
+
+  .contact-orb-two {
+    right: -220px;
+  }
+
+  .contact-info-card:hover,
+  .contact-form-card:hover {
+    transform: none;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .contact-reveal,
+  .contact-orb-one,
+  .contact-orb-two,
+  .contact-ring,
+  .contact-status-dot,
+  .contact-divider,
+  .contact-button-shine,
+  .contact-spinner {
+    animation: none !important;
+  }
+
+  .contact-reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .contact-info-card,
+  .contact-form-card,
+  .contact-input-shell,
+  .contact-textarea-shell,
+  .contact-submit,
+  .contact-quote {
+    transition: none !important;
+  }
+}
