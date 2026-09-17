@@ -79,20 +79,7 @@ export function Navbar() {
     "
           />
 
-          {/* Rotating accent */}
-          <span
-            className="
-      pointer-events-none
-      absolute
-      -inset-[2px]
-      rounded-full
-      border
-      border-transparent
-      border-t-[var(--accent)]
-      border-r-[var(--accent)]/40
-      animate-[spin_4s_linear_infinite]
-    "
-          />
+          
 
           {/* Photo */}
           <div className="relative h-full w-full overflow-hidden rounded-full">

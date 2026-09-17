@@ -63,39 +63,7 @@ export function ChatButton() {
         "
       />
 
-      {/* Outer Glow */}
-      <span
-        className="
-          pointer-events-none
-          absolute
-          -inset-1
-          rounded-full
-          border
-          border-[var(--accent)]/40
-          opacity-70
-          transition-all
-          duration-500
-          group-hover:border-[var(--accent)]
-          group-hover:opacity-100
-          group-hover:shadow-[0_0_25px_var(--accent)]
-        "
-      />
-
-      {/* Rotating Ring */}
-      <span
-        className="
-          pointer-events-none
-          absolute
-          -inset-[3px]
-          rounded-full
-          border
-          border-transparent
-          border-t-white/90
-          border-r-white/40
-          animate-[spin_4s_linear_infinite]
-        "
-      />
-
+     
       {/* Icon */}
       <span
         className="
