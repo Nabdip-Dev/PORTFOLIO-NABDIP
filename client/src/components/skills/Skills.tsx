@@ -415,32 +415,7 @@ function SkillNode({
           "
         />
 
-        <span
-          className="
-            origin-dot
-            absolute
-            top-1/2
-            h-[4px]
-            w-[4px]
-            -translate-y-1/2
-            rounded-full
-            bg-[var(--skills-point)]
-            shadow-[0_0_8px_var(--skills-point)]
-            sm:h-[5px]
-            sm:w-[5px]
-          "
-          style={
-            index < 5
-              ? {
-                  right: "-2px",
-                  animationDelay: `${index * 0.15}s`,
-                }
-              : {
-                  left: "-2px",
-                  animationDelay: `${index * 0.15}s`,
-                }
-          }
-        />
+        
       </div>
     </div>
   );

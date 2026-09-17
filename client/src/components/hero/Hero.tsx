@@ -372,7 +372,7 @@ export function Hero() {
                   delayChildren: 0.15,
                 },
               },
-            }} className=" relative z-10 order-2 flex max-w-3xl flex-col items-start justify-center gap-5 lg:order-1">
+            }} className=" relative z-10 order-2 flex max-w-3xl flex-col items-center lg:items-start justify-center gap-5 lg:order-1 mb-12 md:mb-8 lg:mb-0">
 
             {/* HELLO TEXT */}
             <motion.div
@@ -756,19 +756,7 @@ export function Hero() {
                     }}
                   />
 
-                  {/* floating dot */}
-                  <motion.span
-                    className="pointer-events-none absolute right-2 top-1.5 h-1 w-1 rounded-full bg-current opacity-40"
-                    animate={{
-                      y: [0, 3, 0],
-                      opacity: [0.25, 0.7, 0.25],
-                    }}
-                    transition={{
-                      duration: 1.8,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  />
+                  
 
                   <motion.span
                     className="relative z-10"

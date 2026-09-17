@@ -156,7 +156,7 @@ export function About() {
             className="mx-auto -mt-4 w-full max-w-5xl xs:-mt-6 sm:-mt-12 md:-mt-16 lg:-mt-24 xl:-mt-40"
           >
             <div
-              className="relative h-[105px] w-full xs:h-[125px] sm:h-[175px] md:h-[215px] lg:h-[270px] xl:h-[320px]"
+              className="relative h-[105px] -top-22 md:-top-15 w-full xs:h-[125px] sm:h-[175px] md:h-[215px] lg:h-[270px] xl:h-[320px]"
               style={
                 {
                   "--particle-color": "var(--foreground)",
@@ -230,10 +230,11 @@ export function About() {
 
         {/* Main */}
         {!isLoading && about && !isError && (
-          <div className="mt-0 grid min-w-0 items-start gap-10 xs:gap-12 sm:gap-14 md:gap-16 lg:grid-cols-[minmax(280px,380px)_minmax(0,1fr)] lg:gap-16 xl:gap-20">
+          <div className="mt-0 grid min-w-0 items-start gap-10 xs:gap-12 sm:gap-14 md:gap-16 lg:grid-cols-[minmax(280px,380px)_minmax(0,1fr)] lg:items-stretch lg:gap-16 xl:gap-20">
+
             {/* Photo */}
             {about.photo?.url ? (
-              <div className="relative w-full min-w-0 lg:sticky lg:top-24 lg:self-start">
+              <div className="relative w-full min-w-0 lg:sticky lg:top-24 lg:self-start lg:h-fit">
                 {/* Circular Text */}
                 <div className="pointer-events-none absolute -right-4 -top-4 z-0 xs:-right-6 xs:-top-6 sm:-right-9 sm:-top-9 md:-right-11 md:-top-11 lg:-right-14 lg:-top-14 xl:-right-15 xl:-top-15">
                   <CircularText
@@ -247,6 +248,7 @@ export function About() {
                 {/* Full Card Hover Area */}
                 <div className="group relative z-10 mx-auto w-full max-w-[420px] [perspective:1600px] sm:w-[92%] lg:w-full">
                   {/* Flip Card */}
+
                   <div
                     className="
                       relative
@@ -691,6 +693,7 @@ export function About() {
                       </div>
                     </div>
                   </div>
+
                 </div>
               </div>
             ) : (

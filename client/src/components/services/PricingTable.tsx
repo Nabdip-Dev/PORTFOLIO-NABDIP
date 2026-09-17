@@ -505,294 +505,179 @@ export function PricingTable() {
 
                 <div
                   className="
-                    relative
-                    flex
-                    min-h-[430px]
-                    flex-col
-                    overflow-hidden
-                    rounded-[1.75rem]
-                    p-7
-                    backdrop-blur-xl
-
-                    transform-gpu
-                    transition-transform
-                    duration-300
-                    ease-out
-
-                    group-hover:-translate-y-[3px]
-
-                    sm:p-8
-                  "
-                  style={
-                    plan.highlighted
-                      ? {
-                          background: "var(--surface-elevated)",
-                          border: "1px solid var(--accent)",
-                          boxShadow:
-                            "0 18px 60px rgba(229,9,20,0.08)",
-                        }
-                      : {
-                          background: "var(--glass-bg)",
-                          border:
-                            "1px solid var(--glass-border)",
-                        }
-                  }
+    group relative flex min-h-[450px] flex-col overflow-hidden
+    rounded-[1.75rem]
+    border border-[var(--border)]
+    bg-[var(--surface)]
+    p-6
+    shadow-[0_20px_70px_rgba(0,0,0,0.08)]
+    transition-all duration-500 ease-out
+    hover:-translate-y-2
+    hover:border-[var(--accent)]
+    hover:shadow-[0_30px_90px_rgba(0,0,0,0.14)]
+    sm:p-7
+  "
                 >
-                  {/* =======================================
-                      CARD AMBIENT LIGHT
-                  ======================================== */}
-
+                  {/* Premium glow */}
                   <div
                     className="
-                      pointer-events-none
-                      absolute
-                      -right-24
-                      -top-24
-                      h-64
-                      w-64
-                      rounded-full
-                      bg-[var(--accent)]/[0.08]
-                      blur-[75px]
-                      opacity-60
-                    "
+      pointer-events-none absolute -right-20 -top-20
+      h-64 w-64 rounded-full
+      bg-[var(--accent)]
+      opacity-[0.07]
+      blur-[90px]
+      transition-all duration-700
+      group-hover:scale-125
+      group-hover:opacity-[0.13]
+    "
                   />
 
-                  {/* =======================================
-                      POPULAR BADGE
-                  ======================================== */}
-
-                  {plan.highlighted && (
-                    <span
-                      className="
-                        absolute
-                        -top-3
-                        left-1/2
-                        z-20
-                        -translate-x-1/2
-                        rounded-full
-                        px-4
-                        py-1.5
-                        text-[10px]
-                        font-semibold
-                        uppercase
-                        tracking-[0.12em]
-                        text-[var(--accent-foreground)]
-                        shadow-[0_8px_25px_rgba(229,9,20,0.22)]
-                      "
-                      style={{
-                        background:
-                          "var(--gradient-accent)",
-                      }}
-                    >
-                      Most Popular
-                    </span>
-                  )}
-
-                  {/* =======================================
-                      TOP
-                  ======================================== */}
-
+                  {/* Top shine */}
                   <div
                     className="
-                      relative
-                      z-10
-                      flex
-                      items-center
-                      justify-between
-                    "
-                  >
-                    <div className="flex items-center gap-3">
+      pointer-events-none absolute inset-x-7 top-0 h-px
+      bg-gradient-to-r
+      from-transparent
+      via-[var(--accent)]
+      to-transparent
+      opacity-40
+    "
+                  />
+
+                  {/* Header */}
+                  <div className="relative z-10 flex items-start justify-between">
+                    <div>
+                      <div className="mb-3 flex items-center gap-2">
+                        <span
+                          className="
+            h-1.5 w-1.5 rounded-full
+            bg-[var(--accent)]
+            shadow-[0_0_10px_var(--accent)]
+          "
+                        />
+
+                        <span
+                          className="
+            text-[9px] font-semibold uppercase
+            tracking-[0.2em]
+            text-[var(--foreground-muted)]
+          "
+                        >
+                          Plan {String(index + 1).padStart(2, "0")}
+                        </span>
+                      </div>
+
+                      <h3
+                        className="
+          font-display text-xl font-semibold
+          tracking-[-0.04em]
+          text-[var(--foreground)]
+          transition-colors duration-300
+          group-hover:text-[var(--accent)]
+        "
+                      >
+                        {plan.name}
+                      </h3>
+
+                      {plan.description && (
+                        <p
+                          className="
+            mt-2 max-w-[220px]
+            text-[11px] leading-5
+            text-[var(--foreground-muted)]
+          "
+                        >
+                          {plan.description}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Icon */}
+                    <div
+                      className="
+        flex h-10 w-10 shrink-0 items-center justify-center
+        rounded-2xl
+        border border-[var(--border)]
+        bg-[var(--surface-elevated)]
+        text-[var(--foreground-muted)]
+        transition-all duration-300
+        group-hover:border-[var(--accent)]
+        group-hover:bg-[var(--accent)]
+        group-hover:text-[var(--accent-foreground)]
+        group-hover:rotate-6
+      "
+                    >
+                      <FiArrowUpRight size={16} />
+                    </div>
+                  </div>
+
+                  {/* Price */}
+                  <div className="relative z-10 mt-8">
+                    <div className="flex items-end gap-2">
                       <span
                         className="
-                          font-mono-tag
-                          text-[10px]
-                          tracking-[0.22em]
-                          text-[var(--foreground-muted)]
-                        "
+          font-display text-4xl font-semibold
+          leading-none tracking-[-0.06em]
+          text-[var(--foreground)]
+        "
                       >
-                        {String(index + 1).padStart(2, "0")}
+                        ${plan.price}
                       </span>
 
                       <span
                         className="
-                          h-px
-                          w-6
-                          bg-[var(--border)]
-                          transition-all
-                          duration-300
-                          group-hover:w-10
-                          group-hover:bg-[var(--accent)]
-                        "
-                      />
+          mb-1 text-[11px]
+          text-[var(--foreground-muted)]
+        "
+                      >
+                        / {plan.billingPeriod}
+                      </span>
                     </div>
+                  </div>
+
+                  {/* Premium divider */}
+                  <div className="relative z-10 my-6 flex items-center gap-3">
+                    <div className="h-px flex-1 bg-[var(--border)]" />
 
                     <div
                       className="
-                        flex
-                        h-9
-                        w-9
-                        items-center
-                        justify-center
-                        rounded-full
-                        border
-                        border-[var(--border)]
-                        text-[var(--foreground-muted)]
-                        transition-colors
-                        duration-300
-                        group-hover:border-[var(--accent)]
-                        group-hover:text-[var(--accent)]
-                      "
-                    >
-                      <FiArrowUpRight size={15} />
-                    </div>
+        h-1 w-1 rounded-full
+        bg-[var(--accent)]
+      "
+                    />
+
+                    <div className="h-px flex-1 bg-[var(--border)]" />
                   </div>
 
-                  {/* =======================================
-                      PLAN NAME
-                  ======================================== */}
-
-                  <div className="relative z-10 mt-10">
-                    <h3
-                      className="
-                        font-display
-                        text-xl
-                        font-semibold
-                        tracking-[-0.025em]
-                        text-[var(--foreground)]
-                        transition-colors
-                        duration-300
-                        group-hover:text-[var(--accent)]
-                      "
-                    >
-                      {plan.name}
-                    </h3>
-
-                    {plan.description && (
-                      <p
-                        className="
-                          mt-2
-                          text-xs
-                          leading-6
-                          text-[var(--foreground-muted)]
-                        "
-                      >
-                        {plan.description}
-                      </p>
-                    )}
-                  </div>
-
-                  {/* =======================================
-                      PRICE
-                  ======================================== */}
-
-                  <div
-                    className="
-                      relative
-                      z-10
-                      mt-6
-                      flex
-                      items-baseline
-                      gap-1
-                    "
-                  >
-                    <span
-                      className="
-                        font-display
-                        text-4xl
-                        font-semibold
-                        tracking-[-0.035em]
-                        text-[var(--accent)]
-                      "
-                    >
-                      ${plan.price}
-                    </span>
-
-                    <span
-                      className="
-                        text-xs
-                        text-[var(--foreground-muted)]
-                      "
-                    >
-                      / {plan.billingPeriod}
-                    </span>
-                  </div>
-
-                  {/* =======================================
-                      DIVIDER
-                  ======================================== */}
-
-                  <div
-                    className="
-                      relative
-                      z-10
-                      mt-6
-                      h-px
-                      w-full
-                      bg-gradient-to-r
-                      from-[var(--border)]
-                      via-[var(--border)]/40
-                      to-transparent
-                    "
-                  />
-
-                  {/* =======================================
-                      FEATURES
-                  ======================================== */}
-
-                  <ul
-                    className="
-                      relative
-                      z-10
-                      mt-6
-                      flex-1
-                      space-y-3
-                    "
-                  >
+                  {/* Features */}
+                  <ul className="relative z-10 flex-1 space-y-3">
                     {plan.features?.map((feature) => (
                       <li
                         key={feature.text}
-                        className="
-                          flex
-                          items-start
-                          gap-2.5
-                          text-sm
-                        "
+                        className="flex items-center gap-2.5"
                       >
                         <span
                           className={`
-                            mt-[2px]
-                            flex
-                            h-4
-                            w-4
-                            shrink-0
-                            items-center
-                            justify-center
-                            rounded-full
-                            ${
-                              feature.included
-                                ? "bg-[var(--accent)]/10 text-[var(--accent)]"
-                                : "bg-[var(--foreground-muted)]/5 text-[var(--foreground-muted)]"
+            flex h-4.5 w-4.5 shrink-0 items-center justify-center
+            rounded-full
+            ${feature.included
+                              ? "bg-[var(--accent)] text-[var(--accent-foreground)]"
+                              : "border border-[var(--border)] text-[var(--foreground-muted)]"
                             }
-                          `}
+          `}
                         >
                           {feature.included ? (
-                            <FiCheck
-                              size={9}
-                              strokeWidth={3}
-                            />
+                            <FiCheck size={9} strokeWidth={3} />
                           ) : (
-                            <FiX
-                              size={9}
-                              strokeWidth={2}
-                            />
+                            <FiX size={8} />
                           )}
                         </span>
 
                         <span
                           className={
                             feature.included
-                              ? "text-[var(--foreground)]"
-                              : "text-[var(--foreground-muted)] line-through"
+                              ? "text-xs text-[var(--foreground)]"
+                              : "text-xs text-[var(--foreground-muted)] line-through"
                           }
                         >
                           {feature.text}
@@ -801,99 +686,58 @@ export function PricingTable() {
                     ))}
                   </ul>
 
-                  {/* =======================================
-                      BUTTON
-                  ======================================== */}
-
+                  {/* CTA */}
                   <a
                     href="#contact"
                     className="
-                      group/button
-                      relative
-                      z-10
-                      mt-7
-                      flex
-                      items-center
-                      justify-center
-                      gap-2
-                      overflow-hidden
-                      rounded-full
-                      px-5
-                      py-3
-                      text-sm
-                      font-medium
-
-                      transform-gpu
-                      transition-transform
-                      duration-300
-                      ease-out
-
-                      hover:-translate-y-0.5
-                    "
-                    style={
-                      plan.highlighted
-                        ? {
-                            background:
-                              "var(--gradient-accent)",
-                            color:
-                              "var(--accent-foreground)",
-                            boxShadow:
-                              "0 10px 30px rgba(229,9,20,0.16)",
-                          }
-                        : {
-                            background:
-                              "var(--surface-elevated)",
-                            color:
-                              "var(--foreground)",
-                          }
-                    }
+      group/button relative z-10 mt-6
+      flex h-11 items-center justify-center gap-2
+      overflow-hidden rounded-xl
+      border border-[var(--border)]
+      bg-[var(--surface-elevated)]
+      px-4
+      text-xs font-medium
+      text-[var(--foreground)]
+      transition-all duration-300
+      hover:border-[var(--accent)]
+      hover:bg-[var(--accent)]
+      hover:text-[var(--accent-foreground)]
+    "
                   >
                     <span>Get started</span>
 
                     <FiArrowUpRight
                       size={14}
                       className="
-                        transform-gpu
-                        transition-transform
-                        duration-300
-                        group-hover/button:-translate-y-0.5
-                        group-hover/button:translate-x-0.5
-                      "
+        transition-transform duration-300
+        group-hover/button:translate-x-1
+        group-hover/button:-translate-y-1
+      "
                     />
                   </a>
 
-                  {/* =======================================
-                      BOTTOM PROGRESS
-                  ======================================== */}
-
+                  {/* Bottom accent */}
                   <div
                     className="
-                      relative
-                      z-10
-                      mt-5
-                      h-px
-                      w-full
-                      overflow-hidden
-                      bg-[var(--border)]
-                    "
+      relative z-10 mt-4 h-0.5 w-full
+      overflow-hidden rounded-full
+      bg-[var(--border)]
+    "
                   >
                     <div
                       className="
-                        h-full
-                        w-[18%]
-                        bg-[var(--accent)]
-                        transition-[width]
-                        duration-500
-                        ease-out
-                        group-hover:w-[65%]
-                      "
-                      style={{
-                        boxShadow:
-                          "0 0 8px var(--accent)",
-                      }}
+        h-full w-1/4
+        rounded-full
+        bg-[var(--accent)]
+        shadow-[0_0_12px_var(--accent)]
+        transition-all duration-700
+        group-hover:w-full
+      "
                     />
                   </div>
                 </div>
+
+
               </motion.article>
             ))}
           </motion.div>
