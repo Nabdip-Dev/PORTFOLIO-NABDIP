@@ -1,6 +1,7 @@
 "use client";
 
-import { memo, useMemo } from "react";
+import { memo } from "react";
+import type { CSSProperties } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -15,20 +16,32 @@ import ParticleText from "./ParticleText";
 const ease = [0.22, 1, 0.36, 1] as const;
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: {
+    opacity: 0,
+    y: 28,
+  },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.65, ease },
+    transition: {
+      duration: 0.65,
+      ease,
+    },
   },
 };
 
 const contentContainer = {
   hidden: {},
   visible: {
-    transition: { staggerChildren: 0.1 },
+    transition: {
+      staggerChildren: 0.1,
+    },
   },
 };
+
+/* -------------------------------------------------------------------------- */
+/* Achievement                                                               */
+/* -------------------------------------------------------------------------- */
 
 const AchievementItem = memo(function AchievementItem({
   item,
@@ -39,64 +52,218 @@ const AchievementItem = memo(function AchievementItem({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, x: -18 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.5, delay: index * 0.06, ease }}
-      whileHover={{ x: 5 }}
-      className="group flex min-w-0 items-start gap-2.5 overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--glass-bg)] p-3 transition-[transform,border-color,background-color] duration-300 ease-out hover:border-[var(--accent)]/30 hover:bg-[var(--accent)]/[0.04] xs:gap-3 sm:gap-4 sm:p-4"
+      initial={{
+        opacity: 0,
+        x: -18,
+      }}
+      whileInView={{
+        opacity: 1,
+        x: 0,
+      }}
+      viewport={{
+        once: true,
+        amount: 0.2,
+      }}
+      transition={{
+        duration: 0.5,
+        delay: index * 0.06,
+        ease,
+      }}
+      whileHover={{
+        x: 5,
+      }}
+      className="
+        group
+        flex
+        min-w-0
+        items-start
+        gap-2.5
+        rounded-2xl
+        border
+        border-[var(--border)]
+        bg-[var(--glass-bg)]
+        p-3
+        transition-[transform,border-color,background-color]
+        duration-300
+        ease-out
+        hover:border-[var(--accent)]/30
+        hover:bg-[var(--accent)]/[0.04]
+        xs:gap-3
+        sm:gap-4
+        sm:p-4
+      "
       style={{
         backfaceVisibility: "hidden",
         transform: "translateZ(0)",
       }}
     >
-      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/10 text-[10px] font-bold text-[var(--accent)] transition-[background-color,border-color,color] duration-300 group-hover:border-[var(--accent)] group-hover:bg-[var(--accent)] group-hover:text-white">
+      <span
+        className="
+          flex
+          h-8
+          w-8
+          shrink-0
+          items-center
+          justify-center
+          rounded-full
+          border
+          border-[var(--accent)]/30
+          bg-[var(--accent)]/10
+          text-[10px]
+          font-bold
+          text-[var(--accent)]
+          transition-[background-color,border-color,color]
+          duration-300
+          group-hover:border-[var(--accent)]
+          group-hover:bg-[var(--accent)]
+          group-hover:text-white
+        "
+      >
         {String(index + 1).padStart(2, "0")}
       </span>
 
-      <span className="min-w-0 break-words pt-1 text-xs leading-5 text-[var(--foreground-muted)] sm:text-sm sm:leading-7">
+      <span
+        className="
+          min-w-0
+          break-words
+          pt-1
+          text-xs
+          leading-5
+          text-[var(--foreground-muted)]
+          sm:text-sm
+          sm:leading-7
+        "
+      >
         {item}
       </span>
     </motion.div>
   );
 });
 
+/* -------------------------------------------------------------------------- */
+/* Stats                                                                      */
+/* -------------------------------------------------------------------------- */
+
 const StatCard = memo(function StatCard({
   stat,
   index,
 }: {
-  stat: { value: string; label: string };
+  stat: {
+    value: string;
+    label: string;
+  };
   index: number;
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.25 }}
-      transition={{ duration: 0.55, delay: index * 0.07, ease }}
-      whileHover={{ y: -5 }}
-      className="group relative min-w-0 overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--glass-bg)] p-3 transition-[transform,border-color] duration-300 ease-out hover:border-[var(--accent)]/30 xs:p-3.5 sm:p-5"
+      initial={{
+        opacity: 0,
+        y: 20,
+      }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+      }}
+      viewport={{
+        once: true,
+        amount: 0.25,
+      }}
+      transition={{
+        duration: 0.55,
+        delay: index * 0.07,
+        ease,
+      }}
+      whileHover={{
+        y: -5,
+      }}
+      className="
+        group
+        relative
+        min-w-0
+        rounded-2xl
+        border
+        border-[var(--border)]
+        bg-[var(--glass-bg)]
+        p-3
+        transition-[transform,border-color]
+        duration-300
+        ease-out
+        hover:border-[var(--accent)]/30
+        xs:p-3.5
+        sm:p-5
+      "
       style={{
         backfaceVisibility: "hidden",
         transform: "translateZ(0)",
       }}
     >
-      <div className="pointer-events-none absolute -right-10 -top-10 h-24 w-24 rounded-full bg-[var(--accent)]/10 blur-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      <div
+        className="
+          pointer-events-none
+          absolute
+          -right-10
+          -top-10
+          h-24
+          w-24
+          rounded-full
+          bg-[var(--accent)]/10
+          blur-2xl
+          opacity-0
+          transition-opacity
+          duration-500
+          group-hover:opacity-100
+        "
+      />
 
       <div className="relative min-w-0">
-        <div className="font-display text-xl font-semibold tracking-tight text-[var(--foreground)] xs:text-2xl sm:text-3xl">
-          <span className="block break-words text-[var(--accent)]">
+        <div
+          className="
+            font-display
+            text-xl
+            font-semibold
+            tracking-tight
+            text-[var(--foreground)]
+            xs:text-2xl
+            sm:text-3xl
+          "
+        >
+          <span
+            className="
+              block
+              break-words
+              text-[var(--accent)]
+            "
+          >
             {stat.value}
           </span>
         </div>
 
-        <div className="mt-1.5 break-words text-[8px] font-medium uppercase leading-4 tracking-[0.08em] text-[var(--foreground-muted)] xs:text-[9px] sm:mt-2 sm:text-[10px] sm:tracking-[0.16em]">
+        <div
+          className="
+            mt-1.5
+            break-words
+            text-[8px]
+            font-medium
+            uppercase
+            leading-4
+            tracking-[0.08em]
+            text-[var(--foreground-muted)]
+            xs:text-[9px]
+            sm:mt-2
+            sm:text-[10px]
+            sm:tracking-[0.16em]
+          "
+        >
           {stat.label}
         </div>
       </div>
     </motion.div>
   );
 });
+
+/* -------------------------------------------------------------------------- */
+/* About                                                                      */
+/* -------------------------------------------------------------------------- */
 
 export function About() {
   const {
@@ -110,58 +277,181 @@ export function About() {
 
   const { t } = useLanguage();
 
-  const achievements = useMemo(
-    () => about?.achievements ?? [],
-    [about?.achievements],
-  );
-
-  const stats = useMemo(() => about?.stats ?? [], [about?.stats]);
-
   return (
     <section
       id="about"
-      className="relative isolate overflow-visible bg-[var(--background)] py-12 text-[var(--foreground)] transition-colors duration-700 xs:py-14 sm:py-20 md:py-24 lg:py-32 xl:py-40"
+      className="
+        relative
+        isolate
+        bg-[var(--background)]
+        py-12
+        text-[var(--foreground)]
+        transition-colors
+        duration-700
+        xs:py-14
+        sm:py-20
+        md:py-24
+        lg:py-16
+        xl:py-20
+      "
     >
-      {/* Background */}
+      {/* ------------------------------------------------------------------ */}
+      {/* BACKGROUND                                                         */}
+      {/* ------------------------------------------------------------------ */}
+
       <div
-        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
-        style={{ contain: "paint" }}
+        className="pointer-events-none absolute inset-0 -z-10"
+        style={{
+          contain: "paint",
+        }}
       >
         <div className="absolute inset-0 bg-[var(--about-gradient)]" />
 
-        <div className="absolute -left-40 top-20 h-[300px] w-[300px] rounded-full bg-red-500/[0.07] blur-[100px] dark:bg-red-600/[0.13] sm:h-[380px] sm:w-[380px] sm:blur-[120px] lg:h-[420px] lg:w-[420px] lg:blur-[130px]" />
+        <div
+          className="
+            absolute
+            -left-40
+            top-20
+            h-[300px]
+            w-[300px]
+            rounded-full
+            bg-red-500/[0.07]
+            blur-[100px]
+            dark:bg-red-600/[0.13]
+            sm:h-[380px]
+            sm:w-[380px]
+            sm:blur-[120px]
+            lg:h-[420px]
+            lg:w-[420px]
+            lg:blur-[130px]
+          "
+        />
 
-        <div className="absolute -right-40 top-[45%] h-[360px] w-[360px] rounded-full bg-red-500/[0.05] blur-[110px] dark:bg-red-900/[0.16] sm:h-[440px] sm:w-[440px] sm:blur-[135px] lg:h-[500px] lg:w-[500px] lg:blur-[150px]" />
+        <div
+          className="
+            absolute
+            -right-40
+            top-[45%]
+            h-[360px]
+            w-[360px]
+            rounded-full
+            bg-red-500/[0.05]
+            blur-[110px]
+            dark:bg-red-900/[0.16]
+            sm:h-[440px]
+            sm:w-[440px]
+            sm:blur-[135px]
+            lg:h-[500px]
+            lg:w-[500px]
+            lg:blur-[150px]
+          "
+        />
 
-        <div className="absolute left-1/2 top-0 h-[220px] w-[500px] -translate-x-1/2 rounded-full bg-red-500/[0.035] blur-[100px] dark:bg-red-500/[0.07] sm:h-[260px] sm:w-[600px] sm:blur-[115px] lg:h-[300px] lg:w-[700px] lg:blur-[130px]" />
+        <div
+          className="
+            absolute
+            left-1/2
+            top-0
+            h-[220px]
+            w-[500px]
+            -translate-x-1/2
+            rounded-full
+            bg-red-500/[0.035]
+            blur-[100px]
+            dark:bg-red-500/[0.07]
+            sm:h-[260px]
+            sm:w-[600px]
+            sm:blur-[115px]
+            lg:h-[300px]
+            lg:w-[700px]
+            lg:blur-[130px]
+          "
+        />
 
-        <div className="absolute inset-0 opacity-[0.02] [background-image:linear-gradient(rgba(0,0,0,0.45)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.45)_1px,transparent_1px)] [background-size:60px_60px] dark:opacity-[0.03] dark:[background-image:linear-gradient(rgba(255,255,255,0.45)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.45)_1px,transparent_1px)] sm:[background-size:70px_70px] lg:[background-size:80px_80px]" />
+        <div
+          className="
+            absolute
+            inset-0
+            opacity-[0.02]
+            [background-image:linear-gradient(rgba(0,0,0,0.45)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.45)_1px,transparent_1px)]
+            [background-size:60px_60px]
+            dark:opacity-[0.03]
+            dark:[background-image:linear-gradient(rgba(255,255,255,0.45)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.45)_1px,transparent_1px)]
+            sm:[background-size:70px_70px]
+            lg:[background-size:80px_80px]
+          "
+        />
 
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_10%,rgba(229,9,20,0.035),transparent_35%)] dark:bg-[radial-gradient(circle_at_50%_10%,rgba(229,9,20,0.09),transparent_35%)]" />
+        <div
+          className="
+            absolute
+            inset-0
+            bg-[radial-gradient(circle_at_50%_10%,rgba(229,9,20,0.035),transparent_35%)]
+            dark:bg-[radial-gradient(circle_at_50%_10%,rgba(229,9,20,0.09),transparent_35%)]
+          "
+        />
 
-        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black/[0.035] to-transparent dark:from-black/60 sm:h-56 lg:h-64" />
+        <div
+          className="
+            absolute
+            inset-x-0
+            bottom-0
+            h-48
+            bg-gradient-to-t
+            from-black/[0.035]
+            to-transparent
+            dark:from-black/60
+            sm:h-56
+            lg:h-64
+          "
+        />
       </div>
 
       <Container>
-        {/* Heading */}
+        {/* ---------------------------------------------------------------- */}
+        {/* HEADING                                                          */}
+        {/* ---------------------------------------------------------------- */}
+
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{
+            once: true,
+            amount: 0.3,
+          }}
           className="w-full min-w-0"
         >
-          {/* Heading Name */}
           <motion.div
             variants={fadeUp}
-            className="mx-auto -mt-4 w-full max-w-5xl xs:-mt-6 sm:-mt-12 md:-mt-16 lg:-mt-24 xl:-mt-40"
+            className="
+              mx-auto
+              w-full
+              max-w-5xl
+              -mt-4
+              xs:-mt-6
+              sm:-mt-12
+              md:-mt-16
+              lg:-mt-10
+              xl:-mt-16
+            "
           >
             <div
-              className="relative h-[105px] -top-22 md:-top-15 w-full xs:h-[125px] sm:h-[175px] md:h-[215px] lg:h-[270px] xl:h-[320px]"
+              className="
+                relative
+                -top-12
+                h-[105px]
+                w-full
+                xs:h-[125px]
+                sm:h-[175px]
+                md:h-[215px]
+                lg:h-[230px]
+                xl:h-[280px]
+              "
               style={
                 {
                   "--particle-color": "var(--foreground)",
                   "--particle-accent": "var(--accent)",
-                } as React.CSSProperties
+                } as CSSProperties
               }
             >
               <ParticleText
@@ -186,10 +476,36 @@ export function About() {
           </motion.div>
         </motion.div>
 
-        {/* Loading */}
+        {/* ---------------------------------------------------------------- */}
+        {/* LOADING                                                          */}
+        {/* ---------------------------------------------------------------- */}
+
         {isLoading && (
-          <div className="mt-6 grid min-w-0 items-start gap-8 xs:mt-8 sm:mt-10 md:gap-10 lg:mt-14 lg:grid-cols-[minmax(280px,380px)_minmax(0,1fr)] lg:gap-16 xl:gap-20">
-            <Skeleton className="mx-auto aspect-[4/5] w-full max-w-[420px] rounded-[1.5rem] sm:rounded-[2rem]" />
+          <div
+            className="
+              mt-6
+              grid
+              min-w-0
+              items-start
+              gap-8
+              xs:mt-8
+              sm:mt-10
+              md:gap-10
+              lg:grid-cols-[minmax(280px,380px)_minmax(0,1fr)]
+              lg:gap-16
+              xl:gap-20
+            "
+          >
+            <Skeleton
+              className="
+                mx-auto
+                aspect-[4/5]
+                w-full
+                max-w-[420px]
+                rounded-[1.5rem]
+                sm:rounded-[2rem]
+              "
+            />
 
             <div className="min-w-0 space-y-5">
               <Skeleton className="h-5 w-full" />
@@ -197,7 +513,17 @@ export function About() {
               <Skeleton className="h-5 w-10/12" />
               <Skeleton className="h-5 w-8/12" />
 
-              <div className="grid grid-cols-2 gap-2.5 pt-5 sm:gap-4 sm:pt-6 md:grid-cols-4">
+              <div
+                className="
+                  grid
+                  grid-cols-2
+                  gap-2.5
+                  pt-5
+                  sm:gap-4
+                  sm:pt-6
+                  md:grid-cols-4
+                "
+              >
                 {[0, 1, 2, 3].map((item) => (
                   <Skeleton
                     key={item}
@@ -209,34 +535,140 @@ export function About() {
           </div>
         )}
 
-        {/* Error */}
+        {/* ---------------------------------------------------------------- */}
+        {/* ERROR                                                            */}
+        {/* ---------------------------------------------------------------- */}
+
         {!isLoading && (isError || !about) && (
           <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, ease }}
-            className="mx-auto mt-6 max-w-xl rounded-2xl border border-[var(--accent)]/20 bg-[var(--accent)]/[0.04] p-5 text-center xs:mt-8 xs:p-6 sm:mt-12 sm:p-8 lg:mt-16"
+            initial={{
+              opacity: 0,
+              y: 18,
+            }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+            }}
+            viewport={{
+              once: true,
+            }}
+            transition={{
+              duration: 0.5,
+              ease,
+            }}
+            className="
+              mx-auto
+              mt-6
+              max-w-xl
+              rounded-2xl
+              border
+              border-[var(--accent)]/20
+              bg-[var(--accent)]/[0.04]
+              p-5
+              text-center
+              xs:mt-8
+              xs:p-6
+              sm:mt-12
+              sm:p-8
+              lg:mt-8
+            "
           >
-            <div className="mx-auto mb-4 flex h-11 w-11 items-center justify-center rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/10 text-lg font-semibold text-[var(--accent)] sm:h-12 sm:w-12">
+            <div
+              className="
+                mx-auto
+                mb-4
+                flex
+                h-11
+                w-11
+                items-center
+                justify-center
+                rounded-full
+                border
+                border-[var(--accent)]/30
+                bg-[var(--accent)]/10
+                text-lg
+                font-semibold
+                text-[var(--accent)]
+                sm:h-12
+                sm:w-12
+              "
+            >
               !
             </div>
 
-            <p className="text-xs leading-5 text-[var(--foreground-muted)] sm:text-sm">
+            <p
+              className="
+                text-xs
+                leading-5
+                text-[var(--foreground-muted)]
+                sm:text-sm
+              "
+            >
               About data could not be loaded. Check API or network connection.
             </p>
           </motion.div>
         )}
 
-        {/* Main */}
-        {!isLoading && about && !isError && (
-          <div className="mt-0 grid min-w-0 items-start gap-10 xs:gap-12 sm:gap-14 md:gap-16 lg:grid-cols-[minmax(280px,380px)_minmax(0,1fr)] lg:items-stretch lg:gap-16 xl:gap-20">
+        {/* ---------------------------------------------------------------- */}
+        {/* MAIN CONTENT                                                     */}
+        {/* ---------------------------------------------------------------- */}
 
-            {/* Photo */}
+        {!isLoading && about && !isError && (
+          <div
+            className="
+              relative
+              mx-auto
+              grid
+              min-w-0
+              grid-cols-1
+              items-start
+              gap-10
+
+              lg:grid-cols-[minmax(320px,380px)_minmax(0,1fr)]
+              lg:gap-16
+
+              xl:grid-cols-[minmax(360px,420px)_minmax(0,1fr)]
+              xl:gap-20
+            "
+          >
+            {/* ============================================================ */}
+            {/* LEFT SIDE                                                     */}
+            {/* ============================================================ */}
+
             {about.photo?.url ? (
-              <div className="relative w-full min-w-0 lg:sticky lg:top-24 lg:self-start lg:h-fit">
+              <aside
+                className="
+                  relative
+                  z-20
+                  w-full
+                  min-w-0
+                  self-start
+
+                  lg:sticky
+                  lg:top-10
+                "
+              >
                 {/* Circular Text */}
-                <div className="pointer-events-none absolute -right-4 -top-4 z-0 xs:-right-6 xs:-top-6 sm:-right-9 sm:-top-9 md:-right-11 md:-top-11 lg:-right-14 lg:-top-14 xl:-right-15 xl:-top-15">
+
+                <div
+                  className="
+                    pointer-events-none
+                    absolute
+                    -right-4
+                    -top-4
+                    z-0
+                    xs:-right-6
+                    xs:-top-6
+                    sm:-right-9
+                    sm:-top-9
+                    md:-right-11
+                    md:-top-11
+                    lg:-right-14
+                    lg:-top-14
+                    xl:-right-15
+                    xl:-top-15
+                  "
+                >
                   <CircularText
                     text="BUILD*CREATE*DESIGN*DEVELOP*REACT*"
                     onHover="speedUp"
@@ -245,10 +677,21 @@ export function About() {
                   />
                 </div>
 
-                {/* Full Card Hover Area */}
-                <div className="group relative z-10 mx-auto w-full max-w-[420px] [perspective:1600px] sm:w-[92%] lg:w-full">
-                  {/* Flip Card */}
+                {/* Flip Card */}
 
+                <div
+                  className="
+                    group
+                    relative
+                    z-10
+                    mx-auto
+                    w-full
+                    max-w-[420px]
+                    [perspective:1600px]
+                    sm:w-[92%]
+                    lg:w-full
+                  "
+                >
                   <div
                     className="
                       relative
@@ -262,7 +705,10 @@ export function About() {
                       group-hover:[transform:rotateY(180deg)]
                     "
                   >
-                    {/* FRONT */}
+                    {/* ---------------------------------------------------- */}
+                    {/* FRONT                                                */}
+                    {/* ---------------------------------------------------- */}
+
                     <div
                       className="
                         absolute
@@ -273,7 +719,6 @@ export function About() {
                         [-webkit-backface-visibility:hidden]
                       "
                     >
-                      {/* Outer Accent Glow */}
                       <div
                         className="
                           pointer-events-none
@@ -293,7 +738,6 @@ export function About() {
                         "
                       />
 
-                      {/* Main Glass Card */}
                       <div
                         className="
                           relative
@@ -316,13 +760,12 @@ export function About() {
                           dark:shadow-[0_30px_90px_rgba(0,0,0,0.55)]
                         "
                       >
-                        {/* Image Container */}
                         <div
                           className="
                             relative
                             h-full
                             w-full
-                            overflow-hidden
+                            
                             rounded-[1rem]
                             bg-[var(--surface)]
                             xs:rounded-[1.15rem]
@@ -333,7 +776,13 @@ export function About() {
                             src={about.photo.url}
                             alt="Profile photo"
                             fill
-                            sizes="(max-width: 480px) 90vw, (max-width: 640px) 86vw, (max-width: 1024px) 70vw, (max-width: 1280px) 380px, 420px"
+                            sizes="
+                              (max-width: 480px) 90vw,
+                              (max-width: 640px) 86vw,
+                              (max-width: 1024px) 70vw,
+                              (max-width: 1280px) 380px,
+                              420px
+                            "
                             priority
                             className="
                               object-cover
@@ -347,7 +796,6 @@ export function About() {
                             "
                           />
 
-                          {/* Bottom Gradient */}
                           <div
                             className="
                               pointer-events-none
@@ -360,7 +808,6 @@ export function About() {
                             "
                           />
 
-                          {/* Top Accent Glow */}
                           <div
                             className="
                               pointer-events-none
@@ -387,7 +834,6 @@ export function About() {
                             "
                           />
 
-                          {/* About Me Badge */}
                           <div
                             className="
                               absolute
@@ -437,7 +883,6 @@ export function About() {
                         </div>
                       </div>
 
-                      {/* Bottom Right Corner */}
                       <div
                         className="
                           pointer-events-none
@@ -465,7 +910,6 @@ export function About() {
                         "
                       />
 
-                      {/* Top Left Corner */}
                       <div
                         className="
                           pointer-events-none
@@ -491,7 +935,10 @@ export function About() {
                       />
                     </div>
 
-                    {/* BACK */}
+                    {/* ---------------------------------------------------- */}
+                    {/* BACK                                                 */}
+                    {/* ---------------------------------------------------- */}
+
                     <div
                       className="
                         absolute
@@ -515,7 +962,6 @@ export function About() {
                         dark:shadow-[0_30px_90px_rgba(0,0,0,0.55)]
                       "
                     >
-                      {/* Back Inner */}
                       <div
                         className="
                           relative
@@ -524,7 +970,6 @@ export function About() {
                           w-full
                           flex-col
                           justify-between
-                          overflow-hidden
                           rounded-[1rem]
                           bg-[var(--surface)]
                           p-4
@@ -535,7 +980,6 @@ export function About() {
                           md:p-8
                         "
                       >
-                        {/* Back Accent Glow */}
                         <div
                           className="
                             pointer-events-none
@@ -559,7 +1003,6 @@ export function About() {
                           "
                         />
 
-                        {/* Content */}
                         <div className="relative z-10 min-w-0">
                           <span
                             className="
@@ -613,8 +1056,16 @@ export function About() {
                           </p>
                         </div>
 
-                        {/* Technologies */}
-                        <div className="relative z-10 mt-5 min-w-0 xs:mt-6 sm:mt-8">
+                        <div
+                          className="
+                            relative
+                            z-10
+                            mt-5
+                            min-w-0
+                            xs:mt-6
+                            sm:mt-8
+                          "
+                        >
                           <p
                             className="
                               mb-2
@@ -666,7 +1117,6 @@ export function About() {
                           </div>
                         </div>
 
-                        {/* Back Decorative Line */}
                         <div
                           className="
                             pointer-events-none
@@ -693,102 +1143,306 @@ export function About() {
                       </div>
                     </div>
                   </div>
-
                 </div>
-              </div>
-            ) : (
-              <div className="hidden lg:block" />
-            )}
+              </aside>
+            ) : null}
 
-            {/* Content */}
+            {/* ============================================================ */}
+            {/* RIGHT SIDE — NORMAL PAGE SCROLL                               */}
+            {/* ============================================================ */}
+
             <motion.div
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.08 }}
+              viewport={{
+                once: true,
+                amount: 0.08,
+              }}
               variants={contentContainer}
-              className="min-w-0 w-full"
+              className="
+                min-w-0
+                w-full
+              "
             >
+              {/* ---------------------------------------------------------- */}
+              {/* INTRODUCTION                                               */}
+              {/* ---------------------------------------------------------- */}
+
               <motion.div
                 variants={fadeUp}
-                className="mb-5 min-w-0 xs:mb-6 sm:mb-8"
+                className="
+                  mb-5
+                  min-w-0
+                  xs:mb-6
+                  sm:mb-8
+                "
               >
-                <div className="flex min-w-0 items-center gap-2.5 sm:gap-3">
-                  <span className="h-px w-6 shrink-0 bg-gradient-to-r from-[var(--accent)] to-transparent xs:w-8 sm:w-10" />
+                <div
+                  className="
+                    flex
+                    min-w-0
+                    items-center
+                    gap-2.5
+                    sm:gap-3
+                  "
+                >
+                  <span
+                    className="
+                      h-px
+                      w-6
+                      shrink-0
+                      bg-gradient-to-r
+                      from-[var(--accent)]
+                      to-transparent
+                      xs:w-8
+                      sm:w-10
+                    "
+                  />
 
-                  <span className="min-w-0 break-words text-[9px] font-semibold uppercase tracking-[0.2em] text-[var(--accent)] xs:text-[10px] sm:text-[11px] sm:tracking-[0.3em]">
+                  <span
+                    className="
+                      min-w-0
+                      break-words
+                      text-[9px]
+                      font-semibold
+                      uppercase
+                      tracking-[0.2em]
+                      text-[var(--accent)]
+                      xs:text-[10px]
+                      sm:text-[11px]
+                      sm:tracking-[0.3em]
+                    "
+                  >
                     Introduction
                   </span>
                 </div>
               </motion.div>
 
-              <motion.div variants={fadeUp} className="min-w-0">
-                <p className="max-w-3xl whitespace-pre-line break-words text-sm leading-[1.8] text-[var(--foreground-muted)] xs:text-[15px] sm:text-lg sm:leading-[1.9] md:text-xl">
+              {/* ---------------------------------------------------------- */}
+              {/* BIOGRAPHY                                                  */}
+              {/* ---------------------------------------------------------- */}
+
+              <motion.div
+                variants={fadeUp}
+                className="min-w-0"
+              >
+                <p
+                  className="
+                    max-w-3xl
+                    whitespace-pre-line
+                    break-words
+                    text-sm
+                    leading-[1.8]
+                    text-[var(--foreground-muted)]
+                    xs:text-[15px]
+                    sm:text-lg
+                    sm:leading-[1.9]
+                    md:text-xl
+                  "
+                >
                   {about.biography}
                 </p>
               </motion.div>
 
-              {/* Achievements */}
-              {achievements.length > 0 && (
-                <motion.div
-                  variants={fadeUp}
-                  className="mt-8 min-w-0 xs:mt-10 sm:mt-14"
-                >
-                  <div className="mb-4 flex min-w-0 items-center gap-2.5 xs:mb-5 sm:mb-6 sm:gap-4">
-                    <h3 className="shrink-0 text-[9px] font-semibold uppercase tracking-[0.16em] text-[var(--foreground)] xs:text-[10px] sm:text-xs sm:tracking-[0.25em]">
-                      Highlights
-                    </h3>
+              {/* ---------------------------------------------------------- */}
+              {/* ACHIEVEMENTS                                               */}
+              {/* ---------------------------------------------------------- */}
 
-                    <div className="h-px min-w-0 flex-1 bg-gradient-to-r from-[var(--border)] to-transparent" />
-                  </div>
+              {about.achievements &&
+                about.achievements.length > 0 && (
+                  <motion.div
+                    variants={fadeUp}
+                    className="
+                      mt-8
+                      min-w-0
+                      xs:mt-10
+                      sm:mt-14
+                    "
+                  >
+                    <div
+                      className="
+                        mb-4
+                        flex
+                        min-w-0
+                        items-center
+                        gap-2.5
+                        xs:mb-5
+                        sm:mb-6
+                        sm:gap-4
+                      "
+                    >
+                      <h3
+                        className="
+                          shrink-0
+                          text-[9px]
+                          font-semibold
+                          uppercase
+                          tracking-[0.16em]
+                          text-[var(--foreground)]
+                          xs:text-[10px]
+                          sm:text-xs
+                          sm:tracking-[0.25em]
+                        "
+                      >
+                        Highlights
+                      </h3>
 
-                  <div className="space-y-2.5 sm:space-y-3">
-                    {achievements.map((item, index) => (
-                      <AchievementItem
-                        key={`${item}-${index}`}
-                        item={item}
-                        index={index}
+                      <div
+                        className="
+                          h-px
+                          min-w-0
+                          flex-1
+                          bg-gradient-to-r
+                          from-[var(--border)]
+                          to-transparent
+                        "
                       />
-                    ))}
-                  </div>
-                </motion.div>
-              )}
+                    </div>
 
-              {/* Stats */}
-              {stats.length > 0 && (
-                <motion.div
-                  variants={fadeUp}
-                  className="mt-8 min-w-0 xs:mt-10 sm:mt-14"
-                >
-                  <div className="mb-4 flex min-w-0 items-center gap-2.5 xs:mb-5 sm:mb-6 sm:gap-4">
-                    <h3 className="shrink-0 text-[9px] font-semibold uppercase tracking-[0.16em] text-[var(--foreground)] xs:text-[10px] sm:text-xs sm:tracking-[0.25em]">
-                      By The Numbers
-                    </h3>
+                    <div className="space-y-2.5 sm:space-y-3">
+                      {about.achievements.map((item, index) => (
+                        <AchievementItem
+                          key={`${item}-${index}`}
+                          item={item}
+                          index={index}
+                        />
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
 
-                    <div className="h-px min-w-0 flex-1 bg-gradient-to-r from-[var(--border)] to-transparent" />
-                  </div>
+              {/* ---------------------------------------------------------- */}
+              {/* STATS                                                      */}
+              {/* ---------------------------------------------------------- */}
 
-                  <div className="grid min-w-0 grid-cols-2 gap-2 xs:gap-2.5 sm:grid-cols-2 sm:gap-3 md:grid-cols-4">
-                    {stats.map((stat, index) => (
-                      <StatCard
-                        key={`${stat.label}-${index}`}
-                        stat={stat}
-                        index={index}
+              {about.stats &&
+                about.stats.length > 0 && (
+                  <motion.div
+                    variants={fadeUp}
+                    className="
+                      mt-8
+                      min-w-0
+                      xs:mt-10
+                      sm:mt-14
+                    "
+                  >
+                    <div
+                      className="
+                        mb-4
+                        flex
+                        min-w-0
+                        items-center
+                        gap-2.5
+                        xs:mb-5
+                        sm:mb-6
+                        sm:gap-4
+                      "
+                    >
+                      <h3
+                        className="
+                          shrink-0
+                          text-[9px]
+                          font-semibold
+                          uppercase
+                          tracking-[0.16em]
+                          text-[var(--foreground)]
+                          xs:text-[10px]
+                          sm:text-xs
+                          sm:tracking-[0.25em]
+                        "
+                      >
+                        By The Numbers
+                      </h3>
+
+                      <div
+                        className="
+                          h-px
+                          min-w-0
+                          flex-1
+                          bg-gradient-to-r
+                          from-[var(--border)]
+                          to-transparent
+                        "
                       />
-                    ))}
-                  </div>
-                </motion.div>
-              )}
+                    </div>
 
-              {/* Accent */}
+                    <div
+                      className="
+                        grid
+                        min-w-0
+                        grid-cols-2
+                        gap-2
+                        xs:gap-2.5
+                        sm:grid-cols-2
+                        sm:gap-3
+                        md:grid-cols-4
+                      "
+                    >
+                      {about.stats.map((stat, index) => (
+                        <StatCard
+                          key={`${stat.label}-${index}`}
+                          stat={stat}
+                          index={index}
+                        />
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+
+              {/* ---------------------------------------------------------- */}
+              {/* DIVIDER                                                    */}
+              {/* ---------------------------------------------------------- */}
+
               <motion.div
                 variants={fadeUp}
-                className="mt-8 flex min-w-0 items-center gap-2.5 xs:mt-10 xs:gap-3 sm:mt-14 sm:gap-4"
+                className="
+                  mt-8
+                  flex
+                  min-w-0
+                  items-center
+                  gap-2.5
+                  xs:mt-10
+                  xs:gap-3
+                  sm:mt-14
+                  sm:gap-4
+                  pb-8
+                  lg:pb-16
+                "
               >
-                <div className="h-px w-8 shrink-0 bg-gradient-to-r from-[var(--accent)] to-transparent xs:w-12 sm:w-20" />
+                <div
+                  className="
+                    h-px
+                    w-8
+                    shrink-0
+                    bg-gradient-to-r
+                    from-[var(--accent)]
+                    to-transparent
+                    xs:w-12
+                    sm:w-20
+                  "
+                />
 
-                <div className="h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)] shadow-[0_0_12px_rgba(229,9,20,0.9)]" />
+                <div
+                  className="
+                    h-1.5
+                    w-1.5
+                    shrink-0
+                    rounded-full
+                    bg-[var(--accent)]
+                    shadow-[0_0_12px_rgba(229,9,20,0.9)]
+                  "
+                />
 
-                <div className="h-px min-w-0 flex-1 bg-gradient-to-r from-[var(--accent)]/30 to-transparent" />
+                <div
+                  className="
+                    h-px
+                    min-w-0
+                    flex-1
+                    bg-gradient-to-r
+                    from-[var(--accent)]/30
+                    to-transparent
+                  "
+                />
               </motion.div>
             </motion.div>
           </div>

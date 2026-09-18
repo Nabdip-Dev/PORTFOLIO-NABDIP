@@ -1459,8 +1459,8 @@ html {
   width: 100%;
   max-width: 100%;
   min-width: 0;
-
-  overflow-x: hidden;
+  overflow-x: clip !important;
+  overflow-y: visible !important;
   overscroll-behavior-x: none;
 
   scroll-behavior: smooth;
@@ -1474,7 +1474,6 @@ body {
   margin: 0;
   padding: 0;
 
-  overflow-x: hidden;
   overscroll-behavior-x: none;
 }
 
@@ -1612,8 +1611,6 @@ button {
     width: 100%;
     max-width: 100%;
     min-width: 0;
-
-    overflow-x: hidden !important;
   }
 
   #skills,
@@ -1651,7 +1648,7 @@ button {
   body {
     width: 100%;
     max-width: 100%;
-    overflow-x: hidden;
+    
   }
 
   #skills,
@@ -1671,7 +1668,6 @@ button {
   body {
     width: 100%;
     max-width: 100%;
-    overflow-x: hidden;
   }
 
   #skills,
