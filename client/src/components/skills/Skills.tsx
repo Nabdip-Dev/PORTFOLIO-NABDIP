@@ -18,6 +18,8 @@ import {
   SiMongodb,
   SiTailwindcss,
 } from "react-icons/si";
+import GlitchText from "./TrueFocus";
+import TrueFocus from "./TrueFocus";
 
 type Skill = {
   id: number;
@@ -415,7 +417,7 @@ function SkillNode({
           "
         />
 
-        
+
       </div>
     </div>
   );
@@ -844,119 +846,132 @@ export function Skills() {
       <section
         id="skills"
         className="
-          relative
-          overflow-hidden
-          bg-[var(--skills-background)]
-          py-12
-          transition-colors
-          duration-500
+    relative
+    overflow-hidden
+    bg-[var(--skills-background)]
+    py-12
+    transition-colors
+    duration-500
 
-          xs:py-14
-          sm:py-16
-          md:py-18
-          lg:py-20
-        "
+    xs:py-14
+    sm:py-16
+    md:py-18
+    lg:py-20
+  "
       >
         <div
           className="
-            mx-auto
-            w-full
-            max-w-7xl
-            px-4
-
-            xs:px-5
-            sm:px-6
-            lg:px-8
-          "
+      mx-auto
+      w-full
+      max-w-7xl
+      px-4
+      text-center
+      xs:px-5
+      sm:px-6
+      lg:px-8
+    "
         >
           {/* Heading */}
 
-          <div className="mb-4 xs:mb-5 sm:mb-6">
+          <div className="relative top-0 lg:top-20 left-3 mb-4 xs:mb-5 sm:mb-6">
+
+            <TrueFocus
+              sentence="Technologies I Work With"
+              manualMode={false}
+              blurAmount={5}
+              borderColor="#ff0000"
+              animationDuration={0.5}
+              pauseBetweenAnimations={1}
+            />
+
             <p
               className="
-                font-mono
-                text-[8px]
-                uppercase
-                tracking-[0.25em]
-                text-[var(--skills-label)]
+          font-mono
+          mt-3
+          text-[14px]
+          uppercase
+          tracking-[0.25em]
+          text-[var(--skills-label)]
 
-                xs:text-[9px]
-                xs:tracking-[0.28em]
+          xs:text-[9px]
+          xs:tracking-[0.28em]
 
-                sm:tracking-[0.30em]
-              "
+          sm:tracking-[0.30em]
+        "
             >
               Skills
             </p>
 
             <h2
               className="
-                mt-1.5
-                text-xl
-                font-semibold
-                tracking-tight
-                text-[var(--skills-heading)]
+          mt-1.5
+          text-xl
+          font-semibold
+          tracking-tight
+          text-[var(--skills-heading)]
 
-                xs:text-2xl
-                sm:mt-2
-                sm:text-3xl
-                lg:text-[34px]
-              "
+          xs:text-2xl
+          sm:mt-2
+          sm:text-3xl
+          lg:text-[34px]
+        "
             >
-              Technologies I Work With
+
             </h2>
+
+
           </div>
 
           {/* Skill Map */}
 
           <div
             className="
-              relative
-              mx-auto
-              h-[330px]
-              w-full
-              max-w-[1030px]
+        relative
+        mx-auto
+        h-[330px]
+        w-full
+        max-w-[1030px]
 
-              xs:h-[360px]
+        xs:h-[360px]
 
-              sm:h-[400px]
+        sm:h-[400px]
 
-              md:h-[440px]
+        md:h-[440px]
 
-              lg:h-[500px]
+        lg:h-[500px]
 
-              xl:h-[540px]
-            "
+        xl:h-[540px]
+      "
           >
             {/* Ambient Map Glow */}
 
             <div
               className="
-                pointer-events-none
-                absolute
-                left-1/2
-                top-1/2
-                h-[190px]
-                w-[190px]
-                -translate-x-1/2
-                -translate-y-1/2
-                rounded-full
-                bg-[var(--skills-point)]/[0.012]
-                blur-[65px]
+          pointer-events-none
+          absolute
+          left-1/2
+          top-1/2
+          h-[190px]
+          w-[190px]
+          -translate-x-1/2
+          -translate-y-1/2
+          rounded-full
+          bg-[var(--skills-point)]/[0.012]
+          blur-[65px]
 
-                xs:h-[220px]
-                xs:w-[220px]
+          xs:h-[220px]
+          xs:w-[220px]
 
-                sm:h-[250px]
-                sm:w-[250px]
+          sm:h-[250px]
+          sm:w-[250px]
 
-                md:h-[280px]
-                md:w-[280px]
+          md:h-[280px]
+          md:w-[280px]
 
-                lg:h-[300px]
-                lg:w-[300px]
-                lg:blur-[90px]
-              "
+          lg:h-[300px]
+          lg:w-[300px]
+          lg:blur-[90px]
+        "
             />
 
             {/* Connections */}
@@ -987,6 +1002,7 @@ export function Skills() {
           </div>
         </div>
       </section>
+
     </>
   );
 }

@@ -1171,99 +1171,6 @@ p {
 
 
 
-
-
-/* =========================================================
-   SKILLS — DARK THEME
-========================================================= */
-
-[data-theme="dark"] {
-  --skills-background: #040404;
-
-  --skills-heading: #ffffff;
-  --skills-label: rgba(255, 255, 255, 0.35);
-
-  --skills-point: #38bdf8;
-
-  --skills-line-start: rgba(255, 255, 255, 0.17);
-  --skills-line-middle: rgba(255, 255, 255, 0.055);
-  --skills-line-end: rgba(56, 189, 248, 0.14);
-
-  --skills-track: rgba(255, 255, 255, 0.025);
-
-  --skills-node-bg: #070c13;
-  --skills-node-border: rgba(255, 255, 255, 0.11);
-
-  --skills-node-shadow: rgba(0, 0, 0, 0.35);
-  --skills-node-glow: rgba(56, 189, 248, 0.10);
-
-  --skills-inner-border: rgba(255, 255, 255, 0.035);
-
-  --skills-orbit-border: rgba(255, 255, 255, 0.055);
-
-  --skills-center-bg: #060a10;
-  --skills-center-border: rgba(255, 255, 255, 0.12);
-
-  --skills-center-glow: rgba(56, 189, 248, 0.08);
-
-  --skills-center-muted: rgba(255, 255, 255, 0.55);
-}
-
-/* =========================================================
-   SKILLS — LIGHT THEME
-========================================================= */
-
-[data-theme="light"] {
-  --skills-background: #fff9fa;
-
-  --skills-heading: #090909;
-  --skills-label: rgba(0, 0, 0, 0.38);
-
-  --skills-point: #e50914;
-
-  --skills-line-start: rgba(0, 0, 0, 0.14);
-  --skills-line-middle: rgba(0, 0, 0, 0.045);
-  --skills-line-end: rgba(229, 9, 20, 0.18);
-
-  --skills-track: rgba(0, 0, 0, 0.025);
-
-  --skills-node-bg: #ffffff;
-  --skills-node-border: rgba(0, 0, 0, 0.11);
-
-  --skills-node-shadow: rgba(0, 0, 0, 0.14);
-  --skills-node-glow: rgba(229, 9, 20, 0.10);
-
-  --skills-inner-border: rgba(0, 0, 0, 0.045);
-
-  --skills-orbit-border: rgba(0, 0, 0, 0.07);
-
-  --skills-center-bg: #ffffff;
-  --skills-center-border: rgba(0, 0, 0, 0.12);
-
-  --skills-center-glow: rgba(229, 9, 20, 0.08);
-
-  --skills-center-muted: rgba(0, 0, 0, 0.55);
-}
-
-[data-theme="dark"] .skills-section {
-  background:
-    radial-gradient(circle at 50% 50%,
-      rgba(229, 9, 20, 0.035),
-      transparent 45%),
-    #040404;
-}
-
-[data-theme="light"] .skills-section {
-  background:
-    radial-gradient(circle at 50% 50%,
-      rgba(229, 9, 20, 0.045),
-      transparent 45%),
-    #fff9fa;
-}
-
-
-
-
 /* =========================================================
    FAQ — PREMIUM SMOOTH THEME
 ========================================================= */
@@ -1510,26 +1417,6 @@ svg {
   max-width: 100%;
 }
 
-/* =========================================================
-    SKILLS SECTION
- ========================================================= */
-
-#skills {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-  overflow-y: hidden;
-}
-
-#skills>div {
-  max-width: 100%;
-  min-width: 0;
-}
-
-/* SVG connection lines */
-#skills svg {
-  max-width: none;
-}
 
 /* =========================================================
     TESTIMONIALS
@@ -2505,4 +2392,202 @@ button {
 
 
 
+/* =========================================================
+   SKILLS SECTION
+   COLOR SYSTEM ONLY
+   Primary  : #FD1843
+   Soft     : #FF9FA
+   Dark     : #000000
+========================================================= */
 
+#skills {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background: var(--skills-background);
+}
+
+#skills > div {
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* SVG connection lines */
+#skills svg {
+  max-width: none;
+}
+
+
+/* =========================================================
+   DARK THEME
+========================================================= */
+
+[data-theme="dark"] {
+  --skills-background:
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(253, 24, 67, 0.08) 0%,
+      rgba(253, 24, 67, 0.035) 24%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(255, 159, 175, 0.025) 0%,
+      transparent 65%
+    ),
+    linear-gradient(
+      135deg,
+      #000000 0%,
+      #030000 50%,
+      #000000 100%
+    );
+
+  --skills-heading: #ffffff;
+  --skills-label: rgba(255, 255, 255, 0.38);
+
+  --skills-point: #FD1843;
+
+  --skills-line-start: rgba(255, 255, 255, 0.17);
+  --skills-line-middle: rgba(255, 159, 175, 0.05);
+  --skills-line-end: rgba(253, 24, 67, 0.25);
+
+  --skills-track: rgba(255, 255, 255, 0.025);
+
+  --skills-node-bg: #050505;
+  --skills-node-border: rgba(255, 159, 175, 0.14);
+  --skills-node-shadow: rgba(0, 0, 0, 0.50);
+  --skills-node-glow: rgba(253, 24, 67, 0.14);
+
+  --skills-inner-border: rgba(255, 159, 175, 0.045);
+  --skills-orbit-border: rgba(255, 159, 175, 0.07);
+
+  --skills-center-bg: #040404;
+  --skills-center-border: rgba(255, 159, 175, 0.16);
+  --skills-center-glow: rgba(253, 24, 67, 0.12);
+  --skills-center-muted: rgba(255, 255, 255, 0.56);
+}
+
+
+/* =========================================================
+   LIGHT THEME
+========================================================= */
+
+[data-theme="light"] {
+  --skills-background:
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(253, 24, 67, 0.065) 0%,
+      rgba(253, 24, 67, 0.025) 24%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(255, 159, 175, 0.06) 0%,
+      transparent 65%
+    ),
+    linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #fffafb 50%,
+      #fff4f6 100%
+    );
+
+  --skills-heading: #000000;
+  --skills-label: rgba(0, 0, 0, 0.40);
+
+  --skills-point: #FD1843;
+
+  --skills-line-start: rgb(255, 0, 0);
+  --skills-line-middle: rgb(247, 247, 247);
+  --skills-line-end: rgb(239, 0, 44);
+
+  --skills-track: rgba(0, 0, 0, 0.025);
+
+  --skills-node-bg: #ffffff;
+  --skills-node-border: rgba(253, 24, 67, 0.13);
+  --skills-node-shadow: rgba(0, 0, 0, 0.13);
+  --skills-node-glow: rgba(253, 24, 67, 0.10);
+
+  --skills-inner-border: rgba(253, 24, 67, 0.05);
+  --skills-orbit-border: rgba(253, 24, 67, 0.075);
+
+  --skills-center-bg: #ffffff;
+  --skills-center-border: rgba(253, 24, 67, 0.15);
+  --skills-center-glow: rgba(253, 24, 67, 0.09);
+  --skills-center-muted: rgba(0, 0, 0, 0.56);
+}
+
+
+/* =========================================================
+   APPLY THEME BACKGROUND
+========================================================= */
+
+[data-theme="dark"] #skills {
+  background: var(--skills-background);
+}
+
+/* =========================================================
+   SKILLS — DAY / LIGHT
+   White + Black + Red + Soft Pink
+========================================================= */
+
+[data-theme="light"] {
+  /* Background */
+  --skills-background:
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(253, 24, 67, 0.035) 0%,
+      transparent 42%
+    ),
+    linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #ffffff 55%,
+      #fff7f8 100%
+    );
+
+  /* Text */
+  --skills-heading: #000000;
+  --skills-label: rgba(0, 0, 0, 0.58);
+
+  /* Main Accent */
+  --skills-point: #FD1843;
+
+  /* Connections */
+  --skills-line-start: rgba(255, 0, 0, 0.947);
+  --skills-line-middle: rgba(0, 0, 0, 0.657);
+  --skills-line-end: rgba(247, 0, 0, 0.907);
+
+  /* Track */
+  --skills-track: rgba(0, 0, 0, 0.055);
+
+  /* Nodes */
+  --skills-node-bg: #ffffff;
+  --skills-node-border: rgba(0, 0, 0, 0.16);
+  --skills-node-shadow: rgba(0, 0, 0, 0.16);
+  --skills-node-glow: rgba(253, 24, 67, 0.12);
+
+  /* Inner */
+  --skills-inner-border: rgba(0, 0, 0, 0.08);
+  --skills-orbit-border: rgba(0, 0, 0, 0.12);
+
+  /* Center */
+  --skills-center-bg: #ffffff;
+  --skills-center-border: rgba(0, 0, 0, 0.18);
+  --skills-center-glow: rgba(253, 24, 67, 0.10);
+  --skills-center-muted: rgba(0, 0, 0, 0.62);
+}
+
+
+
+
+@media (max-width: 1024px) {
+  html,
+  body,
+  #root {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden !important;
+  }
+}
