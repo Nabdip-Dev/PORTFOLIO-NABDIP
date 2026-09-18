@@ -643,9 +643,8 @@ export function About() {
                   w-full
                   min-w-0
                   self-start
-
                   lg:sticky
-                  lg:top-10
+                  lg:top-30
                 "
               >
                 {/* Circular Text */}
@@ -681,201 +680,198 @@ export function About() {
 
                 <div
                   className="
-                    group
-                    relative
-                    z-10
-                    mx-auto
-                    w-full
-                    max-w-[420px]
-                    [perspective:1600px]
-                    sm:w-[92%]
-                    lg:w-full
-                  "
+    group
+    relative
+    z-10
+    mx-auto
+    w-full
+    max-w-[360px]
+    [perspective:1400px]
+    sm:w-[88%]
+    lg:w-full
+  "
                 >
                   <div
                     className="
-                      relative
-                      aspect-[5/6]
-                      w-full
-                      transform-gpu
-                      transition-transform
-                      duration-[900ms]
-                      ease-[cubic-bezier(0.22,1,0.36,1)]
-                      [transform-style:preserve-3d]
-                      group-hover:[transform:rotateY(180deg)]
-                    "
+      relative
+      aspect-[5/6]
+      w-full
+      transform-gpu
+      transition-transform
+      duration-[900ms]
+      ease-[cubic-bezier(0.22,1,0.36,1)]
+      [transform-style:preserve-3d]
+      group-hover:[transform:rotateY(180deg)]
+    "
                   >
-                    {/* ---------------------------------------------------- */}
-                    {/* FRONT                                                */}
-                    {/* ---------------------------------------------------- */}
-
+                    {/* FRONT */}
                     <div
                       className="
-                        absolute
-                        inset-0
-                        h-full
-                        w-full
-                        [backface-visibility:hidden]
-                        [-webkit-backface-visibility:hidden]
-                      "
+        absolute
+        inset-0
+        h-full
+        w-full
+        [backface-visibility:hidden]
+        [-webkit-backface-visibility:hidden]
+      "
                     >
                       <div
                         className="
-                          pointer-events-none
-                          absolute
-                          -inset-2
-                          rounded-[2rem]
-                          bg-[var(--accent)]
-                          opacity-[0.10]
-                          blur-xl
-                          transition-opacity
-                          duration-500
-                          group-hover:opacity-[0.18]
-                          xs:-inset-2.5
-                          sm:-inset-4
-                          sm:rounded-[2.5rem]
-                          sm:blur-2xl
-                        "
+          pointer-events-none
+          absolute
+          -inset-1.5
+          rounded-[1.5rem]
+          bg-[var(--accent)]
+          opacity-[0.10]
+          blur-lg
+          transition-opacity
+          duration-500
+          group-hover:opacity-[0.18]
+          xs:-inset-2
+          sm:-inset-3
+          sm:rounded-[2rem]
+          sm:blur-xl
+        "
                       />
 
                       <div
                         className="
-                          relative
-                          h-full
-                          w-full
-                          rounded-[1.25rem]
-                          border
-                          border-[var(--glass-border)]
-                          bg-[var(--glass-bg)]
-                          p-1
-                          shadow-[0_20px_55px_rgba(0,0,0,0.12)]
-                          transition-[border-color,box-shadow]
-                          duration-500
-                          group-hover:border-[var(--accent)]/25
-                          xs:rounded-[1.5rem]
-                          xs:p-1.5
-                          sm:rounded-[2rem]
-                          sm:p-2
-                          sm:shadow-[0_30px_80px_rgba(0,0,0,0.12)]
-                          dark:shadow-[0_30px_90px_rgba(0,0,0,0.55)]
-                        "
+          relative
+          h-full
+          w-full
+          rounded-[1rem]
+          border
+          border-[var(--glass-border)]
+          bg-[var(--glass-bg)]
+          p-1
+          shadow-[0_15px_40px_rgba(0,0,0,0.12)]
+          transition-[border-color,box-shadow]
+          duration-500
+          group-hover:border-[var(--accent)]/25
+          xs:rounded-[1.25rem]
+          xs:p-1.5
+          sm:rounded-[1.5rem]
+          sm:p-2
+          sm:shadow-[0_25px_60px_rgba(0,0,0,0.12)]
+          dark:shadow-[0_25px_70px_rgba(0,0,0,0.55)]
+        "
                       >
                         <div
                           className="
-                            relative
-                            h-full
-                            w-full
-                            
-                            rounded-[1rem]
-                            bg-[var(--surface)]
-                            xs:rounded-[1.15rem]
-                            sm:rounded-[1.5rem]
-                          "
+            relative
+            h-full
+            w-full
+            rounded-[0.8rem]
+            bg-[var(--surface)]
+            xs:rounded-[1rem]
+            sm:rounded-[1.25rem]
+          "
                         >
                           <Image
                             src={about.photo.url}
                             alt="Profile photo"
                             fill
                             sizes="
-                              (max-width: 480px) 90vw,
-                              (max-width: 640px) 86vw,
-                              (max-width: 1024px) 70vw,
-                              (max-width: 1280px) 380px,
-                              420px
-                            "
+              (max-width: 480px) 82vw,
+              (max-width: 640px) 78vw,
+              (max-width: 1024px) 60vw,
+              (max-width: 1280px) 330px,
+              360px
+            "
                             priority
                             className="
-                              object-cover
-                              grayscale-[15%]
-                              transform-gpu
-                              transition-[transform,filter]
-                              duration-[900ms]
-                              ease-out
-                              group-hover:scale-105
-                              group-hover:grayscale-0
-                            "
+              object-cover
+              grayscale-[15%]
+              transform-gpu
+              rounded-[0.8rem]
+              transition-[transform,filter]
+              duration-[900ms]
+              
+              ease-out
+              group-hover:scale-105
+              group-hover:grayscale-0
+            "
                           />
 
                           <div
                             className="
-                              pointer-events-none
-                              absolute
-                              inset-0
-                              bg-gradient-to-t
-                              from-black/65
-                              via-black/5
-                              to-transparent
-                            "
+              pointer-events-none
+              absolute
+              inset-0
+              bg-gradient-to-t
+              from-black/65
+              via-black/5
+              to-transparent
+            "
                           />
 
                           <div
                             className="
-                              pointer-events-none
-                              absolute
-                              -right-16
-                              -top-16
-                              h-36
-                              w-36
-                              rounded-full
-                              bg-[var(--accent)]/25
-                              blur-2xl
-                              transition-[background-color]
-                              duration-500
-                              group-hover:bg-[var(--accent)]/40
-                              xs:-right-20
-                              xs:-top-20
-                              xs:h-44
-                              xs:w-44
-                              sm:-right-24
-                              sm:-top-24
-                              sm:h-56
-                              sm:w-56
-                              sm:blur-3xl
-                            "
+              pointer-events-none
+              absolute
+              -right-12
+              -top-12
+              h-28
+              w-28
+              rounded-full
+              bg-[var(--accent)]/25
+              blur-xl
+              transition-[background-color]
+              duration-500
+              group-hover:bg-[var(--accent)]/40
+              xs:-right-14
+              xs:-top-14
+              xs:h-36
+              xs:w-36
+              sm:-right-18
+              sm:-top-18
+              sm:h-44
+              sm:w-44
+              sm:blur-2xl
+            "
                           />
 
                           <div
                             className="
-                              absolute
-                              bottom-3
-                              left-3
-                              flex
-                              max-w-[calc(100%-1.5rem)]
-                              items-center
-                              gap-1.5
-                              rounded-full
-                              border
-                              border-white/20
-                              bg-black/35
-                              px-2.5
-                              py-1.5
-                              text-[8px]
-                              font-semibold
-                              uppercase
-                              tracking-[0.16em]
-                              text-white
-                              backdrop-blur-md
-                              xs:bottom-4
-                              xs:left-4
-                              xs:gap-2
-                              xs:px-3
-                              sm:bottom-5
-                              sm:left-5
-                              sm:px-4
-                              sm:py-2
-                              sm:text-[10px]
-                              sm:tracking-[0.25em]
-                            "
+              absolute
+              bottom-2.5
+              left-2.5
+              flex
+              max-w-[calc(100%-1.25rem)]
+              items-center
+              gap-1
+              rounded-full
+              border
+              border-white/20
+              bg-black/35
+              px-2
+              py-1
+              text-[7px]
+              font-semibold
+              uppercase
+              tracking-[0.14em]
+              text-white
+              backdrop-blur-md
+              xs:bottom-3
+              xs:left-3
+              xs:px-2.5
+              sm:bottom-4
+              sm:left-4
+              sm:px-3
+              sm:py-1.5
+              sm:text-[9px]
+              sm:tracking-[0.2em]
+            "
                           >
                             <span
                               className="
-                                h-1.5
-                                w-1.5
-                                shrink-0
-                                rounded-full
-                                bg-[var(--accent)]
-                                shadow-[0_0_12px_rgba(229,9,20,1)]
-                              "
+                h-1.5
+                w-1.5
+                shrink-0
+                rounded-full
+                bg-[var(--accent)]
+                shadow-[0_0_10px_rgba(229,9,20,1)]
+              "
                             />
 
                             About Me
@@ -885,170 +881,167 @@ export function About() {
 
                       <div
                         className="
-                          pointer-events-none
-                          absolute
-                          -bottom-1.5
-                          -right-1.5
-                          h-10
-                          w-10
-                          rounded-br-[1.25rem]
-                          border-b-2
-                          border-r-2
-                          border-[var(--accent)]/50
-                          transition-[border-color]
-                          duration-500
-                          group-hover:border-[var(--accent)]
-                          xs:-bottom-2
-                          xs:-right-2
-                          xs:h-12
-                          xs:w-12
-                          sm:-bottom-3
-                          sm:-right-3
-                          sm:h-20
-                          sm:w-20
-                          sm:rounded-br-[2rem]
-                        "
+          pointer-events-none
+          absolute
+          -bottom-1
+          -right-1
+          h-8
+          w-8
+          rounded-br-[1rem]
+          border-b-2
+          border-r-2
+          border-[var(--accent)]/50
+          transition-[border-color]
+          duration-500
+          group-hover:border-[var(--accent)]
+          xs:-bottom-1.5
+          xs:-right-1.5
+          xs:h-10
+          xs:w-10
+          sm:-bottom-2
+          sm:-right-2
+          sm:h-14
+          sm:w-14
+          sm:rounded-br-[1.5rem]
+        "
                       />
 
                       <div
                         className="
-                          pointer-events-none
-                          absolute
-                          -left-1.5
-                          -top-1.5
-                          h-9
-                          w-9
-                          rounded-tl-[1rem]
-                          border-l
-                          border-t
-                          border-[var(--border)]
-                          xs:-left-2
-                          xs:-top-2
-                          xs:h-11
-                          xs:w-11
-                          sm:-left-3
-                          sm:-top-3
-                          sm:h-16
-                          sm:w-16
-                          sm:rounded-tl-[1.5rem]
-                        "
+          pointer-events-none
+          absolute
+          -left-1
+          -top-1
+          h-7
+          w-7
+          rounded-tl-[0.8rem]
+          border-l
+          border-t
+          border-[var(--border)]
+          xs:-left-1.5
+          xs:-top-1.5
+          xs:h-9
+          xs:w-9
+          sm:-left-2
+          sm:-top-2
+          sm:h-12
+          sm:w-12
+          sm:rounded-tl-[1.25rem]
+        "
                       />
                     </div>
 
-                    {/* ---------------------------------------------------- */}
-                    {/* BACK                                                 */}
-                    {/* ---------------------------------------------------- */}
-
+                    {/* BACK */}
                     <div
                       className="
-                        absolute
-                        inset-0
-                        h-full
-                        w-full
-                        rounded-[1.25rem]
-                        border
-                        border-[var(--glass-border)]
-                        bg-[var(--glass-bg)]
-                        p-1
-                        shadow-[0_20px_55px_rgba(0,0,0,0.12)]
-                        [backface-visibility:hidden]
-                        [-webkit-backface-visibility:hidden]
-                        [transform:rotateY(180deg)]
-                        xs:rounded-[1.5rem]
-                        xs:p-1.5
-                        sm:rounded-[2rem]
-                        sm:p-2
-                        sm:shadow-[0_30px_80px_rgba(0,0,0,0.12)]
-                        dark:shadow-[0_30px_90px_rgba(0,0,0,0.55)]
-                      "
+        absolute
+        inset-0
+        h-full
+        w-full
+        rounded-[1rem]
+        border
+        border-[var(--glass-border)]
+        bg-[var(--glass-bg)]
+        p-1
+        shadow-[0_15px_40px_rgba(0,0,0,0.12)]
+        [backface-visibility:hidden]
+        [-webkit-backface-visibility:hidden]
+        [transform:rotateY(180deg)]
+        xs:rounded-[1.25rem]
+        xs:p-1.5
+        sm:rounded-[1.5rem]
+        sm:p-2
+        sm:shadow-[0_25px_60px_rgba(0,0,0,0.12)]
+        dark:shadow-[0_25px_70px_rgba(0,0,0,0.55)]
+      "
                     >
                       <div
                         className="
-                          relative
-                          flex
-                          h-full
-                          w-full
-                          flex-col
-                          justify-between
-                          rounded-[1rem]
-                          bg-[var(--surface)]
-                          p-4
-                          xs:rounded-[1.15rem]
-                          xs:p-5
-                          sm:rounded-[1.5rem]
-                          sm:p-6
-                          md:p-8
-                        "
+          relative
+          flex
+          h-full
+          w-full
+          flex-col
+          justify-between
+          rounded-[0.8rem]
+          bg-[var(--surface)]
+          p-3
+          xs:rounded-[1rem]
+          xs:p-4
+          sm:rounded-[1.25rem]
+          sm:p-5
+          md:p-6
+        "
                       >
                         <div
                           className="
-                            pointer-events-none
-                            absolute
-                            -right-16
-                            -top-16
-                            h-44
-                            w-44
-                            rounded-full
-                            bg-[var(--accent)]/15
-                            blur-2xl
-                            xs:-right-20
-                            xs:-top-20
-                            xs:h-52
-                            xs:w-52
-                            sm:-right-24
-                            sm:-top-24
-                            sm:h-64
-                            sm:w-64
-                            sm:blur-3xl
-                          "
+            pointer-events-none
+            absolute
+            -right-12
+            -top-12
+            h-36
+            w-36
+            rounded-full
+            bg-[var(--accent)]/15
+            blur-xl
+            xs:-right-14
+            xs:-top-14
+            xs:h-44
+            xs:w-44
+            sm:-right-18
+            sm:-top-18
+            sm:h-52
+            sm:w-52
+            sm:blur-2xl
+          "
                         />
 
                         <div className="relative z-10 min-w-0">
                           <span
                             className="
-                              text-[8px]
-                              font-semibold
-                              uppercase
-                              tracking-[0.2em]
-                              text-[var(--accent)]
-                              xs:text-[9px]
-                              sm:text-[10px]
-                              sm:tracking-[0.3em]
-                            "
+              text-[7px]
+              font-semibold
+              uppercase
+              tracking-[0.18em]
+              text-[var(--accent)]
+              xs:text-[8px]
+              sm:text-[9px]
+              sm:tracking-[0.25em]
+            "
                           >
                             About Me
                           </span>
 
                           <h3
                             className="
-                              mt-2
-                              break-words
-                              text-xl
-                              font-bold
-                              tracking-tight
-                              xs:mt-3
-                              xs:text-2xl
-                              sm:mt-5
-                              sm:text-3xl
-                            "
+              mt-1.5
+              break-words
+              text-lg
+              font-bold
+              tracking-tight
+              xs:mt-2
+              xs:text-xl
+              sm:mt-3
+              sm:text-2xl
+            "
                           >
                             Creative Developer
                           </h3>
 
                           <p
                             className="
-                              mt-2
-                              break-words
-                              text-[11px]
-                              leading-5
-                              opacity-70
-                              xs:mt-3
-                              xs:text-xs
-                              xs:leading-6
-                              sm:mt-5
-                              sm:text-sm
-                              sm:leading-7
-                            "
+              mt-1.5
+              break-words
+              text-[10px]
+              leading-4
+              opacity-70
+              xs:mt-2
+              xs:text-[11px]
+              xs:leading-5
+              sm:mt-3
+              sm:text-xs
+              sm:leading-6
+            "
                           >
                             I build modern, interactive and visually engaging
                             web experiences using React, Next.js and modern UI
@@ -1058,58 +1051,53 @@ export function About() {
 
                         <div
                           className="
-                            relative
-                            z-10
-                            mt-5
-                            min-w-0
-                            xs:mt-6
-                            sm:mt-8
-                          "
+            relative
+            z-10
+            mt-4
+            min-w-0
+            xs:mt-5
+            sm:mt-6
+          "
                         >
                           <p
                             className="
-                              mb-2
-                              text-[8px]
-                              font-semibold
-                              uppercase
-                              tracking-[0.2em]
-                              opacity-50
-                              xs:text-[9px]
-                              sm:mb-3
-                              sm:text-[10px]
-                              sm:tracking-[0.3em]
-                            "
+              mb-1.5
+              text-[7px]
+              font-semibold
+              uppercase
+              tracking-[0.18em]
+              opacity-50
+              xs:text-[8px]
+              sm:mb-2
+              sm:text-[9px]
+              sm:tracking-[0.25em]
+            "
                           >
                             Technologies
                           </p>
 
-                          <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                            {[
-                              "React",
-                              "Next.js",
-                              "TypeScript",
-                              "Tailwind",
-                            ].map((item) => (
+                          <div className="flex flex-wrap gap-1 sm:gap-1.5">
+                            {["React", "Next.js", "TypeScript", "Tailwind"].map((item) => (
                               <span
                                 key={item}
                                 className="
-                                  rounded-full
-                                  border
-                                  border-[var(--border)]
-                                  bg-white/[0.03]
-                                  px-2
-                                  py-1
-                                  text-[9px]
-                                  transition-colors
-                                  duration-300
-                                  hover:border-[var(--accent)]/50
-                                  hover:text-[var(--accent)]
-                                  xs:px-2.5
-                                  xs:text-[10px]
-                                  sm:px-3
-                                  sm:py-1.5
-                                  sm:text-xs
-                                "
+                  rounded-full
+                  border
+                  border-[var(--border)]
+                  bg-white/[0.03]
+                  px-1.5
+                  py-0.5
+                  text-[8px]
+                  transition-colors
+                  duration-300
+                  hover:border-[var(--accent)]/50
+                  hover:text-[var(--accent)]
+                  xs:px-2
+                  xs:text-[9px]
+                  sm:px-2.5
+                  sm:py-1
+                  sm:text-[10px]
+                "
                               >
                                 {item}
                               </span>
@@ -1119,31 +1107,34 @@ export function About() {
 
                         <div
                           className="
-                            pointer-events-none
-                            absolute
-                            bottom-3
-                            right-3
-                            h-9
-                            w-9
-                            rounded-br-lg
-                            border-b
-                            border-r
-                            border-[var(--accent)]/40
-                            xs:bottom-4
-                            xs:right-4
-                            xs:h-12
-                            xs:w-12
-                            sm:bottom-5
-                            sm:right-5
-                            sm:h-16
-                            sm:w-16
-                            sm:rounded-br-xl
-                          "
+            pointer-events-none
+            absolute
+            bottom-2.5
+            right-2.5
+            h-7
+            w-7
+            rounded-br-md
+            border-b
+            border-r
+            border-[var(--accent)]/40
+            xs:bottom-3
+            xs:right-3
+            xs:h-9
+            xs:w-9
+            sm:bottom-4
+            sm:right-4
+            sm:h-12
+            sm:w-12
+            sm:rounded-br-lg
+          "
                         />
                       </div>
                     </div>
                   </div>
                 </div>
+
+
+
               </aside>
             ) : null}
 
