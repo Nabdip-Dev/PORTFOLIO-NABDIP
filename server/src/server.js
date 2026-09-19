@@ -65,10 +65,19 @@ const globalLimiter = rateLimit({
 });
 app.use("/api", globalLimiter);
 
+// --- Root route ---
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "Nabdip Portfolio API is running",
+  });
+});
+
 // --- Health check ---
 app.get("/api/health", (req, res) => {
   res.json({ success: true, message: "API is running" });
 });
+
 
 // --- Public content + auth routes ---
 app.use("/api/auth", authRoutes);

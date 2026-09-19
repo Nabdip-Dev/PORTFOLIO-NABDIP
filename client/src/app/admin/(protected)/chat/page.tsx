@@ -29,7 +29,12 @@ export default function AdminChatPage() {
     const map: Record<string, ChatMessageData[]> = {};
     chats.forEach((c) => (map[c._id] = c.messages));
     setThreads(map);
-    if (!selectedChatId && chats.length > 0) setSelectedChatId(chats[0]._id);
+    const firstChat = chats[0];
+
+    if (!selectedChatId && firstChat) {
+      setSelectedChatId(firstChat._id);
+    }
+
   }, [chats]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {

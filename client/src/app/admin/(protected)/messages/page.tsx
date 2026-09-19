@@ -2,7 +2,7 @@
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { FiTrash2, FiMail, FiMailOpen } from "react-icons/fi";
+import { FiTrash2, FiMail} from "react-icons/fi";
 import { fetchMessages, markMessageRead, deleteMessage } from "@/services/api/adminMessageService";
 
 export default function AdminMessagesPage() {
@@ -34,7 +34,7 @@ export default function AdminMessagesPage() {
                 <div>
                   <div className="flex items-center gap-2">
                     {m.read ? (
-                      <FiMailOpen size={14} className="text-[var(--foreground-muted)]" />
+                      <FiMail size={14} className="text-[var(--foreground-muted)]" />
                     ) : (
                       <FiMail size={14} style={{ color: "var(--accent)" }} />
                     )}
