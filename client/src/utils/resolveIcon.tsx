@@ -2,7 +2,7 @@ import type { ComponentType } from "react";
 import {
   SiReact, SiNextdotjs, SiTypescript, SiJavascript, SiTailwindcss, SiNodedotjs,
   SiExpress, SiMongodb, SiPostgresql, SiDocker, SiGit, SiGithub, SiFigma,
-  SiVercel, SiAmazon
+  SiVercel
 , SiRedis, SiGraphql, SiPython, SiVuedotjs,
 } from "react-icons/si";
 import { FiCode } from "react-icons/fi";
@@ -13,7 +13,7 @@ import { FiCode } from "react-icons/fi";
 const ICON_MAP: Record<string, ComponentType<{ size?: number; className?: string }>> = {
   SiReact, SiNextdotjs, SiTypescript, SiJavascript, SiTailwindcss, SiNodedotjs,
   SiExpress, SiMongodb, SiPostgresql, SiDocker, SiGit, SiGithub, SiFigma,
-  SiVercel, SiAmazon
+  SiVercel
 , SiRedis, SiGraphql, SiPython, SiVuedotjs,
 };
 

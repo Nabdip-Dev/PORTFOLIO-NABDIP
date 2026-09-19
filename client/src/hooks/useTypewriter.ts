@@ -8,9 +8,7 @@ interface UseTypewriterOptions {
 }
 
 /**
- * Cycles through `words`, typing and deleting each one. Kept dependency-free
- * (no external typewriter lib) since the behavior is simple and this avoids
- * pulling in another package for ~40 lines of logic.
+ * Cycles through `words`, typing and deleting each one.
  */
 export function useTypewriter({
   words,
@@ -23,23 +21,47 @@ export function useTypewriter({
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    if (words.length === 0) return;
-    const current = words[wordIndex % words.length];
+    if (words.length === 0) {
+      return;
+    }
+
+    // noUncheckedIndexedAccess-এর জন্য fallback রাখা হয়েছে
+    const current = words[wordIndex % words.length] ?? "";
 
     let timeout: ReturnType<typeof setTimeout>;
 
     if (!isDeleting && text === current) {
-      timeout = setTimeout(() => setIsDeleting(true), pauseMs);
+      timeout = setTimeout(() => {
+        setIsDeleting(true);
+      }, pauseMs);
     } else if (isDeleting && text === "") {
       setIsDeleting(false);
-      setWordIndex((i) => (i + 1) % words.length);
+
+      setWordIndex((currentIndex) => {
+        return (currentIndex + 1) % words.length;
+      });
     } else {
-      const next = isDeleting ? current.slice(0, text.length - 1) : current.slice(0, text.length + 1);
-      timeout = setTimeout(() => setText(next), isDeleting ? deletingSpeedMs : typingSpeedMs);
+      const next: string = isDeleting
+        ? current.slice(0, Math.max(0, text.length - 1))
+        : current.slice(0, text.length + 1);
+
+      timeout = setTimeout(() => {
+        setText(next);
+      }, isDeleting ? deletingSpeedMs : typingSpeedMs);
     }
 
-    return () => clearTimeout(timeout);
-  }, [text, isDeleting, wordIndex, words, typingSpeedMs, deletingSpeedMs, pauseMs]);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [
+    text,
+    isDeleting,
+    wordIndex,
+    words,
+    typingSpeedMs,
+    deletingSpeedMs,
+    pauseMs,
+  ]);
 
   return text;
 }
