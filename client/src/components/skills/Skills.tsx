@@ -988,8 +988,9 @@ export function Skills() {
             {/* Center */}
 
             <Center
-              skill={SKILLS[activeSkill] ?? SKILLS[0]}
+              skill={SKILLS[activeSkill] as Skill}
             />
+
 
 
             {/* Nodes */}
