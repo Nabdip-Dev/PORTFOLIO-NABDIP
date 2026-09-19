@@ -87,15 +87,13 @@ function ExperienceCard({
           max-w-[660px]
           overflow-hidden
           rounded-[1.25rem]
-
           border
           p-5
-
           backdrop-blur-xl
 
-          transition-[background,border-color,box-shadow]
+          transition-[background-color,border-color,box-shadow]
           duration-700
-          ease-out
+          ease-[cubic-bezier(0.22,1,0.36,1)]
 
           sm:rounded-[1.4rem]
           sm:p-6
@@ -104,35 +102,57 @@ function ExperienceCard({
           ${
             active
               ? `
-                border-white/35
+                border-white/30
                 bg-[#FD1843]
-                shadow-[0_30px_80px_-38px_rgba(253,24,67,0.85)]
+                shadow-[0_30px_90px_-40px_rgba(253,24,67,0.95)]
               `
               : `
-                border-[#FD1843]/30
-                bg-black
-                shadow-[0_30px_80px_-38px_rgba(0,0,0,0.8)]
+                border-white/15
+                bg-[#080808]
+                shadow-[0_30px_90px_-35px_rgba(0,0,0,0.8)]
               `
           }
         `}
       >
-        {/* Animated top accent */}
+        {/* =====================================================
+            CARD TOP SHINE
+        ====================================================== */}
         <div
           className="
+            pointer-events-none
             absolute
-            left-6
-            right-6
+            left-8
+            right-8
             top-0
             h-[2px]
             bg-gradient-to-r
             from-transparent
             via-white
             to-transparent
-            opacity-90
+            opacity-80
           "
         />
 
-        {/* Number */}
+        {/* =====================================================
+            CARD INNER RED GLOW
+        ====================================================== */}
+        <div
+          className="
+            pointer-events-none
+            absolute
+            -right-24
+            -top-24
+            h-56
+            w-56
+            rounded-full
+            bg-[#FD1843]/25
+            blur-[70px]
+          "
+        />
+
+        {/* =====================================================
+            NUMBER
+        ====================================================== */}
         <span
           className={`
             absolute
@@ -145,7 +165,7 @@ function ExperienceCard({
             duration-700
             ${
               active
-                ? "text-black/40"
+                ? "text-black/45"
                 : "text-white/35"
             }
           `}
@@ -159,7 +179,9 @@ function ExperienceCard({
           {String(total).padStart(2, "0")}
         </span>
 
-        {/* Date */}
+        {/* =====================================================
+            DATE
+        ====================================================== */}
         <div
           className={`
             inline-flex
@@ -173,19 +195,18 @@ function ExperienceCard({
             text-[9px]
             uppercase
             tracking-[0.08em]
-            shadow-sm
             transition-all
             duration-700
 
             ${
               active
                 ? `
-                  border-white/30
-                  bg-black/[0.08]
+                  border-white/35
+                  bg-black/[0.10]
                   text-white
                 `
                 : `
-                  border-[#FD1843]/40
+                  border-[#FD1843]/45
                   bg-[#FD1843]/10
                   text-[#FD1843]
                 `
@@ -205,7 +226,9 @@ function ExperienceCard({
           </span>
         </div>
 
-        {/* Label */}
+        {/* =====================================================
+            LABEL
+        ====================================================== */}
         <p
           className={`
             mt-5
@@ -218,7 +241,7 @@ function ExperienceCard({
 
             ${
               active
-                ? "text-black/60"
+                ? "text-black/55"
                 : "text-white/45"
             }
           `}
@@ -226,65 +249,71 @@ function ExperienceCard({
           Professional Experience
         </p>
 
-        {/* Role */}
+        {/* =====================================================
+            ROLE — CHROME / 3D TEXT
+        ====================================================== */}
         <h3
-          className={`
+          className="
             mt-2
-            max-w-[85%]
+            max-w-[88%]
+
             font-display
             text-xl
-            font-bold
-            leading-tight
-            tracking-[-0.035em]
+            font-black
+            leading-[0.95]
+            tracking-[-0.04em]
 
             bg-clip-text
             text-transparent
 
-            transition-all
-            duration-700
-
             sm:text-2xl
 
-            ${
-              active
-                ? `
-                  bg-gradient-to-br
-                  from-black
-                  via-white
-                  to-black
-                  drop-shadow-[0_2px_0_rgba(255,255,255,0.25)]
-                `
-                : `
-                  bg-gradient-to-r
-                  from-white
-                  via-[#FD1843]
-                  to-white
-                `
-            }
-          `}
+            transition-all
+            duration-700
+          "
+          style={{
+            backgroundImage: active
+              ? `
+                linear-gradient(
+                  180deg,
+                  #050505 0%,
+                  #050505 18%,
+                  #ffffff 42%,
+                  #ffffff 55%,
+                  #151515 78%,
+                  #000000 100%
+                )
+              `
+              : `
+                linear-gradient(
+                  180deg,
+                  #ffffff 0%,
+                  #ffffff 25%,
+                  #FD1843 48%,
+                  #ffffff 70%,
+                  #999999 100%
+                )
+              `,
+
+            textShadow: active
+              ? `
+                0 1px 0 rgba(255,255,255,0.8),
+                0 2px 0 rgba(0,0,0,0.18),
+                0 4px 8px rgba(0,0,0,0.18)
+              `
+              : `
+                0 1px 0 rgba(255,255,255,0.15),
+                0 3px 8px rgba(0,0,0,0.6)
+              `,
+          }}
         >
           {item.role}
         </h3>
 
-        {/* Company */}
-        <div
-          className={`
-            mt-2
-            flex
-            min-w-0
-            items-center
-            gap-2
-            text-xs
-            transition-colors
-            duration-700
-
-            ${
-              active
-                ? "text-black/75"
-                : "text-white/65"
-            }
-          `}
-        >
+        {/* =====================================================
+            COMPANY
+        ====================================================== */}
+        <div className="mt-2 flex min-w-0 items-center gap-2">
           <span
             className={`
               h-1.5
@@ -298,45 +327,63 @@ function ExperienceCard({
                 active
                   ? `
                     bg-white
-                    shadow-[0_0_12px_rgba(255,255,255,0.95)]
+                    shadow-[0_0_14px_rgba(255,255,255,0.9)]
                   `
                   : `
                     bg-[#FD1843]
-                    shadow-[0_0_12px_rgba(253,24,67,0.8)]
+                    shadow-[0_0_14px_rgba(253,24,67,0.9)]
                   `
               }
             `}
           />
 
-          <span className="truncate">
+          <span
+            className="
+              truncate
+              bg-gradient-to-r
+              from-black
+              via-white
+              to-black
+              bg-clip-text
+              text-transparent
+              font-semibold
+            "
+          >
             {item.company}
           </span>
         </div>
 
-        {/* Description */}
+        {/* =====================================================
+            DESCRIPTION
+        ====================================================== */}
         {item.description && (
           <p
-            className={`
+            className="
               mt-4
               max-w-xl
-              text-xs
-              leading-6
-              transition-colors
-              duration-700
-              sm:text-[13px]
 
-              ${
-                active
-                  ? "text-black/70"
-                  : "text-white/55"
-              }
-            `}
+              text-xs
+              font-medium
+              leading-6
+
+              bg-gradient-to-r
+              from-black
+              via-white
+              to-black
+
+              bg-clip-text
+              text-transparent
+
+              sm:text-[13px]
+            "
           >
             {item.description}
           </p>
         )}
 
-        {/* Technologies */}
+        {/* =====================================================
+            TECHNOLOGIES
+        ====================================================== */}
         {item.technologies?.length ? (
           <div className="mt-4 flex flex-wrap gap-1.5">
             {item.technologies.map((tech) => (
@@ -357,12 +404,12 @@ function ExperienceCard({
                       ? `
                         border-white/30
                         bg-black/[0.08]
-                        text-black/70
+                        text-black/75
                       `
                       : `
                         border-white/15
                         bg-white/[0.04]
-                        text-white/55
+                        text-white/65
                       `
                   }
                 `}
@@ -373,24 +420,26 @@ function ExperienceCard({
           </div>
         ) : null}
 
-        {/* Glow */}
+        {/* =====================================================
+            BOTTOM GLOW
+        ====================================================== */}
         <div
           className={`
             pointer-events-none
             absolute
-            -bottom-20
-            -right-20
-            h-40
-            w-40
+            -bottom-24
+            -right-24
+            h-52
+            w-52
             rounded-full
-            blur-3xl
+            blur-[80px]
             transition-all
             duration-700
 
             ${
               active
-                ? "bg-white/[0.16]"
-                : "bg-[#FD1843]/[0.18]"
+                ? "bg-white/15"
+                : "bg-[#FD1843]/25"
             }
           `}
         />
@@ -572,65 +621,106 @@ export function Experience() {
         h-screen
         w-full
         overflow-hidden
-
-        bg-white
       "
+      style={{
+        background: `
+          radial-gradient(
+            ellipse 80% 70% at 8% 12%,
+            rgba(253, 24, 67, 0.95) 0%,
+            rgba(253, 24, 67, 0.55) 18%,
+            transparent 48%
+          ),
+
+          radial-gradient(
+            ellipse 75% 80% at 92% 88%,
+            rgba(0, 0, 0, 0.92) 0%,
+            rgba(0, 0, 0, 0.55) 24%,
+            transparent 58%
+          ),
+
+          radial-gradient(
+            ellipse 85% 65% at 50% 45%,
+            rgba(255, 255, 255, 1) 0%,
+            rgba(255, 255, 255, 0.96) 30%,
+            transparent 72%
+          ),
+
+          conic-gradient(
+            from 210deg at 50% 50%,
+            #000000 0deg,
+            #000000 52deg,
+            #FD1843 118deg,
+            #ffffff 185deg,
+            #ffffff 235deg,
+            #FD1843 292deg,
+            #000000 360deg
+          )
+        `,
+        backgroundBlendMode:
+          "screen, screen, normal, soft-light",
+      }}
     >
-      {/* 3-COLOR BACKGROUND */}
+      {/* =====================================================
+          BACKGROUND GLASS / LIGHT VEIL
+      ====================================================== */}
       <div
         className="
           pointer-events-none
           absolute
           inset-0
-
-          bg-[radial-gradient(circle_at_12%_15%,rgba(253,24,67,0.30),transparent_32%),radial-gradient(circle_at_88%_20%,rgba(0,0,0,0.13),transparent_30%),radial-gradient(circle_at_75%_90%,rgba(253,24,67,0.16),transparent_35%),linear-gradient(135deg,#ffffff_0%,#f7f7f7_32%,#111111_58%,#FD1843_100%)]
-
-          opacity-[0.13]
+          bg-white/[0.18]
+          backdrop-blur-[1px]
         "
       />
 
-      {/* RED LIGHT */}
+      {/* =====================================================
+          RED ORB
+      ====================================================== */}
       <div
         className="
           pointer-events-none
           absolute
-          -right-40
-          top-[-100px]
+          -left-32
+          top-[-140px]
+          h-[520px]
+          w-[520px]
+          rounded-full
+          bg-[#FD1843]/25
+          blur-[100px]
+        "
+      />
+
+      {/* =====================================================
+          BLACK ORB
+      ====================================================== */}
+      <div
+        className="
+          pointer-events-none
+          absolute
+          -bottom-40
+          right-[-120px]
           h-[500px]
           w-[500px]
           rounded-full
-          bg-[#FD1843]/20
-          blur-[120px]
-        "
-      />
-
-      {/* BLACK LIGHT */}
-      <div
-        className="
-          pointer-events-none
-          absolute
-          -left-40
-          bottom-[-100px]
-          h-[420px]
-          w-[420px]
-          rounded-full
-          bg-black/10
+          bg-black/20
           blur-[110px]
         "
       />
 
-      {/* WHITE LIGHT */}
+      {/* =====================================================
+          WHITE CENTER LIGHT
+      ====================================================== */}
       <div
         className="
           pointer-events-none
           absolute
-          left-[35%]
-          top-[10%]
-          h-[280px]
-          w-[280px]
+          left-[32%]
+          top-[18%]
+          h-[420px]
+          w-[420px]
           rounded-full
-          bg-white/80
-          blur-[120px]
+          bg-white/65
+          blur-[130px]
         "
       />
 
@@ -691,21 +781,15 @@ export function Experience() {
                   max-w-xl
                   rounded-[1.25rem]
                   border
-                  border-[#FD1843]/20
-                  bg-white/60
+                  border-black/10
+                  bg-white/70
                   px-6
                   py-10
                   text-center
-                  shadow-[0_25px_70px_-45px_rgba(253,24,67,0.6)]
-                  backdrop-blur-md
+                  backdrop-blur-xl
                 "
               >
-                <p
-                  className="
-                    text-sm
-                    text-black/55
-                  "
-                >
+                <p className="text-sm text-black/60">
                   No experience added yet.
                 </p>
               </div>
@@ -725,14 +809,29 @@ export function Experience() {
               >
                 {/* LEFT */}
                 <div className="relative z-20">
-                  <SectionHeading
-                    eyebrow={
-                      t.sections.experience.eyebrow
-                    }
-                    title={
-                      t.sections.experience.title
-                    }
-                  />
+                  {/* 
+                    Wrapper targets the h2 inside SectionHeading.
+                    No change to SectionHeading component required.
+                  */}
+                  <div
+                    className="
+                      [&_h2]:bg-[linear-gradient(105deg,#000_0%,#000_18%,#FD1843_38%,#fff_50%,#FD1843_62%,#000_82%,#000_100%)]
+                      [&_h2]:bg-clip-text
+                      [&_h2]:text-transparent
+                      [&_h2]:font-black
+                      [&_h2]:drop-shadow-[0_2px_0_rgba(255,255,255,0.9)]
+                      [&_h2]:drop-shadow-[0_7px_16px_rgba(253,24,67,0.22)]
+                    "
+                  >
+                    <SectionHeading
+                      eyebrow={
+                        t.sections.experience.eyebrow
+                      }
+                      title={
+                        t.sections.experience.title
+                      }
+                    />
+                  </div>
 
                   <div
                     className="
@@ -748,8 +847,8 @@ export function Experience() {
                         h-px
                         flex-1
                         bg-gradient-to-r
-                        from-transparent
-                        via-black/20
+                        from-black/20
+                        via-[#FD1843]/50
                         to-transparent
                       "
                     />
@@ -760,7 +859,7 @@ export function Experience() {
                         w-1.5
                         rotate-45
                         bg-[#FD1843]
-                        shadow-[0_0_14px_rgba(253,24,67,0.7)]
+                        shadow-[0_0_14px_rgba(253,24,67,0.8)]
                       "
                     />
 
@@ -770,8 +869,8 @@ export function Experience() {
                         flex-1
                         bg-gradient-to-r
                         from-transparent
-                        via-black/20
-                        to-transparent
+                        via-[#FD1843]/50
+                        to-black/20
                       "
                     />
                   </div>
@@ -781,17 +880,23 @@ export function Experience() {
                       mt-5
                       max-w-sm
                       text-sm
+                      font-medium
                       leading-6
 
-                      bg-gradient-to-r
-                      from-black
-                      via-[#FD1843]
-                      to-black
+                      bg-[linear-gradient(
+                        105deg,
+                        #000000 0%,
+                        #000000 30%,
+                        #ffffff 48%,
+                        #ffffff 55%,
+                        #000000 75%,
+                        #FD1843 100%
+                      )]
 
                       bg-clip-text
                       text-transparent
 
-                      font-medium
+                      drop-shadow-[0_1px_0_rgba(255,255,255,0.7)]
                     "
                   >
                     Scroll to explore my
@@ -811,9 +916,9 @@ export function Experience() {
                       className="
                         font-mono-tag
                         text-xs
+                        font-bold
                         tracking-widest
                         text-[#FD1843]
-                        font-bold
                       "
                     >
                       {String(
@@ -823,7 +928,7 @@ export function Experience() {
                         ),
                       ).padStart(2, "0")}
 
-                      <span className="mx-1 text-black/30">
+                      <span className="mx-1 text-black/40">
                         /
                       </span>
 
@@ -838,7 +943,7 @@ export function Experience() {
                         w-24
                         overflow-hidden
                         rounded-full
-                        bg-black/10
+                        bg-black/15
                       "
                     >
                       <div
@@ -847,7 +952,7 @@ export function Experience() {
                           bg-gradient-to-r
                           from-black
                           via-[#FD1843]
-                          to-[#FD1843]
+                          to-white
 
                           transition-all
                           duration-500
@@ -922,17 +1027,15 @@ export function Experience() {
                     <span
                       className="
                         rounded-full
-
                         border
                         border-[#FD1843]/30
-
-                        bg-black
-
+                        bg-black/90
                         px-5
                         py-3
-
                         text-xs
-                        font-medium
+                        font-semibold
+                        shadow-[0_15px_50px_-20px_rgba(253,24,67,0.8)]
+                        backdrop-blur-md
 
                         bg-gradient-to-r
                         from-white
@@ -941,10 +1044,6 @@ export function Experience() {
 
                         bg-clip-text
                         text-transparent
-
-                        shadow-[0_15px_50px_-20px_rgba(253,24,67,0.8)]
-
-                        backdrop-blur-md
                       "
                     >
                       Scroll to reveal
