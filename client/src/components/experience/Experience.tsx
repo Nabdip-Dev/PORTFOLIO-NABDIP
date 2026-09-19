@@ -56,9 +56,9 @@ function ExperienceCard({
           ? 1
           : previous
             ? Math.max(
-                0.15,
-                0.55 - distance * 0.1,
-              )
+              0.15,
+              0.55 - distance * 0.1,
+            )
             : 0,
 
         visibility: future
@@ -73,9 +73,9 @@ function ExperienceCard({
           ? "translate3d(0,0,0) scale(1)"
           : previous
             ? `translate3d(0,${-distance * 12}px,0) scale(${Math.max(
-                0.9,
-                1 - distance * 0.025,
-              )})`
+              0.9,
+              1 - distance * 0.025,
+            )})`
             : "translate3d(105%,0,0) scale(0.96)",
       }}
     >
@@ -101,14 +101,13 @@ function ExperienceCard({
           sm:p-6
           lg:p-7
 
-          ${
-            active
-              ? `
+          ${active
+            ? `
                 border-white/35
                 bg-[#FD1843]
                 shadow-[0_30px_80px_-38px_rgba(253,24,67,0.85)]
               `
-              : `
+            : `
                 border-[#FD1843]/30
                 bg-black
                 shadow-[0_30px_80px_-38px_rgba(0,0,0,0.8)]
@@ -143,10 +142,9 @@ function ExperienceCard({
             tracking-[0.18em]
             transition-colors
             duration-700
-            ${
-              active
-                ? "text-black/40"
-                : "text-white/35"
+            ${active
+              ? "text-black/40"
+              : "text-white/35"
             }
           `}
         >
@@ -177,14 +175,13 @@ function ExperienceCard({
             transition-all
             duration-700
 
-            ${
-              active
-                ? `
+            ${active
+              ? `
                   border-white/30
                   bg-black/[0.08]
                   text-white
                 `
-                : `
+              : `
                   border-[#FD1843]/40
                   bg-[#FD1843]/10
                   text-[#FD1843]
@@ -216,10 +213,9 @@ function ExperienceCard({
             transition-colors
             duration-700
 
-            ${
-              active
-                ? "text-black/60"
-                : "text-white/45"
+            ${active
+              ? "text-black/60"
+              : "text-white/45"
             }
           `}
         >
@@ -245,16 +241,15 @@ function ExperienceCard({
 
             sm:text-2xl
 
-            ${
-              active
-                ? `
+            ${active
+              ? `
                   bg-gradient-to-br
                   from-black
-                  via-white
+                  from-blue-800
                   to-black
                   drop-shadow-[0_2px_0_rgba(255,255,255,0.25)]
                 `
-                : `
+              : `
                   bg-gradient-to-r
                   from-white
                   via-[#FD1843]
@@ -278,10 +273,9 @@ function ExperienceCard({
             transition-colors
             duration-700
 
-            ${
-              active
-                ? "text-black/75"
-                : "text-white/65"
+            ${active
+              ? "text-black/75"
+              : "text-white/65"
             }
           `}
         >
@@ -294,13 +288,12 @@ function ExperienceCard({
               transition-all
               duration-700
 
-              ${
-                active
-                  ? `
+              ${active
+                ? `
                     bg-white
                     shadow-[0_0_12px_rgba(255,255,255,0.95)]
                   `
-                  : `
+                : `
                     bg-[#FD1843]
                     shadow-[0_0_12px_rgba(253,24,67,0.8)]
                   `
@@ -325,10 +318,9 @@ function ExperienceCard({
               duration-700
               sm:text-[13px]
 
-              ${
-                active
-                  ? "text-black/70"
-                  : "text-white/55"
+              ${active
+                ? "text-black/70"
+                : "text-white/55"
               }
             `}
           >
@@ -352,14 +344,13 @@ function ExperienceCard({
                   transition-all
                   duration-700
 
-                  ${
-                    active
-                      ? `
+                  ${active
+                    ? `
                         border-white/30
                         bg-black/[0.08]
                         text-black/70
                       `
-                      : `
+                    : `
                         border-white/15
                         bg-white/[0.04]
                         text-white/55
@@ -387,10 +378,9 @@ function ExperienceCard({
             transition-all
             duration-700
 
-            ${
-              active
-                ? "bg-white/[0.16]"
-                : "bg-[#FD1843]/[0.18]"
+            ${active
+              ? "bg-white/[0.16]"
+              : "bg-[#FD1843]/[0.18]"
             }
           `}
         />
@@ -567,14 +557,17 @@ export function Experience() {
       ref={sectionRef}
       id="experience"
       className="
-        relative
-        isolate
-        h-screen
-        w-full
-        overflow-hidden
+  relative
+  isolate
+  h-screen
+  mx-0
+  lg:mx-20
+  overflow-hidden
+  rounded-[50px]
+  border-1
+  border-red-500
+"
 
-        bg-white
-      "
     >
       {/* 3-COLOR BACKGROUND */}
       <div
@@ -599,7 +592,7 @@ export function Experience() {
           h-[500px]
           w-[500px]
           rounded-full
-          bg-[#FD1843]/20
+          bg-[#0e0032]
           blur-[120px]
         "
       />
@@ -614,7 +607,7 @@ export function Experience() {
           h-[420px]
           w-[420px]
           rounded-full
-          bg-black/10
+          bg-black
           blur-[110px]
         "
       />
@@ -629,7 +622,7 @@ export function Experience() {
           h-[280px]
           w-[280px]
           rounded-full
-          bg-white/80
+          bg-blue-950
           blur-[120px]
         "
       />
@@ -725,14 +718,12 @@ export function Experience() {
               >
                 {/* LEFT */}
                 <div className="relative z-20">
-                  <SectionHeading
-                    eyebrow={
-                      t.sections.experience.eyebrow
-                    }
-                    title={
-                      t.sections.experience.title
-                    }
-                  />
+                  <div className="[&_h2]:text-[#FD1843]">
+                    <SectionHeading
+                      eyebrow={t.sections.experience.eyebrow}
+                      title={t.sections.experience.title}
+                    />
+                  </div>
 
                   <div
                     className="
@@ -853,13 +844,12 @@ export function Experience() {
                           duration-500
                         "
                         style={{
-                          width: `${
-                            activeIndex < 0
-                              ? 0
-                              : ((activeIndex + 1) /
-                                  experiences.length) *
-                                100
-                          }%`,
+                          width: `${activeIndex < 0
+                            ? 0
+                            : ((activeIndex + 1) /
+                              experiences.length) *
+                            100
+                            }%`,
                         }}
                       />
                     </div>
