@@ -313,9 +313,10 @@ function SkillNode({
         group
       "
       style={{
-        left: position.left,
-        top: position.top,
+        left: position?.left ?? 0,
+        top: position?.top ?? 0,
       }}
+
     >
       {/* Glow */}
       <div
@@ -987,8 +988,9 @@ export function Skills() {
             {/* Center */}
 
             <Center
-              skill={SKILLS[activeSkill]}
+              skill={SKILLS[activeSkill] ?? SKILLS[0]}
             />
+
 
             {/* Nodes */}
 

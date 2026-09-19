@@ -113,7 +113,7 @@ const waitForFonts = async (font: string): Promise<void> => {
 
   try {
     await document.fonts.load(font);
-  } catch {}
+  } catch { }
 
   await document.fonts.ready;
 };
@@ -280,12 +280,12 @@ const ParticleText = ({
           baseX =
             particle.startX +
             (particle.targetX - particle.startX) *
-              eased;
+            eased;
 
           baseY =
             particle.startY +
             (particle.targetY - particle.startY) *
-              eased;
+            eased;
 
           if (progress < 1) complete = false;
         } else if (!reducedMotion && idleDrift > 0) {
@@ -294,7 +294,7 @@ const ParticleText = ({
           baseX +=
             Math.sin(
               driftTime * 0.9 +
-                particle.seed * 10,
+              particle.seed * 10,
             ) *
             idleDrift *
             particle.depth;
@@ -302,7 +302,7 @@ const ParticleText = ({
           baseY +=
             Math.cos(
               driftTime * 0.75 +
-                particle.depth * 10,
+              particle.depth * 10,
             ) *
             idleDrift *
             particle.depth;
@@ -419,7 +419,7 @@ const ParticleText = ({
       const resolvedFamily =
         fontFamily === "inherit"
           ? computed.fontFamily ||
-            "sans-serif"
+          "sans-serif"
           : fontFamily;
 
       let resolvedSize = resolveFontSize(
@@ -461,7 +461,7 @@ const ParticleText = ({
         resolvedSize = Math.max(
           18,
           resolvedSize *
-            (maxTextWidth / measuredWidth),
+          (maxTextWidth / measuredWidth),
         );
 
         font = `${fontWeight} ${resolvedSize}px ${resolvedFamily}`;
@@ -481,17 +481,17 @@ const ParticleText = ({
 
       const right = Math.ceil(
         metrics.actualBoundingBoxRight ||
-          metrics.width,
+        metrics.width,
       );
 
       const ascent = Math.ceil(
         metrics.actualBoundingBoxAscent ||
-          resolvedSize * 0.78,
+        resolvedSize * 0.78,
       );
 
       const descent = Math.ceil(
         metrics.actualBoundingBoxDescent ||
-          resolvedSize * 0.22,
+        resolvedSize * 0.22,
       );
 
       const padding = Math.max(
@@ -560,12 +560,13 @@ const ParticleText = ({
         ) {
           const alpha =
             imageData.data[
-              (y * offscreen.width + x) *
-                4 +
-                3
+            (y * offscreen.width + x) *
+            4 +
+            3
             ];
 
-          if (alpha > 40) {
+          if ((alpha ?? 0) > 40) {
+
             targets.push({
               x:
                 width / 2 -
@@ -577,7 +578,8 @@ const ParticleText = ({
                 offscreen.height / 2 +
                 y,
 
-              alpha: alpha / 255,
+              alpha: (alpha ?? 0) / 255,
+
             });
           }
         }
@@ -597,7 +599,7 @@ const ParticleText = ({
         1,
         Math.ceil(
           targets.length /
-            maxParticles,
+          maxParticles,
         ),
       );
 
@@ -638,31 +640,31 @@ const ParticleText = ({
             (((index * 233 + 97) %
               1000) /
               1000) *
-              0.9;
+            0.9;
 
           const blend =
             baseRgb &&
-            highlightRgb
+              highlightRgb
               ? clamp(
-                  target.x /
-                    Math.max(1, width) +
-                    (seed - 0.5) *
-                      0.35,
-                  0,
-                  1,
-                )
+                target.x /
+                Math.max(1, width) +
+                (seed - 0.5) *
+                0.35,
+                0,
+                1,
+              )
               : 0;
 
           const particleColor =
             baseRgb &&
-            highlightRgb
+              highlightRgb
               ? rgbToCss(
-                  mixRgb(
-                    baseRgb,
-                    highlightRgb,
-                    blend,
-                  ),
-                )
+                mixRgb(
+                  baseRgb,
+                  highlightRgb,
+                  blend,
+                ),
+              )
               : resolvedColor;
 
           const angle =
@@ -677,18 +679,18 @@ const ParticleText = ({
           const startX =
             target.x +
             Math.cos(angle) *
-              distance +
+            distance +
             (seed - 0.5) *
-              scatter *
-              0.45;
+            scatter *
+            0.45;
 
           const startY =
             target.y +
             Math.sin(angle) *
-              distance +
+            distance +
             (depth - 0.9) *
-              scatter *
-              0.45;
+            scatter *
+            0.45;
 
           return {
             x: reducedMotion
@@ -708,8 +710,8 @@ const ParticleText = ({
             size: Math.max(
               0.6,
               particleSize *
-                (0.75 +
-                  target.alpha * 0.45),
+              (0.75 +
+                target.alpha * 0.45),
             ),
 
             color: particleColor,

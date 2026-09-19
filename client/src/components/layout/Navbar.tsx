@@ -112,14 +112,16 @@ export function Navbar() {
                   href={resolveHref(link.href)}
                   className="text-sm text-[var(--foreground-muted)] transition-colors hover:text-[var(--foreground)]"
                 >
-                  {t.nav[navLabelKey[link.label]] ?? link.label}
+                  {t.nav[navLabelKey[link.label] as keyof typeof t.nav] ?? link.label}
+
                 </a>
               ) : (
                 <Link
                   href={link.href}
                   className="text-sm text-[var(--foreground-muted)] transition-colors hover:text-[var(--foreground)]"
                 >
-                  {t.nav[navLabelKey[link.label]] ?? link.label}
+                  {t.nav[navLabelKey[link.label] as keyof typeof t.nav] ?? link.label}
+
                 </Link>
               )}
             </li>
@@ -167,7 +169,8 @@ export function Navbar() {
                       onClick={() => setMobileOpen(false)}
                       className="block rounded-lg px-3 py-2.5 text-sm text-[var(--foreground-muted)] hover:bg-[var(--surface-elevated)] hover:text-[var(--foreground)]"
                     >
-                      {t.nav[navLabelKey[link.label]] ?? link.label}
+                     {t.nav[navLabelKey[link.label] as keyof typeof t.nav] ?? link.label}
+
                     </a>
                   ) : (
                     <Link
@@ -175,7 +178,8 @@ export function Navbar() {
                       onClick={() => setMobileOpen(false)}
                       className="block rounded-lg px-3 py-2.5 text-sm text-[var(--foreground-muted)] hover:bg-[var(--surface-elevated)] hover:text-[var(--foreground)]"
                     >
-                      {t.nav[navLabelKey[link.label]] ?? link.label}
+                      {t.nav[navLabelKey[link.label] as keyof typeof t.nav] ?? link.label}
+
                     </Link>
                   )}
                 </li>

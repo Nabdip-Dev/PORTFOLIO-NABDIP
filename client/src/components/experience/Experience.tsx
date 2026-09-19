@@ -424,11 +424,14 @@ export function Experience() {
 
     const observer =
       new IntersectionObserver(
-        ([entry]) => {
+        ([entry]: IntersectionObserverEntry[]) => {
+          if (!entry) return;
+
           insideRef.current =
             entry.isIntersecting &&
             entry.intersectionRatio >= 0.65;
         },
+
         {
           threshold: [0, 0.65, 1],
         },
