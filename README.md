@@ -51,7 +51,7 @@ cd server && npm install && npm run dev
 ```
 
 Each side has its own `.env.example` — copy to `.env` and fill in real values
-(MongoDB URI, JWT secrets, Cloudinary keys, SMTP credentials).
+(MongoDB URI, JWT secrets, Cloudinary keys, SMTP  credentials).
 
 ## Build order
 
